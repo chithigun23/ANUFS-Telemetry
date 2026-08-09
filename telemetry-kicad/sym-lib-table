@@ -1,4 +1,4 @@
 (sym_lib_table
 	(version 7)
-	(lib (name "u-blox") (type "KiCad") (uri "C:/Users/chith/Desktop/telemetry/telemetry-library/Symbol") (options "") (descr ""))
+	(lib (name "telemetry") (type "KiCad") (uri "C:/Users/chith/Desktop/telemetry/telemetry-library/Symbol") (options "") (descr ""))
 )
