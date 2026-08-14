@@ -1,1 +1,4 @@
 telemetry-kicad/.history/
+*.log
+telemetry-kicad/*.log
+kleplace.log
