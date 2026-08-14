@@ -2,4 +2,7 @@
 	(version 7)
 	(lib (name "u-blox") (type "KiCad") (uri "C:/Users/chith/Desktop/telemetry/telemetry-library/Footprint") (options "") (descr ""))
 	(lib (name "test") (type "KiCad") (uri "C:/Users/chith/Downloads/ul_TCAN1044VDRQ1/KiCADv6/footprints.pretty") (options "") (descr ""))
+	(lib (name "test0") (type "KiCad") (uri "C:/Users/chith/Desktop/telemetry/telemetry-library/Footprint") (options "") (descr ""))
+	(lib (name "Footprint") (type "KiCad") (uri "C:/Users/chith/Desktop/telemetry/telemetry-library/Footprint.pretty") (options "") (descr ""))
+	(lib (name "Footprint") (type "KiCad") (uri "C:/Users/chith/Desktop/telemetry/telemetry-library/Footprint.pretty") (options "") (descr ""))
 )
