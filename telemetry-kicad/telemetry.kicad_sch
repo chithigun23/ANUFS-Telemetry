@@ -890,8 +890,8 @@
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "J"
-				(at 0 22.225 0)
+			(property "Reference" "J6"
+				(at 0 22.86 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -901,7 +901,7 @@
 				)
 			)
 			(property "Value" "USB_C_Receptacle_USB2.0_16P"
-				(at 0 19.685 0)
+				(at 0 20.32 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -910,7 +910,7 @@
 					)
 				)
 			)
-			(property "Footprint" ""
+			(property "Footprint" "telemetry:USB-C-SMD_TYPE-C-16PIN-2MD-073"
 				(at 3.81 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1387,82 +1387,6 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 15.24 15.24 180)
-					(length 5.08)
-					(hide yes)
-					(name "VBUS"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "A9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -22.86 90)
-					(length 5.08)
-					(hide yes)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "A12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -22.86 90)
-					(length 5.08)
-					(hide yes)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "B1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 15.24 15.24 180)
-					(length 5.08)
-					(hide yes)
-					(name "VBUS"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "B4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin bidirectional line
 					(at 15.24 7.62 180)
 					(length 5.08)
@@ -1528,44 +1452,6 @@
 						)
 					)
 					(number "B8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 15.24 15.24 180)
-					(length 5.08)
-					(hide yes)
-					(name "VBUS"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "B9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -22.86 90)
-					(length 5.08)
-					(hide yes)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "B12"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -9971,12 +9857,6 @@
 		(uuid "59ec87ea-8c6f-4529-bac1-e5b6b64d7284")
 	)
 	(junction
-		(at 306.07 217.17)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5ace386c-7332-4f05-8cb3-1c9479f9377b")
-	)
-	(junction
 		(at 184.15 34.29)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -10217,12 +10097,6 @@
 		(uuid "f0ebe837-4cd2-4a08-b9e6-b40634ae9667")
 	)
 	(junction
-		(at 312.42 219.71)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f37fa2b3-328b-450d-9230-f96b39931a3c")
-	)
-	(junction
 		(at 60.96 240.03)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -10273,6 +10147,14 @@
 	(no_connect
 		(at 73.66 93.98)
 		(uuid "80766cc7-681b-4e66-97ab-961cd68a7277")
+	)
+	(no_connect
+		(at 303.53 219.71)
+		(uuid "827389e0-fc6e-44a0-8e35-02530e2ab21e")
+	)
+	(no_connect
+		(at 303.53 217.17)
+		(uuid "a250374a-190a-408d-b823-03191adf5ed8")
 	)
 	(no_connect
 		(at 27.94 99.06)
@@ -10522,16 +10404,6 @@
 	)
 	(wire
 		(pts
-			(xy 312.42 219.71) (xy 303.53 219.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "162d1cab-a556-4ffd-9ce0-3cedfba66fa3")
-	)
-	(wire
-		(pts
 			(xy 35.56 240.03) (xy 25.4 240.03)
 		)
 		(stroke
@@ -10652,16 +10524,6 @@
 	)
 	(wire
 		(pts
-			(xy 306.07 210.82) (xy 306.07 217.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "237999c7-533c-4f56-a82e-f387f04e8342")
-	)
-	(wire
-		(pts
 			(xy 86.36 240.03) (xy 73.66 240.03)
 		)
 		(stroke
@@ -10689,16 +10551,6 @@
 			(type default)
 		)
 		(uuid "24cb0011-bcff-40a2-9989-c079f28f368b")
-	)
-	(wire
-		(pts
-			(xy 306.07 217.17) (xy 303.53 217.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "26006801-1189-45cb-bb06-39194587a396")
 	)
 	(wire
 		(pts
@@ -11872,16 +11724,6 @@
 	)
 	(wire
 		(pts
-			(xy 312.42 210.82) (xy 312.42 219.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "92ec0a00-d4c2-4cfb-b2bd-34c690d47d81")
-	)
-	(wire
-		(pts
 			(xy 271.78 113.03) (xy 271.78 107.95)
 		)
 		(stroke
@@ -12079,16 +11921,6 @@
 			(type default)
 		)
 		(uuid "ae6a2999-ee30-40e0-9027-8f6b9d0e95e9")
-	)
-	(wire
-		(pts
-			(xy 313.69 219.71) (xy 312.42 219.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "af59223a-846b-4423-8e24-be855063ef6d")
 	)
 	(wire
 		(pts
@@ -12702,16 +12534,6 @@
 	)
 	(wire
 		(pts
-			(xy 313.69 217.17) (xy 306.07 217.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e5159b7e-eb8d-4429-b329-c8f220561f05")
-	)
-	(wire
-		(pts
 			(xy 184.15 194.31) (xy 182.88 194.31)
 		)
 		(stroke
@@ -13040,6 +12862,16 @@
 		)
 		(uuid "ffe9edaa-dacd-4a12-a363-764e1017b045")
 	)
+	(label "CANL2"
+		(at 275.59 165.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0fc775af-0aa6-4153-a645-2bd212d0f516")
+	)
 	(label "NRST"
 		(at 105.41 199.39 0)
 		(effects
@@ -13070,6 +12902,16 @@
 		)
 		(uuid "3823bf5b-f06f-447f-8a75-dccf981dd43c")
 	)
+	(label "CANH1"
+		(at 285.75 95.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3d97a852-7aac-435e-8dd4-ad81de906c54")
+	)
 	(label "VBUS"
 		(at 173.99 182.88 0)
 		(effects
@@ -13089,6 +12931,16 @@
 			(justify right bottom)
 		)
 		(uuid "69b5c31b-db06-49bf-a641-e47ab0d1701f")
+	)
+	(label "CANL1"
+		(at 285.75 100.33 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a045ad38-d674-4bf3-8ab5-bd3102c9cfaf")
 	)
 	(label "inD-"
 		(at 172.72 200.66 0)
@@ -13120,6 +12972,16 @@
 		)
 		(uuid "d3c918d0-d5c1-40ba-b76c-78d268700e2e")
 	)
+	(label "CANH2"
+		(at 275.59 160.02 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fd58f650-9705-42f8-bea2-bedb3910ac3c")
+	)
 	(global_label "D1_SD"
 		(shape input)
 		(at 100.33 166.37 0)
@@ -13133,30 +12995,6 @@
 		(uuid "03e37954-469f-4891-b8a3-e3343716bafe")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 109.2418 166.37 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
-	(global_label "DET_SD"
-		(shape input)
-		(at 313.69 217.17 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "0c1b66de-f437-4740-9f4f-fb00bd6f31e6")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 323.5089 217.17 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13357,30 +13195,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-			)
-		)
-	)
-	(global_label "WP_SD"
-		(shape input)
-		(at 313.69 219.71 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "286f9475-3a35-4db5-9d3a-210abc452940")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 322.8437 219.71 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 			)
 		)
 	)
@@ -14996,7 +14810,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "00a100c5-837b-4cee-9a82-55bfb5d3fec9")
-		(property "Reference" "#PWR093"
+		(property "Reference" "#PWR048"
 			(at 227.33 153.67 0)
 			(hide yes)
 			(show_name no)
@@ -15057,7 +14871,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR093")
+					(reference "#PWR048")
 					(unit 1)
 				)
 			)
@@ -15075,7 +14889,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "090f15c4-567a-4bf8-8e2a-5f589b8d6508")
-		(property "Reference" "#PWR088"
+		(property "Reference" "#PWR069"
 			(at 294.64 213.36 0)
 			(hide yes)
 			(show_name no)
@@ -15136,7 +14950,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR088")
+					(reference "#PWR069")
 					(unit 1)
 				)
 			)
@@ -15154,7 +14968,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "09f15c16-1203-4f33-8886-27cb4f029933")
-		(property "Reference" "U3"
+		(property "Reference" "U6"
 			(at 263.7633 149.86 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15237,7 +15051,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "U3")
+					(reference "U6")
 					(unit 1)
 				)
 			)
@@ -15255,7 +15069,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0ac1af55-7de9-4829-bfe1-a5adfbde4118")
-		(property "Reference" "#PWR074"
+		(property "Reference" "#PWR078"
 			(at 271.78 254 0)
 			(hide yes)
 			(show_name no)
@@ -15316,7 +15130,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR074")
+					(reference "#PWR078")
 					(unit 1)
 				)
 			)
@@ -15334,7 +15148,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0d06cbd5-df2e-4b33-9ae9-b4179b340cf0")
-		(property "Reference" "R19"
+		(property "Reference" "R20"
 			(at 110.49 213.3599 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15398,7 +15212,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R19")
+					(reference "R20")
 					(unit 1)
 				)
 			)
@@ -15416,7 +15230,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0ead45f9-89de-471c-a7bd-6d93f0df8301")
-		(property "Reference" "#PWR068"
+		(property "Reference" "#PWR058"
 			(at 187.96 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -15477,7 +15291,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR068")
+					(reference "#PWR058")
 					(unit 1)
 				)
 			)
@@ -15495,7 +15309,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0f1ac602-2e6b-41df-b3be-333cbaa5e99f")
-		(property "Reference" "#PWR012"
+		(property "Reference" "#PWR010"
 			(at 238.76 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -15556,7 +15370,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR012")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
@@ -15662,7 +15476,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "133744ac-c833-48c8-8265-c9b5a4cb4cae")
-		(property "Reference" "TP4"
+		(property "Reference" "TP5"
 			(at 282.448 87.122 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15723,7 +15537,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "TP4")
+					(reference "TP5")
 					(unit 1)
 				)
 			)
@@ -15823,7 +15637,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "14720d15-3553-4528-ab33-65e6e2fd1fa3")
-		(property "Reference" "C19"
+		(property "Reference" "C20"
 			(at 52.07 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15887,7 +15701,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C19")
+					(reference "C20")
 					(unit 1)
 				)
 			)
@@ -15905,7 +15719,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "15412848-18bd-4d69-9f17-405b82a63ffe")
-		(property "Reference" "C26"
+		(property "Reference" "C27"
 			(at 144.78 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15969,7 +15783,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C26")
+					(reference "C27")
 					(unit 1)
 				)
 			)
@@ -15987,7 +15801,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "15869773-4639-49ea-a177-bc67172256f1")
-		(property "Reference" "#PWR072"
+		(property "Reference" "#PWR071"
 			(at 180.34 218.44 0)
 			(hide yes)
 			(show_name no)
@@ -16048,7 +15862,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR072")
+					(reference "#PWR071")
 					(unit 1)
 				)
 			)
@@ -16065,7 +15879,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "15aa4283-4cbb-48d9-830a-d2622d98b7e4")
-		(property "Reference" "#PWR062"
+		(property "Reference" "#PWR064"
 			(at 233.68 208.28 0)
 			(hide yes)
 			(show_name no)
@@ -16125,7 +15939,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR062")
+					(reference "#PWR064")
 					(unit 1)
 				)
 			)
@@ -16142,7 +15956,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "1645f958-2eee-4395-9e1d-859f677957fc")
-		(property "Reference" "#PWR096"
+		(property "Reference" "#PWR042"
 			(at 261.62 148.59 0)
 			(hide yes)
 			(show_name no)
@@ -16203,7 +16017,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR096")
+					(reference "#PWR042")
 					(unit 1)
 				)
 			)
@@ -16220,7 +16034,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "17980ea9-de9a-4620-a184-3e3ad02159dd")
-		(property "Reference" "#PWR064"
+		(property "Reference" "#PWR066"
 			(at 246.38 208.28 0)
 			(hide yes)
 			(show_name no)
@@ -16280,7 +16094,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR064")
+					(reference "#PWR066")
 					(unit 1)
 				)
 			)
@@ -16297,7 +16111,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "183a53c7-f95b-4bcd-831f-da1abcce0eed")
-		(property "Reference" "#PWR063"
+		(property "Reference" "#PWR065"
 			(at 240.03 208.28 0)
 			(hide yes)
 			(show_name no)
@@ -16357,7 +16171,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR063")
+					(reference "#PWR065")
 					(unit 1)
 				)
 			)
@@ -16374,7 +16188,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "1975e96b-a28b-4d28-b6e5-b4ef39c20b3b")
-		(property "Reference" "R11"
+		(property "Reference" "R14"
 			(at 228.854 206.756 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16438,7 +16252,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R11")
+					(reference "R14")
 					(unit 1)
 				)
 			)
@@ -16534,7 +16348,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "1afc49d3-5932-4eef-9a98-e7017321108a")
-		(property "Reference" "U9"
+		(property "Reference" "U7"
 			(at 195.326 206.248 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16611,7 +16425,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "U9")
+					(reference "U7")
 					(unit 1)
 				)
 			)
@@ -16629,7 +16443,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1f6b222a-89e1-4ced-b152-63b45b07d117")
-		(property "Reference" "#PWR048"
+		(property "Reference" "#PWR044"
 			(at 132.08 153.67 0)
 			(hide yes)
 			(show_name no)
@@ -16690,7 +16504,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR048")
+					(reference "#PWR044")
 					(unit 1)
 				)
 			)
@@ -16708,7 +16522,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2006dc6a-fcb4-46be-9955-421ce76a1e4b")
-		(property "Reference" "#PWR011"
+		(property "Reference" "#PWR012"
 			(at 35.56 60.96 0)
 			(hide yes)
 			(show_name no)
@@ -16769,7 +16583,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR011")
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -16787,7 +16601,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "25e7e687-d430-420d-baf2-6a6eddd234d8")
-		(property "Reference" "#PWR04"
+		(property "Reference" "#PWR03"
 			(at 106.68 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -16848,84 +16662,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR04")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3.3V")
-		(at 312.42 203.2 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "2839b123-a4aa-4860-b028-25ef0378ae5a")
-		(property "Reference" "#PWR091"
-			(at 312.42 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 312.42 199.644 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 312.42 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 312.42 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 312.42 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "46ea21f5-a94e-4816-a47d-070af38bb524")
-		)
-		(instances
-			(project "telemetry"
-				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR091")
+					(reference "#PWR03")
 					(unit 1)
 				)
 			)
@@ -16943,7 +16680,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "29befe99-5743-4e68-b485-0a724d930441")
-		(property "Reference" "#PWR036"
+		(property "Reference" "#PWR032"
 			(at 171.45 118.11 0)
 			(hide yes)
 			(show_name no)
@@ -17004,7 +16741,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR036")
+					(reference "#PWR032")
 					(unit 1)
 				)
 			)
@@ -17022,7 +16759,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2ada7741-f5c5-4163-b0b5-5358accff320")
-		(property "Reference" "#PWR09"
+		(property "Reference" "#PWR08"
 			(at 212.09 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -17083,7 +16820,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR09")
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -17101,7 +16838,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2ae28dd5-0aa3-4333-bad6-f6ab4866abd8")
-		(property "Reference" "#PWR069"
+		(property "Reference" "#PWR057"
 			(at 184.15 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -17162,7 +16899,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR069")
+					(reference "#PWR057")
 					(unit 1)
 				)
 			)
@@ -17262,7 +16999,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2ccda17d-5d5d-475c-a5d4-d5ed02a7aa6c")
-		(property "Reference" "C17"
+		(property "Reference" "C18"
 			(at 29.21 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17326,7 +17063,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C17")
+					(reference "C18")
 					(unit 1)
 				)
 			)
@@ -17430,7 +17167,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "30a0ed8d-bf37-437e-8646-bf895d7e9920")
-		(property "Reference" "C32"
+		(property "Reference" "C31"
 			(at 203.2 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17494,7 +17231,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C32")
+					(reference "C31")
 					(unit 1)
 				)
 			)
@@ -17512,7 +17249,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "33d0d217-1ea9-4ce4-96c2-64a51d6b385d")
-		(property "Reference" "C22"
+		(property "Reference" "C23"
 			(at 90.17 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17576,7 +17313,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C22")
+					(reference "C23")
 					(unit 1)
 				)
 			)
@@ -17594,7 +17331,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3965a02c-a532-440a-98bb-c7a2bff17a1a")
-		(property "Reference" "C7"
+		(property "Reference" "C6"
 			(at 229.87 41.9099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17658,7 +17395,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C7")
+					(reference "C6")
 					(unit 1)
 				)
 			)
@@ -17675,7 +17412,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3a8e6a3c-fdd2-45cd-85f3-d442ff19785e")
-		(property "Reference" "TP6"
+		(property "Reference" "TP7"
 			(at 272.288 151.892 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17736,7 +17473,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "TP6")
+					(reference "TP7")
 					(unit 1)
 				)
 			)
@@ -17754,7 +17491,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3ca0e231-ec75-4a65-8b2b-cb211db63dc7")
-		(property "Reference" "C6"
+		(property "Reference" "C5"
 			(at 215.9 41.9099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17818,7 +17555,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C6")
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -17835,7 +17572,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "3d2985ec-2b0d-4873-ba03-5cf7cec10d70")
-		(property "Reference" "R20"
+		(property "Reference" "R5"
 			(at 239.014 87.376 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17899,7 +17636,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R20")
+					(reference "R5")
 					(unit 1)
 				)
 			)
@@ -17917,7 +17654,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3f91d2a3-5526-4279-ba06-d1251fab6f7a")
-		(property "Reference" "#PWR022"
+		(property "Reference" "#PWR020"
 			(at 113.03 88.9 0)
 			(hide yes)
 			(show_name no)
@@ -17978,7 +17715,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR022")
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -18096,7 +17833,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "4829a7de-33b7-48f3-a415-7977a5ce675f")
-		(property "Reference" "R23"
+		(property "Reference" "R6"
 			(at 239.014 106.426 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18160,7 +17897,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R23")
+					(reference "R6")
 					(unit 1)
 				)
 			)
@@ -18177,7 +17914,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "48778c38-c8a1-4cfd-9687-d82a9cfd8b2e")
-		(property "Reference" "#PWR071"
+		(property "Reference" "#PWR070"
 			(at 130.81 213.36 0)
 			(hide yes)
 			(show_name no)
@@ -18237,7 +17974,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR071")
+					(reference "#PWR070")
 					(unit 1)
 				)
 			)
@@ -18255,7 +17992,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4a99a138-700d-49f0-80de-7e311074ebc8")
-		(property "Reference" "#PWR076"
+		(property "Reference" "#PWR073"
 			(at 148.59 231.14 0)
 			(hide yes)
 			(show_name no)
@@ -18316,7 +18053,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR076")
+					(reference "#PWR073")
 					(unit 1)
 				)
 			)
@@ -18334,7 +18071,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4c0c3bf5-955d-498d-8afe-3acd7301b958")
-		(property "Reference" "C30"
+		(property "Reference" "C29"
 			(at 176.53 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18398,7 +18135,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C30")
+					(reference "C29")
 					(unit 1)
 				)
 			)
@@ -18416,7 +18153,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4cb44652-e7d3-4aa3-95db-1aa0de1a963e")
-		(property "Reference" "#PWR040"
+		(property "Reference" "#PWR036"
 			(at 172.72 130.81 0)
 			(hide yes)
 			(show_name no)
@@ -18477,7 +18214,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR040")
+					(reference "#PWR036")
 					(unit 1)
 				)
 			)
@@ -18495,7 +18232,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4f263d0e-5cba-48da-b8a8-7e4b5351d939")
-		(property "Reference" "U4"
+		(property "Reference" "U2"
 			(at 198.12 68.58 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18595,7 +18332,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "U4")
+					(reference "U2")
 					(unit 1)
 				)
 			)
@@ -18613,7 +18350,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "51606bef-94c5-40df-8897-8272e0cbe869")
-		(property "Reference" "#PWR021"
+		(property "Reference" "#PWR019"
 			(at 110.49 88.9 0)
 			(hide yes)
 			(show_name no)
@@ -18674,7 +18411,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR021")
+					(reference "#PWR019")
 					(unit 1)
 				)
 			)
@@ -18691,7 +18428,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "521c8e6b-9055-48c3-ac28-d5c27674d476")
-		(property "Reference" "#PWR057"
+		(property "Reference" "#PWR052"
 			(at 129.54 162.56 0)
 			(hide yes)
 			(show_name no)
@@ -18752,7 +18489,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR057")
+					(reference "#PWR052")
 					(unit 1)
 				)
 			)
@@ -18769,7 +18506,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "564f1e3e-acbe-4d5d-9766-648aa849f6d8")
-		(property "Reference" "C13"
+		(property "Reference" "C12"
 			(at 146.304 113.03 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18833,7 +18570,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C13")
+					(reference "C12")
 					(unit 1)
 				)
 			)
@@ -18931,7 +18668,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "571cdfcf-8d0f-437d-9973-b4ddae864c0b")
-		(property "Reference" "R4"
+		(property "Reference" "R3"
 			(at 186.69 48.2599 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -18995,7 +18732,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R4")
+					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -19012,7 +18749,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "579ca951-956e-4b83-9d68-4c0e17888286")
-		(property "Reference" "C28"
+		(property "Reference" "C16"
 			(at 121.92 190.754 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19074,7 +18811,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C28")
+					(reference "C16")
 					(unit 1)
 				)
 			)
@@ -19092,7 +18829,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5e45d715-d4c0-4da9-9287-5740064fd97f")
-		(property "Reference" "#PWR017"
+		(property "Reference" "#PWR015"
 			(at 138.43 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -19152,7 +18889,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR017")
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)
@@ -19170,7 +18907,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5e5bb53f-36b4-4024-ac09-0becebb0f32b")
-		(property "Reference" "C33"
+		(property "Reference" "C17"
 			(at 298.45 201.9299 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19234,7 +18971,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C33")
+					(reference "C17")
 					(unit 1)
 				)
 			)
@@ -19252,7 +18989,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5f14b18e-7a80-4eee-8c5b-6f313d556e94")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR013"
 			(at 279.4 62.23 0)
 			(hide yes)
 			(show_name no)
@@ -19313,7 +19050,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR016")
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -19331,7 +19068,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5fc9b6d7-6c7a-408f-9da5-9ea4fce3cfbf")
-		(property "Reference" "#PWR034"
+		(property "Reference" "#PWR028"
 			(at 172.72 115.57 0)
 			(hide yes)
 			(show_name no)
@@ -19392,84 +19129,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR034")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3.3V")
-		(at 306.07 203.2 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "60ecbf73-011d-4b96-a69b-7b4d03c85bb8")
-		(property "Reference" "#PWR090"
-			(at 306.07 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 306.07 199.644 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 306.07 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 306.07 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 306.07 203.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "1add3600-d53d-4b22-9a3b-a0720b5dd967")
-		)
-		(instances
-			(project "telemetry"
-				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR090")
+					(reference "#PWR028")
 					(unit 1)
 				)
 			)
@@ -19487,7 +19147,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "627f5df9-e689-4e1d-bb3e-36b3e23d3e0e")
-		(property "Reference" "#PWR087"
+		(property "Reference" "#PWR082"
 			(at 186.69 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -19548,7 +19208,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR087")
+					(reference "#PWR082")
 					(unit 1)
 				)
 			)
@@ -19566,7 +19226,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "62e8f41c-d756-40d9-b54e-15925e9101f4")
-		(property "Reference" "#PWR078"
+		(property "Reference" "#PWR076"
 			(at 140.97 241.3 0)
 			(hide yes)
 			(show_name no)
@@ -19626,7 +19286,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR078")
+					(reference "#PWR076")
 					(unit 1)
 				)
 			)
@@ -19644,7 +19304,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "638e3130-7bf5-4e32-a73e-717fd802d369")
-		(property "Reference" "#PWR010"
+		(property "Reference" "#PWR09"
 			(at 226.06 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -19705,7 +19365,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR010")
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -19723,7 +19383,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "63a305e6-e783-485a-8bb7-fc54a9512718")
-		(property "Reference" "#PWR031"
+		(property "Reference" "#PWR030"
 			(at 271.78 119.38 0)
 			(hide yes)
 			(show_name no)
@@ -19784,7 +19444,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR031")
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -19802,7 +19462,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "63d74659-4c3b-4f45-a2a3-284f4ebbc9a6")
-		(property "Reference" "#PWR070"
+		(property "Reference" "#PWR060"
 			(at 127 207.01 0)
 			(hide yes)
 			(show_name no)
@@ -19863,7 +19523,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR070")
+					(reference "#PWR060")
 					(unit 1)
 				)
 			)
@@ -19970,7 +19630,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "64506589-7cf0-40fb-b69c-55302a11b924")
-		(property "Reference" "#PWR059"
+		(property "Reference" "#PWR053"
 			(at 186.69 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -20031,7 +19691,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR059")
+					(reference "#PWR053")
 					(unit 1)
 				)
 			)
@@ -20048,7 +19708,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "66987f07-4ae4-43a5-a762-8771b4dad38b")
-		(property "Reference" "R14"
+		(property "Reference" "R17"
 			(at 247.904 206.756 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20112,7 +19772,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R14")
+					(reference "R17")
 					(unit 1)
 				)
 			)
@@ -20130,7 +19790,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "683ce6fe-b102-49bc-8d35-dd1b54c0243b")
-		(property "Reference" "#PWR077"
+		(property "Reference" "#PWR074"
 			(at 156.21 231.14 0)
 			(hide yes)
 			(show_name no)
@@ -20191,7 +19851,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR077")
+					(reference "#PWR074")
 					(unit 1)
 				)
 			)
@@ -20209,7 +19869,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6844e59b-7f1a-4ef4-9310-cef9af64dd14")
-		(property "Reference" "U7"
+		(property "Reference" "U5"
 			(at 154.94 132.08 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20459,89 +20119,8 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "U7")
+					(reference "U5")
 					(unit 2)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_US")
-		(at 312.42 207.01 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "68c64a6f-0e6a-48fd-a63e-a17b11eef7c2")
-		(property "Reference" "R22"
-			(at 313.944 205.486 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "10k"
-			(at 313.944 207.5181 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 313.436 207.264 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 312.42 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor, US symbol"
-			(at 312.42 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "f09f2855-c1a2-422e-969d-85e724c8251e")
-		)
-		(pin "1"
-			(uuid "78115d01-68e2-42e8-aadd-aeabc5a2e730")
-		)
-		(instances
-			(project "telemetry"
-				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R22")
-					(unit 1)
 				)
 			)
 		)
@@ -20558,7 +20137,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "69be36bb-fc34-4687-aa75-502bb5f02caa")
-		(property "Reference" "#PWR049"
+		(property "Reference" "#PWR045"
 			(at 177.8 151.13 0)
 			(hide yes)
 			(show_name no)
@@ -20619,7 +20198,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR049")
+					(reference "#PWR045")
 					(unit 1)
 				)
 			)
@@ -20798,7 +20377,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6fa2c055-10f7-49a9-aa67-450998699064")
-		(property "Reference" "#PWR03"
+		(property "Reference" "#PWR02"
 			(at 93.98 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -20859,7 +20438,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR03")
+					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -20877,7 +20456,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6fc158eb-2db0-47d8-a084-eef72c7db2bc")
-		(property "Reference" "C18"
+		(property "Reference" "C19"
 			(at 39.37 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20941,88 +20520,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C18")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_US")
-		(at 306.07 207.01 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "708f8037-e4c2-4519-8261-d985b25e6d5a")
-		(property "Reference" "R21"
-			(at 307.594 205.486 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "10k"
-			(at 307.594 207.5181 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 307.086 207.264 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 306.07 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor, US symbol"
-			(at 306.07 207.01 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "4a488e32-a088-421a-b527-48f894121222")
-		)
-		(pin "1"
-			(uuid "bb13ef49-aad7-45f6-8998-b117412a1464")
-		)
-		(instances
-			(project "telemetry"
-				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R21")
+					(reference "C19")
 					(unit 1)
 				)
 			)
@@ -21119,7 +20617,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "744052f4-065c-4105-8e75-1c1eb7ef4759")
-		(property "Reference" "#PWR082"
+		(property "Reference" "#PWR016"
 			(at 271.78 83.82 0)
 			(hide yes)
 			(show_name no)
@@ -21180,7 +20678,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR082")
+					(reference "#PWR016")
 					(unit 1)
 				)
 			)
@@ -21197,7 +20695,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "74d2b18a-759f-43ee-a765-8d65fa4fa03d")
-		(property "Reference" "#PWR067"
+		(property "Reference" "#PWR059"
 			(at 288.29 203.2 0)
 			(hide yes)
 			(show_name no)
@@ -21257,7 +20755,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR067")
+					(reference "#PWR059")
 					(unit 1)
 				)
 			)
@@ -21275,7 +20773,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "76efa4eb-0161-4789-ac93-f269c34af1fa")
-		(property "Reference" "C25"
+		(property "Reference" "C26"
 			(at 130.81 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21339,7 +20837,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C25")
+					(reference "C26")
 					(unit 1)
 				)
 			)
@@ -21357,7 +20855,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "788695b1-a04e-4e70-a172-0d1efcaddf67")
-		(property "Reference" "TP2"
+		(property "Reference" "TP1"
 			(at 104.14 27.1779 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21418,7 +20916,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "TP2")
+					(reference "TP1")
 					(unit 1)
 				)
 			)
@@ -21436,7 +20934,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "78d5cf21-88fc-4b7a-afb0-73d30efffe1b")
-		(property "Reference" "#PWR020"
+		(property "Reference" "#PWR017"
 			(at 69.85 81.28 0)
 			(hide yes)
 			(show_name no)
@@ -21497,7 +20995,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR020")
+					(reference "#PWR017")
 					(unit 1)
 				)
 			)
@@ -21515,7 +21013,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "793cee6d-5f7d-4fd2-944e-389795147c43")
-		(property "Reference" "#PWR054"
+		(property "Reference" "#PWR050"
 			(at 134.62 161.29 0)
 			(hide yes)
 			(show_name no)
@@ -21576,7 +21074,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR054")
+					(reference "#PWR050")
 					(unit 1)
 				)
 			)
@@ -21594,7 +21092,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7a00423a-d6e8-47ca-ab42-26243ebd2853")
-		(property "Reference" "TP8"
+		(property "Reference" "TP4"
 			(at 48.26 54.1019 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21655,7 +21153,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "TP8")
+					(reference "TP4")
 					(unit 1)
 				)
 			)
@@ -21673,7 +21171,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7aa8d411-ff8b-4d00-a4d2-a0e51bfa2507")
-		(property "Reference" "#PWR024"
+		(property "Reference" "#PWR022"
 			(at 118.11 88.9 0)
 			(hide yes)
 			(show_name no)
@@ -21734,7 +21232,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR024")
+					(reference "#PWR022")
 					(unit 1)
 				)
 			)
@@ -21773,7 +21271,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "telemetry:SD_Yamaichi_FPS009-4200-0"
 			(at 297.18 230.632 0)
 			(hide yes)
 			(show_name no)
@@ -21863,7 +21361,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7e3ef339-44b7-47a7-8270-c06f38da6613")
-		(property "Reference" "#PWR052"
+		(property "Reference" "#PWR047"
 			(at 179.07 153.67 0)
 			(hide yes)
 			(show_name no)
@@ -21924,7 +21422,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR052")
+					(reference "#PWR047")
 					(unit 1)
 				)
 			)
@@ -21941,7 +21439,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7ef92f4c-9a74-49b6-8431-fe747b989c05")
-		(property "Reference" "#PWR092"
+		(property "Reference" "#PWR018"
 			(at 255.27 85.09 0)
 			(hide yes)
 			(show_name no)
@@ -22002,7 +21500,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR092")
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -22020,7 +21518,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "80f7b3c0-10bf-49d6-b618-3fde5c94da91")
-		(property "Reference" "#PWR023"
+		(property "Reference" "#PWR021"
 			(at 115.57 88.9 0)
 			(hide yes)
 			(show_name no)
@@ -22081,7 +21579,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR023")
+					(reference "#PWR021")
 					(unit 1)
 				)
 			)
@@ -22099,7 +21597,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8196be7b-fab7-44bd-831c-75adf8464237")
-		(property "Reference" "#PWR013"
+		(property "Reference" "#PWR011"
 			(at 251.46 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -22160,7 +21658,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR013")
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -22178,7 +21676,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8247506f-9156-42cd-b8ef-64c2a0942a46")
-		(property "Reference" "#PWR045"
+		(property "Reference" "#PWR040"
 			(at 129.54 151.13 0)
 			(hide yes)
 			(show_name no)
@@ -22239,7 +21737,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR045")
+					(reference "#PWR040")
 					(unit 1)
 				)
 			)
@@ -22256,7 +21754,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "87804cdd-2a16-427a-9dbb-dbeae8906922")
-		(property "Reference" "TP5"
+		(property "Reference" "TP6"
 			(at 289.052 108.458 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22317,7 +21815,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "TP5")
+					(reference "TP6")
 					(unit 1)
 				)
 			)
@@ -22470,7 +21968,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8f623e08-7c9c-4701-b6c9-1ef593b2e4ed")
-		(property "Reference" "C10"
+		(property "Reference" "C9"
 			(at 128.27 48.2599 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22534,7 +22032,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C10")
+					(reference "C9")
 					(unit 1)
 				)
 			)
@@ -22552,7 +22050,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "90782183-a857-45a6-bd0c-b303689e264f")
-		(property "Reference" "C24"
+		(property "Reference" "C25"
 			(at 115.57 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22616,7 +22114,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C24")
+					(reference "C25")
 					(unit 1)
 				)
 			)
@@ -22634,7 +22132,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "92af95b6-2799-4e36-b9b7-0182f3ba557f")
-		(property "Reference" "#PWR046"
+		(property "Reference" "#PWR041"
 			(at 176.53 148.59 0)
 			(hide yes)
 			(show_name no)
@@ -22695,7 +22193,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR046")
+					(reference "#PWR041")
 					(unit 1)
 				)
 			)
@@ -22713,7 +22211,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "92f76b14-5d92-4e7e-9a7c-e39d9bff1259")
-		(property "Reference" "#PWR051"
+		(property "Reference" "#PWR046"
 			(at 134.62 156.21 0)
 			(hide yes)
 			(show_name no)
@@ -22774,7 +22272,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR051")
+					(reference "#PWR046")
 					(unit 1)
 				)
 			)
@@ -22791,7 +22289,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "93eb8917-8ed8-4c79-9b8f-3acb5b13ee86")
-		(property "Reference" "#PWR061"
+		(property "Reference" "#PWR063"
 			(at 227.33 208.28 0)
 			(hide yes)
 			(show_name no)
@@ -22851,7 +22349,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR061")
+					(reference "#PWR063")
 					(unit 1)
 				)
 			)
@@ -22869,7 +22367,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "94dac263-9264-42a8-916a-0665300b3d6a")
-		(property "Reference" "#PWR05"
+		(property "Reference" "#PWR04"
 			(at 124.46 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -22930,7 +22428,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR05")
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
@@ -22948,7 +22446,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "95b81455-0076-4687-9a8e-f6a1a8525cc9")
-		(property "Reference" "#PWR07"
+		(property "Reference" "#PWR06"
 			(at 184.15 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -23009,7 +22507,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR07")
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)
@@ -23027,7 +22525,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9771fdf2-9e18-4429-b886-a2d1ea77d72c")
-		(property "Reference" "U5"
+		(property "Reference" "U3"
 			(at 50.8 68.58 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23283,7 +22781,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "U5")
+					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -23301,7 +22799,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "99ff2d62-c554-4634-b881-bbd7aa92c4f6")
-		(property "Reference" "#PWR029"
+		(property "Reference" "#PWR027"
 			(at 165.1 100.33 0)
 			(hide yes)
 			(show_name no)
@@ -23362,7 +22860,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR029")
+					(reference "#PWR027")
 					(unit 1)
 				)
 			)
@@ -23380,7 +22878,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9ac12c93-786b-4d79-86fb-89e41653617b")
-		(property "Reference" "#PWR060"
+		(property "Reference" "#PWR054"
 			(at 194.31 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -23441,7 +22939,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR060")
+					(reference "#PWR054")
 					(unit 1)
 				)
 			)
@@ -23459,7 +22957,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9bcda930-b3b6-41e3-b2be-0fe83bd146e1")
-		(property "Reference" "#PWR037"
+		(property "Reference" "#PWR033"
 			(at 114.3 125.73 0)
 			(hide yes)
 			(show_name no)
@@ -23519,7 +23017,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR037")
+					(reference "#PWR033")
 					(unit 1)
 				)
 			)
@@ -23536,7 +23034,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "9db1d203-8237-4dca-b345-e9ae390b2320")
-		(property "Reference" "#PWR02"
+		(property "Reference" "#PWR01"
 			(at 254 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -23596,7 +23094,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR02")
+					(reference "#PWR01")
 					(unit 1)
 				)
 			)
@@ -23614,7 +23112,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9df741e8-91b4-456b-a6cf-b7bec69cb10d")
-		(property "Reference" "C31"
+		(property "Reference" "C30"
 			(at 190.5 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23678,7 +23176,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C31")
+					(reference "C30")
 					(unit 1)
 				)
 			)
@@ -23696,7 +23194,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9f1c645e-a7ab-49c2-b57f-b3bbe541056e")
-		(property "Reference" "#PWR041"
+		(property "Reference" "#PWR056"
 			(at 261.62 184.15 0)
 			(hide yes)
 			(show_name no)
@@ -23757,7 +23255,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR041")
+					(reference "#PWR056")
 					(unit 1)
 				)
 			)
@@ -23775,7 +23273,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9fdec4be-703e-4bd4-a455-a77107a3eb26")
-		(property "Reference" "#PWR027"
+		(property "Reference" "#PWR026"
 			(at 161.29 100.33 0)
 			(hide yes)
 			(show_name no)
@@ -23836,7 +23334,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR027")
+					(reference "#PWR026")
 					(unit 1)
 				)
 			)
@@ -23853,7 +23351,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a102ba47-b50a-4d47-8d08-096787ea15b6")
-		(property "Reference" "C29"
+		(property "Reference" "C10"
 			(at 267.97 80.264 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23915,7 +23413,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C29")
+					(reference "C10")
 					(unit 1)
 				)
 			)
@@ -23933,7 +23431,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a14f902d-0c57-4f76-931e-94d17ef5c3da")
-		(property "Reference" "C8"
+		(property "Reference" "C7"
 			(at 242.57 41.9099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23997,7 +23495,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C8")
+					(reference "C7")
 					(unit 1)
 				)
 			)
@@ -24015,7 +23513,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a198baad-70e9-43b2-a6fb-ecd0071c3d3c")
-		(property "Reference" "#PWR095"
+		(property "Reference" "#PWR049"
 			(at 252.73 157.48 0)
 			(hide yes)
 			(show_name no)
@@ -24076,7 +23574,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR095")
+					(reference "#PWR049")
 					(unit 1)
 				)
 			)
@@ -24093,7 +23591,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a1cab72b-5455-4cd4-a4a6-5130ebc73654")
-		(property "Reference" "#PWR066"
+		(property "Reference" "#PWR068"
 			(at 259.08 208.28 0)
 			(hide yes)
 			(show_name no)
@@ -24153,7 +23651,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR066")
+					(reference "#PWR068")
 					(unit 1)
 				)
 			)
@@ -24171,7 +23669,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a1d6e505-dcdc-4792-bc6e-464819fe617f")
-		(property "Reference" "C23"
+		(property "Reference" "C24"
 			(at 102.87 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24235,7 +23733,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C23")
+					(reference "C24")
 					(unit 1)
 				)
 			)
@@ -24253,7 +23751,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a265cb62-18c6-4817-a021-0999cc5db3b4")
-		(property "Reference" "TP1"
+		(property "Reference" "TP3"
 			(at 157.48 47.7519 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24314,7 +23812,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "TP1")
+					(reference "TP3")
 					(unit 1)
 				)
 			)
@@ -24331,7 +23829,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a4ad990b-6dde-4620-bf0c-c254a38d7124")
-		(property "Reference" "U2"
+		(property "Reference" "U4"
 			(at 272.034 87.376 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24414,7 +23912,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "U2")
+					(reference "U4")
 					(unit 1)
 				)
 			)
@@ -24431,7 +23929,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a55648b5-dd5f-42f2-9b49-d7698f825ff7")
-		(property "Reference" "R17"
+		(property "Reference" "R10"
 			(at 179.07 187.706 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24493,7 +23991,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R17")
+					(reference "R10")
 					(unit 1)
 				)
 			)
@@ -24589,7 +24087,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a9298e5d-fc09-46d4-a11f-b00c3771acf8")
-		(property "Reference" "C15"
+		(property "Reference" "C14"
 			(at 189.23 154.178 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24651,7 +24149,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C15")
+					(reference "C14")
 					(unit 1)
 				)
 			)
@@ -24749,7 +24247,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "afc953f0-20e0-4124-a484-bd459b8c6ecc")
-		(property "Reference" "C9"
+		(property "Reference" "C8"
 			(at 255.27 41.9099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -24813,7 +24311,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C9")
+					(reference "C8")
 					(unit 1)
 				)
 			)
@@ -24831,7 +24329,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b09a9163-7c1a-4625-ac89-8e5751413ab9")
-		(property "Reference" "#PWR08"
+		(property "Reference" "#PWR07"
 			(at 198.12 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -24892,7 +24390,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR08")
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
@@ -24909,7 +24407,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "b1df42e2-3537-48d2-8707-55b8fd12daf5")
-		(property "Reference" "#PWR086"
+		(property "Reference" "#PWR024"
 			(at 237.49 88.9 0)
 			(hide yes)
 			(show_name no)
@@ -24970,7 +24468,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR086")
+					(reference "#PWR024")
 					(unit 1)
 				)
 			)
@@ -25067,7 +24565,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "b81bbc50-de60-4494-bf7e-29f511c24695")
-		(property "Reference" "C34"
+		(property "Reference" "C13"
 			(at 257.81 145.034 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25129,7 +24627,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C34")
+					(reference "C13")
 					(unit 1)
 				)
 			)
@@ -25284,7 +24782,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "b8da5831-4034-4c79-8a69-29b44ad7c773")
-		(property "Reference" "R27"
+		(property "Reference" "R7"
 			(at 246.634 148.336 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25348,7 +24846,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R27")
+					(reference "R7")
 					(unit 1)
 				)
 			)
@@ -25367,7 +24865,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b8f91c2c-0ea1-42d7-adb1-886b8ed8bcb5")
-		(property "Reference" "U7"
+		(property "Reference" "U5"
 			(at 59.69 133.35 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25617,7 +25115,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "U7")
+					(reference "U5")
 					(unit 1)
 				)
 			)
@@ -25635,7 +25133,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b9762bfa-3a31-4f80-8f53-642168d5a80b")
-		(property "Reference" "C5"
+		(property "Reference" "C4"
 			(at 201.93 41.9099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25699,7 +25197,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C5")
+					(reference "C4")
 					(unit 1)
 				)
 			)
@@ -25717,7 +25215,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b98e34ef-6254-4aa4-ba75-7b221a222776")
-		(property "Reference" "#PWR083"
+		(property "Reference" "#PWR025"
 			(at 262.89 92.71 0)
 			(hide yes)
 			(show_name no)
@@ -25778,7 +25276,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR083")
+					(reference "#PWR025")
 					(unit 1)
 				)
 			)
@@ -25796,7 +25294,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ba23664d-7417-4864-afa5-e5afc1ef0976")
-		(property "Reference" "#PWR043"
+		(property "Reference" "#PWR038"
 			(at 127 148.59 0)
 			(hide yes)
 			(show_name no)
@@ -25857,7 +25355,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR043")
+					(reference "#PWR038")
 					(unit 1)
 				)
 			)
@@ -25875,7 +25373,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ba680ce6-53bd-4332-afc2-15ec7a00c53a")
-		(property "Reference" "#PWR025"
+		(property "Reference" "#PWR023"
 			(at 128.27 83.82 0)
 			(hide yes)
 			(show_name no)
@@ -25936,7 +25434,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR025")
+					(reference "#PWR023")
 					(unit 1)
 				)
 			)
@@ -26036,7 +25534,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bb43350b-c373-4587-b7e9-d7bc1bc65264")
-		(property "Reference" "C27"
+		(property "Reference" "C28"
 			(at 157.48 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26100,7 +25598,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C27")
+					(reference "C28")
 					(unit 1)
 				)
 			)
@@ -26117,7 +25615,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "bfcecb9d-5f16-4118-b943-2f11b565ef4d")
-		(property "Reference" "R12"
+		(property "Reference" "R15"
 			(at 235.204 206.756 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26181,7 +25679,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R12")
+					(reference "R15")
 					(unit 1)
 				)
 			)
@@ -26198,7 +25696,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c0521d99-f759-46c6-ae27-212956bbeff0")
-		(property "Reference" "#PWR065"
+		(property "Reference" "#PWR067"
 			(at 252.73 208.28 0)
 			(hide yes)
 			(show_name no)
@@ -26258,7 +25756,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR065")
+					(reference "#PWR067")
 					(unit 1)
 				)
 			)
@@ -26276,7 +25774,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c3118b76-dfe3-456c-a3d2-19a5b713f913")
-		(property "Reference" "#PWR033"
+		(property "Reference" "#PWR055"
 			(at 227.33 184.15 0)
 			(hide yes)
 			(show_name no)
@@ -26337,7 +25835,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR033")
+					(reference "#PWR055")
 					(unit 1)
 				)
 			)
@@ -26354,7 +25852,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "c687910a-2f31-4260-947b-8c18fa53f293")
-		(property "Reference" "R24"
+		(property "Reference" "R4"
 			(at 256.794 83.566 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26418,7 +25916,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R24")
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -26495,26 +25993,14 @@
 		(pin "A1"
 			(uuid "b8c0c9e9-ae18-4d27-b038-2d4d5e939770")
 		)
-		(pin "B12"
-			(uuid "72272dde-431e-4cf8-a22f-5d643f2c96cf")
-		)
 		(pin "A6"
 			(uuid "df5aae07-9831-40bf-a3fd-a736f8e5f3af")
 		)
 		(pin "A4"
 			(uuid "3172c3e5-5dba-43a3-90e8-de9e26b595c1")
 		)
-		(pin "A12"
-			(uuid "80c7a0c1-a2f4-4dc4-b7e2-4a45e0a8d562")
-		)
 		(pin "B7"
 			(uuid "94a99707-041c-4ee3-afce-cd541a39eb04")
-		)
-		(pin "B1"
-			(uuid "c8dce403-f98d-416e-b9b8-29cb85297f10")
-		)
-		(pin "A9"
-			(uuid "0b47000e-1746-4b3f-85e8-67d7cf5499bc")
 		)
 		(pin "SH"
 			(uuid "ac7e2d78-6bf6-4ddd-979e-23f7d2cee729")
@@ -26533,12 +26019,6 @@
 		)
 		(pin "A8"
 			(uuid "906085f0-f584-4c2f-80d2-f3df0fee2b99")
-		)
-		(pin "B9"
-			(uuid "ccd1b529-b75d-46c1-9f00-a1cd7ef4c94e")
-		)
-		(pin "B4"
-			(uuid "5e87cb90-ec4a-4c19-aab5-9fe8c1a4aeaa")
 		)
 		(instances
 			(project "telemetry"
@@ -26561,7 +26041,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cb778179-660a-4fa0-a8e3-0058fb2109f6")
-		(property "Reference" "#PWR018"
+		(property "Reference" "#PWR014"
 			(at 69.85 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -26622,7 +26102,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR018")
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)
@@ -26640,7 +26120,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cdfb4edb-81bb-4712-9c89-ba54174f6ba9")
-		(property "Reference" "#PWR075"
+		(property "Reference" "#PWR072"
 			(at 107.95 226.06 0)
 			(hide yes)
 			(show_name no)
@@ -26701,7 +26181,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR075")
+					(reference "#PWR072")
 					(unit 1)
 				)
 			)
@@ -26719,7 +26199,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ce57cfa1-4409-4673-acbe-3f564aa7d62d")
-		(property "Reference" "TP3"
+		(property "Reference" "TP2"
 			(at 220.98 29.7179 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26780,7 +26260,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "TP3")
+					(reference "TP2")
 					(unit 1)
 				)
 			)
@@ -26879,7 +26359,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "cee5030b-a577-4fc0-a22a-d6a2316ed718")
-		(property "Reference" "C16"
+		(property "Reference" "C15"
 			(at 181.61 156.464 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26941,7 +26421,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C16")
+					(reference "C15")
 					(unit 1)
 				)
 			)
@@ -26958,7 +26438,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "d506d9ad-9102-40bc-8d43-466427dfcb7e")
-		(property "Reference" "R16"
+		(property "Reference" "R19"
 			(at 260.604 206.756 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -27022,7 +26502,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R16")
+					(reference "R19")
 					(unit 1)
 				)
 			)
@@ -27040,7 +26520,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d6938968-d5d3-4bac-acfe-a5629b88c93b")
-		(property "Reference" "#PWR032"
+		(property "Reference" "#PWR029"
 			(at 237.49 119.38 0)
 			(hide yes)
 			(show_name no)
@@ -27101,7 +26581,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR032")
+					(reference "#PWR029")
 					(unit 1)
 				)
 			)
@@ -27200,7 +26680,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "daaa4436-7a63-4784-b55a-4704463f3fb3")
-		(property "Reference" "TP7"
+		(property "Reference" "TP8"
 			(at 278.892 173.228 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -27261,7 +26741,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "TP7")
+					(reference "TP8")
 					(unit 1)
 				)
 			)
@@ -27278,7 +26758,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "dd92b6e8-9be7-44b1-b7c6-56fb7bfe5cb1")
-		(property "Reference" "R26"
+		(property "Reference" "R9"
 			(at 228.854 171.196 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -27342,7 +26822,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R26")
+					(reference "R9")
 					(unit 1)
 				)
 			)
@@ -27360,7 +26840,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "deb63fab-c153-466b-aba5-9c96ff46e6b6")
-		(property "Reference" "#PWR089"
+		(property "Reference" "#PWR037"
 			(at 176.53 130.81 0)
 			(hide yes)
 			(show_name no)
@@ -27421,7 +26901,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR089")
+					(reference "#PWR037")
 					(unit 1)
 				)
 			)
@@ -27439,7 +26919,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e31af167-de79-4eb6-a41d-5ac42e4f51d0")
-		(property "Reference" "#PWR073"
+		(property "Reference" "#PWR079"
 			(at 288.29 254 0)
 			(hide yes)
 			(show_name no)
@@ -27500,7 +26980,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR073")
+					(reference "#PWR079")
 					(unit 1)
 				)
 			)
@@ -27517,7 +26997,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e56cfccd-1e38-4f0b-9152-2ef049b884b4")
-		(property "Reference" "R18"
+		(property "Reference" "R11"
 			(at 179.07 196.088 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -27579,7 +27059,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R18")
+					(reference "R11")
 					(unit 1)
 				)
 			)
@@ -27596,7 +27076,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e7c14fcd-f0ab-4101-982a-29d58502f2d8")
-		(property "Reference" "R15"
+		(property "Reference" "R18"
 			(at 254.254 206.756 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -27660,7 +27140,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R15")
+					(reference "R18")
 					(unit 1)
 				)
 			)
@@ -27678,7 +27158,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e8c8d08d-5dce-42a2-9aec-990aaa5e3e00")
-		(property "Reference" "D4"
+		(property "Reference" "D3"
 			(at 187.0075 176.53 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -27740,7 +27220,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "D4")
+					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -27758,7 +27238,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ec9b433f-50b2-4a45-bbc5-fd4bdc591f15")
-		(property "Reference" "#PWR039"
+		(property "Reference" "#PWR035"
 			(at 143.51 125.73 0)
 			(hide yes)
 			(show_name no)
@@ -27818,7 +27298,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR039")
+					(reference "#PWR035")
 					(unit 1)
 				)
 			)
@@ -27836,7 +27316,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f1765a5b-8de1-48c6-b3e3-4eb2ddc07d07")
-		(property "Reference" "#PWR044"
+		(property "Reference" "#PWR039"
 			(at 175.26 146.05 0)
 			(hide yes)
 			(show_name no)
@@ -27897,7 +27377,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR044")
+					(reference "#PWR039")
 					(unit 1)
 				)
 			)
@@ -27915,7 +27395,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f18da6cd-53c1-41c0-8b73-b32460f0795d")
-		(property "Reference" "#PWR035"
+		(property "Reference" "#PWR031"
 			(at 73.66 120.65 0)
 			(hide yes)
 			(show_name no)
@@ -27976,7 +27456,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR035")
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -27993,7 +27473,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f2586d3c-9b48-47c9-b396-5591a8629ee2")
-		(property "Reference" "C12"
+		(property "Reference" "C11"
 			(at 117.094 113.03 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28057,7 +27537,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C12")
+					(reference "C11")
 					(unit 1)
 				)
 			)
@@ -28075,7 +27555,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f29e79dc-0aac-4612-b62c-70bfc6fcc027")
-		(property "Reference" "J8"
+		(property "Reference" "J3"
 			(at 140.97 68.58 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28149,7 +27629,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "J8")
+					(reference "J3")
 					(unit 1)
 				)
 			)
@@ -28167,7 +27647,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f2b0949b-6230-4c1c-ad68-c0fd5e6eeb12")
-		(property "Reference" "#PWR079"
+		(property "Reference" "#PWR075"
 			(at 67.31 241.3 0)
 			(hide yes)
 			(show_name no)
@@ -28227,7 +27707,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR079")
+					(reference "#PWR075")
 					(unit 1)
 				)
 			)
@@ -28245,7 +27725,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f350c56e-d8e1-4174-97c1-daa6ecf6e23d")
-		(property "Reference" "C20"
+		(property "Reference" "C21"
 			(at 64.77 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28309,7 +27789,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C20")
+					(reference "C21")
 					(unit 1)
 				)
 			)
@@ -28326,7 +27806,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f3a185f4-471e-4651-b2b7-c7c8531cffeb")
-		(property "Reference" "#PWR094"
+		(property "Reference" "#PWR043"
 			(at 245.11 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -28387,7 +27867,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR094")
+					(reference "#PWR043")
 					(unit 1)
 				)
 			)
@@ -28405,7 +27885,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f504f1d5-c00b-45fc-9721-88f461350568")
-		(property "Reference" "C21"
+		(property "Reference" "C22"
 			(at 77.47 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28469,7 +27949,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C21")
+					(reference "C22")
 					(unit 1)
 				)
 			)
@@ -28487,7 +27967,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f81fd62c-c496-4a7f-b4a9-9fa04e024afe")
-		(property "Reference" "#PWR06"
+		(property "Reference" "#PWR05"
 			(at 142.24 59.69 0)
 			(hide yes)
 			(show_name no)
@@ -28548,7 +28028,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR06")
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -28565,7 +28045,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f9226786-27de-4566-8fc7-e40d685d33c1")
-		(property "Reference" "R13"
+		(property "Reference" "R16"
 			(at 241.554 206.756 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28629,7 +28109,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R13")
+					(reference "R16")
 					(unit 1)
 				)
 			)
@@ -28647,7 +28127,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f922a811-5f96-44f8-9e9f-194a328389cf")
-		(property "Reference" "#PWR085"
+		(property "Reference" "#PWR077"
 			(at 186.69 241.3 0)
 			(hide yes)
 			(show_name no)
@@ -28707,7 +28187,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR085")
+					(reference "#PWR077")
 					(unit 1)
 				)
 			)
@@ -28724,7 +28204,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "fafa843d-d748-4fcc-9e3f-f4717ba15be9")
-		(property "Reference" "#PWR055"
+		(property "Reference" "#PWR051"
 			(at 175.26 158.75 0)
 			(hide yes)
 			(show_name no)
@@ -28785,7 +28265,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR055")
+					(reference "#PWR051")
 					(unit 1)
 				)
 			)
@@ -28802,7 +28282,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "fd1dc8eb-ebd4-4f30-b49c-41fd30ade801")
-		(property "Reference" "R25"
+		(property "Reference" "R8"
 			(at 228.854 152.146 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28866,7 +28346,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R25")
+					(reference "R8")
 					(unit 1)
 				)
 			)
@@ -28884,7 +28364,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ff27776f-9ac1-4cc7-93e2-da9a9476bc67")
-		(property "Reference" "#PWR038"
+		(property "Reference" "#PWR034"
 			(at 123.19 125.73 0)
 			(hide yes)
 			(show_name no)
@@ -28944,7 +28424,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR038")
+					(reference "#PWR034")
 					(unit 1)
 				)
 			)
