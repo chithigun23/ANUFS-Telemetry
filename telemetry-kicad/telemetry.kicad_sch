@@ -6589,7 +6589,7 @@
 					)
 				)
 			)
-			(property "Footprint" "ABM8AIG-24.000MHz-8-2Z-T:XTAL_ABM8AIG-24.000MHz-8-2Z-T"
+			(property "Footprint" "telemetry:ABM8AIG-24.000MHZ-8-2Z-T"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -6827,7 +6827,25 @@
 							)
 						)
 					)
-					(number "2,4"
+					(number "2"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 7.62 -6.35 180)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "4"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -10091,6 +10109,12 @@
 		(uuid "a30c0334-8242-4daa-a1cd-59964a390a1f")
 	)
 	(junction
+		(at 123.19 115.57)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a49efb5a-b91c-4819-ad0f-b2e2c25f6151")
+	)
+	(junction
 		(at 73.66 240.03)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -12248,7 +12272,7 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 114.3) (xy 123.19 119.38)
+			(xy 123.19 114.3) (xy 123.19 115.57)
 		)
 		(stroke
 			(width 0)
@@ -12818,6 +12842,16 @@
 	)
 	(wire
 		(pts
+			(xy 123.19 115.57) (xy 123.19 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f094c1e5-0aff-4fb0-8809-926466bd63db")
+	)
+	(wire
+		(pts
 			(xy 185.42 217.17) (xy 185.42 220.98)
 		)
 		(stroke
@@ -12985,6 +13019,16 @@
 			(type default)
 		)
 		(uuid "ff1dd247-9875-4d80-b1c9-7cd859ac0749")
+	)
+	(wire
+		(pts
+			(xy 123.19 115.57) (xy 124.46 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ffacf8bb-9587-4f5a-a658-aee25c58e248")
 	)
 	(wire
 		(pts
@@ -15640,7 +15684,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
 			(at 290.83 95.25 0)
 			(hide yes)
 			(show_name no)
@@ -17653,7 +17697,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
 			(at 280.67 160.02 0)
 			(hide yes)
 			(show_name no)
@@ -21335,7 +21379,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
 			(at 106.68 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -21572,7 +21616,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
 			(at 40.64 52.07 0)
 			(hide yes)
 			(show_name no)
@@ -22234,7 +22278,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
 			(at 280.67 100.33 0)
 			(hide yes)
 			(show_name no)
@@ -22399,8 +22443,11 @@
 		(pin "1"
 			(uuid "bc428f4d-c621-49b8-8d4b-78bb83a87948")
 		)
-		(pin "2,4"
+		(pin "4"
 			(uuid "81b17912-ab0a-4986-a562-f209cc8583a3")
+		)
+		(pin "2"
+			(uuid "dccd1f77-4614-4d01-b55f-38809df63dc6")
 		)
 		(instances
 			(project "telemetry"
@@ -24228,7 +24275,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
 			(at 149.86 45.72 0)
 			(hide yes)
 			(show_name no)
@@ -26694,7 +26741,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
 			(at 223.52 34.29 0)
 			(hide yes)
 			(show_name no)
@@ -27175,7 +27222,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
 			(at 270.51 165.1 0)
 			(hide yes)
 			(show_name no)
