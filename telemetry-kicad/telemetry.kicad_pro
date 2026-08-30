@@ -485,7 +485,9 @@
   },
   "libraries": {
     "pinned_footprint_libs": [],
-    "pinned_symbol_libs": []
+    "pinned_symbol_libs": [
+      "telemetry"
+    ]
   },
   "meta": {
     "filename": "telemetry.kicad_pro",
@@ -511,6 +513,14 @@
         "via_diameter": 0.6,
         "via_drill": 0.3,
         "wire_width": 6
+      },
+      {
+        "name": "ANT",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.32,
+        "tuning_profile": ""
       }
     ],
     "meta": {
@@ -518,7 +528,12 @@
     },
     "net_colors": null,
     "netclass_assignments": null,
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "ANT",
+        "pattern": "ANT"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {
@@ -661,7 +676,7 @@
         "uuid": "3df6834d-aaf5-42e5-8a41-0f444a5b1186"
       }
     ],
-    "used_designators": "J1-8,U1-11,F1,Q1-3,Y1,C1-34,D1-4,#PWR1-104,SW1-2,NT1-2,R1-32,L1,TP1-8",
+    "used_designators": "J1-8,U1-11,F1,Q1-3,Y1,C1-35,D1-4,D6,#PWR1-120,SW1-2,NT1-2,R1-32,L1,TP1-8,LED1-5",
     "variants": []
   },
   "sheets": [
