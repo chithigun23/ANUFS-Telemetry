@@ -6,7 +6,7 @@
 	(property "Reference" "REF**"
 		(at 1.525 -2.885 0)
 		(layer "F.SilkS")
-		(uuid "69d95e85-dac1-4e08-a190-ea49e5abc4a8")
+		(uuid "81be61fe-91b3-486e-8828-dbda46a3ac14")
 		(effects
 			(font
 				(size 1 1)
@@ -17,7 +17,7 @@
 	(property "Value" "XTAL_ABM8AIG-24.000MHz-8-2Z-T"
 		(at 16.765 2.885 0)
 		(layer "F.Fab")
-		(uuid "2fbe14bb-9f90-4d89-826d-bc4b2203f517")
+		(uuid "bae1fb6f-0fd7-48cf-8703-9c778e3d276c")
 		(effects
 			(font
 				(size 1 1)
@@ -29,7 +29,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "bef0368b-e3f6-433a-aafa-1b5204f9ef56")
+		(uuid "4cb67119-b624-4de6-a180-fe4f5391ebb5")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -40,7 +40,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "24719134-6d1d-47ac-80bb-61931bbb0450")
+		(uuid "203d5297-bd39-4e2f-a1e3-55415eb55a69")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -57,7 +57,7 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "1d7fe06f-f580-401d-ae43-27e7ae47dee7")
+		(uuid "278506d6-0bb2-42ad-ba56-73abedbfcf07")
 	)
 	(fp_line
 		(start 1.25 -0.08)
@@ -67,7 +67,7 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "ade341e8-9895-4f01-b158-cfe5930f849e")
+		(uuid "64c9c606-2261-45e4-840c-cf5f47ed2c48")
 	)
 	(fp_circle
 		(center -2.15 -1.1)
@@ -78,7 +78,7 @@
 		)
 		(fill no)
 		(layer "F.SilkS")
-		(uuid "e269bccc-757e-4b85-8ada-f95fb1daf4b4")
+		(uuid "c0664335-c23d-4d05-bb4f-c5cc23a27969")
 	)
 	(fp_line
 		(start -1.65 -2.05)
@@ -88,7 +88,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(uuid "861566c4-19f8-4e67-8ab5-07afcfd5664e")
+		(uuid "f2774856-e6cb-48bb-8525-5a15c346b2e2")
 	)
 	(fp_line
 		(start -1.65 -2.05)
@@ -98,7 +98,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(uuid "262deb69-edef-416f-903d-9028a1d28787")
+		(uuid "c6edf4d3-73e7-45eb-b0b5-f56ca4c3adcd")
 	)
 	(fp_line
 		(start 1.65 -2.05)
@@ -108,7 +108,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(uuid "369e9b40-7568-4ae6-9487-7f762d2e568a")
+		(uuid "13323874-ae9a-4922-87ab-0e9c17cb036d")
 	)
 	(fp_line
 		(start 1.65 2.05)
@@ -118,7 +118,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(uuid "b910acad-9293-4586-a12d-df3b55d87f2e")
+		(uuid "816dd2c8-9c9d-4823-9596-a27b2198bd8f")
 	)
 	(fp_line
 		(start -1.25 -1.6)
@@ -128,7 +128,7 @@
 			(type solid)
 		)
 		(layer "F.Fab")
-		(uuid "376a374f-bc20-4663-8eb5-c8138d8dcb5a")
+		(uuid "ea508292-26ac-4749-96a2-2e1abd9466c0")
 	)
 	(fp_line
 		(start -1.25 -1.6)
@@ -138,7 +138,7 @@
 			(type solid)
 		)
 		(layer "F.Fab")
-		(uuid "5dd73b66-5fbc-4d66-b29a-ebe411e0a737")
+		(uuid "57875d0b-f12a-4e8c-b469-78f1ce099804")
 	)
 	(fp_line
 		(start 1.25 -1.6)
@@ -148,7 +148,7 @@
 			(type solid)
 		)
 		(layer "F.Fab")
-		(uuid "71274508-3795-4a6b-ba32-e996f63d0d5a")
+		(uuid "396b9d9f-df05-421b-9bd0-8a3d2208dad4")
 	)
 	(fp_line
 		(start 1.25 1.6)
@@ -158,7 +158,7 @@
 			(type solid)
 		)
 		(layer "F.Fab")
-		(uuid "24084dd8-a657-4c85-bb92-2921a4f8ee12")
+		(uuid "199e5d4d-0785-4be1-99aa-4452051f3657")
 	)
 	(fp_circle
 		(center -2.15 -1.1)
@@ -169,35 +169,35 @@
 		)
 		(fill no)
 		(layer "F.Fab")
-		(uuid "544730e4-47c9-4afe-ad41-01c0a27502f8")
+		(uuid "0efc5934-4f34-481b-9471-651dfdd099cb")
 	)
 	(pad "1" smd rect
 		(at -0.8 -1.1)
 		(size 1.2 1.4)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
-		(uuid "bedb42c5-1a5a-443b-8379-0b2f61f18468")
+		(uuid "15acadd8-ed1c-4317-949e-5c6d850ec41b")
 	)
 	(pad "2" smd rect
 		(at -0.8 1.1)
 		(size 1.2 1.4)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
-		(uuid "9656ea14-3d16-4158-93ae-38e43cf4e279")
+		(uuid "919d10c2-30b1-4e86-836b-3ae19677f494")
 	)
 	(pad "3" smd rect
 		(at 0.8 1.1)
 		(size 1.2 1.4)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
-		(uuid "d569fc23-5f53-46e7-8a2a-c85c9021a5ce")
+		(uuid "3783b3e7-b316-4797-bd2a-d51e66407fbb")
 	)
 	(pad "4" smd rect
 		(at 0.8 -1.1)
 		(size 1.2 1.4)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
-		(uuid "30b73659-4af0-4787-9794-ef9c89646d29")
+		(uuid "0b20388b-f15e-4d58-8899-27f4f4d51a00")
 	)
 	(embedded_fonts no)
 	(model "C:/Users/chith/Desktop/telemetry/telemetry-library/3d/ABM8AIG-24.000MHz-8-2Z-T.STEP"
