@@ -21397,7 +21397,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LC29HBAMD"
+		(property "Footprint" ""
 			(at 29.464 89.154 90)
 			(hide yes)
 			(show_name no)
@@ -25450,7 +25450,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LC29HBAMD"
+		(property "Footprint" ""
 			(at 40.64 74.93 0)
 			(hide yes)
 			(show_name no)

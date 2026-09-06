@@ -1,4 +1,4 @@
-(footprint "LED-SMD_4P-L2.0-W1.3-RD-TL"
+(footprint "XL-2012SURUGC"
 	(version 20260206)
 	(generator "pcbnew")
 	(generator_version "10.0")
@@ -14,7 +14,7 @@
 			)
 		)
 	)
-	(property "Value" "LED-SMD_4P-L2.0-W1.3-RD-TL"
+	(property "Value" "XL-2012SURUGC"
 		(at 0 4.4 0)
 		(layer "F.Fab")
 		(uuid "42cb8e73-d096-4a43-8dd9-28cc89d31de4")
