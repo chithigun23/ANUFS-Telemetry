@@ -12,10 +12,9 @@
 		(in_pos_files yes)
 		(duplicate_pin_numbers_are_jumpers no)
 		(property "Reference" "U"
-			(at 33.02 10.16 0)
+			(at 14.986 3.81 0)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -23,10 +22,9 @@
 			)
 		)
 		(property "Value" "LC29HBAMD"
-			(at 33.02 7.62 0)
+			(at 14.986 1.27 0)
 			(show_name no)
 			(do_not_autoplace no)
-			(hide yes)
 			(effects
 				(font
 					(size 1.524 1.524)
