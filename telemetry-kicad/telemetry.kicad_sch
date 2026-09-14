@@ -4808,7 +4808,7 @@
 						)
 					)
 				)
-				(pin power_in line
+				(pin passive line
 					(at 40.64 -17.78 180)
 					(length 7.62)
 					(name "VCAP"
@@ -4898,7 +4898,7 @@
 						)
 					)
 				)
-				(pin power_in line
+				(pin passive line
 					(at 40.64 -20.32 180)
 					(length 7.62)
 					(name "VCAP"
@@ -8261,7 +8261,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin power_out line
 					(at -7.62 -20.32 0)
 					(length 7.62)
 					(name "VDD_EXT"
@@ -10821,7 +10821,7 @@
 						)
 					)
 				)
-				(pin power_in line
+				(pin passive line
 					(at 40.64 -17.78 180)
 					(length 7.62)
 					(name "VCAP"
@@ -10911,7 +10911,7 @@
 						)
 					)
 				)
-				(pin power_in line
+				(pin passive line
 					(at 40.64 -20.32 180)
 					(length 7.62)
 					(name "VCAP"
@@ -11576,7 +11576,7 @@
 						(type none)
 					)
 				)
-				(pin unspecified line
+				(pin power_out line
 					(at -8.89 6.35 0)
 					(length 2.54)
 					(name "OUT"
@@ -11702,7 +11702,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin power_out line
 					(at 8.89 -3.81 180)
 					(length 2.54)
 					(name "OUT"
@@ -12166,6 +12166,121 @@
 			)
 			(embedded_fonts no)
 		)
+			(symbol "power:PWR_FLAG"
+				(power global)
+				(pin_numbers
+					(hide yes)
+				)
+				(pin_names
+					(offset 0)
+					(hide yes)
+				)
+				(exclude_from_sim no)
+				(in_bom yes)
+				(on_board yes)
+				(in_pos_files yes)
+				(duplicate_pin_numbers_are_jumpers no)
+				(property "Reference" "#FLG"
+					(at 0 1.905 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Value" "PWR_FLAG"
+					(at 0 3.81 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Footprint" ""
+					(at 0 0 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Datasheet" ""
+					(at 0 0 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Description" "Special symbol for telling ERC where power comes from"
+					(at 0 0 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "ki_keywords" "flag power"
+					(at 0 0 0)
+					(show_name no)
+					(do_not_autoplace no)
+					(hide yes)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(symbol "PWR_FLAG_0_0"
+					(pin power_out line
+						(at 0 0 90)
+						(length 0)
+						(name ""
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "1"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+				)
+				(symbol "PWR_FLAG_0_1"
+					(polyline
+						(pts
+							(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+				)
+				(embedded_fonts no)
+			)
 	)
 	(rectangle
 		(start 209.55 128.27)
@@ -13203,6 +13318,66 @@
 	(no_connect
 		(at 389.89 227.33)
 		(uuid "08b003cd-4bdc-4731-8a5e-bb35f63a5366")
+	)
+	(no_connect
+		(at 100.33 176.53)
+		(uuid "f3eb1573-f951-4fef-9936-6dcae6d358ee")
+	)
+	(no_connect
+		(at 100.33 179.07)
+		(uuid "959cb485-e05d-4756-b80a-0523f4061ca7")
+	)
+	(no_connect
+		(at 100.33 181.61)
+		(uuid "816865cf-336a-4efc-8a18-8fa725a6a832")
+	)
+	(no_connect
+		(at 39.37 186.69)
+		(uuid "83db4898-3884-4609-b48e-7c1691583b72")
+	)
+	(no_connect
+		(at 39.37 189.23)
+		(uuid "8971ba10-abf4-4f8d-b0c9-682d512400b6")
+	)
+	(no_connect
+		(at 39.37 191.77)
+		(uuid "5c3ad909-85eb-4898-8a25-15b2fa65e196")
+	)
+	(no_connect
+		(at 39.37 217.17)
+		(uuid "b001ce13-99dd-4f51-a2bc-5c8813acf8ba")
+	)
+	(no_connect
+		(at 39.37 219.71)
+		(uuid "706e7afd-7345-4a6e-8227-d53d20405c13")
+	)
+	(no_connect
+		(at 39.37 181.61)
+		(uuid "7ec34988-8511-4413-8014-f6c50af9deb7")
+	)
+	(no_connect
+		(at 353.06 172.72)
+		(uuid "97af874a-8894-4af1-a5fd-dfc0bf211bb3")
+	)
+	(no_connect
+		(at 353.06 175.26)
+		(uuid "4e4ee8ab-1dc4-42f6-b276-c8f4827e4fa0")
+	)
+	(no_connect
+		(at 353.06 177.8)
+		(uuid "b44204f0-83b1-417b-ba30-d94e86c312ef")
+	)
+	(no_connect
+		(at 410.21 172.72)
+		(uuid "0cd8d2ce-9323-460e-a285-f2bb5dc267a3")
+	)
+	(no_connect
+		(at 410.21 175.26)
+		(uuid "8e262ee4-3bab-4be6-89e8-8cbc1a28cfa8")
+	)
+	(no_connect
+		(at 410.21 177.8)
+		(uuid "d767f037-4d53-4484-9af6-abf20c9be51c")
 	)
 	(no_connect
 		(at 171.45 217.17)
@@ -20629,6 +20804,207 @@
 			)
 		)
 	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 393.7 27.94 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "6594b136-9f3e-418f-aa7c-bfd9b9ec53f4")
+		(property "Reference" "#FLG01"
+			(at 393.7 29.845000000000002 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 393.7 31.75 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 393.7 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 393.7 27.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7bf5829e-efba-496a-8dd3-18f9929b6faa")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#FLG01")
+					(unit 1)
+				)
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 22.86 29.21 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "dc187aec-bcda-455d-ab1f-f387244ba4ea")
+		(property "Reference" "#FLG02"
+			(at 22.86 31.115000000000002 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 22.86 33.02 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 22.86 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 22.86 29.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1a7bcbd5-f729-4911-9175-e89c7c3a4765")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#FLG02")
+					(unit 1)
+				)
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 254.0 33.02 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "8738e30a-57e4-4f33-ab24-9490b2e1c1c0")
+		(property "Reference" "#FLG03"
+			(at 254.0 34.925000000000004 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 254.0 36.830000000000005 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 254.0 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 254.0 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "40efb89d-d5f0-4f71-a7e4-3021bd19b73a")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#FLG03")
+					(unit 1)
+				)
+			)
+		)
+	)
+
 	(symbol
 		(lib_id "power:+3.3V")
 		(at 100.33 80.01 0)
