@@ -1,4 +1,4 @@
 (sym_lib_table
 	(version 7)
-	(lib (name "telemetry") (type "KiCad") (uri "${TELEM_LIB}/Symbol") (options "") (descr ""))
+	(lib (name "telemetry") (type "KiCad") (uri "${KIPRJMOD}/telemetry-library/Symbol") (options "") (descr ""))
 )
