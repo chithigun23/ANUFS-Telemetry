@@ -143,206 +143,36 @@
 		(layer "F.SilkS")
 		(uuid "4e5e514d-0bc6-4ab6-9a01-6ad442f50608")
 	)
-	(fp_line
-		(start -7.598601 -7.660401)
-		(end -7.598601 0.260399)
+	(fp_rect
+		(start -7.6 -8.35)
+		(end 7.6 8.35)
 		(stroke
-			(width 0.1524)
+			(width 0.05)
 			(type solid)
 		)
+		(fill no)
 		(layer "F.CrtYd")
-		(uuid "82272db8-cc11-435e-8568-8348a7193f8d")
+		(uuid "eb3a3de3-467e-4208-a356-9550dfc3b70e")
 	)
-	(fp_line
-		(start -7.598601 0.260399)
-		(end -6.4262 0.260399)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "c2ad8134-9fc3-43ab-83d1-f9d638c293f4")
-	)
-	(fp_line
-		(start -7.598601 1.939599)
-		(end -7.598601 7.660401)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "9cf36b5f-8842-4fde-8c9a-a200397fac20")
-	)
-	(fp_line
-		(start -7.598601 7.660401)
-		(end -6.4262 7.660401)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "784e0319-9f15-4546-8f1a-1a728121879a")
-	)
-	(fp_line
-		(start -6.4262 -8.3312)
-		(end -6.4262 -7.660401)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "c1b2c259-73eb-4fc3-849e-21819c856552")
-	)
-	(fp_line
-		(start -6.4262 -7.660401)
-		(end -7.598601 -7.660401)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "896c7a0f-8caf-4cca-a6c9-18b1f0e356b3")
-	)
-	(fp_line
-		(start -6.4262 0.260399)
-		(end -6.4262 1.939599)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "e06aeabf-6bec-49f0-b9ac-f4cadfba21c7")
-	)
-	(fp_line
-		(start -6.4262 1.939599)
-		(end -7.598601 1.939599)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "063ae774-8ce7-41bf-994e-93ca6f1d4ad1")
-	)
-	(fp_line
-		(start -6.4262 7.660401)
-		(end -6.4262 8.3312)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "ade792b4-468d-4c7a-ba51-a42e1256f26c")
-	)
-	(fp_line
-		(start -6.4262 8.3312)
-		(end 6.4262 8.3312)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "8ce174a1-beb7-4850-b26c-376747809d5a")
-	)
-	(fp_line
-		(start 6.4262 -8.3312)
-		(end -6.4262 -8.3312)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "fe755216-0d9f-4659-a665-1197edd88592")
-	)
-	(fp_line
-		(start 6.4262 -7.660401)
-		(end 6.4262 -8.3312)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "700e8bcf-de56-4246-b869-383ea879dbcb")
-	)
-	(fp_line
-		(start 6.4262 0.260399)
-		(end 7.598601 0.260399)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "dd395613-854b-483a-b081-47cfb89447f9")
-	)
-	(fp_line
-		(start 6.4262 1.939599)
-		(end 6.4262 0.260399)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "ec483082-3127-48b9-bd8f-3b8a0b5b59d0")
-	)
-	(fp_line
-		(start 6.4262 7.660401)
-		(end 7.598601 7.660401)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "2f10c818-8988-4141-bacb-6c8679c93494")
-	)
-	(fp_line
-		(start 6.4262 8.3312)
-		(end 6.4262 7.660401)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "2bc947a7-77cf-4b4d-aba4-5cb576f8142c")
-	)
-	(fp_line
-		(start 7.598601 -7.660401)
-		(end 6.4262 -7.660401)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "2eb9ae4a-5e22-4d4e-8daa-03ef457e1bcf")
-	)
-	(fp_line
-		(start 7.598601 0.260399)
-		(end 7.598601 -7.660401)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "55aabff5-9d9a-4fa3-b52c-b731e250b0c1")
-	)
-	(fp_line
-		(start 7.598601 1.939599)
-		(end 6.4262 1.939599)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "14675806-6838-4b57-8dc6-23126cbc1d07")
-	)
-	(fp_line
-		(start 7.598601 7.660401)
-		(end 7.598601 1.939599)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "a636d719-545b-4912-9662-7314c59a02b5")
-	)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	(fp_line
 		(start -6.1722 -8.0772)
 		(end -6.1722 8.0772)

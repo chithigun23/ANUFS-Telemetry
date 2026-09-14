@@ -2,3 +2,7 @@ telemetry-kicad/.history/
 *.log
 telemetry-kicad/*.log
 kleplace.log
+.history/
+*.bak
+*.bak-*
+*.inspect.ndjson
