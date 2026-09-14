@@ -67,7 +67,7 @@
 			(width 0.25)
 			(type solid)
 		)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(uuid "c03e023c-1452-4b9f-87d3-b14853fe3136")
 	)
 	(fp_line
@@ -77,7 +77,7 @@
 			(width 0.25)
 			(type solid)
 		)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(uuid "50e1655e-2aa6-4d94-a939-279cbf8e046d")
 	)
 	(fp_line
@@ -97,7 +97,7 @@
 			(width 0.25)
 			(type solid)
 		)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(uuid "1d38ba2f-39a1-4225-a8ac-86f27003e64a")
 	)
 	(fp_line
@@ -107,7 +107,7 @@
 			(width 0.25)
 			(type solid)
 		)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(uuid "44c6a3b0-4bb9-4ba9-a3b6-6c3e41cd67c1")
 	)
 	(fp_circle
@@ -118,7 +118,7 @@
 			(type solid)
 		)
 		(fill no)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(uuid "48393225-2918-4d39-b82d-104210f8b025")
 	)
 	(fp_circle
@@ -194,20 +194,18 @@
 			)
 		)
 	)
-	(pad "" thru_hole circle
+	(pad "" np_thru_hole circle
 		(at -2.89 -1.3)
-		(size 0.7 0.7)
-		(drill 0.7)
+		(size 0.65 0.65)
+		(drill 0.65)
 		(layers "*.Cu" "*.Mask")
-		(remove_unused_layers no)
 		(uuid "71717c38-d69a-4337-ad63-d5db5a346291")
 	)
-	(pad "" thru_hole circle
+	(pad "" np_thru_hole circle
 		(at 2.89 -1.3)
-		(size 0.7 0.7)
-		(drill 0.7)
+		(size 0.65 0.65)
+		(drill 0.65)
 		(layers "*.Cu" "*.Mask")
-		(remove_unused_layers no)
 		(uuid "1059c9a1-acab-45ae-9f20-8fc359a4c83b")
 	)
 	(pad "A1" smd rect
