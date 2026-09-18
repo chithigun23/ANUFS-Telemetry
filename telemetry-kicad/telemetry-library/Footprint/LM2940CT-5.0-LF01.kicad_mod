@@ -3,12 +3,11 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
-	(descr "TI LM2940CT-5.0/LF01, TO-220 (NDG0003F package), SMD formed-lead variant -- entire part (3 leads + tab) solders flat to the board, no through-holes. Land pattern derived from TI datasheet (lm2940c.pdf) page 43 EXAMPLE BOARD LAYOUT for NDG0003F: 2.54mm lead pitch, 2.8x1.0mm lead pads, ~7.7x8.3mm exposed tab pad. Verify against the datasheet drawing before fab -- dimensions were reconstructed from PDF text extraction, not read directly off the CAD drawing.")
-	(tags "LM2940 LDO TO-220 NDG0003F SMD formed-lead 2.54mm")
+	(descr "TI LM2940CT-5.0/LF01, TO-220 NDG0003F SMD formed-lead package - 3 gull-wing leads plus the exposed tab solder flat to the board, no through-holes. Land pattern read directly off TI lm2940c.pdf NDG0003F EXAMPLE BOARD LAYOUT (4219861/A p.43): 1.0x2.8mm lead pads at 2.54mm pitch; stepped thermal pad 8.32x5.81mm under the body then 10.16x6.35mm under the tab (12.16mm total); paste per p.44 stencil, 64 windows = 61%% coverage on the thermal pad. https://www.ti.com/lit/ds/symlink/lm2940c.pdf")
+	(tags "LM2940 LDO TO-220 NDG0003F SMD formed-lead gull-wing 2.54mm thermal pad")
 	(property "Reference" "REF**"
-		(at 0 -8.5 0)
+		(at 0 -7.6 0)
 		(layer "F.SilkS")
-		(uuid "b7a1c001-2000-4000-8000-000000000001")
 		(effects
 			(font
 				(size 1 1)
@@ -17,9 +16,8 @@
 		)
 	)
 	(property "Value" "LM2940CT-5.0/LF01"
-		(at 0 8.5 0)
+		(at 0 14.6 0)
 		(layer "F.Fab")
-		(uuid "b7a1c001-2000-4000-8000-000000000002")
 		(effects
 			(font
 				(size 1 1)
@@ -31,10 +29,10 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "b7a1c001-2000-4000-8000-000000000003")
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -42,10 +40,10 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "b7a1c001-2000-4000-8000-000000000004")
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -54,7 +52,6 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "b7a1c001-2000-4000-8000-000000000005")
 		(effects
 			(font
 				(size 1 1)
@@ -67,7 +64,6 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "b7a1c001-2000-4000-8000-000000000006")
 		(effects
 			(font
 				(size 1 1)
@@ -78,61 +74,181 @@
 	(property ki_fp_filters "TO?220*NDG*")
 	(attr smd)
 	(duplicate_pad_numbers_are_jumpers no)
-	(fp_rect
-		(start -6.08 -6.5)
-		(end 6.08 5.5)
-		(stroke (width 0.12) (type solid))
-		(fill no)
-		(layer "F.SilkS")
-		(uuid "b7a1c001-2000-4000-8000-000000000010")
+	(fp_line
+		(start 4.08 -1.58)
+		(end -5.08 -1.58)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
 	)
 	(fp_line
-		(start -6.3 -5.2)
-		(end -6.3 5.7)
-		(stroke (width 0.05) (type solid))
-		(layer "F.CrtYd")
-		(uuid "b7a1c001-2000-4000-8000-000000000020")
+		(start -5.08 -1.58)
+		(end -5.08 13.41)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
 	)
 	(fp_line
-		(start -6.3 5.7)
-		(end 6.3 5.7)
-		(stroke (width 0.05) (type solid))
-		(layer "F.CrtYd")
-		(uuid "b7a1c001-2000-4000-8000-000000000021")
+		(start -5.08 13.41)
+		(end 5.08 13.41)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
 	)
 	(fp_line
-		(start 6.3 5.7)
-		(end 6.3 -5.2)
-		(stroke (width 0.05) (type solid))
-		(layer "F.CrtYd")
-		(uuid "b7a1c001-2000-4000-8000-000000000022")
+		(start 5.08 13.41)
+		(end 5.08 -0.5800000000000001)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
 	)
 	(fp_line
-		(start 6.3 -5.2)
-		(end -6.3 -5.2)
-		(stroke (width 0.05) (type solid))
-		(layer "F.CrtYd")
-		(uuid "b7a1c001-2000-4000-8000-000000000023")
+		(start 5.08 -0.5800000000000001)
+		(end 4.08 -1.58)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
 	)
-	(fp_rect
-		(start -6.08 -6.5)
-		(end 6.08 5.5)
-		(stroke (width 0.1) (type solid))
+	(fp_line
+		(start -5.08 7.06)
+		(end 5.08 7.06)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_circle
+		(center 0 10.61)
+		(end 1.92 10.61)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
 		(fill no)
 		(layer "F.Fab")
-		(uuid "b7a1c001-2000-4000-8000-000000000030")
 	)
 	(fp_line
-		(start 3.94 -5)
-		(end 2.54 -3.6)
-		(stroke (width 0.1) (type solid))
+		(start 2.135 -5.65)
+		(end 2.9450000000000003 -5.65)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
 		(layer "F.Fab")
-		(uuid "b7a1c001-2000-4000-8000-000000000031")
+	)
+	(fp_line
+		(start 2.9450000000000003 -5.65)
+		(end 2.9450000000000003 -1.58)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start 2.9450000000000003 -1.58)
+		(end 2.135 -1.58)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start 2.135 -1.58)
+		(end 2.135 -5.65)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -0.405 -5.65)
+		(end 0.405 -5.65)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start 0.405 -5.65)
+		(end 0.405 -1.58)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start 0.405 -1.58)
+		(end -0.405 -1.58)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -0.405 -1.58)
+		(end -0.405 -5.65)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -2.9450000000000003 -5.65)
+		(end -2.135 -5.65)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -2.135 -5.65)
+		(end -2.135 -1.58)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -2.135 -1.58)
+		(end -2.9450000000000003 -1.58)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -2.9450000000000003 -1.58)
+		(end -2.9450000000000003 -5.65)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
 	)
 	(fp_text user "${REFERENCE}"
-		(at 0 0.2 0)
+		(at 0 2.75 0)
 		(layer "F.Fab")
-		(uuid "b7a1c001-2000-4000-8000-000000000040")
 		(effects
 			(font
 				(size 1 1)
@@ -140,29 +256,436 @@
 			)
 		)
 	)
-	(pad "1" smd rect
-		(at 2.54 -5)
-		(size 1 2.8)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(uuid "b7a1c001-2000-4000-8000-000000000061")
+	(fp_line
+		(start -5.4 -1.6400000000000001)
+		(end 5.4 -1.6400000000000001)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -5.4 -1.6400000000000001)
+		(end -5.4 13.41)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 5.4 -1.6400000000000001)
+		(end 5.4 13.41)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+	)
+	(fp_circle
+		(center 3.6 -6.4)
+		(end 3.72 -6.4)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -5.6 -6.65)
+		(end 5.6 -6.65)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+	)
+	(fp_line
+		(start 5.6 -6.65)
+		(end 5.6 13.66)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+	)
+	(fp_line
+		(start 5.6 13.66)
+		(end -5.6 13.66)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+	)
+	(fp_line
+		(start -5.6 13.66)
+		(end -5.6 -6.65)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+	)
+	(pad "1" smd roundrect
+		(at 2.54 -5.0)
+		(size 1.0 2.8)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(roundrect_rratio 0.05)
+	)
+	(pad "2" smd roundrect
+		(at 0 -5.0)
+		(size 1.0 2.8)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(roundrect_rratio 0.05)
+	)
+	(pad "3" smd roundrect
+		(at -2.54 -5.0)
+		(size 1.0 2.8)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(roundrect_rratio 0.05)
 	)
 	(pad "2" smd rect
-		(at 0 1)
-		(size 7.74 8)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(uuid "b7a1c001-2000-4000-8000-000000000060")
+		(at 0 4.155)
+		(size 8.32 5.81)
+		(layers "F.Cu" "F.Mask")
 	)
 	(pad "2" smd rect
-		(at 0 -5)
-		(size 1 2.8)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(uuid "b7a1c001-2000-4000-8000-000000000062")
+		(at 0 10.235)
+		(size 10.16 6.35)
+		(layers "F.Cu" "F.Mask")
 	)
-	(pad "3" smd rect
-		(at -2.54 -5)
-		(size 1 2.8)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(uuid "b7a1c001-2000-4000-8000-000000000063")
+	(pad "" smd rect
+		(at 3.175 2.1)
+		(size 1.07 1.17)
+		(layers "F.Paste")
 	)
-	(embedded_fonts no)
+	(pad "" smd rect
+		(at 1.905 2.1)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 0.635 2.1)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -0.635 2.1)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -1.905 2.1)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -3.175 2.1)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 3.175 3.47)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 1.905 3.47)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 0.635 3.47)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -0.635 3.47)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -1.905 3.47)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -3.175 3.47)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 3.175 4.84)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 1.905 4.84)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 0.635 4.84)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -0.635 4.84)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -1.905 4.84)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -3.175 4.84)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 3.175 6.21)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 1.905 6.21)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 0.635 6.21)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -0.635 6.21)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -1.905 6.21)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -3.175 6.21)
+		(size 1.07 1.17)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 4.13 7.84)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 2.95 7.84)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 1.77 7.84)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 0.59 7.84)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -0.59 7.84)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -1.77 7.84)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -2.95 7.84)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -4.13 7.84)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 4.13 9.04)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 2.95 9.04)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 1.77 9.04)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 0.59 9.04)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -0.59 9.04)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -1.77 9.04)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -2.95 9.04)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -4.13 9.04)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 4.13 10.24)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 2.95 10.24)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 1.77 10.24)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 0.59 10.24)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -0.59 10.24)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -1.77 10.24)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -2.95 10.24)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -4.13 10.24)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 4.13 11.44)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 2.95 11.44)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 1.77 11.44)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 0.59 11.44)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -0.59 11.44)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -1.77 11.44)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -2.95 11.44)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -4.13 11.44)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 4.13 12.64)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 2.95 12.64)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 1.77 12.64)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at 0.59 12.64)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -0.59 12.64)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -1.77 12.64)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -2.95 12.64)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(pad "" smd rect
+		(at -4.13 12.64)
+		(size 0.98 1.0)
+		(layers "F.Paste")
+	)
+	(model "${KIPRJMOD}/telemetry-library/3d/LM2940CT-5.0-LF01.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
 )

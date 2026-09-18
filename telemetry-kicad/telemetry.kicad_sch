@@ -36431,7 +36431,7 @@
 				)
 			)
 		)
-		(property "Footprint" "telemetry:LM2940CT-5.0-LF01"
+		(property "Footprint" "Package_TO_SOT_SMD:TO-263-3_TabPin2"
 			(at 412.75 113.03 0)
 			(hide yes)
 			(show_name no)
@@ -45802,7 +45802,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical"
+		(property "Footprint" "Connector:Tag-Connect_TC2030-IDC-FP_2x03_P1.27mm_Vertical"
 			(at 129.54 81.28 0)
 			(hide yes)
 			(show_name no)
