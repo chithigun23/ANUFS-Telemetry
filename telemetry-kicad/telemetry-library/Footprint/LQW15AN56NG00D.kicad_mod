@@ -1,0 +1,155 @@
+(footprint "LQW15AN56NG00D"
+	(version 20260206)
+	(generator "kicad-footprint-generator")
+	(layer "F.Cu")
+	(descr "Murata LQW15AN56NG00D, 56nH +/-2% wire-wound RF chip inductor, 0402 (1005 Metric), 1.0x0.5x0.5mm. Land pattern per Murata spec JELF243A section 12.1 (a=0.50 b=1.2 c=0.65) - tighter than a generic 0402, keeping copper out from under the winding for RF performance. Reflow only. https://www.murata.com/en-us/products/productdetail?partno=LQW15AN56NG00D")
+	(tags "inductor RF choke wire wound 0402 1005 Murata LQW15AN 56nH")
+	(property "Reference" "REF**"
+		(at 0 -1.2 0)
+		(layer "F.SilkS")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "LQW15AN56NG00D"
+		(at 0 1.2 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.murata.com/en-us/products/productdetail?partno=LQW15AN56NG00D"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "Murata LQW15AN56NG00D 56nH 0402 RF inductor"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 0.26 0.26)
+				(thickness 0.04)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -0.5 -0.25)
+		(end 0.5 -0.25)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start 0.5 -0.25)
+		(end 0.5 0.25)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start 0.5 0.25)
+		(end -0.5 0.25)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -0.5 0.25)
+		(end -0.5 -0.25)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -0.75 -0.48)
+		(end 0.75 -0.48)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+	)
+	(fp_line
+		(start 0.75 -0.48)
+		(end 0.75 0.48)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+	)
+	(fp_line
+		(start 0.75 0.48)
+		(end -0.75 0.48)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+	)
+	(fp_line
+		(start -0.75 0.48)
+		(end -0.75 -0.48)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+	)
+	(pad "1" smd roundrect
+		(at -0.425 0)
+		(size 0.35 0.65)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(roundrect_rratio 0.25)
+	)
+	(pad "2" smd roundrect
+		(at 0.425 0)
+		(size 0.35 0.65)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(roundrect_rratio 0.25)
+	)
+	(model "${KIPRJMOD}/telemetry-library/3d/LQW15AN56NG00D.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)
