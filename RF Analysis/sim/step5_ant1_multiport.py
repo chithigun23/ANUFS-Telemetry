@@ -27,6 +27,7 @@ The real board file is only read, never modified.
 """
 import json
 import os
+import socket
 import subprocess
 import sys
 
@@ -41,6 +42,10 @@ sys.path.insert(0, PLUGINS)
 
 import board_reader  # noqa: E402
 import solverenv  # noqa: E402
+
+# Results go to results/<TAG>/..., so two machines never write to the same path.
+# Set RF_TAG (for example "desktop" or "laptop"); the default is the computer name.
+TAG = os.environ.get("RF_TAG") or socket.gethostname()
 
 BOX = (21.0, 20.5, 31.5, 33.0)          # x0, y0, x1, y1 (mm, KiCad coordinates)
 TRACE_X, TEST_Y = 25.89, 21.5           # test pad on the ANT1 trace, above J7
@@ -106,7 +111,7 @@ def make_cropped_board(out_path):
 
 
 def main(mesh="coarse", excite=None):
-    outdir = os.path.join(REPO, "RF Analysis", "results", "ant1_4port_" + mesh)
+    outdir = os.path.join(REPO, "RF Analysis", "results", TAG, "ant1_4port_" + mesh)
     os.makedirs(outdir, exist_ok=True)
     cropped = os.path.join(outdir, "ant1_cropped.kicad_pcb")
     # Crop in a separate process: the bindings misbehave when a board is edited
