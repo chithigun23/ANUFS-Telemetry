@@ -126,8 +126,10 @@ def main(mesh="coarse", mode="full"):
     pads = [board.FindFootprintByReference(r).FindPadByNumber("1") for r in refs]
     margin = 2.0 if short else 4.0
     model = board_reader.extract(board, pads, margin_mm=margin)
+    # PORTTYPE=lumped uses lumped ports (no wave separation along a line), which suits
+    # structures that are electrically short at GNSS frequencies. Default is msl.
     for p in model["ports"]:
-        p["type"] = "msl"
+        p["type"] = os.environ.get("PORTTYPE", "msl")
     model["settings"] = {
         "f_start": 0.5e9, "f_stop": 3.0e9, "z0": 50.0, "margin_mm": margin,
         "mesh": mesh, "n_freq": 251, "max_timesteps": 300000,
