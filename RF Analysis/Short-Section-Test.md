@@ -97,6 +97,7 @@ existed, is in `RF Analysis/results/step1_short_coarse/`):
 | Date | Mesh | Line Z0 (ohm) | S11 worst L5 / L1 (dB) | S21 worst L5 / L1 (dB) | Notes |
 |---|---|---|---|---|---|
 | 2026-09-22 | coarse | 46.8 (port 1), 46.1 (port 2), at 1.75 GHz; eps_eff 3.30 / 3.19 | not valid | not valid | see below |
+| 2026-09-22 | coarse, 9.5 mm | not valid (solver diverged) | not valid | not valid | desktop and laptop identical, see section 7 |
 
 **Run details (coarse, 118 x 94 x 39 cells):** timestep 1.77e-14 s. Port 1 stopped at about 118,000 steps and
 port 2 at about 110,000 steps, each when the energy fell below the -40 dB criterion, after about 24 minutes each.
@@ -122,3 +123,27 @@ numbers must not be used or quoted.
 **Next runs to separate these causes:** (a) the same section at 10 mm, coarse mesh (about 2 hours for both ports);
 (b) the 5 mm section at the medium mesh. A run of the plugin's own validation with a narrow 0.32 mm trace would
 also show whether the plugin handles this trace width.
+
+## 7. 9.5 mm run (desktop and laptop): the solver diverges
+
+Both machines ran mode `long` (9.5 mm section, coarse mesh, 134 x 110 x 39 = 574,860 cells, timestep 1.666e-14 s).
+The results are identical on both, to the second decimal (`summary.csv`: S11 -11.12 / -11.13 dB, S21 +18.9 dB;
+not physical), which shows the failure is deterministic and not a fault of one machine. The desktop took about an
+hour per excitation, the laptop (Core Ultra 7 258V) about 1.6 times faster.
+
+**What the log shows:** the field energy is bounded until about 60,000-75,000 steps, then grows exponentially:
+about 1e-12 at 75,000 steps, 1e-5 at 100,000, 20 at 125,000, 1e8 at 150,000, and 7e27 at 225,000 steps, reaching
+infinity at about 230,000 steps. The line impedance read at port 1 is meaningless (50 - 9.8j ohm with an
+effective dielectric constant of 106), and the far field is NaN. This is a late-time numerical instability, not a
+geometry error. Port results from a diverging run cannot be used.
+
+**Reading of the earlier 5 mm result:** in that run the energy was still decaying (down to -35 dB at 110,000
+steps) when the -40 dB stopping criterion ended the run. An instability that starts at 60,000-75,000 steps and
+grows for tens of thousands of steps could have contaminated the port data before then without being visible in
+the energy. The invalid 5 mm S-parameters are therefore probably the same fault, but this is not proven.
+
+**Diagnostics under way (2026-09-22):**
+| Machine | Change | Question |
+|---|---|---|
+| laptop | timestep factor 0.5, step cap 600,000, port 1 only | is the instability a timestep (Courant) problem? |
+| desktop | copper as a perfect conductor (`sim/experiments/runner_pec.py`), port 1 only | does the finite-conductivity copper sheet model cause it? |
