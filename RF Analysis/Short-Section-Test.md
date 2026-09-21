@@ -3,7 +3,7 @@
 This document supplements `RF-Analysis-Plan.md` (Step 1). It does not replace it. It records why Step 1 is
 being run on a short section of the ANT3 line instead of the full J9-to-J10 line, and how.
 
-Status: **running** (started 2026-09-22). Results go in section 6.
+Status: **first run complete (2026-09-22): line impedance usable, S-parameters not valid.** See section 6.
 
 ## 1. Why the full line was not simulated
 
@@ -94,4 +94,29 @@ first). Output goes to `RF Analysis/results/step1_short_coarse/`:
 
 | Date | Mesh | Line Z0 (ohm) | S11 worst L5 / L1 (dB) | S21 worst L5 / L1 (dB) | Notes |
 |---|---|---|---|---|---|
-| | | | | | |
+| 2026-09-22 | coarse | 46.8 (port 1), 46.1 (port 2), at 1.75 GHz; eps_eff 3.30 / 3.19 | not valid | not valid | see below |
+
+**Run details (coarse, 118 x 94 x 39 cells):** timestep 1.77e-14 s. Port 1 stopped at about 118,000 steps and
+port 2 at about 110,000 steps, each when the energy fell below the -40 dB criterion, after about 24 minutes each.
+Solver speed 33-38 million cells/s on the Ryzen 3 3100.
+
+**Line impedance (usable):** the plugin reads 46.8 ohm at port 1 and 46.1 ohm at port 2, at 1.75 GHz, with an
+effective dielectric constant of 3.30 and 3.19. The two ports agree within 0.7 ohm. This is lower than the hand
+estimate of about 54 ohm (`RF-Analysis-Plan.md`, section 2.2), which ignored the ground pour beside the trace, as
+expected. Coarse meshes under-read impedance by up to about 2 ohm in the plugin's own tests, so the true value is
+probably 46-49 ohm. Not yet confirmed at a finer mesh.
+
+**S-parameters (not valid):** the solver's own check reports that port 1 and port 2 give out more power than they
+take in (sum of |S|^2 up to 116,536 and 2,977; it must be at most 1). The written S11 is +35 to +51 dB and S21 is
+about +8.5 dB, which is impossible for a passive line. The far-field figure for port 1 also came out as NaN. These
+numbers must not be used or quoted.
+
+**Likely causes, not yet tested:**
+1. The 5 mm section is too short: the plugin's line ports de-embed over a length of line, and two ports 5 mm apart
+   may have overlapping measurement regions.
+2. The coarse mesh is too coarse across the 0.32 mm strip (the solver's warning points at this).
+3. Test pads the same width as the trace (0.32 mm) may not be handled well as microstrip ports.
+
+**Next runs to separate these causes:** (a) the same section at 10 mm, coarse mesh (about 2 hours for both ports);
+(b) the 5 mm section at the medium mesh. A run of the plugin's own validation with a narrow 0.32 mm trace would
+also show whether the plugin handles this trace width.
