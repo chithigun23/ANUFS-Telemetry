@@ -1,4 +1,5 @@
 # ANUFS Telemetry
+<img width="1060" height="888" alt="image" src="https://github.com/user-attachments/assets/a3f25499-ddef-4914-a0bc-0bdd9bb30e09" />
 
 <p align="center">
   <img src="assets/architecture.svg" alt="ANUFS Telemetry system architecture - animated diagram of power, sensing, CAN, GNSS and status flow" width="100%">
