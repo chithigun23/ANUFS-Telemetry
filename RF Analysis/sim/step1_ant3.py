@@ -14,9 +14,9 @@ What it does:
   3. Runs the openEMS solver from C:\\openEMS\\venv and writes a Touchstone file.
   4. Prints S11/S21 across the GNSS bands and saves a CSV summary.
 
-Short mode ("short" as the 2nd argument): instead of the full 11 mm J9->J10 line,
-simulate only a 5 mm section of the same trace (y = 29.5 .. 34.5) between two
-0.32 mm test pads, in a tighter domain. Same stackup, same ground pours, so the
+Section modes ("short" or "long" as the 2nd argument): instead of the full 11 mm J9->J10
+line, simulate a section of the same trace between two 0.32 mm test pads, in a tighter
+domain. "short" = 5 mm (y 29.5 .. 34.5), "long" = 9.5 mm (y 26.5 .. 36.0). Same stackup, same ground pours, so the
 impedance and the toolchain check are the same but the run is far cheaper.
 
 The real board file is only read, never modified.
@@ -41,18 +41,22 @@ import solverenv  # noqa: E402
 # Crop box around ANT3 (mm, KiCad coordinates): the two SMA pads are at
 # x = 18.29, y = 25.96 and y = 37.29.
 BOX = (10.0, 20.0, 27.0, 43.0)  # x0, y0, x1, y1
-SHORT_BOX = (14.0, 27.0, 22.5, 37.0)
-SHORT_Y = (34.5, 29.5)  # y of test pad 1 and test pad 2
+# Section modes: crop box (x0, y0, x1, y1) and the y of test pad 1 and test pad 2 (mm).
+SECTIONS = {
+    "short": ((14.0, 27.0, 22.5, 37.0), (34.5, 29.5)),   # 5 mm
+    "long": ((14.0, 24.5, 22.5, 38.0), (36.0, 26.5)),    # 9.5 mm
+}
 TRACE_X = 18.26
 BANDS = {"L5": (1164e6, 1188e6), "L1": (1559e6, 1606e6)}
 
 
-def make_cropped_board(out_path, short=False):
+def make_cropped_board(out_path, section=None):
+    short = section is not None
     b = pcbnew.LoadBoard(BOARD)
     for d in list(b.GetDrawings()):
         if d.GetLayer() == pcbnew.Edge_Cuts:
             b.Remove(d)
-    x0, y0, x1, y1 = SHORT_BOX if short else BOX
+    x0, y0, x1, y1 = SECTIONS[section][0] if short else BOX
     pts = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
     for i in range(4):
         seg = pcbnew.PCB_SHAPE(b)
@@ -83,10 +87,10 @@ def make_cropped_board(out_path, short=False):
         trk.SetLayer(pcbnew.F_Cu)
         trk.SetNetCode(ant3_code)
         trk.SetWidth(FromMM(0.32))
-        trk.SetStart(VECTOR2I(FromMM(TRACE_X), FromMM(SHORT_Y[0])))
-        trk.SetEnd(VECTOR2I(FromMM(TRACE_X), FromMM(SHORT_Y[1])))
+        trk.SetStart(VECTOR2I(FromMM(TRACE_X), FromMM(SECTIONS[section][1][0])))
+        trk.SetEnd(VECTOR2I(FromMM(TRACE_X), FromMM(SECTIONS[section][1][1])))
         b.Add(trk)
-        for ref, y in (("P1", SHORT_Y[0]), ("P2", SHORT_Y[1])):
+        for ref, y in (("P1", SECTIONS[section][1][0]), ("P2", SECTIONS[section][1][1])):
             fp = pcbnew.FOOTPRINT(b)
             fp.SetReference(ref)
             fp.SetPosition(VECTOR2I(FromMM(TRACE_X), FromMM(y)))
@@ -104,13 +108,13 @@ def make_cropped_board(out_path, short=False):
 
 
 def main(mesh="coarse", mode="full"):
-    short = mode == "short"
+    short = mode in SECTIONS
     outdir = os.path.join(REPO, "RF Analysis", "results", "step1_%s_%s" % (mode, mesh))
     os.makedirs(outdir, exist_ok=True)
     cropped = os.path.join(outdir, "ant3_cropped.kicad_pcb")
     # Crop in a separate process: KiCad's Python bindings misbehave when a board
     # is edited and another board is loaded in the same process.
-    subprocess.check_call([sys.executable, os.path.abspath(__file__), "--crop", cropped, "short" if short else "full"])
+    subprocess.check_call([sys.executable, os.path.abspath(__file__), "--crop", cropped, mode])
 
     board = pcbnew.LoadBoard(cropped)
     refs = ("P1", "P2") if short else ("J9", "J10")
@@ -161,6 +165,6 @@ def main(mesh="coarse", mode="full"):
 
 if __name__ == "__main__":
     if sys.argv[1:2] == ["--crop"]:
-        make_cropped_board(sys.argv[2], short=sys.argv[3:4] == ["short"])
+        make_cropped_board(sys.argv[2], section=sys.argv[3] if sys.argv[3:4] and sys.argv[3] in SECTIONS else None)
     else:
         main(*(sys.argv[1:] or ["coarse"]))
