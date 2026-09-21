@@ -133,6 +133,11 @@ def main(mesh="coarse", excite=None):
     kinds = ("msl", "msl", "lumped", "lumped") if os.environ.get("PORTTYPE") == "msl" else ("lumped",) * 4
     for p, kind in zip(model["ports"], kinds):
         p["type"] = kind
+    # Unpopulated pads: the plugin models a value of 0 as a series RL (0.25 nH to ground), which
+    # is a near-short across the RF line at GNSS frequencies. An empty pad is an open circuit, so
+    # these parts are dropped from the lumped-element list (the pad copper stays).
+    empty = {"C28", "C29"}
+    model["lumped_elements"] = [e for e in model.get("lumped_elements", []) if e["ref"] not in empty]
     settings = {
         "f_start": 0.5e9, "f_stop": 3.0e9, "z0": 50.0, "margin_mm": margin,
         "mesh": mesh, "n_freq": 251, "max_timesteps": 300000,
