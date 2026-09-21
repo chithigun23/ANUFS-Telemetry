@@ -28,8 +28,9 @@
       .node { fill: #101827; stroke-width: 2; rx: 10; }
       .nodeText { fill: #f1f5f9; font-size: 12px; font-weight: 700; }
       .nodeSub { fill: #97a3b8; font-size: 9.4px; }
-      .flow { fill: none; stroke-width: 1.75; opacity: .6; stroke-dasharray: 6 6; animation: dash 1.1s linear infinite; }
-      .flowTrunk { fill: none; stroke-width: 2.25; opacity: .85; stroke-dasharray: 7 7; animation: dash 1.3s linear infinite; }
+      .flow { fill: none; stroke-width: 1.75; opacity: .6; stroke-dasharray: 6 6; stroke-linecap: round; stroke-linejoin: round; animation: dash 1.1s linear infinite; }
+      .flowInternal { fill: none; stroke-width: 1.75; opacity: .75; stroke-linecap: round; stroke-linejoin: round; }
+      .flowTrunk { fill: none; stroke-width: 2.25; opacity: .85; stroke-dasharray: 7 7; stroke-linecap: round; stroke-linejoin: round; animation: dash 1.3s linear infinite; }
       .flowPower { fill: none; stroke-width: 2.5; opacity: .9; stroke-dasharray: 8 5; animation: dash 1s linear infinite; }
       @keyframes dash { to { stroke-dashoffset: -26; } }
       .legendText { fill: #cbd5e1; font-size: 11px; }
@@ -73,13 +74,13 @@
     <rect class="node" x="590" y="240" width="545" height="50" stroke="#f59e0b"/>
   </g>
   <text class="nodeText" x="297.5" y="136" text-anchor="middle">Battery / Harness Input</text>
-  <text class="nodeSub" x="297.5" y="152" text-anchor="middle">12-36V DC in &#8226; fused</text>
+  <text class="nodeSub" x="297.5" y="152" text-anchor="middle">12V nominal &#8226; 3.8-36V supported &#8226; fused</text>
 
   <text class="nodeText" x="862.5" y="136" text-anchor="middle">USB-C Input</text>
   <text class="nodeSub" x="862.5" y="152" text-anchor="middle">ESD-protected &#8226; series blocking diode</text>
 
-  <text class="nodeText" x="580" y="199" text-anchor="middle">Protection + Power Mux</text>
-  <text class="nodeSub" x="580" y="214" text-anchor="middle">fuse &#183; TVS &#183; ideal-diode &#8594; battery/USB power mux &#8594; V_IN</text>
+  <text class="nodeText" x="580" y="199" text-anchor="middle">Automotive Protection + Power-Path Mux</text>
+  <text class="nodeSub" x="580" y="214" text-anchor="middle">fuse &#183; TVS &#183; reverse protection &#183; TPS2121 battery/USB mux &#8594; V_IN</text>
 
   <text class="nodeText" x="297.5" y="261" text-anchor="middle">Buck Converter</text>
   <text class="nodeSub" x="297.5" y="277" text-anchor="middle">V_IN &#8594; <tspan fill="#fbbf24" font-weight="700">+3.3V rail</tspan></text>
@@ -94,7 +95,7 @@
 
   <!-- clean, single-purpose power drops: no shared rail, no crossings, no edge routing -->
   <path id="RAIL33" class="flowPower" stroke="#fbbf24" d="M297.5 290 L297.5 313 L580 313 L580 350"/>
-  <path id="RAIL5" class="flowPower" stroke="#fb923c" d="M862.5 290 L862.5 303 L865 303 L865 690"/>
+  <path id="RAIL5" class="flowPower" stroke="#fb923c" d="M862.5 290 L862.5 303 L845 303 L845 645 L900 645 L900 690"/>
   <text class="railLabel" x="330" y="309" fill="#fbbf24">+3.3V</text>
   <text class="railLabel" x="640" y="299" fill="#fb923c">+5V &#8594; LEDs only</text>
   <circle class="pulse" r="3.2" fill="#fbbf24"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#RAIL33"/></animateMotion></circle>
@@ -107,25 +108,37 @@
   <text class="badgeText" x="251" y="339" text-anchor="middle">+3.3V</text>
 
   <g filter="url(#shadow)">
-    <rect class="node" x="40" y="350" width="260" height="55" stroke="#22d3ee"/>
-    <rect class="node" x="40" y="413" width="260" height="48" stroke="#22d3ee"/>
-    <rect class="node" x="40" y="469" width="260" height="55" stroke="#22d3ee"/>
-    <rect class="node" x="40" y="532" width="260" height="48" stroke="#22d3ee"/>
+    <rect class="node" x="40" y="350" width="260" height="45" stroke="#22d3ee"/>
+    <rect class="node" x="40" y="403" width="260" height="45" stroke="#22d3ee"/>
+    <rect class="node" x="40" y="456" width="125" height="60" stroke="#22d3ee"/>
+    <rect class="node" x="175" y="456" width="125" height="60" stroke="#22d3ee"/>
+    <rect class="node" x="40" y="542" width="125" height="68" stroke="#22d3ee"/>
+    <rect class="node" x="175" y="542" width="125" height="68" stroke="#22d3ee"/>
   </g>
-  <text class="nodeText" x="170" y="373" text-anchor="middle">6-Axis IMU</text>
-  <text class="nodeSub" x="170" y="389" text-anchor="middle">ASM330LHHX &#8226; SPI + INT</text>
+  <text class="nodeText" x="170" y="371" text-anchor="middle">6-Axis IMU</text>
+  <text class="nodeSub" x="170" y="386" text-anchor="middle">ASM330LHHX &#8226; SPI + INT</text>
 
-  <text class="nodeText" x="170" y="433" text-anchor="middle">GNSS Level Shifter</text>
-  <text class="nodeSub" x="170" y="449" text-anchor="middle">TXS0108E &#8226; 3V3&#8596;2V8</text>
+  <text class="nodeText" x="170" y="424" text-anchor="middle">GNSS Level Shifter</text>
+  <text class="nodeSub" x="170" y="439" text-anchor="middle">TXS0104E &#8226; 3V3&#8596;2V8</text>
 
-  <text class="nodeText" x="170" y="492" text-anchor="middle">GNSS Receiver</text>
-  <text class="nodeSub" x="170" y="508" text-anchor="middle">LC29HBAMD &#8226; SPI + 1PPS</text>
+  <text class="nodeText" x="102.5" y="480" text-anchor="middle" font-size="10.5">GNSS Receiver 1</text>
+  <text class="nodeSub" x="102.5" y="497" text-anchor="middle">LC29HEAMD</text>
+  <text class="nodeSub" x="102.5" y="510" text-anchor="middle">UART + 1PPS</text>
 
-  <text class="nodeText" x="170" y="552" text-anchor="middle">GNSS Antenna</text>
-  <text class="nodeSub" x="170" y="568" text-anchor="middle">SMA connector</text>
+  <text class="nodeText" x="237.5" y="480" text-anchor="middle" font-size="10.5">GNSS Receiver 2</text>
+  <text class="nodeSub" x="237.5" y="497" text-anchor="middle">LC29HEAMD</text>
+  <text class="nodeSub" x="237.5" y="510" text-anchor="middle">UART &#8226; 2.8V</text>
+  <text class="nodeText" x="102.5" y="568" text-anchor="middle" font-size="10.5">SMA Antenna 1</text>
+  <text class="nodeSub" x="102.5" y="586" text-anchor="middle">RF input</text>
+  <text class="nodeText" x="237.5" y="568" text-anchor="middle" font-size="10.5">SMA Antenna 2</text>
+  <text class="nodeSub" x="237.5" y="586" text-anchor="middle">RF input</text>
 
-  <path class="flow" stroke="#22d3ee" d="M170 461 L170 469"/>
-  <path class="flow" stroke="#22d3ee" d="M170 524 L170 532"/>
+  <path class="flowInternal" stroke="#22d3ee" d="M170 395 L170 403"/>
+  <path class="flowInternal" stroke="#22d3ee" d="M135 448 L102.5 456"/>
+  <path class="flowInternal" stroke="#22d3ee" d="M130 516 L130 528 L210 528 L210 516"/>
+  <text class="nodeSub" x="170" y="537" text-anchor="middle" fill="#67e8f9">UART</text>
+  <path class="flowInternal" stroke="#22d3ee" d="M102.5 516 L102.5 542"/>
+  <path class="flowInternal" stroke="#22d3ee" d="M237.5 516 L237.5 542"/>
 
   <rect class="boundary" x="340" y="320" width="500" height="310" rx="16" stroke="#8b5cf6"/>
   <text class="domlabel" x="356" y="340" fill="#8b5cf6">COMPUTE</text>
@@ -136,12 +149,9 @@
   <text class="nodeText" x="590" y="420" text-anchor="middle" font-size="15">STM32H523RCT7</text>
   <text class="nodeSub" x="590" y="440" text-anchor="middle">Arm Cortex-M33 &#8226; main MCU</text>
   <text class="nodeSub" x="590" y="456" text-anchor="middle">SPI &#183; I2C &#183; UART &#183; CAN &#183; USB &#183; SDIO</text>
-
-  <g filter="url(#shadow)">
-    <rect class="node" x="360" y="585" width="460" height="35" stroke="#8b5cf6"/>
-  </g>
-  <text class="nodeText" x="590" y="608" text-anchor="middle" font-size="11.5">24 MHz Crystal</text>
-  <path class="flow" stroke="#8b5cf6" d="M590 570 L590 585"/>
+  <rect class="node" x="500" y="485" width="180" height="48" stroke="#8b5cf6" stroke-width="1.5" fill="#161126"/>
+  <text class="nodeText" x="590" y="505" text-anchor="middle" font-size="11.5">HSE</text>
+  <text class="nodeSub" x="590" y="521" text-anchor="middle">24 MHz Crystal (Y1)</text>
 
   <rect class="boundary" x="860" y="320" width="300" height="310" rx="16" stroke="#34d399"/>
   <text class="domlabel" x="876" y="340" fill="#34d399">COMMS</text>
@@ -166,8 +176,8 @@
   <path class="flow" stroke="#34d399" d="M1010 502 L1010 510"/>
 
   <!-- direct adjacent hub connections, row 2 -->
-  <path id="H1" class="flowTrunk" stroke="#22d3ee" d="M300 377.5 L360 377.5"/>
-  <path id="H2" class="flowTrunk" stroke="#22d3ee" d="M300 437 L360 437"/>
+  <path id="H1" class="flowTrunk" stroke="#22d3ee" d="M300 372.5 L360 372.5"/>
+  <path id="H2" class="flowTrunk" stroke="#22d3ee" d="M300 425.5 L360 425.5"/>
   <path id="H3" class="flowTrunk" stroke="#34d399" d="M820 375 L880 375"/>
   <path id="H4" class="flowTrunk" stroke="#34d399" d="M820 477 L880 477"/>
 
@@ -176,9 +186,9 @@
   <circle class="pulse" r="3" fill="#34d399"><animateMotion dur="1.9s" repeatCount="indefinite"><mpath href="#H3"/></animateMotion></circle>
   <circle class="pulse" r="3" fill="#34d399"><animateMotion dur="2.3s" repeatCount="indefinite"><mpath href="#H4"/></animateMotion></circle>
 
-  <!-- MCU <-> Status data, routed through the clear gap right of COMPUTE, left of the +5V channel -->
-  <path id="H5" class="flowTrunk" stroke="#f472b6" d="M820 545 L845 545 L845 660 L935 660 L935 690"/>
-  <circle class="pulse" r="3" fill="#f472b6"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#H5"/></animateMotion></circle>
+  <!-- MCU <-> Status data, offset in the gap between power and Comms -->
+  <path id="STATUS_DATA" class="flowTrunk" stroke="#f472b6" d="M820 545 L853 545 L853 640 L935 640 L935 690"/>
+  <circle class="pulse" r="3" fill="#f472b6"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#STATUS_DATA"/></animateMotion></circle>
 
   <!-- ============ ROW 3: I/O & DEBUG (under COMPUTE) + STATUS (under COMMS / channel) ============ -->
   <rect class="boundary" x="350" y="660" width="440" height="190" rx="16" stroke="#60a5fa"/>
@@ -203,29 +213,29 @@
   <text class="nodeText" x="715" y="759" text-anchor="middle" font-size="11">Programming</text>
   <text class="nodeSub" x="715" y="780" text-anchor="middle">Tag-Connect SWD</text>
 
-  <path id="H5" class="flowTrunk" stroke="#60a5fa" d="M435 570 L435 700"/>
+  <path id="IO_SD" class="flowTrunk" stroke="#60a5fa" d="M435 570 L435 645 L465 645 L465 700"/>
   <path id="H6" class="flowTrunk" stroke="#60a5fa" d="M580 570 L580 700"/>
   <path id="H7" class="flowTrunk" stroke="#60a5fa" d="M715 570 L715 700"/>
-  <circle class="pulse" r="3" fill="#60a5fa"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#H5"/></animateMotion></circle>
+  <circle class="pulse" r="3" fill="#60a5fa"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#IO_SD"/></animateMotion></circle>
   <circle class="pulse" r="3" fill="#60a5fa"><animateMotion dur="2.7s" repeatCount="indefinite"><mpath href="#H6"/></animateMotion></circle>
   <circle class="pulse" r="3" fill="#60a5fa"><animateMotion dur="2.1s" repeatCount="indefinite"><mpath href="#H7"/></animateMotion></circle>
 
-  <rect class="boundary" x="810" y="660" width="350" height="290" rx="16" stroke="#f472b6"/>
+  <rect class="boundary" x="810" y="660" width="350" height="220" rx="16" stroke="#f472b6"/>
   <text class="domlabel" x="826" y="680" fill="#f472b6">STATUS</text>
 
   <g filter="url(#shadow)">
     <rect class="node" x="830" y="690" width="310" height="75" stroke="#f472b6"/>
-    <rect class="node" x="830" y="790" width="310" height="80" stroke="#f472b6"/>
+    <rect class="node" x="830" y="780" width="310" height="80" stroke="#f472b6"/>
   </g>
   <text class="nodeText" x="985" y="720" text-anchor="middle">LED Drivers</text>
   <text class="nodeSub" x="985" y="736" text-anchor="middle">TLC59108 &#215;2 (red + green channels) &#8226; I2C</text>
   <text class="nodeSub" x="985" y="750" text-anchor="middle">one driver per colour, shared bus</text>
 
-  <text class="nodeText" x="985" y="825" text-anchor="middle">5x Red/Green LEDs</text>
-  <text class="nodeSub" x="985" y="841" text-anchor="middle">common anode &#8226; board status indication</text>
-  <text class="nodeSub" x="985" y="855" text-anchor="middle">anode fed by +5V rail above &#8226; cathodes by drivers</text>
+  <text class="nodeText" x="985" y="815" text-anchor="middle">5x Red/Green LEDs</text>
+  <text class="nodeSub" x="985" y="831" text-anchor="middle">common anode &#8226; board status indication</text>
+  <text class="nodeSub" x="985" y="845" text-anchor="middle">anode fed by +5V rail above &#8226; cathodes by drivers</text>
 
-  <path class="flow" stroke="#f472b6" d="M985 765 L985 790"/>
+  <path class="flow" stroke="#f472b6" d="M985 765 L985 780"/>
 
   <text class="footer" x="30" y="975">Every domain sits directly beside the MCU or in a clear routing gap - no wire crosses another wire, a block, or the canvas edge. "+3.3V" badges mark rail-powered domains without redrawing the rail everywhere.</text>
   <text class="footer" x="1150" y="975" text-anchor="end">telemetry-kicad</text>
