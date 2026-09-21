@@ -8,10 +8,12 @@ Run with KiCad's Python (needs pcbnew):
             between machines and the .s4p files merged afterwards.
 
 Ports (all on the real ANT1 layout, cropped from telemetry.kicad_pcb):
-    1  microstrip port on a test pad on the ANT1 trace, just after the SMA J7
-    2  microstrip port on the LC29H RF_IN pad (U10 pad 11)
-    3  lumped port on L2 pad 1 (the bias-tee tap, ANT1 side)
-    4  lumped port on L2 pad 2 (the bias network side)
+    1  port on a test pad on the ANT1 trace, just after the SMA J7
+    2  port on the LC29H RF_IN pad (U10 pad 11)
+    3  port on L2 pad 1 (the bias-tee tap, ANT1 side)
+    4  port on L2 pad 2 (the bias network side)
+    All four are lumped ports by default (PORTTYPE=msl makes ports 1 and 2 microstrip ports).
+    Use the FINE mesh: the coarse and medium presets make the solver unstable on this stack-up.
 
 Why L2 is a pair of ports and not a lumped 56 nH part: the plugin lowers the
 FDTD timestep as 0.7 / sqrt(L in nH), which for 56 nH is a factor of 0.094,
@@ -126,7 +128,10 @@ def main(mesh="coarse", excite=None):
             l2.FindPadByNumber("1"), l2.FindPadByNumber("2")]
     margin = 3.0
     model = board_reader.extract(board, pads, margin_mm=margin)
-    for p, kind in zip(model["ports"], ("msl", "msl", "lumped", "lumped")):
+    # Lumped ports for all four: the microstrip-port wave separation gave invalid S-parameters on
+    # the short 0.32 mm line (see Short-Section-Test.md). PORTTYPE=msl restores microstrip ports 1 and 2.
+    kinds = ("msl", "msl", "lumped", "lumped") if os.environ.get("PORTTYPE") == "msl" else ("lumped",) * 4
+    for p, kind in zip(model["ports"], kinds):
         p["type"] = kind
     settings = {
         "f_start": 0.5e9, "f_stop": 3.0e9, "z0": 50.0, "margin_mm": margin,
