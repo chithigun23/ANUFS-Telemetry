@@ -1,0 +1,91 @@
+[rfsim] WARNING: Copper on F.Cu/In1.Cu/In2.Cu/B.Cu extends beyond the simulation domain and is cut at the boundary. If it's part of the structure under test, increase the domain margin.
+[rfsim] mesh resolution: 4.659 mm (coarse)
+[rfsim] === excitation 1/1 (port 1) ===
+[rfsim] UserWarning: h5py is running against HDF5 2.2.0 when it was built against 2.0.0, this may cause problems
+[rfsim] port 1: lumped at (18.26, -34.50) 
+[rfsim] port 2: lumped at (18.26, -29.50) 
+[rfsim] mesh: 51 x 58 x 39 lines
+[rfsim] engine: multithreaded, 4 thread(s)
+openEMS - enabled multithreading
+openEMS - fixed number of threads: 4
+ ---------------------------------------------------------------------- 
+ | openEMS 64bit -- version v0.37.0-rc2
+ | (C) 2010-2026 Thorsten Liebig <thorsten.liebig@gmx.de>  GPL license
+ ---------------------------------------------------------------------- 
+	Used external libraries:
+		CSXCAD -- Version: v0.7.0-rc2
+		hdf5   -- Version: 2.2.0
+		          compiled against: HDF5 library version: 2.2.0
+		tinyxml -- compiled against: 2.6.2
+		fparser
+		boost  -- compiled against: 1_91
+		vtk -- Version: 9.3.20231030
+		       compiled against: 9.3.20231030
+
+Create FDTD operator (compressed SSE + multi-threading)
+FDTD simulation size: 51x58x39 --> 115362 FDTD cells 
+FDTD timestep is: 4.45071e-14 s; Nyquist rate: 3744 timesteps @3.00058e+09 Hz
+openEMS::SetupFDTD: Warning, the timestep seems to be very small --> long simulation. Check your mesh!?
+Excitation signal length is: 51494 timesteps (2.29185e-09s)
+Max. number of timesteps: 300000 ( --> 5.82592 * Excitation signal length)
+Create FDTD engine (compressed SSE + multi-threading)
+Warning: Unused primitive (type: LinPoly) detected in property: cu_F.Cu!
+Warning: Unused primitive (type: Cylinder) detected in property: vias!
+Warning: Unused primitive (type: Cylinder) detected in property: vias!
+Running FDTD engine... this may take a while... grab a cup of coffee?!?
+[@        4s] Timestep:          936 || Speed:   25.0 MC/s (4.618e-03 s/TS) || Energy: ~3.95e-19 (- 0.00dB)
+[@        8s] Timestep:         1872 || Speed:   26.0 MC/s (4.435e-03 s/TS) || Energy: ~5.59e-19 (- 0.00dB)
+[@       16s] Timestep:         3744 || Speed:   27.3 MC/s (4.220e-03 s/TS) || Energy: ~3.06e-19 (- 2.62dB)
+[@       24s] Timestep:         5616 || Speed:   27.6 MC/s (4.174e-03 s/TS) || Energy: ~7.80e-17 (- 0.00dB)
+[@       28s] Timestep:         6552 || Speed:   26.8 MC/s (4.310e-03 s/TS) || Energy: ~2.79e-16 (- 0.00dB)
+[@       35s] Timestep:         8424 || Speed:   27.9 MC/s (4.141e-03 s/TS) || Energy: ~7.68e-16 (- 0.00dB)
+[@       43s] Timestep:        10296 || Speed:   27.5 MC/s (4.192e-03 s/TS) || Energy: ~4.69e-16 (- 2.15dB)
+[@       51s] Timestep:        12168 || Speed:   27.9 MC/s (4.137e-03 s/TS) || Energy: ~3.58e-14 (- 0.00dB)
+[@       59s] Timestep:        14040 || Speed:   27.5 MC/s (4.200e-03 s/TS) || Energy: ~1.27e-13 (- 0.00dB)
+[@     1m07s] Timestep:        15912 || Speed:   28.1 MC/s (4.106e-03 s/TS) || Energy: ~1.57e-14 (- 9.07dB)
+[@     1m14s] Timestep:        17784 || Speed:   27.5 MC/s (4.197e-03 s/TS) || Energy: ~5.68e-13 (- 0.00dB)
+[@     1m22s] Timestep:        19656 || Speed:   27.3 MC/s (4.230e-03 s/TS) || Energy: ~2.52e-12 (- 0.00dB)
+[@     1m30s] Timestep:        21528 || Speed:   27.4 MC/s (4.214e-03 s/TS) || Energy: ~1.22e-12 (- 3.14dB)
+[@     1m38s] Timestep:        23400 || Speed:   27.9 MC/s (4.135e-03 s/TS) || Energy: ~8.02e-13 (- 4.97dB)
+[@     1m46s] Timestep:        25272 || Speed:   27.5 MC/s (4.194e-03 s/TS) || Energy: ~6.81e-12 (- 0.00dB)
+[@     1m54s] Timestep:        27144 || Speed:   28.1 MC/s (4.107e-03 s/TS) || Energy: ~1.32e-11 (- 0.00dB)
+[@     2m01s] Timestep:        29016 || Speed:   27.6 MC/s (4.183e-03 s/TS) || Energy: ~2.44e-10 (- 0.00dB)
+[@     2m09s] Timestep:        30888 || Speed:   28.0 MC/s (4.123e-03 s/TS) || Energy: ~4.18e-09 (- 0.00dB)
+[@     2m17s] Timestep:        32760 || Speed:   27.6 MC/s (4.177e-03 s/TS) || Energy: ~4.81e-08 (- 0.00dB)
+[@     2m25s] Timestep:        34632 || Speed:   27.9 MC/s (4.140e-03 s/TS) || Energy: ~1.37e-06 (- 0.00dB)
+[@     2m32s] Timestep:        36504 || Speed:   27.6 MC/s (4.174e-03 s/TS) || Energy: ~8.13e-05 (- 0.00dB)
+[@     2m40s] Timestep:        38376 || Speed:   28.0 MC/s (4.126e-03 s/TS) || Energy: ~3.11e-03 (- 0.00dB)
+[@     2m48s] Timestep:        40248 || Speed:   27.6 MC/s (4.182e-03 s/TS) || Energy: ~7.29e-02 (- 0.00dB)
+[@     2m56s] Timestep:        42120 || Speed:   27.4 MC/s (4.216e-03 s/TS) || Energy: ~1.04e+00 (- 0.00dB)
+[@     3m04s] Timestep:        43992 || Speed:   27.7 MC/s (4.170e-03 s/TS) || Energy: ~1.32e+01 (- 0.00dB)
+[@     3m12s] Timestep:        45864 || Speed:   27.7 MC/s (4.164e-03 s/TS) || Energy: ~6.30e+02 (- 0.00dB)
+[@     3m19s] Timestep:        47736 || Speed:   27.8 MC/s (4.151e-03 s/TS) || Energy: ~3.29e+04 (- 0.00dB)
+[@     3m27s] Timestep:        49608 || Speed:   27.7 MC/s (4.161e-03 s/TS) || Energy: ~1.04e+06 (- 0.00dB)
+[@     3m35s] Timestep:        51480 || Speed:   27.7 MC/s (4.172e-03 s/TS) || Energy: ~2.04e+07 (- 0.00dB)
+[@     3m43s] Timestep:        53352 || Speed:   27.5 MC/s (4.190e-03 s/TS) || Energy: ~2.47e+08 (- 0.00dB)
+[@     3m51s] Timestep:        55224 || Speed:   27.8 MC/s (4.145e-03 s/TS) || Energy: ~4.74e+09 (- 0.00dB)
+[@     3m58s] Timestep:        57096 || Speed:   27.6 MC/s (4.185e-03 s/TS) || Energy: ~2.85e+11 (- 0.00dB)
+[@     4m06s] Timestep:        58968 || Speed:   27.8 MC/s (4.152e-03 s/TS) || Energy: ~1.24e+13 (- 0.00dB)
+[@     4m14s] Timestep:        60840 || Speed:   27.7 MC/s (4.171e-03 s/TS) || Energy: ~3.28e+14 (- 0.00dB)
+[@     4m22s] Timestep:        62712 || Speed:   28.2 MC/s (4.091e-03 s/TS) || Energy: ~5.30e+15 (- 0.00dB)
+[@     4m29s] Timestep:        64584 || Speed:   27.5 MC/s (4.197e-03 s/TS) || Energy: ~6.08e+16 (- 0.00dB)
+[@     4m37s] Timestep:        66456 || Speed:   28.0 MC/s (4.126e-03 s/TS) || Energy: ~2.09e+18 (- 0.00dB)
+[@     4m41s] Timestep:        67392 || Speed:   26.9 MC/s (4.282e-03 s/TS) || Energy: ~2.31e+19 (- 0.00dB)
+[@     4m49s] Timestep:        69264 || Speed:   27.8 MC/s (4.154e-03 s/TS) || Energy: ~2.75e+20 (- 0.00dB)
+[@     4m57s] Timestep:        71136 || Speed:   27.7 MC/s (4.172e-03 s/TS) || Energy: ~5.79e+21 (- 0.00dB)
+[@     5m05s] Timestep:        73008 || Speed:   27.8 MC/s (4.150e-03 s/TS) || Energy: ~3.50e+23 (- 0.00dB)
+[@     5m12s] Timestep:        74880 || Speed:   27.7 MC/s (4.167e-03 s/TS) || Energy: ~1.48e+25 (- 0.00dB)
+[@     5m20s] Timestep:        76752 || Speed:   28.0 MC/s (4.122e-03 s/TS) || Energy: ~3.80e+26 (- 0.00dB)
+[@     5m28s] Timestep:        78624 || Speed:   27.6 MC/s (4.183e-03 s/TS) || Energy: ~5.95e+27 (- 0.00dB)
+[@     5m36s] Timestep:        80496 || Speed:   27.9 MC/s (4.131e-03 s/TS) || Energy: ~   inf (-  nandB)
+Time for 80496 iterations with 115362.00 cells : 336.11 sec
+Speed: 27.63 MCells/s 
+[rfsim] NF2FF_p1 at 1.750 GHz...
+[rfsim] RuntimeWarning: invalid value encountered in log10
+[rfsim] RuntimeWarning: invalid value encountered in log10
+[rfsim] RuntimeWarning: invalid value encountered in log10
+[rfsim] far-field: Dmax nan dBi, radiated -1.0% of input power
+[rfsim] WARNING: port 1 gives out more power than it takes in (max sum|S|^2 = 13.65). The S-parameters of this port are NOT reliable. On a CPW port or a stripline port the usual cause is a mesh that is too coarse across the line. Run again at the medium or the fine preset.
+[rfsim] S11: 6.7 .. 11.4 dB
+[rfsim] S21: -38.0 .. -35.5 dB
+[rfsim] wrote C:\Users\chith\Desktop\ANUFS-Telemetry\RF Analysis\results\desktop\step1_short_coarse_lumped_solidplanes\results.s2p
