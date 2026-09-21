@@ -8,6 +8,10 @@ Run with the solver Python (C:\openEMS\venv\Scripts\python.exe):
   --maxsteps  step cap
   --bc        boundary condition for all faces (default PML_8)
   --pec       perfect-conductor copper instead of finite-conductivity sheets
+  --solid-planes  replace all copper on the layers except F.Cu by one solid rectangle covering the domain
+                  (removes the real pour shapes, voids and slivers on the inner layers and B.Cu)
+  --signal-only   on F.Cu keep only the polygons that cross the line between the ports (the trace and pads),
+                  dropping the ground pour beside it
 
 The modified model and the solver output go in <out_dir>; the original is not touched.
 """
@@ -34,6 +38,22 @@ if val("--endcrit"):
     m["settings"]["end_criteria"] = val("--endcrit", float)
 if val("--maxsteps"):
     m["settings"]["max_timesteps"] = val("--maxsteps", int)
+r = m["region"]
+rect = [[r["x0"], r["y0"]], [r["x1"], r["y0"]], [r["x1"], r["y1"]], [r["x0"], r["y1"]]]
+if "--solid-planes" in opts:
+    for name in list(m["polygons"]):
+        if name != "F.Cu":
+            m["polygons"][name] = [rect]
+if "--signal-only" in opts and len(m["ports"]) == 2:
+    (xa, ya), (xb, yb) = [(p["x"], p["y"]) for p in m["ports"]]
+    mid = ((xa + xb) / 2.0, (ya + yb) / 2.0)
+
+    def keeps(poly):
+        xs = [q[0] for q in poly]
+        ys = [q[1] for q in poly]
+        return min(xs) <= mid[0] <= max(xs) and min(ys) <= mid[1] <= max(ys) and max(xs) - min(xs) < 2.0
+    m["polygons"]["F.Cu"] = [poly for poly in m["polygons"]["F.Cu"] if keeps(poly)]
+    print("F.Cu polygons kept:", len(m["polygons"]["F.Cu"]))
 os.makedirs(out, exist_ok=True)
 model_path = os.path.join(out, "model.json")
 json.dump(m, open(model_path, "w"), indent=1)
