@@ -114,7 +114,7 @@ def make_cropped_board(out_path, section=None):
 
 def main(mesh="coarse", mode="full"):
     short = mode in SECTIONS
-    outdir = os.path.join(REPO, "RF Analysis", "results", TAG, "step1_%s_%s" % (mode, mesh))
+    outdir = os.path.join(REPO, "RF Analysis", "results", TAG, "step1_%s_%s%s" % (mode, mesh, os.environ.get("SUFFIX", "")))
     os.makedirs(outdir, exist_ok=True)
     cropped = os.path.join(outdir, "ant3_cropped.kicad_pcb")
     # Crop in a separate process: KiCad's Python bindings misbehave when a board
@@ -133,6 +133,16 @@ def main(mesh="coarse", mode="full"):
         "mesh": mesh, "n_freq": 251, "max_timesteps": 300000,
         "end_criteria": 1e-4,
     }
+    # EXCITE="1" excites port 1 only: a two-port through line needs just that run
+    # for S11 and S21, which halves the cost. Default is both ports.
+    if os.environ.get("EXCITE"):
+        model["settings"]["excite"] = [int(x) for x in os.environ["EXCITE"].split(",")]
+    # Diagnostics for the late-time instability: TSF scales the FDTD timestep (below 1
+    # is smaller, more stable, slower); MAXSTEPS raises the step cap to match.
+    if os.environ.get("TSF"):
+        model["settings"]["time_step_factor"] = float(os.environ["TSF"])
+    if os.environ.get("MAXSTEPS"):
+        model["settings"]["max_timesteps"] = int(os.environ["MAXSTEPS"])
     model_path = os.path.join(outdir, "model.json")
     with open(model_path, "w") as fh:
         json.dump(model, fh, indent=1)
@@ -142,7 +152,7 @@ def main(mesh="coarse", mode="full"):
     print("stackup source:", model.get("stackup_source", "?"))
     print("ports:", [(p["label"], p["direction"], p["track_width"]) for p in model["ports"]])
 
-    runner = os.path.join(PLUGINS, "runner.py")
+    runner = os.path.join(HERE, os.environ["RUNNER"]) if os.environ.get("RUNNER") else os.path.join(PLUGINS, "runner.py")
     solver_py = solverenv.solver_python() or sys.executable
     with open(os.path.join(outdir, "solver.log"), "w") as log:
         proc = subprocess.Popen([solver_py, runner, model_path, outdir],
