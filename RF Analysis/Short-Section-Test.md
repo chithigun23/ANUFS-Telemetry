@@ -1,0 +1,97 @@
+# Step 1 Variant — Short-Section Test
+
+This document supplements `RF-Analysis-Plan.md` (Step 1). It does not replace it. It records why Step 1 is
+being run on a short section of the ANT3 line instead of the full J9-to-J10 line, and how.
+
+Status: **running** (started 2026-09-22). Results go in section 6.
+
+## 1. Why the full line was not simulated
+
+The first attempt simulated the full ANT3 line, from the `J9` pad to the `J10` pad (about 11 mm).
+
+| Item | Full line | Short section |
+|---|---|---|
+| Mesh cells | about 3.0 million | about 0.43 million (118 x 94 x 39) |
+| Timestep | about 1.2e-14 s | same |
+| Steps needed | about 300,000 | about 300,000 (cap) |
+| Solver speed (measured) | about 32 million cells/s on the Ryzen 3 3100 | same |
+| Estimated time per port | 5-7 hours | about 40-60 minutes |
+
+Cost is cells times timesteps. The timestep is set by the smallest mesh cell, and the smallest cell is set by
+the 0.32 mm trace: the plugin puts 4 cells across a microstrip and snaps geometry to 0.02 mm. That is inherent
+to a narrow trace on this stackup, not a fault in the plugin or the machine. The first full-line run reached
+3,607 of about 300,000 steps in 7 minutes and was stopped.
+
+## 2. What Step 1 needs to show
+
+Step 1 has two goals (see the plan):
+
+1. Confirm the simulation setup gives sensible numbers on a structure whose answer we already know.
+2. Get the true line impedance of the 0.32 mm trace, including the effect of the coplanar ground pour.
+
+A bare line is uniform, so both goals can be met with a section of it. The plugin's microstrip ports extract the
+line impedance and propagation constant from the fields at each port, so they do not need the full 11 mm. A 5 mm
+section is about 1/20 of a wavelength at L1. It should be enough for both goals, but it limits how accurately
+the loss can be measured. The check is that Z0 read at port 1 and at port 2 agree; if they do not, the section
+is too short and the test is rerun with a longer one.
+
+## 3. What is simulated
+
+| Setting | Value |
+|---|---|
+| Trace | 0.32 mm on F.Cu, straight, x = 18.26 mm, from y = 34.5 mm to y = 29.5 mm (5 mm) |
+| Ports | microstrip ports at test pads P1 (y = 34.5) and P2 (y = 29.5), each 0.32 x 0.32 mm |
+| Copper and vias | the real ground pours (F.Cu, In1.Cu, B.Cu) and the real ground vias, cropped to the box |
+| Stackup | JLCPCB JLC04161H-7628 as set in the KiCad file (prepreg er 4.4, core er 4.6, loss tangent 0.02) |
+| Crop box | x 14.0-22.5 mm, y 27.0-37.0 mm, plus 2 mm margin (inner air band) and 2 mm PML |
+| Frequency sweep | 0.5-3.0 GHz, 251 points |
+| Mesh preset | coarse (plugin preset; 4 cells across the strip) |
+| Components | none (bare line, no lumped parts) |
+
+The SMA connectors (`J9`, `J10`) are removed from the copy. The reference planes are at the test pads, so the
+connector launch is not part of this step (that is Step 2).
+
+The real `telemetry.kicad_pcb` is only read. The script edits a copy in `results/`.
+
+## 4. What this test can and cannot tell us
+
+Can tell us:
+- Whether the toolchain reads the board and stackup correctly (plausible S11 and S21 for a uniform line).
+- The line impedance of the 0.32 mm trace including the coplanar pour, compared with the hand estimate of
+  about 54 Ω (plan, section 2.2).
+- The insertion loss per millimetre of this trace on this stackup.
+
+Cannot tell us:
+- Anything about the connector launch, the bias tee, the TVS, the DC block or the pi filter (Steps 2 to 5).
+- Loss over the full 11 mm, except by scaling the per-millimetre figure.
+- Absolute accuracy at the coarse preset. The plugin's own tests show the coarse preset reads about 2 Ω low on
+  a 50 Ω line, so a medium-mesh rerun is planned if the coarse result is within a few ohms of the estimate.
+
+Sources of difference from the real ANT3 line:
+- The ground pour's clearance to the trace was computed for the original full-length trace. It is kept as is.
+- The test pads are the same width as the trace, so there is no pad step (the real SMA pads are 2.3 mm).
+- The trace runs at x = 18.26 mm, as on the board (0.03 mm off the connector pad centre).
+
+## 5. How to run
+
+With KiCad's Python (needs `pcbnew`):
+
+    "C:\Program Files\KiCad\10.0\bin\python.exe" "RF Analysis\sim\step1_ant3.py" coarse short
+
+Set `DRY=1` to build the model and stop before the solver starts. Use `medium` or `fine` in place of `coarse`
+for a finer mesh, at much higher cost (about 8x cells and 2x steps per step up in preset; check the estimate
+first). Output goes to `RF Analysis/results/step1_short_coarse/`:
+
+| File | Content |
+|---|---|
+| `ant3_cropped.kicad_pcb` | the cropped copy of the board that was simulated |
+| `model.json` | the geometry sent to the solver |
+| `solver.log` | full openEMS log |
+| `results.s2p` | S-parameters (Touchstone) |
+| `summary.csv` | worst-case S11 and S21 in the L5 and L1 bands |
+
+## 6. Results
+
+| Date | Mesh | Line Z0 (ohm) | S11 worst L5 / L1 (dB) | S21 worst L5 / L1 (dB) | Notes |
+|---|---|---|---|---|---|
+| | | | | | |
