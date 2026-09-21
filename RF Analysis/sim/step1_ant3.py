@@ -143,6 +143,8 @@ def main(mesh="coarse", mode="full"):
         model["settings"]["time_step_factor"] = float(os.environ["TSF"])
     if os.environ.get("MAXSTEPS"):
         model["settings"]["max_timesteps"] = int(os.environ["MAXSTEPS"])
+    if os.environ.get("ENDCRIT"):
+        model["settings"]["end_criteria"] = float(os.environ["ENDCRIT"])
     model_path = os.path.join(outdir, "model.json")
     with open(model_path, "w") as fh:
         json.dump(model, fh, indent=1)
