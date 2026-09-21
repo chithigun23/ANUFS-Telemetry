@@ -23,6 +23,7 @@ The real board file is only read, never modified.
 """
 import json
 import os
+import socket
 import subprocess
 import sys
 
@@ -37,6 +38,10 @@ sys.path.insert(0, PLUGINS)
 
 import board_reader  # noqa: E402
 import solverenv  # noqa: E402
+
+# Results go to results/<TAG>/..., so two machines never write to the same path.
+# Set RF_TAG (for example "desktop" or "laptop"); the default is the computer name.
+TAG = os.environ.get("RF_TAG") or socket.gethostname()
 
 # Crop box around ANT3 (mm, KiCad coordinates): the two SMA pads are at
 # x = 18.29, y = 25.96 and y = 37.29.
@@ -109,7 +114,7 @@ def make_cropped_board(out_path, section=None):
 
 def main(mesh="coarse", mode="full"):
     short = mode in SECTIONS
-    outdir = os.path.join(REPO, "RF Analysis", "results", "step1_%s_%s" % (mode, mesh))
+    outdir = os.path.join(REPO, "RF Analysis", "results", TAG, "step1_%s_%s" % (mode, mesh))
     os.makedirs(outdir, exist_ok=True)
     cropped = os.path.join(outdir, "ant3_cropped.kicad_pcb")
     # Crop in a separate process: KiCad's Python bindings misbehave when a board

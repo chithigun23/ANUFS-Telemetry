@@ -1,0 +1,4 @@
+# Large solver output stays local; the small result files (.s2p, summary.csv, solver logs, model.json, lines.json) are committed.
+**/exc*/
+**/*.kicad_pcb
+**/farfield_*.json

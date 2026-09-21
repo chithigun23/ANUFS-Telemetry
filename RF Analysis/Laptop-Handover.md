@@ -22,11 +22,17 @@ the results of the first desktop run are in `Short-Section-Test.md`.
 
 - Do not modify `telemetry.kicad_pcb`, the schematic, or `RF-Analysis-Plan.md`. The scripts only read the board
   and write copies under `RF Analysis/results/`. If you think the plan needs a change, tell the user.
-- Ask before installing software other than what `Setup-and-Software.md` lists. Do not commit or push.
+- Ask before installing software other than what `Setup-and-Software.md` lists. Do not commit or push unless the user tells you to (see section 8 for results).
 - Report faithfully: if a run fails or a number looks wrong, say so with the log lines. Do not tune settings until
   the result "looks right".
 - Simulations run for tens of minutes to hours. Start them in the background with logging, and do not use a short
   command timeout.
+
+**If a run is already in progress on this machine when you read this** (started before the `RF_TAG` folders
+existed): let it finish. Do not pull, do not create `results/laptop/`, and do not start another simulation until it
+is done. When it has finished, its output is in the old untagged path (for example
+`RF Analysis/results/step1_long_coarse/`). Then: `git pull`, create `RF Analysis/results/laptop/`, move that
+finished folder into it, and continue with the steps below. Do not delete or restart a running job.
 
 ## 3. Stage A: does a longer line fix the invalid S-parameters?
 
@@ -38,7 +44,12 @@ gave the invalid result. A longer line tests the leading suspect: that the plugi
 between them than 5 mm.
 
 1. Set up and check the toolchain (`Setup-and-Software.md` sections 3 and 4). Record the `MCells/s` figure.
-2. Dry run (builds the model, does not start the solver), from the repository root in PowerShell:
+2. Tell the scripts which machine this is, so results do not overwrite the desktop's (once per PowerShell window):
+
+        $env:RF_TAG = "laptop"
+
+   Results then go to `RF Analysis/results/laptop/`. The desktop uses `desktop`.
+3. Dry run (builds the model, does not start the solver), from the repository root in PowerShell:
 
         $env:DRY = "1"
         & "C:\Program Files\KiCad\10.0\bin\python.exe" "RF Analysis\sim\step1_ant3.py" coarse long
@@ -46,13 +57,13 @@ between them than 5 mm.
 
    Expected: the script ends with `DRY run: model written, solver not started`. The model is about 134 x 110 x 39
    cells (about 0.58 million).
-3. Run it (start in the background):
+4. Run it (start in the background):
 
         & "C:\Program Files\KiCad\10.0\bin\python.exe" "RF Analysis\sim\step1_ant3.py" coarse long
 
    Expected time: about 30-35 minutes per port on the desktop, so about an hour or more in total on the
    desktop, less on the laptop. The two ports run one after the other.
-4. Results are in `RF Analysis/results/step1_long_coarse/`. Read `summary.csv`, and the last 40 lines of
+5. Results are in `RF Analysis/results/laptop/step1_long_coarse/`. Read `summary.csv`, and the last 40 lines of
    `solver.log`.
 
 **What good looks like:** the solver log has no line saying a port "gives out more power than it takes in"; S11 is
@@ -106,7 +117,7 @@ Run order (from the repository root, PowerShell):
    cells/s) expect roughly 2-3 hours per port there; the laptop should be faster.
 3. If the trial is plausible (section 5), run ports 2, 3 and 4 the same way.
 
-Results go to `RF Analysis/results/ant1_4port_coarse/`.
+Results go to `RF Analysis/results/laptop/ant1_4port_coarse/` (with `RF_TAG` set to `laptop`).
 
 ## 5. Sanity checks on any result
 
@@ -138,7 +149,25 @@ Results go to `RF Analysis/results/ant1_4port_coarse/`.
 - The desktop and the laptop each need their own copy of the board file. After `git pull` the file
   `telemetry.kicad_pcb` will match the desktop's. Close KiCad on the laptop before pulling if the project is open.
 
-## 8. What to report back
+## 8. Returning results to the repository
+
+Only small result files go in git. `RF Analysis/results/.gitignore` already excludes the large solver output
+(`exc*/` folders, the cropped `.kicad_pcb` copies, far-field files). What is kept: `results.s2p`, `summary.csv`,
+`lines.json`, `model.json` and the solver logs (about 0.3 MB per run).
+
+From the repository root, after a run finishes and only after the user says to:
+
+    git pull
+    git add "RF Analysis/results/laptop"
+    git status
+    git commit -m "RF results from laptop: <which run>"
+    git push
+
+Check `git status` before committing: no file over about 1 MB should be staged. The desktop uses its own folder
+(`results/desktop`), so the two machines never edit the same files and there are no merge conflicts. If the user
+prefers not to use git for results, copy the folder across by USB or a network share.
+
+## 9. What to report back
 
 - The `MCells/s` benchmark figure and the laptop model.
 - For each run: cells, timestep, steps done, wall-clock time, whether the energy criterion was met.

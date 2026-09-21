@@ -80,7 +80,9 @@ With KiCad's Python (needs `pcbnew`):
 
 Set `DRY=1` to build the model and stop before the solver starts. Use `medium` or `fine` in place of `coarse`
 for a finer mesh, at much higher cost (about 8x cells and 2x steps per step up in preset; check the estimate
-first). Output goes to `RF Analysis/results/step1_short_coarse/`:
+first). Set `RF_TAG` (for example `desktop` or `laptop`) so results from different machines stay separate.
+Output goes to `RF Analysis/results/<RF_TAG>/step1_<mode>_<mesh>/` (the first 5 mm run, before machine folders
+existed, is in `RF Analysis/results/step1_short_coarse/`):
 
 | File | Content |
 |---|---|
