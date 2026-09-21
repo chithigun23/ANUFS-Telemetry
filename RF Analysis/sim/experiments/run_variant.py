@@ -7,6 +7,7 @@ Run with the solver Python (C:\openEMS\venv\Scripts\python.exe):
   --endcrit   energy end criterion (default: keep the model's; 1e-12 effectively runs to the step cap)
   --maxsteps  step cap
   --fstart F  --fstop F   sweep limits in Hz; they set the excitation pulse and the mesh resolution
+  --mesh P    mesh preset: coarse, medium or fine (much more expensive)
   --bc        boundary condition for all faces (default PML_8)
   --pec       perfect-conductor copper instead of finite-conductivity sheets
   --solid-planes  replace all copper on the layers except F.Cu by one solid rectangle covering the domain
@@ -37,6 +38,8 @@ if "--tand0" in opts:
         d["loss_tangent"] = 0.0
 if val("--endcrit"):
     m["settings"]["end_criteria"] = val("--endcrit", float)
+if val("--mesh"):
+    m["settings"]["mesh"] = val("--mesh")
 if val("--fstart"):
     m["settings"]["f_start"] = val("--fstart", float)
 if val("--fstop"):
