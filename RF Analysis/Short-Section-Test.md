@@ -147,3 +147,33 @@ the energy. The invalid 5 mm S-parameters are therefore probably the same fault,
 |---|---|---|
 | laptop | timestep factor 0.5, step cap 600,000, port 1 only | is the instability a timestep (Courant) problem? |
 | desktop | copper as a perfect conductor (`sim/experiments/runner_pec.py`), port 1 only | does the finite-conductivity copper sheet model cause it? |
+
+## 8. Diagnostics so far (2026-09-22, desktop unless noted)
+
+All runs use the coarse mesh and `RF Analysis/sim/step1_ant3.py`. "Diverges" means the field energy grows
+exponentially until it reaches infinity. Results are under `RF Analysis/results/<machine>/`.
+
+| # | Run | Result |
+|---|---|---|
+| 1 | 5 mm, microstrip ports, stopped by the -40 dB energy criterion | line Z0 46.8 / 46.1 ohm; S-parameters invalid |
+| 2 | 9.5 mm, microstrip ports (desktop and laptop) | diverges at about 75,000 steps; identical on both machines |
+| 3 | 9.5 mm, copper as perfect conductor (`experiments/runner_pec.py`) | diverges the same way, so the finite-conductivity copper model is not the cause |
+| 4 | 9.5 mm, timestep factor 0.5, step cap 600,000 (laptop) | still diverges, so a Courant-limit timestep is not the cause |
+| 5 | 5 mm, microstrip ports, no early stop (300,000 steps) | energy decays to -67 dB and stays flat: no blow-up; S-parameters identical to run 1 and still invalid (sum of |S|^2 up to 118,102) |
+| 6 | 5 mm, lumped ports | diverges at about 46,000 steps (mesh 55 x 72 x 39, timestep 4.4e-14 s); S-parameters invalid |
+| 7 | run 6 with a Mur boundary in place of PML | diverges almost at once (not informative: Mur is known to be unsuitable for layered stack-ups) |
+| 8 | run 6 with the dielectric slab enlarged to fill the whole domain (`board_rect` = `region`) | diverges the same way, so copper hanging in air outside the slab is not the cause |
+
+**Offline recalculation (run 5 data, `sim/experiments/repostprocess.py`):** with the plugin's forced 50 ohm
+reference the numbers reproduce exactly (S11 +35 to +51 dB). With the line impedance as measured (46.8 and 48.1
+ohm) S21 is between -3 and +2 dB (roughly sensible) but S11 is still +29 dB. The plugin limits each microstrip
+port's measurement line to 30 % of the port spacing (1.5 mm for 5 mm), which is under 0.1 radian of phase at
+1.575 GHz on this line, so splitting incident from reflected waves is probably ill-conditioned. This is a
+suspicion, not a finding: run 6 shows lumped ports fail too, and for a different reason (divergence).
+
+**Working conclusion:** two separate faults are present. (a) A late-time instability appears in every run
+except run 5, and run 5's energy floor also creeps up over its last 40,000 steps (9e-21 to 7e-20), so it may
+be a slower version of the same fault. It is not caused by the copper model, the timestep, the boundary type, or
+the slab edge. (b) The microstrip-port S-parameters are invalid even when the run is stable. The next tests are the
+plugin's own 4-layer stripline validation, to see whether the plugin is stable on a multilayer stack-up with this
+openEMS build (0.37.0-rc2), and if it is not, an older openEMS build.
