@@ -12546,6 +12546,18 @@
 		(uuid "42aeb4cd-dd90-44d0-aa0e-df259196fcc3")
 	)
 	(rectangle
+		(start 81.28 260.35)
+		(end 121.92 292.1)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "496e7f49-7efa-48a5-a5cc-5dd0c19dc503")
+	)
+	(rectangle
 		(start 19.05 20.32)
 		(end 86.36 63.5)
 		(stroke
@@ -13257,6 +13269,12 @@
 		(uuid "5d4cc6ea-49b0-42e0-8534-d3478e34d1ef")
 	)
 	(junction
+		(at 254 218.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5e99376b-11a8-4844-a64c-ad545f863731")
+	)
+	(junction
 		(at 474.98 210.82)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -13285,6 +13303,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6ad11c5e-d875-48f0-8f4d-a5941d334214")
+	)
+	(junction
+		(at 261.62 284.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6d2ce51b-8581-4531-9610-de84ca0ca622")
 	)
 	(junction
 		(at 186.69 252.73)
@@ -13381,6 +13405,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9d55e827-def0-45fb-bc82-63fd21fde2e3")
+	)
+	(junction
+		(at 248.92 284.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9f9d9684-5d5c-495d-b786-b6b2f88b428b")
 	)
 	(junction
 		(at 60.96 252.73)
@@ -13561,6 +13591,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ede08873-0e5a-4b54-9568-75fce04375b8")
+	)
+	(junction
+		(at 266.7 218.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f08b8c01-eb3d-481c-b1aa-526efbcb519a")
 	)
 	(junction
 		(at 233.68 165.1)
@@ -13938,6 +13974,16 @@
 	)
 	(wire
 		(pts
+			(xy 265.43 218.44) (xy 274.32 218.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "10b25044-0bb6-464b-a359-f2ffc8ef8f2c")
+	)
+	(wire
+		(pts
 			(xy 172.72 124.46) (xy 172.72 119.38)
 		)
 		(stroke
@@ -14125,6 +14171,16 @@
 			(type default)
 		)
 		(uuid "1ba56396-e137-41d3-9170-bef10aaf9bf5")
+	)
+	(wire
+		(pts
+			(xy 248.92 284.48) (xy 248.92 285.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1bd68f02-0853-426d-887c-d5f27a71dfec")
 	)
 	(wire
 		(pts
@@ -14335,6 +14391,16 @@
 			(type default)
 		)
 		(uuid "3004dd8b-3bda-47fc-afc6-f52619dafd6b")
+	)
+	(wire
+		(pts
+			(xy 266.7 218.44) (xy 266.7 219.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3015c499-d74e-4148-be88-37f8ffd194cb")
 	)
 	(wire
 		(pts
@@ -14668,6 +14734,16 @@
 	)
 	(wire
 		(pts
+			(xy 261.62 284.48) (xy 270.51 284.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "402d1a0b-5760-44ae-a5a7-1c3a8abd68fd")
+	)
+	(wire
+		(pts
 			(xy 285.75 95.25) (xy 289.56 95.25)
 		)
 		(stroke
@@ -14778,6 +14854,16 @@
 	)
 	(wire
 		(pts
+			(xy 248.92 284.48) (xy 252.73 284.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4816ef53-2f77-420c-818c-7fcfc7d404c5")
+	)
+	(wire
+		(pts
 			(xy 165.1 93.98) (xy 177.8 93.98)
 		)
 		(stroke
@@ -14818,6 +14904,16 @@
 	)
 	(wire
 		(pts
+			(xy 254 218.44) (xy 254 219.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a7ecf23-57ec-49d2-9bc6-f5f3e339aa9c")
+	)
+	(wire
+		(pts
 			(xy 321.31 313.69) (xy 321.31 314.96)
 		)
 		(stroke
@@ -14825,6 +14921,16 @@
 			(type default)
 		)
 		(uuid "4ae9ef6c-3e3a-4b17-ac0b-011c57966450")
+	)
+	(wire
+		(pts
+			(xy 247.65 218.44) (xy 254 218.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4d8aaa29-6b33-4761-b4e5-710323d50ac3")
 	)
 	(wire
 		(pts
@@ -14905,6 +15011,16 @@
 			(type default)
 		)
 		(uuid "50298f56-65a6-4a95-84c5-46326d71b814")
+	)
+	(wire
+		(pts
+			(xy 254 218.44) (xy 257.81 218.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50377bbc-91af-4469-a57f-576e5c0a9e37")
 	)
 	(wire
 		(pts
@@ -17198,6 +17314,26 @@
 	)
 	(wire
 		(pts
+			(xy 243.84 284.48) (xy 248.92 284.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de1d7de5-deb1-45b4-8d9c-97823624b52b")
+	)
+	(wire
+		(pts
+			(xy 260.35 284.48) (xy 261.62 284.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de1e3f99-c0e8-4367-bc6f-a5416dd18338")
+	)
+	(wire
+		(pts
 			(xy 358.14 36.83) (xy 355.6 36.83)
 		)
 		(stroke
@@ -17435,6 +17571,16 @@
 			(type default)
 		)
 		(uuid "eef04820-aeb7-4424-a5f4-5ee10ddda3fe")
+	)
+	(wire
+		(pts
+			(xy 261.62 284.48) (xy 261.62 285.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f07d410a-e14b-4040-a5cf-999196359088")
 	)
 	(wire
 		(pts
@@ -19332,7 +19478,7 @@
 	)
 	(global_label "RF_IN_1"
 		(shape input)
-		(at 247.65 218.44 0)
+		(at 274.32 218.44 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -19342,7 +19488,7 @@
 		)
 		(uuid "5b10c679-3fc9-4248-9c02-591ccab55a9a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 258.0738 218.44 0)
+			(at 284.7438 218.44 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19558,6 +19704,30 @@
 		(uuid "6a50e0ff-507c-4a0b-9f7a-81ee946df269")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 384.7712 219.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "ANT3"
+		(shape input)
+		(at 110.49 278.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6cc390fa-00b5-4ac9-b091-347d1719f851")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 118.0714 278.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20746,7 +20916,7 @@
 	)
 	(global_label "RF_IN_2"
 		(shape input)
-		(at 243.84 284.48 0)
+		(at 270.51 284.48 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -20756,7 +20926,7 @@
 		)
 		(uuid "beedc8fe-0f6e-4744-a940-822f7062909e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 254.2638 284.48 0)
+			(at 280.9338 284.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21165,6 +21335,30 @@
 		(uuid "da0b51b0-62b7-4fa8-9b9c-2a0d9cfc43d8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 339.1118 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "ANT3"
+		(shape input)
+		(at 90.17 278.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "da54b20c-c690-4a19-9238-0d7181ca89dc")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 97.7514 278.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21787,7 +21981,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "002e1265-f371-4561-a725-f6c06fb57078")
-		(property "Reference" "R41"
+		(property "Reference" "R43"
 			(at 259.08 298.196 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21849,7 +22043,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R41")
+					(reference "R43")
 					(unit 1)
 				)
 			)
@@ -21928,6 +22122,85 @@
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
 					(reference "#PWR093")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 261.62 218.44 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "027dfac4-d1c6-4736-ae4c-f076bb6ca231")
+		(property "Reference" "R35"
+			(at 261.62 213.106 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 261.62 215.646 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
+			(at 261.874 217.424 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 261.62 218.44 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 261.62 218.44 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "9cb987ef-a7bc-47c3-8e37-4f7ee16ffd5d")
+		)
+		(pin "1"
+			(uuid "92fdfc9e-bc77-4ce2-9a36-1e5cbaefcd00")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "R35")
 					(unit 1)
 				)
 			)
@@ -22337,7 +22610,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "07db6e95-a95e-4214-bfb8-7d08503ee43c")
-		(property "Reference" "R36"
+		(property "Reference" "R37"
 			(at 411.226 223.012 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22399,7 +22672,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R36")
+					(reference "R37")
 					(unit 1)
 				)
 			)
@@ -22906,6 +23179,85 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 113.03 283.21 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0f5b2857-a3c2-45c4-8adc-c100064a1884")
+		(property "Reference" "#PWR0167"
+			(at 113.03 289.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 113.03 288.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 113.03 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 113.03 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 113.03 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a4122191-68ca-4d51-8230-365e52b964c3")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#PWR0167")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 151.13 283.21 0)
 		(unit 1)
 		(body_style 1)
@@ -22916,7 +23268,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0f5beb76-1a11-4a56-ae4d-31834ea33d1f")
-		(property "Reference" "#PWR0147"
+		(property "Reference" "#PWR0149"
 			(at 151.13 289.56 0)
 			(hide yes)
 			(show_name no)
@@ -22977,7 +23329,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0147")
+					(reference "#PWR0149")
 					(unit 1)
 				)
 			)
@@ -23134,6 +23486,85 @@
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
 					(reference "#PWR079")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 254 227.33 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "11665e24-392d-449e-acf0-c13388a15fb1")
+		(property "Reference" "#PWR0126"
+			(at 254 233.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 254 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 254 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 254 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 254 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "49c1764c-1b3a-4265-8fe0-8d10e93b8db7")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#PWR0126")
 					(unit 1)
 				)
 			)
@@ -23309,7 +23740,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "14720d15-3553-4528-ab33-65e6e2fd1fa3")
-		(property "Reference" "C32"
+		(property "Reference" "C34"
 			(at 51.054 245.11 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23373,7 +23804,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C32")
+					(reference "C34")
 					(unit 1)
 				)
 			)
@@ -23391,7 +23822,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "15412848-18bd-4d69-9f17-405b82a63ffe")
-		(property "Reference" "C39"
+		(property "Reference" "C41"
 			(at 149.86 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -23455,7 +23886,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C39")
+					(reference "C41")
 					(unit 1)
 				)
 			)
@@ -24222,7 +24653,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "19dbdb1b-1bd5-406a-a4fb-74e717ed17a7")
-		(property "Reference" "#PWR0138"
+		(property "Reference" "#PWR0140"
 			(at 67.31 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -24283,7 +24714,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0138")
+					(reference "#PWR0140")
 					(unit 1)
 				)
 			)
@@ -24634,7 +25065,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1d8b2e11-88d9-453c-b914-e54eb40b64dc")
-		(property "Reference" "#PWR0140"
+		(property "Reference" "#PWR0142"
 			(at 186.69 274.32 0)
 			(hide yes)
 			(show_name no)
@@ -24694,7 +25125,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0140")
+					(reference "#PWR0142")
 					(unit 1)
 				)
 			)
@@ -24870,7 +25301,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "21dce919-b592-4bd1-9efd-07baf736c172")
-		(property "Reference" "#PWR0131"
+		(property "Reference" "#PWR0133"
 			(at 304.8 237.49 0)
 			(hide yes)
 			(show_name no)
@@ -24931,7 +25362,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0131")
+					(reference "#PWR0133")
 					(unit 1)
 				)
 			)
@@ -25095,6 +25526,144 @@
 		)
 	)
 	(symbol
+		(lib_id "telemetry:RFPC-SMA27-F")
+		(at 107.95 278.13 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "23f52391-dfba-4f64-a9c0-49d06fe64bb8")
+		(property "Reference" "J10"
+			(at 111.4171 271.78 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "RFPC-SMA27-F"
+			(at 111.4171 274.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "telemetry:RFPC-SMA27-F"
+			(at 107.95 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Datasheet" ""
+			(at 107.95 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 107.95 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PARTREV" "1.0"
+			(at 107.95 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "MANUFACTURER" "GradConn"
+			(at 107.95 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" "10.3mm"
+			(at 107.95 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "STANDARD" "Manufacturer Recommendations"
+			(at 107.95 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(pin "1"
+			(uuid "e77ab9fa-9772-44d3-8487-cedf5873e0d9")
+		)
+		(pin "G1"
+			(uuid "95b903e6-ef64-4000-99c0-198db45974b7")
+		)
+		(pin "G2"
+			(uuid "9fc4f0e3-3fff-4692-b765-4fa3b53f0da1")
+		)
+		(pin "G3"
+			(uuid "d231055b-6455-4c17-aeb0-bd82b83900d8")
+		)
+		(pin "G4"
+			(uuid "65b1e890-9629-481b-882e-3702f2dd7864")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "J10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 401.32 116.84 0)
 		(mirror x)
@@ -25171,6 +25740,87 @@
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
 					(reference "C17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 248.92 289.56 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "24b5949d-0196-46a7-8eb8-6036489ed3d8")
+		(property "Reference" "C49"
+			(at 251.714 288.29 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0"
+			(at 251.714 290.83 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder"
+			(at 249.8852 293.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 248.92 289.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 248.92 289.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c5c4313e-0dda-4cef-a2c3-3723318a6b1e")
+		)
+		(pin "2"
+			(uuid "d5e85fd2-715c-40f8-859b-b792734b21a3")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "C49")
 					(unit 1)
 				)
 			)
@@ -25501,7 +26151,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "29754d7e-2c61-48fa-bcfc-f8db17bc3317")
-		(property "Reference" "#PWR0148"
+		(property "Reference" "#PWR0150"
 			(at 153.67 289.56 0)
 			(hide yes)
 			(show_name no)
@@ -25562,7 +26212,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0148")
+					(reference "#PWR0150")
 					(unit 1)
 				)
 			)
@@ -25642,6 +26292,85 @@
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
 					(reference "#PWR063")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 110.49 283.21 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "29ddb3f0-2cd0-4b1c-a878-04b4f93335dd")
+		(property "Reference" "#PWR0166"
+			(at 110.49 289.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 110.49 288.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 110.49 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 110.49 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 110.49 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d43229e0-190e-4159-8f0d-c521d010bff4")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#PWR0166")
 					(unit 1)
 				)
 			)
@@ -26024,7 +26753,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "2ccda17d-5d5d-475c-a5d4-d5ed02a7aa6c")
-		(property "Reference" "C30"
+		(property "Reference" "C32"
 			(at 28.194 245.11 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26088,7 +26817,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C30")
+					(reference "C32")
 					(unit 1)
 				)
 			)
@@ -26350,7 +27079,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "30a0ed8d-bf37-437e-8646-bf895d7e9920")
-		(property "Reference" "C42"
+		(property "Reference" "C44"
 			(at 203.2 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26414,7 +27143,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C42")
+					(reference "C44")
 					(unit 1)
 				)
 			)
@@ -26788,7 +27517,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "33d0d217-1ea9-4ce4-96c2-64a51d6b385d")
-		(property "Reference" "C35"
+		(property "Reference" "C37"
 			(at 89.154 245.11 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -26852,7 +27581,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C35")
+					(reference "C37")
 					(unit 1)
 				)
 			)
@@ -26870,7 +27599,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "34ba4079-19dc-4eff-8007-c8bd1880eb90")
-		(property "Reference" "#PWR0151"
+		(property "Reference" "#PWR0153"
 			(at 186.69 294.64 0)
 			(hide yes)
 			(show_name no)
@@ -26931,7 +27660,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0151")
+					(reference "#PWR0153")
 					(unit 1)
 				)
 			)
@@ -27589,7 +28318,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3f91d2a3-5526-4279-ba06-d1251fab6f7a")
-		(property "Reference" "#PWR0144"
+		(property "Reference" "#PWR0146"
 			(at 133.35 289.56 0)
 			(hide yes)
 			(show_name no)
@@ -27650,7 +28379,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0144")
+					(reference "#PWR0146")
 					(unit 1)
 				)
 			)
@@ -27988,7 +28717,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "455ae7a1-0ee9-411f-a975-29690ad1be79")
-		(property "Reference" "#PWR0141"
+		(property "Reference" "#PWR0143"
 			(at 367.03 275.59 0)
 			(hide yes)
 			(show_name no)
@@ -28049,7 +28778,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0141")
+					(reference "#PWR0143")
 					(unit 1)
 				)
 			)
@@ -28067,7 +28796,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "469c44c7-08c8-4d88-983e-66b4f35daa14")
-		(property "Reference" "#PWR0142"
+		(property "Reference" "#PWR0144"
 			(at 360.68 278.13 0)
 			(hide yes)
 			(show_name no)
@@ -28128,7 +28857,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0142")
+					(reference "#PWR0144")
 					(unit 1)
 				)
 			)
@@ -28459,7 +29188,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "4b1a55a5-132d-49cb-9507-08afe92aafc5")
-		(property "Reference" "C29"
+		(property "Reference" "C31"
 			(at 254.254 241.3 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28523,7 +29252,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C29")
+					(reference "C31")
 					(unit 1)
 				)
 			)
@@ -28541,7 +29270,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4c0c3bf5-955d-498d-8afe-3acd7301b958")
-		(property "Reference" "C40"
+		(property "Reference" "C42"
 			(at 176.53 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -28605,7 +29334,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C40")
+					(reference "C42")
 					(unit 1)
 				)
 			)
@@ -28685,6 +29414,164 @@
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
 					(reference "#PWR076")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 90.17 283.21 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4d2f2371-4953-4055-b5a9-708d608e6c3e")
+		(property "Reference" "#PWR0162"
+			(at 90.17 289.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 90.17 288.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 90.17 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 90.17 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 90.17 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "891dde75-b3b7-4e37-bdeb-bf60e0b3eb3a")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#PWR0162")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 256.54 284.48 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "4e806e02-fd6c-49ee-8643-8a04cc6e5569")
+		(property "Reference" "R42"
+			(at 256.54 279.146 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 256.54 281.686 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
+			(at 256.794 283.464 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 256.54 284.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 256.54 284.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "d59d33da-7a30-4ce6-9c86-e709953519f5")
+		)
+		(pin "1"
+			(uuid "e91c820a-9fda-4024-b01d-331e2b0269e8")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "R42")
 					(unit 1)
 				)
 			)
@@ -28899,7 +29786,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "51606bef-94c5-40df-8897-8272e0cbe869")
-		(property "Reference" "#PWR0143"
+		(property "Reference" "#PWR0145"
 			(at 130.81 289.56 0)
 			(hide yes)
 			(show_name no)
@@ -28960,7 +29847,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0143")
+					(reference "#PWR0145")
 					(unit 1)
 				)
 			)
@@ -29577,7 +30464,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "57b116e2-2c5f-4b5a-b57a-2341d2ef6afc")
-		(property "Reference" "#PWR0126"
+		(property "Reference" "#PWR0128"
 			(at 304.8 232.41 0)
 			(hide yes)
 			(show_name no)
@@ -29638,7 +30525,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0126")
+					(reference "#PWR0128")
 					(unit 1)
 				)
 			)
@@ -29813,7 +30700,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5a418508-943e-4452-8cb9-2b5367be092d")
-		(property "Reference" "C46"
+		(property "Reference" "C48"
 			(at 238.506 278.638 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -29877,7 +30764,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C46")
+					(reference "C48")
 					(unit 1)
 				)
 			)
@@ -30052,7 +30939,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "5be1802e-ba53-47cd-9d72-dc9a289d1488")
-		(property "Reference" "C28"
+		(property "Reference" "C30"
 			(at 242.824 241.3 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -30116,7 +31003,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C28")
+					(reference "C30")
 					(unit 1)
 				)
 			)
@@ -30773,7 +31660,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "627f5df9-e689-4e1d-bb3e-36b3e23d3e0e")
-		(property "Reference" "#PWR0139"
+		(property "Reference" "#PWR0141"
 			(at 186.69 261.62 0)
 			(hide yes)
 			(show_name no)
@@ -30834,7 +31721,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0139")
+					(reference "#PWR0141")
 					(unit 1)
 				)
 			)
@@ -30852,7 +31739,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "62e8f41c-d756-40d9-b54e-15925e9101f4")
-		(property "Reference" "#PWR0133"
+		(property "Reference" "#PWR0135"
 			(at 139.7 242.57 0)
 			(hide yes)
 			(show_name no)
@@ -30912,7 +31799,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0133")
+					(reference "#PWR0135")
 					(unit 1)
 				)
 			)
@@ -31411,7 +32298,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "65fbc10b-4bc4-437b-80a0-dc5a2123085c")
-		(property "Reference" "#PWR0157"
+		(property "Reference" "#PWR0161"
 			(at 247.65 318.77 0)
 			(hide yes)
 			(show_name no)
@@ -31472,7 +32359,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0157")
+					(reference "#PWR0161")
 					(unit 1)
 				)
 			)
@@ -31996,7 +32883,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "69e46f7f-e91d-4ea8-af62-7fa572f0e3bc")
-		(property "Reference" "R42"
+		(property "Reference" "R44"
 			(at 322.834 317.5 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -32060,7 +32947,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R42")
+					(reference "R44")
 					(unit 1)
 				)
 			)
@@ -32078,7 +32965,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6a99b3e0-ee67-4ee2-9c4c-5dcbd1aa1f0e")
-		(property "Reference" "#PWR0156"
+		(property "Reference" "#PWR0160"
 			(at 236.22 318.77 0)
 			(hide yes)
 			(show_name no)
@@ -32139,7 +33026,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0156")
+					(reference "#PWR0160")
 					(unit 1)
 				)
 			)
@@ -32665,7 +33552,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "6fc158eb-2db0-47d8-a084-eef72c7db2bc")
-		(property "Reference" "C31"
+		(property "Reference" "C33"
 			(at 39.624 245.11 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -32729,7 +33616,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C31")
+					(reference "C33")
 					(unit 1)
 				)
 			)
@@ -33027,7 +33914,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "73795d17-bb00-4ed4-b2a8-524091cc409b")
-		(property "Reference" "#PWR0127"
+		(property "Reference" "#PWR0129"
 			(at 415.29 234.95 0)
 			(hide yes)
 			(show_name no)
@@ -33088,7 +33975,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0127")
+					(reference "#PWR0129")
 					(unit 1)
 				)
 			)
@@ -33261,7 +34148,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "76efa4eb-0161-4789-ac93-f269c34af1fa")
-		(property "Reference" "C38"
+		(property "Reference" "C40"
 			(at 135.89 245.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -33325,7 +34212,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C38")
+					(reference "C40")
 					(unit 1)
 				)
 			)
@@ -33569,6 +34456,87 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 261.62 289.56 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7a4ad2b5-ad2a-4b90-8b43-52978adbc558")
+		(property "Reference" "C50"
+			(at 264.414 288.29 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0"
+			(at 264.414 290.83 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder"
+			(at 262.5852 293.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 261.62 289.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 261.62 289.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1b681932-0628-4e16-b4cd-225f8f05bc82")
+		)
+		(pin "2"
+			(uuid "fddfe111-e016-4cae-b5df-a3184ae03868")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "C50")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3V")
 		(at 168.91 81.28 0)
 		(unit 1)
@@ -33658,7 +34626,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7aa8d411-ff8b-4d00-a4d2-a0e51bfa2507")
-		(property "Reference" "#PWR0146"
+		(property "Reference" "#PWR0148"
 			(at 138.43 289.56 0)
 			(hide yes)
 			(show_name no)
@@ -33719,7 +34687,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0146")
+					(reference "#PWR0148")
 					(unit 1)
 				)
 			)
@@ -33934,6 +34902,85 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 95.25 283.21 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7caaee5a-5ebb-4e26-8bb9-2ea4afd31e58")
+		(property "Reference" "#PWR0164"
+			(at 95.25 289.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 95.25 288.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 95.25 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 95.25 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 95.25 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "43a67a90-4673-41b7-9b86-d61b3285636e")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#PWR0164")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3V")
 		(at 179.07 149.86 0)
 		(unit 1)
@@ -34102,7 +35149,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "80f7b3c0-10bf-49d6-b618-3fde5c94da91")
-		(property "Reference" "#PWR0145"
+		(property "Reference" "#PWR0147"
 			(at 135.89 289.56 0)
 			(hide yes)
 			(show_name no)
@@ -34163,7 +35210,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0145")
+					(reference "#PWR0147")
 					(unit 1)
 				)
 			)
@@ -34418,7 +35465,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "83348930-b8f4-4e6b-8987-c90160ba231b")
-		(property "Reference" "#PWR0136"
+		(property "Reference" "#PWR0138"
 			(at 251.46 252.73 0)
 			(hide yes)
 			(show_name no)
@@ -34479,7 +35526,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0136")
+					(reference "#PWR0138")
 					(unit 1)
 				)
 			)
@@ -34576,7 +35623,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8514bd29-2541-434d-a251-baba166b4fd8")
-		(property "Reference" "#PWR0149"
+		(property "Reference" "#PWR0151"
 			(at 156.21 289.56 0)
 			(hide yes)
 			(show_name no)
@@ -34637,7 +35684,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0149")
+					(reference "#PWR0151")
 					(unit 1)
 				)
 			)
@@ -34655,7 +35702,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "86bb9c03-ff72-4658-b526-57a1c01c77a0")
-		(property "Reference" "#PWR0154"
+		(property "Reference" "#PWR0158"
 			(at 300.99 303.53 0)
 			(hide yes)
 			(show_name no)
@@ -34716,7 +35763,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0154")
+					(reference "#PWR0158")
 					(unit 1)
 				)
 			)
@@ -34967,7 +36014,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8dff4447-dce7-49fb-b641-eb8f5adcb98d")
-		(property "Reference" "#PWR0155"
+		(property "Reference" "#PWR0159"
 			(at 367.03 303.53 0)
 			(hide yes)
 			(show_name no)
@@ -35028,7 +36075,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0155")
+					(reference "#PWR0159")
 					(unit 1)
 				)
 			)
@@ -35262,7 +36309,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "90782183-a857-45a6-bd0c-b303689e264f")
-		(property "Reference" "C37"
+		(property "Reference" "C39"
 			(at 114.554 245.11 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -35326,7 +36373,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C37")
+					(reference "C39")
 					(unit 1)
 				)
 			)
@@ -35344,7 +36391,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "917f618d-3cb7-4ee9-a195-476116043055")
-		(property "Reference" "#PWR0128"
+		(property "Reference" "#PWR0130"
 			(at 422.91 234.95 0)
 			(hide yes)
 			(show_name no)
@@ -35405,7 +36452,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0128")
+					(reference "#PWR0130")
 					(unit 1)
 				)
 			)
@@ -36208,7 +37255,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "970806c8-ee75-43e7-a0c5-c10958ff9879")
-		(property "Reference" "#PWR0153"
+		(property "Reference" "#PWR0157"
 			(at 300.99 298.45 0)
 			(hide yes)
 			(show_name no)
@@ -36269,7 +37316,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0153")
+					(reference "#PWR0157")
 					(unit 1)
 				)
 			)
@@ -37681,6 +38728,85 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 248.92 293.37 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a15c0b9a-efb7-474d-aafc-2b55473c98ff")
+		(property "Reference" "#PWR0155"
+			(at 248.92 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 248.92 298.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 248.92 293.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 248.92 293.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 248.92 293.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a557338b-b7b0-42b7-a0bb-efe399696f4d")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#PWR0155")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 259.08 151.13 0)
 		(unit 1)
 		(body_style 1)
@@ -37952,7 +39078,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a1d6e505-dcdc-4792-bc6e-464819fe617f")
-		(property "Reference" "C36"
+		(property "Reference" "C38"
 			(at 101.854 245.11 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -38016,7 +39142,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C36")
+					(reference "C38")
 					(unit 1)
 				)
 			)
@@ -38446,7 +39572,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a5d0f95c-29bc-44a5-993a-c04e4a3ea955")
-		(property "Reference" "#PWR0137"
+		(property "Reference" "#PWR0139"
 			(at 139.7 260.35 0)
 			(hide yes)
 			(show_name no)
@@ -38507,7 +39633,86 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0137")
+					(reference "#PWR0139")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 118.11 283.21 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a64c5e14-d4c6-45b6-9a32-8ef03104d0a5")
+		(property "Reference" "#PWR0169"
+			(at 118.11 289.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 118.11 288.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 118.11 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 118.11 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 118.11 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1310f6fb-304a-43ac-8666-6de2d995d5ba")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#PWR0169")
 					(unit 1)
 				)
 			)
@@ -38603,7 +39808,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a745f4e7-1272-4e14-9345-39f2ff37fff9")
-		(property "Reference" "C48"
+		(property "Reference" "C52"
 			(at 250.444 307.34 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -38667,7 +39872,88 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C48")
+					(reference "C52")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 254 223.52 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a8239b18-d220-453c-988e-6a3d1568e026")
+		(property "Reference" "C28"
+			(at 256.794 222.25 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0"
+			(at 256.794 224.79 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder"
+			(at 254.9652 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 254 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 254 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "56da6a1a-a8e1-4c87-8776-423f5c76a8e6")
+		)
+		(pin "2"
+			(uuid "c379ae53-43ee-40da-aac4-8e7aa90bd827")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "C28")
 					(unit 1)
 				)
 			)
@@ -38829,6 +40115,85 @@
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
 					(reference "C22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 92.71 283.21 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a9995fab-67ae-46a2-9580-157405afb3bf")
+		(property "Reference" "#PWR0163"
+			(at 92.71 289.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 92.71 288.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 92.71 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 92.71 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 92.71 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "034e8c92-b8e3-4e9a-b1c5-23df8b5ab6fc")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#PWR0163")
 					(unit 1)
 				)
 			)
@@ -39543,7 +40908,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "aff06cc3-ee03-4d60-8e1b-9dd3be7ec014")
-		(property "Reference" "#PWR0134"
+		(property "Reference" "#PWR0136"
 			(at 477.52 246.38 0)
 			(hide yes)
 			(show_name no)
@@ -39604,7 +40969,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0134")
+					(reference "#PWR0136")
 					(unit 1)
 				)
 			)
@@ -39999,6 +41364,144 @@
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
 					(reference "F1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "telemetry:RFPC-SMA27-F")
+		(at 87.63 278.13 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b53847d1-87f7-47e2-83e8-efda8effa00e")
+		(property "Reference" "J9"
+			(at 91.0971 271.78 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "RFPC-SMA27-F"
+			(at 91.0971 274.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "telemetry:RFPC-SMA27-F"
+			(at 87.63 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Datasheet" ""
+			(at 87.63 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 87.63 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "PARTREV" "1.0"
+			(at 87.63 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "MANUFACTURER" "GradConn"
+			(at 87.63 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" "10.3mm"
+			(at 87.63 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "STANDARD" "Manufacturer Recommendations"
+			(at 87.63 278.13 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(pin "1"
+			(uuid "789f46e4-4955-407c-a162-ca91147ec74a")
+		)
+		(pin "G1"
+			(uuid "0026f6e8-ecbe-4b79-9c96-aefd429904f0")
+		)
+		(pin "G2"
+			(uuid "c2abd1a2-ce79-4d1c-8696-3fc7fcf85500")
+		)
+		(pin "G3"
+			(uuid "256688bf-1c1b-4f48-861b-90c03550cc1f")
+		)
+		(pin "G4"
+			(uuid "39c9af42-4513-4ab7-ae79-f84d111e2fd2")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "J9")
 					(unit 1)
 				)
 			)
@@ -41224,7 +42727,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bf2d3c1c-a110-4915-a041-485185435307")
-		(property "Reference" "#PWR0135"
+		(property "Reference" "#PWR0137"
 			(at 240.03 252.73 0)
 			(hide yes)
 			(show_name no)
@@ -41285,7 +42788,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0135")
+					(reference "#PWR0137")
 					(unit 1)
 				)
 			)
@@ -42407,7 +43910,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cbb2e2a5-3399-48f7-9003-1dfb0e7ecb6b")
-		(property "Reference" "C43"
+		(property "Reference" "C45"
 			(at 176.53 278.1299 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -42471,7 +43974,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C43")
+					(reference "C45")
 					(unit 1)
 				)
 			)
@@ -42490,7 +43993,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cc26fb54-2bf9-4844-b29e-ba6593e5ad4a")
-		(property "Reference" "#PWR0132"
+		(property "Reference" "#PWR0134"
 			(at 370.84 237.49 0)
 			(hide yes)
 			(show_name no)
@@ -42551,7 +44054,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0132")
+					(reference "#PWR0134")
 					(unit 1)
 				)
 			)
@@ -42568,7 +44071,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "cd8e3295-3c15-48e1-a935-60846cb27a24")
-		(property "Reference" "C47"
+		(property "Reference" "C51"
 			(at 239.014 307.34 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -42632,7 +44135,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C47")
+					(reference "C51")
 					(unit 1)
 				)
 			)
@@ -42649,7 +44152,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "cd923ee9-313e-423c-a7f8-a933665d36d1")
-		(property "Reference" "C41"
+		(property "Reference" "C43"
 			(at 192.278 245.364 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -42711,7 +44214,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C41")
+					(reference "C43")
 					(unit 1)
 				)
 			)
@@ -43115,6 +44618,164 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 115.57 283.21 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d04fc7d3-a1cc-495a-befb-f13253fc925b")
+		(property "Reference" "#PWR0168"
+			(at 115.57 289.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 115.57 288.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 115.57 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 115.57 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 115.57 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "faec40ce-5a72-4282-8a18-663fed304c61")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#PWR0168")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 97.79 283.21 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d078923f-1990-4efe-ada4-a9eac8db7a2f")
+		(property "Reference" "#PWR0165"
+			(at 97.79 289.56 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 97.79 288.29 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 97.79 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 97.79 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 97.79 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "8202299e-d41c-4ef4-bf78-13029261efac")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#PWR0165")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+5V")
 		(at 320.04 119.38 0)
 		(unit 1)
@@ -43358,7 +45019,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d4ebc163-f0ab-4cb6-8dcb-fc5c96f950d9")
-		(property "Reference" "C45"
+		(property "Reference" "C47"
 			(at 203.2 278.1299 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -43422,7 +45083,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C45")
+					(reference "C47")
 					(unit 1)
 				)
 			)
@@ -43520,7 +45181,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "d5c848a6-1906-44d7-99f8-e5e713473063")
-		(property "Reference" "C44"
+		(property "Reference" "C46"
 			(at 192.278 278.384 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -43582,7 +45243,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C44")
+					(reference "C46")
 					(unit 1)
 				)
 			)
@@ -43907,6 +45568,85 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 261.62 293.37 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "daf2efb9-5fc4-4325-948c-b8899997adda")
+		(property "Reference" "#PWR0156"
+			(at 261.62 299.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 261.62 298.45 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 261.62 293.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 261.62 293.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 261.62 293.37 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6bd79b51-4b41-428d-bf9a-8029b78e3868")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#PWR0156")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 22.86 29.21 0)
 		(unit 1)
@@ -44154,7 +45894,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ddb518be-8ce5-4a81-a624-f357b7f723cc")
-		(property "Reference" "#PWR0152"
+		(property "Reference" "#PWR0154"
 			(at 219.71 297.18 0)
 			(hide yes)
 			(show_name no)
@@ -44215,7 +45955,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0152")
+					(reference "#PWR0154")
 					(unit 1)
 				)
 			)
@@ -44373,6 +46113,87 @@
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
 					(reference "#PWR081")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 266.7 223.52 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "df6900b3-f973-4527-9c78-f3e9109a8b65")
+		(property "Reference" "C29"
+			(at 269.494 222.25 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "0"
+			(at 269.494 224.79 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder"
+			(at 267.6652 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 266.7 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 266.7 223.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "cd478291-4c73-4562-b901-f1a4b2c9e717")
+		)
+		(pin "2"
+			(uuid "2824bd59-b019-4a3e-8b1e-1e354a5e07b8")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "C29")
 					(unit 1)
 				)
 			)
@@ -44547,7 +46368,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "e300ab71-239e-40b5-92db-0d5d54a171fb")
-		(property "Reference" "R40"
+		(property "Reference" "R41"
 			(at 344.424 251.46 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -44611,7 +46432,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R40")
+					(reference "R41")
 					(unit 1)
 				)
 			)
@@ -45389,7 +47210,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "eb7d0c19-e3be-493a-9e7c-b1c5a249f1ab")
-		(property "Reference" "R39"
+		(property "Reference" "R40"
 			(at 326.644 251.46 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -45453,7 +47274,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R39")
+					(reference "R40")
 					(unit 1)
 				)
 			)
@@ -45549,7 +47370,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ecab9d7c-713d-42d9-bc7b-0ce1b594e25d")
-		(property "Reference" "#PWR0150"
+		(property "Reference" "#PWR0152"
 			(at 158.75 289.56 0)
 			(hide yes)
 			(show_name no)
@@ -45610,7 +47431,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0150")
+					(reference "#PWR0152")
 					(unit 1)
 				)
 			)
@@ -46224,7 +48045,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f2b0949b-6230-4c1c-ad68-c0fd5e6eeb12")
-		(property "Reference" "#PWR0129"
+		(property "Reference" "#PWR0131"
 			(at 67.31 241.3 0)
 			(hide yes)
 			(show_name no)
@@ -46284,7 +48105,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0129")
+					(reference "#PWR0131")
 					(unit 1)
 				)
 			)
@@ -46301,7 +48122,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f350c56e-d8e1-4174-97c1-daa6ecf6e23d")
-		(property "Reference" "C33"
+		(property "Reference" "C35"
 			(at 63.754 245.11 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -46365,7 +48186,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C33")
+					(reference "C35")
 					(unit 1)
 				)
 			)
@@ -46450,6 +48271,85 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 266.7 227.33 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f3a248dd-9415-416f-a8cd-491ec473a65d")
+		(property "Reference" "#PWR0127"
+			(at 266.7 233.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 266.7 232.41 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 266.7 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 266.7 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 266.7 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6ec76e8b-8ed6-4f92-a6d4-ab1dedc647c8")
+		)
+		(instances
+			(project "telemetry"
+				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
+					(reference "#PWR0127")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 73.66 246.38 0)
 		(unit 1)
@@ -46460,7 +48360,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f504f1d5-c00b-45fc-9721-88f461350568")
-		(property "Reference" "C34"
+		(property "Reference" "C36"
 			(at 76.454 245.11 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -46524,7 +48424,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "C34")
+					(reference "C36")
 					(unit 1)
 				)
 			)
@@ -46850,7 +48750,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f80d2d27-d763-4c16-a63a-060ba9a413ca")
-		(property "Reference" "R43"
+		(property "Reference" "R45"
 			(at 340.614 317.5 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -46914,7 +48814,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R43")
+					(reference "R45")
 					(unit 1)
 				)
 			)
@@ -47092,7 +48992,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f922a811-5f96-44f8-9e9f-194a328389cf")
-		(property "Reference" "#PWR0130"
+		(property "Reference" "#PWR0132"
 			(at 186.69 241.3 0)
 			(hide yes)
 			(show_name no)
@@ -47152,7 +49052,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "#PWR0130")
+					(reference "#PWR0132")
 					(unit 1)
 				)
 			)
@@ -47169,7 +49069,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "f9a7ce6e-c1eb-4b62-b634-17ab15616416")
-		(property "Reference" "R38"
+		(property "Reference" "R39"
 			(at 262.89 232.156 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -47231,7 +49131,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R38")
+					(reference "R39")
 					(unit 1)
 				)
 			)
@@ -47565,7 +49465,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ff63e7bf-07a7-4301-bdd9-fa31752c6336")
-		(property "Reference" "R35"
+		(property "Reference" "R36"
 			(at 455.93 215.9 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -47627,7 +49527,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R35")
+					(reference "R36")
 					(unit 1)
 				)
 			)
@@ -47644,7 +49544,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "ffd9724b-61ab-4d07-a1d7-366d8a31181b")
-		(property "Reference" "R37"
+		(property "Reference" "R38"
 			(at 413.766 229.87 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -47708,7 +49608,7 @@
 		(instances
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R37")
+					(reference "R38")
 					(unit 1)
 				)
 			)
