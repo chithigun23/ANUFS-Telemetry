@@ -49,7 +49,7 @@ BOX = (10.0, 20.0, 27.0, 43.0)  # x0, y0, x1, y1
 # Section modes: crop box (x0, y0, x1, y1) and the y of test pad 1 and test pad 2 (mm).
 SECTIONS = {
     "short": ((14.0, 27.0, 22.5, 37.0), (34.5, 29.5)),   # 5 mm
-    "long": ((14.0, 24.5, 22.5, 38.0), (36.0, 26.5)),    # 9.5 mm
+    "long": ((14.0, 26.0, 22.5, 37.0), (35.0, 28.0)),    # 7 mm; ends kept on the inner-plane copper (the SMA clearance holes reach y = 35.8 and 27.5)
 }
 TRACE_X = 18.26
 BANDS = {"L5": (1164e6, 1188e6), "L1": (1559e6, 1606e6)}
