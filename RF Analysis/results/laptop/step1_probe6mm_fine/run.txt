@@ -1,0 +1,15 @@
+Laptop, 2026-09-22. Task E prep diagnostic: isolate whether the near-total-reflection anomaly (Task C
+step 1, ANT3 7mm section) is a length threshold or a location-specific board defect.
+
+New SECTIONS entry "probe6mm" in step1_ant3.py: port 1 held at "short"'s own known-good y=-34.5,
+port 2 moved to y=-28.5 (6mm separation, only the separation changed from the working 5mm baseline,
+not the absolute board location). Fine mesh, lumped ports, both excited.
+
+$env:RF_TAG="laptop"; $env:PORTTYPE="lumped"
+& "C:\Program Files\KiCad\10.0\bin\python.exe" "RF Analysis\sim\step1_ant3.py" fine probe6mm
+
+Result: near-total reflection, matching the 7mm case (S11 -0.8..-0.0 dB, S22 -0.6..-0.0 dB, S21/S12
+-34.5..-13.6 dB). CONCLUSION: this is a length threshold between 5mm and 6mm, not a location-specific
+defect -- confirmed by changing only separation while holding port 1 at a location already proven
+good. See STATUS.md "Task E prep" section for the full investigation. model.json not committed (same
+geometry pattern as the other ANT3 test sections).

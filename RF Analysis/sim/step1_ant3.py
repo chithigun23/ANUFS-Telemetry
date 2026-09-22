@@ -50,6 +50,10 @@ BOX = (10.0, 20.0, 27.0, 43.0)  # x0, y0, x1, y1
 SECTIONS = {
     "short": ((14.0, 27.0, 22.5, 37.0), (34.5, 29.5)),   # 5 mm
     "long": ((14.0, 26.0, 22.5, 37.0), (35.0, 28.0)),    # 7 mm; ends kept on the inner-plane copper (the SMA clearance holes reach y = 35.8 and 27.5)
+    # Diagnostic (Next-Steps-Sonnet.md Task E prep): isolate length from absolute position. Port 1
+    # held at "short"'s own working y=34.5; port 2 moved out to 6 mm to see if a length threshold
+    # or a location-specific defect explains the 7 mm section's near-total-reflection anomaly.
+    "probe6mm": ((14.0, 26.0, 22.5, 37.0), (34.5, 28.5)),
 }
 TRACE_X = 18.26
 BANDS = {"L5": (1164e6, 1188e6), "L1": (1559e6, 1606e6)}
