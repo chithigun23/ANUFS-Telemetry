@@ -1,0 +1,11 @@
+Laptop, 2026-09-22. Task C step 1: 7 mm ANT3 section (ports on plane copper), fine mesh WITH the Task B
+lumped-port trace-width fix (runner_meshfix.py), both ports excited, lumped ports.
+
+$env:RF_TAG="laptop"; $env:PORTTYPE="lumped"; $env:RUNNER="experiments\runner_meshfix.py"
+& "C:\Program Files\KiCad\10.0\bin\python.exe" "RF Analysis\sim\step1_ant3.py" fine long
+
+Result: 377910 cells, both excitations ended on the energy criterion (no divergence, no power warning).
+Reciprocal (S21 matches S12). But S11 -0.9..-0.0 dB, S21 -35.9..-14.8 dB: still near-total reflection,
+essentially unchanged from the pre-fix run (laptop/step1_long_fixed_fine_lumped). Conclusion: the Task B
+trace-width mesh fix does NOT explain or fix this reflection; its cause is still open. model.json not
+committed (new commit policy).

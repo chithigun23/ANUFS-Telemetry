@@ -1,0 +1,9 @@
+Laptop, 2026-09-22. Task C step 2, first attempt: same 7 mm section as step1_long_fine, trace widened to
+0.60 mm (deliberately wrong Z0), to see if S11 differs clearly from the correct 0.32 mm run.
+
+C:\openEMS\venv\Scripts\python.exe "RF Analysis\sim\experiments\run_variant.py" "RF Analysis\results\laptop\step1_long_fine\model.json" "RF Analysis\results\laptop\taskC_7mm_w060" --trace-width 0.60 --runner-file "runner_meshfix.py"
+
+Result: S11 -0.9..-0.0 dB (0.32mm, correct) -> -0.2..-0.0 dB (0.60mm, wrong): both already saturated near
+total reflection, no clear difference. CONCLUSION: this 7 mm baseline cannot be used to detect a Z0 error,
+because it is already broken (see step1_long_fine/run.txt) for reasons unrelated to trace width. Repeated
+on the known-good 5 mm baseline instead: see taskC_5mm_w032_base and taskC_5mm_w060.

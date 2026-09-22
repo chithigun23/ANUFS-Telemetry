@@ -108,6 +108,35 @@ if it shows up on a model where that explanation doesn't apply.
 **Item 5 (policy):** every run from now on excites all ports and checks reciprocity (|S_ij - S_ji| <= 0.02
 per section 0's validity rule), not just port 1.
 
+## Task C: a validation test that can detect a Z0 error (2026-09-22)
+
+**Step 1: 7 mm fixed-port section with the Task B mesh fix, both ports.** `port_coverage.py` passed
+(both ports on plane copper). Result: **the Task B trace-width fix did not fix the near-total-reflection
+problem** first seen in `laptop/step1_long_fixed_fine_lumped`. S11 -0.9..-0.0 dB, S21 -35.9..-14.8 dB,
+reciprocal, no power warning -- essentially unchanged from before the mesh fix. So that reflection is
+not a mesh-resolution artifact; its real cause is still open, separate from the coarse/medium
+divergence Task B addressed.
+
+**Step 2: deliberately-wrong 0.60 mm trace.** Added `--trace-width` to `run_variant.py` (rescales the
+actual F.Cu trace polygon about the line's own x, not just a label; leaves the surrounding pour where
+it is). On the 7 mm baseline (already saturated near total reflection) it made barely any difference:
+S11 -0.9..-0.0 -> -0.2..-0.0 dB. **The 7 mm test cannot detect a Z0 error, as the brief anticipated it
+might not.** Re-ran on the known-good 5 mm baseline instead (both ports, which needed a new
+`--excite-all` flag -- the saved model.json had `excite: [1]` from its original single-port run):
+S11 went from -38.0..-23.1 dB (0.32 mm, correct) to -0.2..-0.0 dB (0.60 mm, wrong) -- an enormous,
+unambiguous change. **The technique clearly works on a well-behaved baseline.** Note: 0.60 mm may put
+the trace edge close enough to the ground pour to be an extreme case rather than a moderate Z0 shift;
+a smaller perturbation (e.g. 0.40 mm) would show a more proportionate change if wanted later.
+
+**Step 3: eps_eff from S21 phase vs Task A.** New `sim/experiments/eps_eff_from_phase.py`. On the 5 mm
+baseline: eps_eff = 3.79 (L1/L5), against Task A's ANT3 FD-solve figure of 3.17 -- about 20% apart,
+outside the 5% bar. Z0 from S11 (50*(1+S11)/(1-S11)) agrees better: 48.6 ohm against Task A's 53.9 ohm,
+about 10% apart, still outside 5%. Likely reasons, not yet confirmed: Task A's 2D solve only modelled
+the top dielectric layer down to In1.Cu, ignoring the rest of the real stack (In2.Cu, B.Cu); and a
+lumped port has no explicit de-embedded reference plane the way an msl port does, so the phase-based
+extraction's assumed 5.0 mm port-to-port length may not be the true electrical length. **Cross-check is
+in the right ballpark but does not meet the stated 5% agreement bar; flagged, not resolved.**
+
 ## Task list
 
 | Task | Status |
@@ -115,6 +144,6 @@ per section 0's validity rule), not just port 1.
 | 1. Clean up existing results | Done 2026-09-22 |
 | A. Valid line impedance, no FDTD | Done 2026-09-22 — Z0 too high (54-56 ohm), needs a wider trace or thinner dielectric; user to decide |
 | B. Fix the FDTD mesh before any new board run | Done 2026-09-22 — lumped-port trace-width fix built and verified (mesh only, not yet solved); z/open-air ratio jump identified but not fixed |
-| C. A validation test that can detect a Z0 error | Not started |
+| C. A validation test that can detect a Z0 error | Done 2026-09-22 — works on the 5mm baseline, not on the still-broken 7mm one; eps_eff/Z0 cross-check with Task A misses the 5% bar (~10-20% off), flagged |
 | D. Circuit model of each chain | Not started |
 | E. One confirming 3D run | Not started |

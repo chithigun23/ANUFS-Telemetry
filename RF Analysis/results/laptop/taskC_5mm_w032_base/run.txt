@@ -1,0 +1,12 @@
+Laptop, 2026-09-22. Task C step 2, control: the known-good 5 mm ANT3 model (desktop/step1_short_fine_lumped),
+rerun with BOTH ports excited (the saved model.json had settings.excite=[1] from its original single-port
+run) so reciprocity can be checked, and through runner_meshfix.py for consistency with the other Task C runs.
+
+C:\openEMS\venv\Scripts\python.exe "RF Analysis\sim\experiments\run_variant.py" "RF Analysis\results\_keep\desktop\step1_short_fine_lumped\model.json" "RF Analysis\results\laptop\taskC_5mm_w032_base" --runner-file "runner_meshfix.py" --excite-all
+
+Result: S11 -38.0..-23.1 dB, S21 -0.1..-0.0 dB, S12 matches S21, S22 -38.8..-23.6 dB. Clean, reciprocal,
+low-loss -- confirms the original port-1-only result and adds the reciprocity check it lacked. This is
+the baseline for the trace-width sensitivity test in taskC_5mm_w060, and for the eps_eff-from-phase
+cross-check against Task A (eps_eff_from_phase.py: 3.79 vs Task A's 3.17 for ANT3, ~20% apart, and
+Z0-from-S11 48.6 ohm vs Task A's 53.9 ohm, ~10% apart -- both outside the 5% agreement bar, flagged
+in STATUS.md, not resolved). model.json not committed (same geometry as the desktop run).
