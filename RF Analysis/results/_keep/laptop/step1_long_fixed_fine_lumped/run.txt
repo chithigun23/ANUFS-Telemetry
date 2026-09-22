@@ -1,0 +1,18 @@
+Laptop, 2026-09-22. 7 mm ANT3 section (step1_ant3.py mode "long", ports moved off the SMA clearance cutouts onto
+the ground-plane copper), fine mesh, lumped ports, both ports excited.
+
+$env:RF_TAG = "laptop"; $env:PORTTYPE = "lumped"; $env:SUFFIX = "_lumped"
+& "C:\Program Files\KiCad\10.0\bin\python.exe" "RF Analysis\sim\step1_ant3.py" fine long
+
+(Run under the section name "long_fixed" before the desktop's fix to "long" itself was pulled; same geometry.)
+
+Result: 348,840 cells, dt 6.583e-14 s. Both excitations ended on the -40 dB energy criterion (about 34,000 and
+33,000 steps), not the step cap, not divergence. No "gives out more power than it takes in" warning.
+Passivity: col1 max |S|^2 0.997, col2 max 0.999 (both < 1.01). Reciprocity: max|S21-S12| = 0.0003 (< 0.02).
+So this run is VALID by the stated criteria.
+
+But S11 is close to 0 dB (-0.9 to -0.0 dB) and S21 is -14.9 to -36.0 dB across 0.5-3 GHz: most of the signal is
+reflected. Fixing the port position removed the divergence but not this near-total-reflection behaviour, which
+matches what the desktop found independently on its ANT1 4-port rerun after the same pad fix (S11 -0.8 to -0.0 dB
+there too). Likely a lumped-port artifact on this geometry, not yet explained. model.json not committed
+(new commit policy commits *.s2p/s4p, summary.csv, solver*.log, run.txt only).

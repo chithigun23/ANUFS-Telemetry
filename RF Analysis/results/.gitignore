@@ -1,6 +1,11 @@
-# Large solver output stays local; the small result files (.s2p, summary.csv, solver logs, model.json, lines.json) are committed.
+# Large solver output stays local. Per Next-Steps-Sonnet.md section 0, only *.s2p/*.s4p, summary.csv,
+# solver*.log and run.txt are committed for a run.
 **/exc*/
 **/*.kicad_pcb
 **/farfield_*.json
+**/model.json
+**/lines.json
+# A model.json or lines.json already committed under results/_keep/ before this rule predates it and stays
+# tracked (this ignore only stops NEW ones from being added); it was force-added, see git log.
 # The repository root ignores *.log; solver logs are small and are the evidence for each run, so keep them.
 !**/solver*.log
