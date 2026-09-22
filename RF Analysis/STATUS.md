@@ -203,16 +203,44 @@ near-total reflection beyond about 5 mm (Task C step 1 finding), since the ANT1 
   y=-34.5, port 2 moved out to y=-28.5, i.e. only the SEPARATION changed, not the absolute location).
   Result: **also near-total reflection** (S11 -0.8..-0.0 dB, S22 -0.6..-0.0 dB), matching the 7 mm case.
 
-**Conclusion: there is a length threshold between 5 mm and 6 mm** where openEMS's lumped port (a
+**Conclusion so far: there is a length threshold between 5 mm and 6 mm** where openEMS's lumped port (a
 built-in `AddLumpedPort` z-directed vertical probe, not something the plugin authors wrote) stops
-giving valid S-parameters on this stack-up, independent of exact board location. The precise
-breakpoint (5.1-5.9 mm) and the underlying EM cause are not found; that would need field-dump
-visualization (AppCSXCAD/ParaView on the `.h5` dumps), a materially larger step than this session's
-port-file-level investigation. **This directly affects Task E**: the full ANT1 chain (~28 mm,
-lumped ports throughout) is far past this threshold and would very likely reproduce the same defect,
-making a straight rerun of the existing plan low-value until either (a) the threshold's cause is
-understood and fixed, or (b) msl/cpw ports are made to work at the fine mesh (they currently fail even
-there on this stack-up, section on Task C step 1 above) as a length-independent alternative.
+giving valid S-parameters on this stack-up, independent of exact board location.
+
+**Field-dump visualization found the likely mechanism.** Plotted the frequency-domain E-field
+magnitude on the substrate mid-plane (`Ef.h5`, port 1 excitation) for both the working 5 mm case and
+the broken 6 mm `probe6mm` case, log-scale, same colour range, port positions marked:
+- **5 mm (good):** the field is tightly confined to a narrow bright stripe running exactly along the
+  trace between the two ports -- a properly guided transmission-line mode.
+- **6 mm (broken):** the field instead floods a large fraction of the surrounding ground-pour copper
+  at near-uniform high intensity, not confined to the trace at all.
+
+This is consistent with the lumped ports exciting a **parasitic cavity/common-mode resonance in the
+surrounding ground-pour copper**, rather than coupling only to the intended local guided mode. A
+lumped port is broadband and not mode-selective (unlike an msl/cpw port, which explicitly restricts
+itself to the trace's local field via its measurement-line construction), so if the local ground-pour
+geometry happens to support a resonance somewhere in the 0.5-3 GHz excitation content, energy can go
+into that cavity mode instead of the line. Resonances are sharply geometry/frequency-dependent, which
+would explain why this looks like a sharp threshold (5 vs 6 mm) rather than a gradual degradation:
+moving the port by 1 mm changes how strongly it couples to the same nearby resonant structure.
+Port 1 is IDENTICAL between the 5 mm and 6 mm/`probe6mm` cases (same y = -34.5), so this is not a
+property of port 1's location alone -- the resonance depends on the pair's configuration (separation
+and/or port 2's specific position) exciting a shared board-level mode.
+
+**This is a plausible, evidence-backed mechanism, not a confirmed diagnosis.** Not yet checked: which
+specific copper feature (a nearby via cluster, a keepout boundary, the pour's own extent) sets the
+resonant cavity's dimensions, and whether the effect is truly a resonance (would show a narrow band in
+frequency) or something broader-band. That would need a frequency sweep of the field dump or an
+eigenmode-style check, not attempted here.
+
+**This directly affects Task E**: the full ANT1 chain (~28 mm, lumped ports throughout, a large real
+ground-pour area) is far past this threshold and sits in a much bigger, more complex copper environment
+than this test line -- if the mechanism above is right, it is very likely to also couple into a cavity
+mode and reproduce the same defect. A straight rerun of the existing plan is low-value until either
+(a) the resonance is understood well enough to suppress or design around, or (b) msl/cpw ports are
+made to work at the fine mesh (they currently fail differently -- a hard power-conservation violation,
+not this flooding pattern -- on this stack-up; see Task C step 1) as a mode-selective alternative that
+should reject this cavity coupling by construction, though that is not yet demonstrated.
 
 ## Task list
 
