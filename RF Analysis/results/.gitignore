@@ -2,3 +2,5 @@
 **/exc*/
 **/*.kicad_pcb
 **/farfield_*.json
+# The repository root ignores *.log; solver logs are small and are the evidence for each run, so keep them.
+!**/solver*.log
