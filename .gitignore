@@ -6,3 +6,5 @@ kleplace.log
 *.bak
 *.bak-*
 *.inspect.ndjson
+__pycache__/
+*.pyc
