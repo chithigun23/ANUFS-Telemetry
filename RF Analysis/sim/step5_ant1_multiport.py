@@ -138,6 +138,13 @@ def main(mesh="coarse", excite=None):
     # these parts are dropped from the lumped-element list (the pad copper stays).
     empty = {"C28", "C29"}
     model["lumped_elements"] = [e for e in model.get("lumped_elements", []) if e["ref"] not in empty]
+    # Task E item 1 (Next-Steps-Sonnet.md section 6): put D4 (the TVS) into the 3D model as a 0.05 pF
+    # cap instead of leaving it open. D4CAP_PF opts in (default: unchanged, left open as before).
+    if os.environ.get("D4CAP_PF"):
+        for e in model["lumped_elements"]:
+            if e["ref"] == "D4":
+                e["type"] = "C"
+                e["value"] = float(os.environ["D4CAP_PF"]) * 1e-12
     settings = {
         "f_start": 0.5e9, "f_stop": 3.0e9, "z0": 50.0, "margin_mm": margin,
         "mesh": mesh, "n_freq": 251, "max_timesteps": 300000,
@@ -145,6 +152,10 @@ def main(mesh="coarse", excite=None):
     }
     if excite:
         settings["excite"] = [int(x) for x in excite.split(",")]
+    if os.environ.get("ENDCRIT"):
+        settings["end_criteria"] = float(os.environ["ENDCRIT"])
+    if os.environ.get("MAXSTEPS"):
+        settings["max_timesteps"] = int(os.environ["MAXSTEPS"])
     model["settings"] = settings
     model_path = os.path.join(outdir, "model.json")
     with open(model_path, "w") as fh:
@@ -155,7 +166,8 @@ def main(mesh="coarse", excite=None):
         print("DRY run: model written, solver not started")
         return
 
-    runner = os.path.join(PLUGINS, "runner.py")
+    runner = (os.path.join(HERE, os.environ["RUNNER"]) if os.environ.get("RUNNER")
+              else os.path.join(PLUGINS, "runner.py"))
     solver_py = solverenv.solver_python() or sys.executable
     tag = (excite or "all").replace(",", "")
     with open(os.path.join(outdir, "solver_%s.log" % tag), "w") as log:
