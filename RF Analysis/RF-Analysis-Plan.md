@@ -211,7 +211,10 @@ only, and record the result.
 - Coarse meshes under-read impedance; a finer mesh raises run time.
 - The simulation cannot model the 5 m antenna cable or the antenna's LNA output impedance. It tells us
   about the board only.
-- Open: are `C28`/`C29`/`C49`/`C50` meant to be populated, and is ANT3 a calibration coupon?
+- ~~Open: are `C28`/`C29`/`C49`/`C50` meant to be populated~~ — resolved 2026-09-22: intentionally empty
+  (a tuning allowance, not meant to be populated for this board rev). Step 4 and H4 correctly model
+  them as open.
+- Open: is ANT3 a calibration coupon? (unresolved)
 
 ## 9. Results log
 
