@@ -163,3 +163,32 @@ Next: the 7 mm section line-impedance test (already planned, section 3 item 5) w
 microstrip ports are valid at the fine mesh now that the coarse-mesh instability is understood. If they are,
 ANT1 should be rerun with `PORTTYPE=msl` (already wired into `step5_ant1_multiport.py`): ports 1 and 2 as
 microstrip, ports 3 and 4 staying lumped. Not run yet.
+
+
+## 8. Update from the desktop session, 10:56 — microstrip ports also invalid at the fine mesh
+
+`results/desktop/step1_long_fine_msl`: the 7 mm section, fine mesh (789,480 cells), microstrip ports at both
+ends, both excited. Result is NOT valid:
+- port 1 line: Z0 = 56.3-157.9j ohm, eps_eff = 991.8 (should be about 3.3)
+- port 2 line: Z0 = 66.9+13.0j ohm, eps_eff = 213.6
+- "port 2 gives out more power than it takes in" (max sum|S|^2 = 1.50)
+- S21 -24 to -27 dB in the GNSS bands (should be close to 0 dB for a bare line)
+
+So the fine mesh fixes the LATE-TIME DIVERGENCE (confirmed stable, no NaN), but microstrip ports on this board's
+geometry still give physically impossible numbers, a different and separate problem from the divergence. No
+vias sit within 2 mm of either port, so that is not the cause. This is on the SAME 7 mm section whose lumped
+ports (in the ANT1 job's ports 1/2, section 7) gave near-total reflection. So both port types are currently
+unusable for the trace-end ports on this board, while lumped ports on a genuine component pad (L2, ANT1
+ports 3/4) look plausible.
+
+Two working openEMS results exist so far: the 5 mm bare line with lumped ports (`step1_short_fine_lumped`,
+passive and sensible but only one excitation) and the plugin's own validation boards. Nothing on the real ANT1
+or ANT3 geometry with a trace-end port has yet produced a trustworthy S-parameter result.
+
+**Recommendation (not decided by the user yet): pause further blind parameter sweeps on this.** The next useful
+step is probably a visual check of the port geometry (AppCSXCAD, `C:\openEMS\AppCSXCAD.exe`, opening a
+`.xml` dump if the runner can produce one, or the KiCad-RFsim GUI directly in the PCB editor) rather than more
+automated trial and error, since two very different port formulations both fail in different ways on the same
+geometry. For the line impedance specifically, KiCad's own transmission-line calculator or JLCPCB's impedance
+calculator (using the real pour clearance) is a faster, lower-risk way to get a usable number while this is
+investigated (see `RF-Analysis-Plan.md` section 2.2, which already flags this as a fallback).
