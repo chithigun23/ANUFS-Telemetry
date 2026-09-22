@@ -1,0 +1,10 @@
+Laptop, 2026-09-22. Task C step 2, the actual sensitivity test: same 5 mm model as taskC_5mm_w032_base,
+trace widened to 0.60 mm (deliberately wrong Z0), both ports excited.
+
+C:\openEMS\venv\Scripts\python.exe "RF Analysis\sim\experiments\run_variant.py" "RF Analysis\results\_keep\desktop\step1_short_fine_lumped\model.json" "RF Analysis\results\laptop\taskC_5mm_w060" --trace-width 0.60 --runner-file "runner_meshfix.py" --excite-all
+
+Result: S11 -38.0..-23.1 dB (0.32mm, correct) -> -0.2..-0.0 dB (0.60mm, wrong): an enormous, unambiguous
+change. CONCLUSION: on a well-behaved baseline the technique clearly detects a Z0 error. Caveat: doubling
+the trace width this much may bring its edge close to the ground pour (an extreme case), rather than a
+moderate Z0 shift; a smaller width change (e.g. 0.40mm) would show a more proportionate S11 move if a
+graded sensitivity curve is wanted later. model.json not committed (same reason as the sibling runs).
