@@ -179,6 +179,41 @@ this is a circuit model with assumed/ideal parts and approximate lengths, not a 
 (connector launch) and H8 (RF-to-bias isolation) need the SMA and port-4 models this script doesn't
 build; left for Task E. Results: `results/chain_model/ant1_chain.s2p`, `ant2_chain.s2p`.
 
+## Task E prep: investigating the near-total-reflection cause before the ANT1 4-port run (2026-09-22)
+
+Before spending the compute on Task E's ANT1 4-port confirming run, investigated why lumped ports give
+near-total reflection beyond about 5 mm (Task C step 1 finding), since the ANT1 chain is far longer
+(~28 mm end to end per Task D) and Task B's mesh fix did not touch this.
+
+**Ruled out:**
+- **A stray via shorting the trace.** Checked `model["vias"]` against the 7 mm section's trace path
+  (x 17.5-19.0, y -36 to -27): none present.
+- **The port-1/port-2 peak-voltage coincident timing being anomalous.** Both the working 5 mm case and
+  the broken 7 mm case show port 1 and port 2 peaking at the identical instant. That's expected for an
+  electrically short line (7 mm is about 6% of a wavelength at 1.5 GHz in this dielectric) and is not
+  evidence of a bug.
+- **A pure S-parameter post-processing/DFT artifact.** The raw time-domain peak voltage at port 2, during
+  port 1's excitation, is genuinely only about 34% of port 1's own peak in the 7 mm case (5 mm case:
+  about 102%). The defect is in the fields/ports themselves, not only in how S-parameters are extracted
+  from them afterward.
+- **A location-specific defect at the 7 mm section's particular coordinates.** Both ports individually
+  show high reflection at their OWN S11/S22 (not just poor S21 between them), which already pointed at a
+  local port-calibration problem rather than "signal lost in transit". Confirmed with a clean isolation
+  test: `step1_ant3.py fine probe6mm` (a new SECTIONS entry, port 1 held at the known-good 5 mm location
+  y=-34.5, port 2 moved out to y=-28.5, i.e. only the SEPARATION changed, not the absolute location).
+  Result: **also near-total reflection** (S11 -0.8..-0.0 dB, S22 -0.6..-0.0 dB), matching the 7 mm case.
+
+**Conclusion: there is a length threshold between 5 mm and 6 mm** where openEMS's lumped port (a
+built-in `AddLumpedPort` z-directed vertical probe, not something the plugin authors wrote) stops
+giving valid S-parameters on this stack-up, independent of exact board location. The precise
+breakpoint (5.1-5.9 mm) and the underlying EM cause are not found; that would need field-dump
+visualization (AppCSXCAD/ParaView on the `.h5` dumps), a materially larger step than this session's
+port-file-level investigation. **This directly affects Task E**: the full ANT1 chain (~28 mm,
+lumped ports throughout) is far past this threshold and would very likely reproduce the same defect,
+making a straight rerun of the existing plan low-value until either (a) the threshold's cause is
+understood and fixed, or (b) msl/cpw ports are made to work at the fine mesh (they currently fail even
+there on this stack-up, section on Task C step 1 above) as a length-independent alternative.
+
 ## Task list
 
 | Task | Status |
