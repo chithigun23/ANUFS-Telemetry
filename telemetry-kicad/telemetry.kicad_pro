@@ -519,7 +519,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 0,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.32,
+        "track_width": 0.36,
         "tuning_profile": ""
       }
     ],
@@ -544,6 +544,10 @@
       {
         "netclass": "ANT",
         "pattern": "RF_IN_2"
+      },
+      {
+        "netclass": "ANT",
+        "pattern": "ANT3"
       }
     ]
   },
