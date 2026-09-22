@@ -1,0 +1,11 @@
+Laptop, 2026-09-22. Same model as results/desktop/step1_short_fine_lumped/model.json (5 mm ANT3 bare line, fine mesh,
+lumped ports), with the early stop disabled and the step cap raised, to test whether the fine mesh stays stable
+after the point where the coarse and medium runs blew up.
+
+C:\openEMS\venv\Scripts\python.exe "RF Analysis\sim\experiments\run_variant.py" "RF Analysis\results\desktop\step1_short_fine_lumped\model.json" "RF Analysis\results\laptop\step1_short_fine_lumped_long" --endcrit 1e-12 --maxsteps 120000
+
+Result: 325,941 cells, dt 6.586e-14 s, 120,000 steps (7.9 ns), 14 min 8 s at 46 MCells/s. Energy decays monotonically
+from the end of the excitation (2.29 ns) to -85.1 dB at 7.9 ns; no growth. No power warning. S11 -36.2..-21.2 dB,
+S21 -0.08..-0.04 dB over 0.5-3 GHz; max sum |S|^2 = 0.9921. Max difference from the early-stopped desktop run:
+|S11| 0.0003, |S21| 0.0014. model.json is not committed (identical geometry to the desktop run, only the
+settings differ).

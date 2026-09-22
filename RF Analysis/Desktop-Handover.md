@@ -12,10 +12,12 @@ Anything marked "not verified" is a claim or a guess, and is labelled as such.
 
 ## 1. What to trust
 
-**Valid board data (one result).** 5 mm bare ANT3 line, fine mesh (1.165 mm), lumped ports:
-`results/desktop/step1_short_fine_lumped/`. S11 -28.8 dB (L5) and -26.4 dB (L1); S21 -0.04 and -0.05 dB;
-max |S11|^2+|S21|^2 = 0.992 (passive). Only port 1 was excited, so reciprocity is unchecked. It is not a Z0
-measurement (lumped ports do not extract one).
+**Valid board data (one geometry, reproduced on both machines).** 5 mm bare ANT3 line, fine mesh (1.165 mm),
+lumped ports: `results/desktop/step1_short_fine_lumped/` and the laptop's long rerun of the same model,
+`results/laptop/step1_short_fine_lumped_long/`. S11 -28.8 dB (L5) and -26.4 dB (L1); S21 -0.04 and -0.05 dB;
+max |S11|^2+|S21|^2 = 0.992 (passive). The long rerun (early stop off, 7.9 ns) agrees with the desktop run to
+0.0003 in |S11| and 0.0014 in |S21|, and its energy decays monotonically to -85 dB, so this result is stable.
+Only port 1 was excited, so reciprocity is unchecked. It is not a Z0 measurement (lumped ports do not extract one).
 
 **Toolchain validation (evidence the tools work, not board data).** All stable, passive, sensible:
 `laptop/validation_msl_1_6`, `laptop/validation_msl_0p5_6`, `desktop/validation_msl_medium_0p5_3`,
@@ -55,20 +57,24 @@ Suggested fix (you own `step1_ant3.py`; this is a suggestion, not something the 
 (a 7 mm section, ports 0.75 mm and 0.5 mm inside the plane), and check the new model with `port_coverage.py`
 before running it.
 
-### 2.2 The fine-mesh runs stop early, so "the fine mesh is stable" is not yet proven (verified)
-`step1_short_fine_lumped` ended at 31,600 steps (about 2.1 ns) on the default -40 dB energy criterion. The coarse
-and medium runs only started growing between about 1.3 and 2.5 ns and were huge by 4 ns. So the fine run stopped
-before the point where an instability would have shown. The S-parameters are passive and sensible, which is good
-evidence, but not proof. The laptop is running the same fine 5 mm model with the early stop off (`--endcrit 1e-12`,
-cap 120,000 steps, about 7.9 ns): `results/laptop/step1_short_fine_lumped_long/`. At the time of writing the
-energy was at -72 dB at 4.45 ns and still falling. Its final result is in the commit history after this file; if
-that run stays stable to the end, the default early stop is acceptable for fine-mesh runs.
+### 2.2 The fine mesh is stable on the 5 mm model (verified); it is not yet checked on the other fine models
+`step1_short_fine_lumped` ended at 31,600 steps (about 2.1 ns) on the default -40 dB energy criterion, before the
+point where the coarse and medium runs started growing (between about 1.3 and 2.5 ns). So that run alone could
+not show whether the fine mesh is stable. The laptop reran the same model with the early stop off
+(`--endcrit 1e-12`, cap 120,000 steps, 7.9 ns): `results/laptop/step1_short_fine_lumped_long/`. The energy decays
+monotonically from the end of the excitation to -85.1 dB, with no growth in any of the 94 progress lines after
+step 60,000, no power warning, and S-parameters that match the early-stopped run to 0.0003 (|S11|) and 0.0014
+(|S21|). So for the 5 mm model the fine mesh is stable and the early-stopped result was not contaminated.
 
-The desktop session reported that the coarse preset is the root cause and the fine preset is stable (not verified
-by the laptop). The laptop's medium result agrees that the medium preset is not enough on our stack-up
-(26.2 e-folds per ns of energy growth, the same rate as the coarse lumped runs), whereas the plugin's own
-validation board is stable at a 2.355 mm cell. So the trigger is a property of our stack-up plus cell size, not the
-cell size alone. That is untested and unexplained.
+Not yet checked: the fine mesh on the ANT1 model (about 700,000 cells, different layout, more parts) and on the
+9.5 mm section once its ports are fixed. For ANT1, run port 1 once with `--endcrit 1e-12` and a cap that covers
+at least 6 ns of simulated time before trusting the default early stop there.
+
+The desktop session reported that the coarse preset is the root cause. The laptop's medium result agrees that the
+medium preset is not enough on our stack-up (26.2 e-folds per ns of energy growth, the same rate as the coarse
+lumped runs), whereas the plugin's own validation board is stable at a 2.355 mm cell. So the trigger is a property
+of our stack-up plus cell size, not the cell size alone, and why the coarse and medium presets diverge is still
+unexplained. It only needs explaining if a fine-mesh run turns out not to be stable.
 
 ### 2.3 ANT1 (`step5_ant1_multiport.py`)
 - Empty pads C28 and C29: dropped from the lumped list in the current script (the plugin turns a value of 0 into a
@@ -89,8 +95,9 @@ plan Step 1 (true line impedance including the coplanar pour, hypothesis H5) is 
 
 ## 3. What to run, in order
 1. Run `port_coverage.py` on every model.json before spending solver time on it. Do not run a model that fails it.
-2. Finish the fine-mesh stability check (the laptop is doing the 5 mm one). For the ANT1 job, if the laptop check
-   passes, the default early stop is acceptable; if it does not, run ANT1 port 1 with `--endcrit 1e-12`.
+2. Fine-mesh stability: done for the 5 mm model (section 2.2). For the ANT1 model run port 1 once with
+   `--endcrit 1e-12` and a cap of at least 6 ns, and if it stays stable the default early stop is acceptable for
+   the other ports.
 3. 9.5 mm section with the ports moved onto the plane (section 2.1), fine mesh, both ports excited so reciprocity
    can be checked.
 4. ANT1 4-port at the fine mesh with the fixed script (you are already doing this). Excite all four ports.
