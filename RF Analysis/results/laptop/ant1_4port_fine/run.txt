@@ -1,0 +1,50 @@
+Laptop, 2026-09-22. Task E stability check: does an msl/cpw port on the ACTUAL ANT1 4-port chain
+avoid the parasitic cavity-resonance failure found on lumped ports (see step1_probe6mm_fine/run.txt,
+STATUS.md "Task E prep")? Per user direction, this follows the field-heatmap finding: option 1 of
+(1) try msl/cpw ports on the real chain, (2) run Task E with lumped ports anyway, (3) stop and flag
+the gap.
+
+Command (killed before completion, see below):
+$env:RF_TAG="laptop"; $env:PORTTYPE="msl"; $env:D4CAP_PF="0.05"
+$env:RUNNER="experiments\runner_meshfix.py"; $env:ENDCRIT="1e-12"; $env:MAXSTEPS="150000"
+& "C:\Program Files\KiCad\10.0\bin\python.exe" "RF Analysis\sim\step5_ant1_multiport.py" fine 1
+
+Setup: ports 1 and 2 (the ANT1 trace test pad and U10's RF_IN pad) as msl ports; ports 3 and 4
+(L2's pads, not a wave-guided line) stay lumped, as the script already handles. D4 (TVS) modeled
+as 0.05 pF via the new D4CAP_PF env var. Task B mesh fix applied via RUNNER=runner_meshfix.py.
+Fine mesh: 3,034,250 cells (vs 708,875 for the earlier lumped-only ANT1 model -- the msl port's
+trace-width mesh grading is much finer). Timestep 2.96447e-14 s. Excitation length 77,311 steps
+(2.29 ns) for port 1 only.
+
+Result: FAILS, for a different reason than lumped ports. Energy decayed cleanly to -17.35 dB by
+step 54795 (32m22s, ~40% through the excitation), then reversed and grew back up, reaching 0 dB
+(same order as the injected pulse) by step 64630 -- while the excitation pulse was still being
+injected, so that alone isn't conclusive. But growth continued smoothly (~2.5x every ~1400 steps,
+no ripple, no plateau) straight through the excitation's end at step 77,311 and for another ~2800
+steps after it ended (step 80085: energy 3.5e-10, still climbing at the same rate, no sign of
+turning over). Energy grew ~6 orders of magnitude from the step-53390 minimum to the point the run
+was killed. This is smooth exponential growth continuing well after the drive turns off -- the
+signature of a genuine unstable/diverging mode, not of normal Gaussian-pulse energy deposition.
+No power-conservation-violation warning had fired yet (would likely follow if left running to
+completion) and no NaN/Inf appeared in the log before it was killed.
+
+Killed manually (TaskStop on task boyems4ue, monitor task b00hztzn3) at step ~80085 (50m41s
+elapsed) to save compute once the post-excitation growth trend was unambiguous. No .s4p was
+produced (run never reached completion). model.json and ant1_cropped.kicad_pcb are present in
+this folder but NOT committed (matches the existing model.json/lines.json exclusion in
+results/.gitignore). solver_1.log is kept (small, diagnostic).
+
+CONCLUSION: msl/cpw ports on ports 1/2 of the real ANT1 chain do not avoid the instability seen
+with all-lumped ports -- they fail too, via slow exponential growth rather than the earlier
+7mm-bare-line msl test's hard power-conservation violation, and rather than the lumped-port
+cavity-resonance signature (near-total broadband reflection, but numerically stable). This is a
+third, distinct failure mode. Plausible causes (not investigated further, given time spent):
+the msl port's assumed quasi-TEM mode/impedance reference may be a poor match to this specific
+board section (curved/tapered trace geometry near U10's pad, ground pour proximity), the port's
+wave-separation de-embedding depends on a calibration line assumption that may not hold this
+close to the LNA pad discontinuity, or the same underlying ground-pour cavity mode is still being
+excited (just more slowly, since the msl port couples less broadband energy into it than the
+lumped port did). None of these were narrowed down further.
+
+Per the user's decision after option 1 failed: see STATUS.md "Task E" section and the message
+sent alongside this run for the next-step recommendation.

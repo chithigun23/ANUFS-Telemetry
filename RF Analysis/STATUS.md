@@ -242,6 +242,33 @@ made to work at the fine mesh (they currently fail differently -- a hard power-c
 not this flooding pattern -- on this stack-up; see Task C step 1) as a mode-selective alternative that
 should reject this cavity coupling by construction, though that is not yet demonstrated.
 
+## Task E: msl/cpw ports on the real ANT1 chain also fail (2026-09-22)
+
+Per user direction, tried msl ports on ports 1/2 of the real ANT1 4-port model (port 3/4 stay
+lumped — L2's pads aren't a wave-guided line) as a mode-selective alternative that should reject
+the cavity coupling above by construction. D4 modeled as 0.05 pF, Task B mesh fix applied,
+`ENDCRIT=1e-12`/`MAXSTEPS=150000` to catch slow divergence that the plugin's default 1e-4
+end-criteria would mask. Port 1 only (stability check before spending 4x the compute on all 4).
+
+**Result: fails too, a third distinct failure mode.** Energy decayed cleanly to -17.35 dB by 40%
+through the excitation pulse, then reversed and grew back smoothly (~2.5x every ~1400 steps, no
+ripple) straight through the excitation's end (step 77,311) and for ~2800 steps after, with no
+sign of turning over — six orders of magnitude of growth from the trough by the time it was
+killed. This is the signature of genuine exponential divergence continuing after the drive turns
+off, not normal pulse energy deposition. Full details and log excerpts:
+`results/laptop/ant1_4port_fine/run.txt`. Run was killed manually to save compute; no `.s4p`
+produced; `model.json`/`ant1_cropped.kicad_pcb` present but not committed (matches the
+`model.json` exclusion in `results/.gitignore`); `solver_1.log` kept.
+
+So: lumped ports fail with near-total broadband reflection (numerically stable, likely a cavity
+resonance); msl ports on the short 7mm bare line fail with a hard power-conservation violation;
+msl ports on the real ANT1 chain fail with slow exponential divergence. Three different symptoms
+from what may or may not be a common root cause. Not narrowed down further given time already
+spent (candidate causes noted in run.txt: mode-mismatch at the port's calibration reference,
+proximity to the U10 pad discontinuity, or the same ground-pour cavity mode being excited more
+slowly). **Task E's 3D confirming run has no working port configuration on this stack-up at the
+fine mesh.**
+
 ## Task list
 
 | Task | Status |
@@ -251,5 +278,4 @@ should reject this cavity coupling by construction, though that is not yet demon
 | B. Fix the FDTD mesh before any new board run | Done 2026-09-22 — lumped-port trace-width fix built and verified (mesh only, not yet solved); z/open-air ratio jump identified but not fixed |
 | C. A validation test that can detect a Z0 error | Done 2026-09-22 — works on the 5mm baseline, not on the still-broken 7mm one; eps_eff/Z0 cross-check with Task A misses the 5% bar (~10-20% off), flagged |
 | D. Circuit model of each chain | Done 2026-09-22 — both chains pass comfortably (ideal components, vendor files not obtained); pad capacitance is the sensitive parasitic |
-| D. Circuit model of each chain | Not started |
-| E. One confirming 3D run | Not started |
+| E. One confirming 3D run | Blocked 2026-09-22 — no port type gives a valid/stable result on this stack-up (lumped: cavity resonance; msl: divergence); flagged to user for direction |
