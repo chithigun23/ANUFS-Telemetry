@@ -60,13 +60,61 @@ would be the smallest layout change to try. **This has not been changed on the b
 Caveat: 6-9 of ~35-43 sample points per line found no In1.Cu copper directly under the trace (component pads
 or via clearances). The Z0 above assumes typical coverage; it is not the value exactly at those points.
 
+## Task B: fix the FDTD mesh before any new board run (2026-09-22)
+
+`sim/experiments/mesh_check.py` reuses the plugin's own mesh-building code (`runner._port_geometry`,
+`runner._mesh`, `SmoothMeshLines`) so it reports the exact mesh a real run would use.
+
+**Item 2 hypothesis (neighbour-cell ratio above ~2 causes the divergence): partly confirmed, not clean-cut.**
+Compared the valid fine mesh (`_keep/desktop/step1_short_fine_lumped`) against the same 5 mm model
+regenerated at the coarse preset (which always diverged when actually run):
+
+| Axis | Fine (stable) worst ratio | Coarse (diverges) worst ratio |
+|---|---|---|
+| x | 4.4x | 15.0x |
+| y | 9.6x | 20.3x |
+| z | 4.6x | **36.0x** |
+
+A flat "> 2" threshold doesn't separate them (the stable fine mesh already reaches 9.6x), but coarse is
+consistently 2-8x worse than fine in every axis, worst in z. Both worst-z jumps sit at the same
+z = 1.591 mm, just above the top copper layer, where a tiny anchor-forced cell (0.053 mm, from a
+via/port snap) sits directly next to the open-air cell sized by the mesh preset (0.24 mm fine, 1.89 mm
+coarse). That specific transition is the leading suspect; not fixed in this pass (see below).
+
+**Separate, independent defect found: lumped ports get no trace-width mesh refinement at all.**
+`runner.py`'s `_mesh()` only grades the mesh across the strip for `"msl"`/`"cpw"`/`"stripline"` ports
+(see its comment: "before, only the CPW branch existed"). Every run in this project uses `"lumped"`
+ports, which fall through with none of that grading — measured with `mesh_check.py`: only **2 cells**
+across the 0.32 mm trace, at both the coarse and the fine preset.
+
+`sim/experiments/runner_meshfix.py` (a monkey-patched copy, plugin itself untouched) generalises that
+same grading to lumped ports: raises the trace-width cell count from 2 to 4 on both the valid fine
+model and the diverging coarse model, verified with `mesh_check.py`, without introducing new bad
+ratios elsewhere. Getting this right took two failed attempts, documented in the file: a naive
+insertion first created a new 26x ratio pathology (a candidate line landed 6 um from an unrelated
+anchor); the fix merges a candidate into a nearby existing line instead of rejecting or duplicating it,
+sized relative to the target cell for that port, not to a fixed fraction of the FDTD resolution.
+This variant does **not** touch the z/open-air ratio jump above; if a solve with it still diverges,
+that jump is the next thing to fix.
+
+**Item 4 (`Unused primitive (LinPoly)` in `cu_*`, `(Cylinder)` in `vias`): harmless in the cases checked.**
+Both warnings, on all four copper layers and on vias, appear in the two currently-known-valid, physically
+correct runs (`step1_short_fine_lumped` and its long rerun) — passive, low-loss S-parameters despite the
+warnings. They appear alongside the plugin's own "copper ... extends beyond the simulation domain and is
+cut at the boundary" warning in the same logs, which is the plugin's own explanation for exactly this.
+Not re-checked on a geometry where a via sits away from the domain edge; treat as harmless for now, revisit
+if it shows up on a model where that explanation doesn't apply.
+
+**Item 5 (policy):** every run from now on excites all ports and checks reciprocity (|S_ij - S_ji| <= 0.02
+per section 0's validity rule), not just port 1.
+
 ## Task list
 
 | Task | Status |
 |---|---|
 | 1. Clean up existing results | Done 2026-09-22 |
 | A. Valid line impedance, no FDTD | Done 2026-09-22 — Z0 too high (54-56 ohm), needs a wider trace or thinner dielectric; user to decide |
-| B. Fix the FDTD mesh before any new board run | Not started |
+| B. Fix the FDTD mesh before any new board run | Done 2026-09-22 — lumped-port trace-width fix built and verified (mesh only, not yet solved); z/open-air ratio jump identified but not fixed |
 | C. A validation test that can detect a Z0 error | Not started |
 | D. Circuit model of each chain | Not started |
 | E. One confirming 3D run | Not started |
