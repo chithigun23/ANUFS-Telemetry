@@ -215,6 +215,24 @@ only, and record the result.
 
 ## 9. Results log
 
-| Date | Step | Result | Notes |
-|---|---|---|---|
-| | | | |
+| # | Hypothesis | Result | Notes | Run |
+|---|---|---|---|---|
+| H1 | L2 tap stub adds enough shunt C for RL under 15 dB | Pass (circuit model only) | ANT1/ANT2 worst-case S11 −15.1 to −19.3 dB across L5/L1, ideal L2 model. Not confirmed by a 3D run — Task E blocked (see below) | `RF Analysis/sim/chain_model.py` → `results/chain_model/*.s2p` |
+| H2 | TVS pad/via add more C than datasheet 0.05 pF | Open | Not measured directly. Circuit model assumes the datasheet 0.05 pF (no vendor S-parameter file found) and passes; sensitivity sweep shows 10x that value would still pass, so this hypothesis has wide margin even if the true value is somewhat higher. No independent measurement of the real value | `RF Analysis/sim/chain_model.py` |
+| H3 | Pad-width steps at 0402 DC-block/0Ω give a measurable Z bump | Pass (circuit model only) | Modeled as a generic 0.2 pF pad capacitance per part; sensitivity sweep shows S11 only fails above ~2.5x this (0.5 pF) and insertion loss above ~3x (0.6 pF) — comfortable margin. Not confirmed by 3D | `RF Analysis/sim/chain_model.py` |
+| H4 | Empty pi-filter pads (C28/C29/C49/C50) add stub capacitance | Pass (circuit model only) | Modeled as open (no pad capacitance term added for unpopulated pads) — by construction this can't fail in the current model; the real board's fully-empty pad probably behaves close to this. Not confirmed by 3D | `RF Analysis/sim/chain_model.py` |
+| H5 | 54 Ω trace (vs 50 Ω target) plus the coplanar pour leaves line Z off target | **Fail** | FD quasi-static solve (trustworthy per convergence check) gives Z0 = 54–56 Ω on ANT1/ANT2/ANT3, i.e. 8–12% high — inside the plan's ±10% band but outside the preferred ±5%. Closed-form (Hammerstad-Jensen) formula was checked and found invalid for this thin substrate; the FD solve is the number to trust. Smallest fix: widen the trace to about 0.40–0.42 mm (or use a thinner prepreg) to bring Z0 to 50 Ω | `RF Analysis/sim/task_a_line_impedance.py` |
+| H6 | J7/J8 SMA launch is a bigger discontinuity than the filter parts | Open | Never reached — Task E (the run that would isolate the connector launch) is blocked by the port-configuration failures below | — |
+| H7 | Whole chain has an in-band notch/ripple from interacting discontinuities | Pass (circuit model only) | Worst-case in-band ripple 0.008 dB (ANT1 L1), far under the 0.3 dB criterion, with ideal parts and approximate (straight-line) segment lengths. This needs 3D confirmation before it's trustworthy, which Task E could not deliver | `RF Analysis/sim/chain_model.py` |
+| H8 | Bias-network RF leakage into VDD_RF through the tap | Open | Requires the full 4-port 3D run (port 4 = bias side) — never run. The circuit model doesn't build a 4th port, so it can't speak to this at all | — |
+
+**Why H6–H8 are open:** Task E (the confirming 3D run) could not be completed on this stack-up. Three
+port configurations were tried and each failed a different way: all-lumped ports give near-total
+broadband reflection beyond ~5–6 mm port separation (numerically stable, evidence points to a
+parasitic cavity/common-mode resonance in the ground pour — see `STATUS.md` "Task E prep"); microstrip
+(msl) ports on a short bare-line test give a hard power-conservation violation; msl ports on the real
+ANT1 chain (ports 1/2) diverge exponentially, continuing to grow well after the excitation pulse ends
+(see `STATUS.md` "Task E: msl/cpw ports on the real ANT1 chain also fail" and
+`results/laptop/ant1_4port_fine/run.txt`). No root cause was confirmed for any of the three failures
+within the time spent; H6–H8 remain untested by simulation. The real-board VNA measurement in Step 6
+is the next opportunity to get data on these, once boards arrive.
