@@ -137,6 +137,48 @@ lumped port has no explicit de-embedded reference plane the way an msl port does
 extraction's assumed 5.0 mm port-to-port length may not be the true electrical length. **Cross-check is
 in the right ballpark but does not meet the stated 5% agreement bar; flagged, not resolved.**
 
+## Task D: circuit model of the ANT1 and ANT2 chains (2026-09-22)
+
+**Vendor Touchstone files: not obtained.** Murata SimSurfing's search UI (a legacy jQWidgets app) did
+not return results despite a genuine attempt: found and cleared a duplicate-text bug in its search
+input via its own jQuery API, triggered the real search button directly, checked the network requests
+and DOM for a client-side dataset -- the results grid stayed empty throughout. User chose to proceed
+with ideal component models rather than keep debugging it. L2/L3 keep the existing embed_l2.py model
+(56 nH + 2.8 GHz self-resonant cap + an assumed 1.5 ohm); the 100 pF caps are ideal C0G; D4/D5 stay the
+plan's assumed 0.05 pF (no public S-parameter file exists for the TVS regardless of SimSurfing).
+
+**Topology and lengths: derived from the real board, not assumed.** `sim/chain_model.py` extracts
+every component's actual pad position from `telemetry.kicad_pcb` (a rotation-aware S-expression
+parser) and uses straight-line pad-to-pad distances as each segment's length -- an approximation (the
+real routed trace has corners; understates true length most for the ~18.7 mm run into the receiver
+pin). Which pad of each 2-pin part faces the RF line vs. ground was inferred from proximity; ANT1 and
+ANT2 gave the same pattern independently, which is some cross-check on the inference. Full topology
+and the derivation are documented in the script's own docstring.
+
+**Result: both chains pass comfortably with the ideal-component model.**
+
+| Chain | Band | S11 worst | Insertion loss worst | Ripple |
+|---|---|---|---|---|
+| ANT1 | L5 | -19.3 dB | 0.061 dB | 0.001 dB |
+| ANT1 | L1 | -15.3 dB | 0.134 dB | 0.008 dB |
+| ANT2 | L5 | -19.2 dB | 0.063 dB | 0.001 dB |
+| ANT2 | L1 | -15.1 dB | 0.139 dB | 0.008 dB |
+
+All well inside the plan's -10 dB / 0.5 dB / 0.3 dB criteria. Notably, this model uses Task A's
+elevated Z0 (54-56 ohm, not 50) for the line sections, and S11 is still comfortably under -10 dB --
+the chains are electrically short enough that the Z0 mismatch found in Task A doesn't threaten this
+criterion by itself.
+
+**Sensitivity sweep (0.5x-3x each parasitic):** pad capacitance (0.2 pF assumed) is the one that
+matters -- S11 fails around 2.5x nominal (0.5 pF) and insertion loss around 3x (0.6 pF). Ground-via
+inductance (0.5 nH), the TVS capacitance (0.05 pF), L2's assumed series resistance (1.5 ohm), and the
+bias decoupling caps all have wide margin, no failure anywhere in 0.5x-3x.
+
+**H1-H4/H7 (this model can speak to): pass comfortably, but still need 3D confirmation (Task E)** --
+this is a circuit model with assumed/ideal parts and approximate lengths, not a measurement. H6
+(connector launch) and H8 (RF-to-bias isolation) need the SMA and port-4 models this script doesn't
+build; left for Task E. Results: `results/chain_model/ant1_chain.s2p`, `ant2_chain.s2p`.
+
 ## Task list
 
 | Task | Status |
@@ -145,5 +187,6 @@ in the right ballpark but does not meet the stated 5% agreement bar; flagged, no
 | A. Valid line impedance, no FDTD | Done 2026-09-22 — Z0 too high (54-56 ohm), needs a wider trace or thinner dielectric; user to decide |
 | B. Fix the FDTD mesh before any new board run | Done 2026-09-22 — lumped-port trace-width fix built and verified (mesh only, not yet solved); z/open-air ratio jump identified but not fixed |
 | C. A validation test that can detect a Z0 error | Done 2026-09-22 — works on the 5mm baseline, not on the still-broken 7mm one; eps_eff/Z0 cross-check with Task A misses the 5% bar (~10-20% off), flagged |
+| D. Circuit model of each chain | Done 2026-09-22 — both chains pass comfortably (ideal components, vendor files not obtained); pad capacitance is the sensitive parasitic |
 | D. Circuit model of each chain | Not started |
 | E. One confirming 3D run | Not started |
