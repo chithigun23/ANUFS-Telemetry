@@ -143,3 +143,23 @@ Only small files are committed. Large files never go in git.
 Cells, timestep, steps done, wall-clock time, whether the energy criterion or divergence ended the run,
 max sum |S|^2 per excited column, reciprocity if both ports were excited, the printed line impedance if the ports
 are microstrip, and any plugin warnings. Say plainly when a run is invalid.
+
+
+## 7. Update from the desktop session, 10:38
+
+Reran ANT1 4-port at the fine mesh with the C28/C29 fix (`results/desktop/ant1_4port_fine`, all 4 ports
+excited). Passive (max eig(S^H S) = 0.999) and reciprocal (max |S - S^T| = 0.0025), so the run itself is sound.
+But at 1.575 GHz: |S11| = 0.977, |S22| = 0.997, |S21| = 0.021 (-33 dB), |S13| = 0.184. Ports 1 and 2 sit near
+total reflection into their own 50 ohm lumped port, and almost nothing crosses from port 1 to port 2.
+
+Working theory, not yet verified: ports 1 and 2 are on a continuous 0.32 mm trace (ANT1, and the RF_IN pad
+feeding into the module), not an isolated component pad. A lumped port there is a voltage source with a 50 ohm
+source impedance across the small pad-to-plane gap; the local static impedance of that gap is not close to
+50 ohm, unlike a microstrip port, which de-embeds a travelling wave and gives the right answer even off a
+50 ohm point. L2's two pads (ports 3, 4) are genuine component pads, so a lumped port there is the right model
+and the port 1 -> port 3 coupling (|S13| = 0.184, -14.7 dB) looks plausible for a nearby tap.
+
+Next: the 7 mm section line-impedance test (already planned, section 3 item 5) will show directly whether
+microstrip ports are valid at the fine mesh now that the coarse-mesh instability is understood. If they are,
+ANT1 should be rerun with `PORTTYPE=msl` (already wired into `step5_ant1_multiport.py`): ports 1 and 2 as
+microstrip, ports 3 and 4 staying lumped. Not run yet.
