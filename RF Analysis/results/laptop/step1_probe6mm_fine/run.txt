@@ -11,5 +11,13 @@ $env:RF_TAG="laptop"; $env:PORTTYPE="lumped"
 Result: near-total reflection, matching the 7mm case (S11 -0.8..-0.0 dB, S22 -0.6..-0.0 dB, S21/S12
 -34.5..-13.6 dB). CONCLUSION: this is a length threshold between 5mm and 6mm, not a location-specific
 defect -- confirmed by changing only separation while holding port 1 at a location already proven
-good. See STATUS.md "Task E prep" section for the full investigation. model.json not committed (same
-geometry pattern as the other ANT3 test sections).
+good. model.json not committed (same geometry pattern as the other ANT3 test sections).
+
+Follow-up: sim/experiments/field_heatmap.py plots the frequency-domain E-field magnitude on the
+substrate mid-plane (exc1/Ef.h5, port 1 excitation) for this run against the good 5mm baseline
+(taskC_5mm_w032_base). field_comparison_5mm_vs_6mm.png (kept here as an exception to the small-files
+commit policy, 72 KB, genuinely diagnostic): the 5mm case shows a field tightly confined to a guided
+stripe along the trace; the 6mm case shows the field flooding a large area of the surrounding ground
+pour -- consistent with the lumped ports exciting a parasitic cavity/common-mode resonance in the pour
+rather than the intended guided line mode. See STATUS.md "Task E prep" section for the full writeup
+and its caveats (a plausible mechanism, not a confirmed diagnosis).
