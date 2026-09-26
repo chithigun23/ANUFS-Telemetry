@@ -1,8 +1,16 @@
 (version 1)
-# J7 locating holes: 0.65 mm per SHOU HAN C2765186 recommended PCB drawing.
-# Use APPPD's JLCPCB 0.20 mm NPTH-to-copper clearance only within J7.
+# J6 (USB-C) locating holes: 0.65 mm per SHOU HAN C2765186 recommended PCB drawing.
+# Use APPPD's JLCPCB 0.20 mm NPTH-to-copper clearance only within J6.
 # Other footprints and external tracks retain the board's existing constraints.
-(rule "J7 USB-C locating holes to connector pads"
- (condition "A.Type == 'Pad' && A.Pad_Type == 'NPTH, mechanical' && !A.isPlated() && A.memberOfFootprint('J7') && B.Type == 'Pad' && B.memberOfFootprint('J7')")
+(rule "J6 USB-C locating holes to connector pads"
+ (condition "A.Type == 'Pad' && A.Pad_Type == 'NPTH, mechanical' && !A.isPlated() && A.memberOfFootprint('J6') && B.Type == 'Pad' && B.memberOfFootprint('J6')")
  (constraint hole_clearance (min 0.2mm))
+)
+
+# J9/J10: DNP SMA test connectors on the ANT3 line, fitted only for bench testing.
+# Their courtyard overlap with neighbours is intentional.
+(rule "J9 J10 DNP test SMA courtyard"
+ (condition "A.Reference == 'J9' || A.Reference == 'J10' || B.Reference == 'J9' || B.Reference == 'J10'")
+ (constraint courtyard_clearance)
+ (severity ignore)
 )
