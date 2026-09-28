@@ -14,3 +14,11 @@
  (constraint courtyard_clearance)
  (severity ignore)
 )
+
+# J2 (TC2030 Tag-Connect) and J12 (1x04 SWD header) are alternative programming
+# footprints; only one is ever fitted, so their overlap is intentional.
+(rule "J2 J12 alternative SWD footprints"
+ (condition "(A.Reference == 'J2' && B.Reference == 'J12') || (A.Reference == 'J12' && B.Reference == 'J2')")
+ (constraint courtyard_clearance)
+ (severity ignore)
+)
