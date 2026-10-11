@@ -55,7 +55,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Quectel LC29H(EA) dual-band GNSS module. Per Hardware Design v1.4 the EA does not support D_SEL, UART2, I2C or SPI: pins 2, 4, 5, 6, 15 and 16 are reserved and must be left N/C. In the Moving Base (dual-antenna heading) application, pins 18 and 19 are TXD2 and RXD2 (joined to the rover UART1 pins 20 and 21) and pin 17 is RESET_CTL, an output that drives the rover RESET_N (leave it N/C on the rover). Pin 17 is reserved otherwise."
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -120,7 +120,7 @@
 			(pin no_connect line
 				(at -7.62 -7.62 0)
 				(length 7.62)
-				(name "FWD/RESERVED"
+				(name "RESERVED"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -156,7 +156,7 @@
 			(pin no_connect line
 				(at -7.62 -12.7 0)
 				(length 7.62)
-				(name "WHEELTICK/RESERVED"
+				(name "RESERVED"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -171,10 +171,10 @@
 					)
 				)
 			)
-			(pin input line
+			(pin no_connect line
 				(at -7.62 -15.24 0)
 				(length 7.62)
-				(name "D_SEL1"
+				(name "RESERVED"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -189,10 +189,10 @@
 					)
 				)
 			)
-			(pin input line
+			(pin no_connect line
 				(at -7.62 -17.78 0)
 				(length 7.62)
-				(name "D_SEL2"
+				(name "RESERVED"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -351,10 +351,10 @@
 					)
 				)
 			)
-			(pin output line
+			(pin no_connect line
 				(at 45.72 -27.94 180)
 				(length 7.62)
-				(name "TXD2"
+				(name "RESERVED"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -369,10 +369,10 @@
 					)
 				)
 			)
-			(pin input line
+			(pin no_connect line
 				(at 45.72 -25.4 180)
 				(length 7.62)
-				(name "RXD2"
+				(name "RESERVED"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -387,10 +387,10 @@
 					)
 				)
 			)
-			(pin no_connect line
+			(pin output line
 				(at 45.72 -22.86 180)
 				(length 7.62)
-				(name "WI/RESERVED"
+				(name "RESERVED/RESET_CTL"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -405,10 +405,10 @@
 					)
 				)
 			)
-			(pin input line
+			(pin output line
 				(at 45.72 -20.32 180)
 				(length 7.62)
-				(name "I2C_SDA/SPI_CS"
+				(name "RESERVED/TXD2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -426,7 +426,7 @@
 			(pin input line
 				(at 45.72 -17.78 180)
 				(length 7.62)
-				(name "I2C_SCL/SPI_CLK"
+				(name "RESERVED/RXD2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -444,7 +444,7 @@
 			(pin output line
 				(at 45.72 -15.24 180)
 				(length 7.62)
-				(name "TXD1/SPI_MISO"
+				(name "TXD1"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -462,7 +462,7 @@
 			(pin input line
 				(at 45.72 -12.7 180)
 				(length 7.62)
-				(name "RXD1/SPI_MOSI"
+				(name "RXD1"
 					(effects
 						(font
 							(size 1.27 1.27)

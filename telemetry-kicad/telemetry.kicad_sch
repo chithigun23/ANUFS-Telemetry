@@ -2686,6 +2686,551 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "LC29HEAMD_1"
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at 14.986 3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.524 1.524)
+					)
+				)
+			)
+			(property "Value" "LC29HEAMD"
+				(at 14.986 1.27 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.524 1.524)
+					)
+				)
+			)
+			(property "Footprint" "telemetry:LC29HEAMD"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+				)
+			)
+			(property "Datasheet" "LC29HEAMD"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+				)
+			)
+			(property "Description" "Quectel LC29H(EA) dual-band GNSS module. Per Hardware Design v1.4 the EA does not support D_SEL, UART2, I2C or SPI: pins 2, 4, 5, 6, 15 and 16 are reserved and must be left N/C. In the Moving Base (dual-antenna heading) application, pins 18 and 19 are TXD2 and RXD2 (joined to the rover UART1 pins 20 and 21) and pin 17 is RESET_CTL, an output that drives the rover RESET_N (leave it N/C on the rover). Pin 17 is reserved otherwise."
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "LC29HEAMD"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "LC29HEAMD"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "LC29HEAMD_1_0_1"
+				(pin input line
+					(at -7.62 -5.08 0)
+					(length 7.62)
+					(name "WAKEUP"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -7.62 -7.62 0)
+					(length 7.62)
+					(name "RESERVED"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at -7.62 -10.16 0)
+					(length 7.62)
+					(name "1PPS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -7.62 -12.7 0)
+					(length 7.62)
+					(name "RESERVED"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -7.62 -15.24 0)
+					(length 7.62)
+					(name "RESERVED"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -7.62 -17.78 0)
+					(length 7.62)
+					(name "RESERVED"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -7.62 -20.32 0)
+					(length 7.62)
+					(name "VDD_EXT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -22.86 0)
+					(length 7.62)
+					(name "RESET_N"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -7.62 -25.4 0)
+					(length 7.62)
+					(name "VDD_RF"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -7.62 -27.94 0)
+					(length 7.62)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 -30.48 0)
+					(length 7.62)
+					(name "RF_IN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -7.62 -33.02 0)
+					(length 7.62)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 45.72 -33.02 180)
+					(length 7.62)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 45.72 -30.48 180)
+					(length 7.62)
+					(name "ANT_ON"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 45.72 -27.94 180)
+					(length 7.62)
+					(name "RESERVED"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 45.72 -25.4 180)
+					(length 7.62)
+					(name "RESERVED"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 45.72 -22.86 180)
+					(length 7.62)
+					(name "RESERVED/RESET_CTL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 45.72 -20.32 180)
+					(length 7.62)
+					(name "RESERVED/TXD2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 45.72 -17.78 180)
+					(length 7.62)
+					(name "RESERVED/RXD2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 45.72 -15.24 180)
+					(length 7.62)
+					(name "TXD1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 45.72 -12.7 180)
+					(length 7.62)
+					(name "RXD1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 45.72 -10.16 180)
+					(length 7.62)
+					(name "V_BCKP"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 45.72 -7.62 180)
+					(length 7.62)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "23"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 45.72 -5.08 180)
+					(length 7.62)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "24"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "LC29HEAMD_1_1_1"
+				(rectangle
+					(start 0 0)
+					(end 38.1 -38.1)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Logic_LevelTranslator:TXS0104EPW"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -8351,7 +8896,7 @@
 					)
 				)
 			)
-			(property "Description" ""
+			(property "Description" "Quectel LC29H(EA) dual-band GNSS module. Per Hardware Design v1.4 the EA does not support D_SEL, UART2, I2C or SPI: pins 2, 4, 5, 6, 15 and 16 are reserved and must be left N/C. In the Moving Base (dual-antenna heading) application, pins 18 and 19 are TXD2 and RXD2 (joined to the rover UART1 pins 20 and 21) and pin 17 is RESET_CTL, an output that drives the rover RESET_N (leave it N/C on the rover). Pin 17 is reserved otherwise."
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -8416,7 +8961,7 @@
 				(pin no_connect line
 					(at -7.62 -7.62 0)
 					(length 7.62)
-					(name "FWD/RESERVED"
+					(name "RESERVED"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8452,7 +8997,7 @@
 				(pin no_connect line
 					(at -7.62 -12.7 0)
 					(length 7.62)
-					(name "WHEELTICK/RESERVED"
+					(name "RESERVED"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8467,10 +9012,10 @@
 						)
 					)
 				)
-				(pin input line
+				(pin no_connect line
 					(at -7.62 -15.24 0)
 					(length 7.62)
-					(name "D_SEL1"
+					(name "RESERVED"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8485,10 +9030,10 @@
 						)
 					)
 				)
-				(pin input line
+				(pin no_connect line
 					(at -7.62 -17.78 0)
 					(length 7.62)
-					(name "D_SEL2"
+					(name "RESERVED"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8647,10 +9192,10 @@
 						)
 					)
 				)
-				(pin output line
+				(pin no_connect line
 					(at 45.72 -27.94 180)
 					(length 7.62)
-					(name "TXD2"
+					(name "RESERVED"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8665,10 +9210,10 @@
 						)
 					)
 				)
-				(pin input line
+				(pin no_connect line
 					(at 45.72 -25.4 180)
 					(length 7.62)
-					(name "RXD2"
+					(name "RESERVED"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8683,10 +9228,10 @@
 						)
 					)
 				)
-				(pin no_connect line
+				(pin output line
 					(at 45.72 -22.86 180)
 					(length 7.62)
-					(name "WI/RESERVED"
+					(name "RESERVED/RESET_CTL"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8701,10 +9246,10 @@
 						)
 					)
 				)
-				(pin input line
+				(pin output line
 					(at 45.72 -20.32 180)
 					(length 7.62)
-					(name "I2C_SDA/SPI_CS"
+					(name "RESERVED/TXD2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8722,7 +9267,7 @@
 				(pin input line
 					(at 45.72 -17.78 180)
 					(length 7.62)
-					(name "I2C_SCL/SPI_CLK"
+					(name "RESERVED/RXD2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8740,7 +9285,7 @@
 				(pin output line
 					(at 45.72 -15.24 180)
 					(length 7.62)
-					(name "TXD1/SPI_MISO"
+					(name "TXD1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8758,7 +9303,7 @@
 				(pin input line
 					(at 45.72 -12.7 180)
 					(length 7.62)
-					(name "RXD1/SPI_MOSI"
+					(name "RXD1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -14098,14 +14643,6 @@
 		(uuid "061eb99c-2bf1-4cc2-98a0-48d6fe666b8d")
 	)
 	(no_connect
-		(at 364.49 222.25)
-		(uuid "08a15259-c3d7-4982-b3ab-0d29bd39846d")
-	)
-	(no_connect
-		(at 364.49 227.33)
-		(uuid "09e737ca-1d6e-4f89-8fa3-0e9d6e712deb")
-	)
-	(no_connect
 		(at 410.21 172.72)
 		(uuid "0cd8d2ce-9323-460e-a285-f2bb5dc267a3")
 	)
@@ -14118,20 +14655,20 @@
 		(uuid "2a94adf9-7614-40da-8599-1628c8a347a0")
 	)
 	(no_connect
-		(at 487.68 224.79)
-		(uuid "3942a0b7-900c-48c7-a2f5-6e4272a30e17")
+		(at 311.15 209.55)
+		(uuid "347d2e4e-80f6-493e-adf2-45c3015a3c52")
 	)
 	(no_connect
 		(at 360.68 288.29)
 		(uuid "3f68c488-a5c8-44e8-9b8c-1c7877248760")
 	)
 	(no_connect
-		(at 364.49 224.79)
-		(uuid "4a5afb3d-3601-4571-858c-6d41a37429f7")
-	)
-	(no_connect
 		(at 353.06 175.26)
 		(uuid "4e4ee8ab-1dc4-42f6-b276-c8f4827e4fa0")
+	)
+	(no_connect
+		(at 307.34 275.59)
+		(uuid "522afb66-e928-41f1-9ed8-c66f0b041ea5")
 	)
 	(no_connect
 		(at 39.37 148.59)
@@ -14140,14 +14677,6 @@
 	(no_connect
 		(at 171.45 214.63)
 		(uuid "6ce29091-5d0f-4b52-9059-66d5f9baa6b5")
-	)
-	(no_connect
-		(at 311.15 209.55)
-		(uuid "78c55ba8-5d7d-453c-b87c-20111519305f")
-	)
-	(no_connect
-		(at 39.37 151.13)
-		(uuid "79af7295-9a4b-47d0-97e2-6400465ce09d")
 	)
 	(no_connect
 		(at 39.37 181.61)
@@ -14162,10 +14691,6 @@
 		(uuid "8e262ee4-3bab-4be6-89e8-8cbc1a28cfa8")
 	)
 	(no_connect
-		(at 307.34 280.67)
-		(uuid "9384ccc2-3187-4fed-8492-d427684fd27a")
-	)
-	(no_connect
 		(at 100.33 179.07)
 		(uuid "959cb485-e05d-4756-b80a-0523f4061ca7")
 	)
@@ -14174,16 +14699,8 @@
 		(uuid "97af874a-8894-4af1-a5fd-dfc0bf211bb3")
 	)
 	(no_connect
-		(at 307.34 275.59)
-		(uuid "ae395152-210d-4671-8d7a-771b85c20c84")
-	)
-	(no_connect
 		(at 353.06 177.8)
 		(uuid "b44204f0-83b1-417b-ba30-d94e86c312ef")
-	)
-	(no_connect
-		(at 360.68 283.21)
-		(uuid "b90a4dfd-97f0-49b6-be81-39be8891d5c9")
 	)
 	(no_connect
 		(at 360.68 293.37)
@@ -14192,10 +14709,6 @@
 	(no_connect
 		(at 307.34 278.13)
 		(uuid "c2b84b48-1759-4e38-bd40-1faf0e861afa")
-	)
-	(no_connect
-		(at 467.36 224.79)
-		(uuid "c999c70a-f967-4ca0-bc19-86eda9aa7a40")
 	)
 	(no_connect
 		(at 311.15 212.09)
@@ -14208,10 +14721,6 @@
 	(no_connect
 		(at 100.33 176.53)
 		(uuid "f3eb1573-f951-4fef-9936-6dcae6d358ee")
-	)
-	(no_connect
-		(at 360.68 285.75)
-		(uuid "fdbc7a14-1614-45f6-ba6c-b66e92a80f76")
 	)
 	(wire
 		(pts
@@ -14555,16 +15064,6 @@
 	)
 	(wire
 		(pts
-			(xy 325.12 256.54) (xy 325.12 257.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "16e6cf91-006c-4fa8-86b7-5195298bfa8c")
-	)
-	(wire
-		(pts
 			(xy 365.76 214.63) (xy 365.76 212.09)
 		)
 		(stroke
@@ -14752,16 +15251,6 @@
 			(type default)
 		)
 		(uuid "24cb0011-bcff-40a2-9989-c079f28f368b")
-	)
-	(wire
-		(pts
-			(xy 321.31 323.85) (xy 320.04 323.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "26094a3c-78fd-4d80-b417-e627765df2ff")
 	)
 	(wire
 		(pts
@@ -15395,16 +15884,6 @@
 	)
 	(wire
 		(pts
-			(xy 321.31 313.69) (xy 321.31 314.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4ae9ef6c-3e3a-4b17-ac0b-011c57966450")
-	)
-	(wire
-		(pts
 			(xy 247.65 218.44) (xy 254 218.44)
 		)
 		(stroke
@@ -15595,16 +16074,6 @@
 	)
 	(wire
 		(pts
-			(xy 339.09 314.96) (xy 339.09 313.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "53e756c3-b47f-496b-9c02-120699645e9e")
-	)
-	(wire
-		(pts
 			(xy 194.31 182.88) (xy 190.5 182.88)
 		)
 		(stroke
@@ -15765,16 +16234,6 @@
 	)
 	(wire
 		(pts
-			(xy 342.9 248.92) (xy 342.9 247.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5d608c0b-4bf4-4159-8a18-dde69855a2da")
-	)
-	(wire
-		(pts
 			(xy 199.39 35.56) (xy 199.39 36.83)
 		)
 		(stroke
@@ -15922,16 +16381,6 @@
 			(type default)
 		)
 		(uuid "6781add1-9a7c-4882-afbb-481d04cdf143")
-	)
-	(wire
-		(pts
-			(xy 321.31 322.58) (xy 321.31 323.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "67b1bb78-ac7f-43ad-859e-dc0fd91f8998")
 	)
 	(wire
 		(pts
@@ -16275,16 +16724,6 @@
 	)
 	(wire
 		(pts
-			(xy 342.9 256.54) (xy 342.9 257.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7bf258ed-38c9-46db-919c-8fc3be4f7f1b")
-	)
-	(wire
-		(pts
 			(xy 172.72 240.03) (xy 186.69 240.03)
 		)
 		(stroke
@@ -16362,16 +16801,6 @@
 			(type default)
 		)
 		(uuid "81b0464c-a9c9-4d9f-b5e8-b7c39836c40d")
-	)
-	(wire
-		(pts
-			(xy 341.63 257.81) (xy 342.9 257.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8301fec2-55ef-48cc-ba7d-91f7b71dcfbb")
 	)
 	(wire
 		(pts
@@ -16605,16 +17034,6 @@
 	)
 	(wire
 		(pts
-			(xy 325.12 247.65) (xy 325.12 248.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "92a6d52f-b18d-41d7-adac-72ec1e7973ad")
-	)
-	(wire
-		(pts
 			(xy 22.86 31.75) (xy 25.4 31.75)
 		)
 		(stroke
@@ -16782,16 +17201,6 @@
 			(type default)
 		)
 		(uuid "9cfcb34d-05b5-4473-80e4-dcce88a8629c")
-	)
-	(wire
-		(pts
-			(xy 339.09 322.58) (xy 339.09 323.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9f97ce2a-f3f0-49bf-89f2-7d08adc83f38")
 	)
 	(wire
 		(pts
@@ -18075,16 +18484,6 @@
 	)
 	(wire
 		(pts
-			(xy 325.12 257.81) (xy 323.85 257.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e7c6fcb7-b9e6-4b35-b4e7-27f4fa5a61f7")
-	)
-	(wire
-		(pts
 			(xy 186.69 283.21) (xy 186.69 285.75)
 		)
 		(stroke
@@ -18422,16 +18821,6 @@
 			(type default)
 		)
 		(uuid "f9dabd62-2bee-43ab-bac7-e462c292fe41")
-	)
-	(wire
-		(pts
-			(xy 337.82 323.85) (xy 339.09 323.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f9f62bd8-a440-41bd-adf0-eeabbb6baa65")
 	)
 	(wire
 		(pts
@@ -18821,7 +19210,7 @@
 			)
 		)
 	)
-	(global_label "TIMERIN_GNSS"
+	(global_label "TIMERIN_GNSS_1"
 		(shape input)
 		(at 39.37 166.37 180)
 		(fields_autoplaced yes)
@@ -18833,7 +19222,7 @@
 		)
 		(uuid "0a284542-2472-4ae0-b217-ac7f05841074")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 23.0196 166.37 0)
+			(at 20.8425 166.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19002,30 +19391,6 @@
 		(uuid "12c50038-76cf-4c58-b40f-e980e7fb9233")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 108.0323 143.51 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
-	(global_label "RXD2_GNSS_2V8_2"
-		(shape input)
-		(at 364.49 232.41 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "13e9e979-0751-4ca0-9db7-e19bd54fcd2c")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 385.0736 232.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -19325,30 +19690,6 @@
 			)
 		)
 	)
-	(global_label "DSEL_2_1"
-		(shape input)
-		(at 323.85 257.81 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "2adc6a87-90ba-49c6-b722-922c807e857a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 311.854 257.81 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-	)
 	(global_label "LED1"
 		(shape input)
 		(at 410.21 162.56 0)
@@ -19490,6 +19831,30 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+	)
+	(global_label "HEADING"
+		(shape input)
+		(at 364.49 222.25 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "35b38a95-0950-4af6-a193-155339743355")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 375.5186 222.25 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
 		)
 	)
@@ -19685,6 +20050,30 @@
 			)
 		)
 	)
+	(global_label "CORRECTION"
+		(shape input)
+		(at 360.68 283.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3bcfb173-c198-482e-8766-722dbc197a6f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 375.4581 283.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
 	(global_label "LED0"
 		(shape input)
 		(at 331.47 99.06 0)
@@ -19842,30 +20231,6 @@
 		(uuid "4339cfe5-484e-4449-8eee-aec051169ea3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 294.2554 290.83 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-	)
-	(global_label "DSEL_1_2"
-		(shape input)
-		(at 337.82 323.85 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "46d22ba4-953c-49a3-a0df-14292784df7a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 325.824 323.85 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20082,30 +20447,6 @@
 		(uuid "502c8420-28a1-4a79-a5b8-95cc8c903e54")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 360.7018 162.56 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
-	(global_label "TXD2_GNSS_2V8_2"
-		(shape input)
-		(at 360.68 298.45 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "51545244-d560-4048-9395-3bfd098e8fee")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 380.9612 298.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -20425,30 +20766,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-			)
-		)
-	)
-	(global_label "DSEL_1_2"
-		(shape input)
-		(at 307.34 285.75 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "626ad232-a59c-4ffd-be88-3323a3f5ce36")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 295.344 285.75 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 			)
 		)
 	)
@@ -20980,6 +21297,30 @@
 			)
 		)
 	)
+	(global_label "HEADING"
+		(shape input)
+		(at 360.68 285.75 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "894da538-c944-42f5-a6cd-07a4af568fde")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 371.7086 285.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
 	(global_label "D-"
 		(shape input)
 		(at 190.5 218.44 0)
@@ -21052,6 +21393,30 @@
 			)
 		)
 	)
+	(global_label "TIMERIN_GNSS_2"
+		(shape input)
+		(at 487.68 224.79 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8ccd5cb9-716b-4e8a-9998-de4c88241b39")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 506.2075 224.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
 	(global_label "CS_IMU"
 		(shape input)
 		(at 167.64 88.9 180)
@@ -21089,6 +21454,30 @@
 		(uuid "91d35737-0907-4d4d-9abf-98fde2625a39")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 387.092 224.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
+	(global_label "TIMERIN_GNSS_2"
+		(shape input)
+		(at 39.37 151.13 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "92bf009c-9747-43be-a226-a2a17b3d5ff7")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 20.8425 151.13 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -21148,30 +21537,6 @@
 			)
 		)
 	)
-	(global_label "DSEL_1_1"
-		(shape input)
-		(at 311.15 219.71 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "99f21d26-d427-457e-b45e-512ab4aa8a1a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 299.154 219.71 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-	)
 	(global_label "FLT_CAN1"
 		(shape input)
 		(at 39.37 201.93 180)
@@ -21220,30 +21585,6 @@
 			)
 		)
 	)
-	(global_label "DSEL_2_2"
-		(shape input)
-		(at 320.04 323.85 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "9f4afc27-e420-4153-b00b-18058446a3e2")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 308.044 323.85 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-	)
 	(global_label "VDD_EXT_1"
 		(shape input)
 		(at 311.15 224.79 180)
@@ -21289,30 +21630,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-			)
-		)
-	)
-	(global_label "VDD_EXT_1"
-		(shape input)
-		(at 325.12 247.65 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "a7c98a58-a4b1-48aa-ba92-3f41c738cee9")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 312.0354 247.65 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 			)
 		)
 	)
@@ -21385,30 +21702,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-			)
-		)
-	)
-	(global_label "VDD_EXT_2"
-		(shape input)
-		(at 339.09 313.69 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "ab45488f-8428-4cda-a8bd-8f7f319b2521")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 326.0054 313.69 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 			)
 		)
 	)
@@ -21699,6 +21992,30 @@
 			)
 		)
 	)
+	(global_label "TIMERIN_GNSS_2V8_2"
+		(shape input)
+		(at 467.36 224.79 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "bc67f3d9-7235-49eb-8664-9afc9ff2db0b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 444.3573 224.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
 	(global_label "LED5"
 		(shape input)
 		(at 353.06 160.02 0)
@@ -21768,6 +22085,30 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+	)
+	(global_label "CORRECTION"
+		(shape input)
+		(at 364.49 224.79 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "be6bf578-e0cc-475e-8753-631dbe1d1e14")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 379.2681 224.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
 		)
 	)
@@ -21891,30 +22232,6 @@
 			)
 		)
 	)
-	(global_label "TXD2_GNSS_2V8_2"
-		(shape input)
-		(at 364.49 229.87 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "c6a01634-f9a8-4a60-831a-2b9b408742eb")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 384.7712 229.87 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
 	(global_label "V_IN"
 		(shape input)
 		(at 93.98 33.02 180)
@@ -21939,7 +22256,7 @@
 			)
 		)
 	)
-	(global_label "GNSS_RESET_N"
+	(global_label "GNSS_RESET_SLAVE"
 		(shape input)
 		(at 307.34 293.37 180)
 		(fields_autoplaced yes)
@@ -21951,7 +22268,7 @@
 		)
 		(uuid "cb6b4548-3e28-4b3e-ba20-b3dc02fcdb67")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 287.5426 293.37 0)
+			(at 286.0912 293.37 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22083,30 +22400,6 @@
 			)
 		)
 	)
-	(global_label "DSEL_2_2"
-		(shape input)
-		(at 307.34 288.29 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "d3865303-5804-493d-92fd-f75635b8c9fd")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 295.344 288.29 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-	)
 	(global_label "CP2_MUX"
 		(shape input)
 		(at 384.81 66.04 180)
@@ -22168,30 +22461,6 @@
 		(uuid "d4fbdde8-63de-41e3-bcde-4f0689d5d2af")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 125.9501 321.31 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-	)
-	(global_label "DSEL_1_1"
-		(shape input)
-		(at 341.63 257.81 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "d63195e5-4c83-4f5d-acc8-55fca207976a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 329.634 257.81 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22299,30 +22568,6 @@
 			)
 		)
 	)
-	(global_label "VDD_EXT_1"
-		(shape input)
-		(at 342.9 247.65 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "de87a513-72a0-4184-9744-7bc8f783946a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 329.8154 247.65 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-	)
 	(global_label "LED4"
 		(shape input)
 		(at 331.47 139.7 0)
@@ -22416,6 +22661,30 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+	)
+	(global_label "GNSS_RESET_SLAVE"
+		(shape input)
+		(at 364.49 227.33 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e578aa5f-20c9-4f66-835c-41163798acb1")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 385.7388 227.33 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
 		)
 	)
@@ -22563,30 +22832,6 @@
 			)
 		)
 	)
-	(global_label "DSEL_2_1"
-		(shape input)
-		(at 311.15 222.25 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "e978db36-1f3e-415b-ab38-40090761d5d1")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 299.154 222.25 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-	)
 	(global_label "RXD1_GNSS_2V8_1"
 		(shape input)
 		(at 364.49 217.17 0)
@@ -22648,6 +22893,30 @@
 		(uuid "ea47617f-859e-4176-a2f4-0b8d2660360f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 20.3587 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+	)
+	(global_label "TIMERIN_GNSS_2V8_2"
+		(shape input)
+		(at 307.34 280.67 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "eb0cf2e6-5843-4d0f-9fa8-61fe9ab28b64")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 284.3373 280.67 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22755,7 +23024,7 @@
 			)
 		)
 	)
-	(global_label "TIMERIN_GNSS"
+	(global_label "TIMERIN_GNSS_1"
 		(shape input)
 		(at 487.68 232.41 0)
 		(fields_autoplaced yes)
@@ -22767,7 +23036,7 @@
 		)
 		(uuid "f6a0752f-48a6-4bd9-98b5-db68ad9f46b6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 504.0304 232.41 0)
+			(at 506.2075 232.41 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -22824,54 +23093,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-			)
-		)
-	)
-	(global_label "RXD2_GNSS_2V8_2"
-		(shape input)
-		(at 360.68 295.91 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "fb516a7f-3681-4e47-b1cf-5dd11870c920")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 381.2636 295.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
-	(global_label "VDD_EXT_2"
-		(shape input)
-		(at 321.31 313.69 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "fbe98f67-44f0-42a7-8871-5e84518d5cb0")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 308.2254 313.69 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 			)
 		)
 	)
@@ -28478,7 +28699,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "63.4k"
+		(property "Value" "73.2k"
 			(at 400.05 62.23 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -34304,87 +34525,6 @@
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
 					(reference "#PWR090")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_US")
-		(at 321.31 318.77 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "69e46f7f-e91d-4ea8-af62-7fa572f0e3bc")
-		(property "Reference" "R44"
-			(at 322.834 317.5 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "39k"
-			(at 322.834 320.04 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
-			(at 322.326 319.024 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 321.31 318.77 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor, US symbol"
-			(at 321.31 318.77 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "635d0551-f91c-48b3-9dd2-ce447d0fb4e7")
-		)
-		(pin "2"
-			(uuid "a1d5d2bc-2e1f-47f2-8e98-e8577619d078")
-		)
-		(instances
-			(project "telemetry"
-				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R44")
 					(unit 1)
 				)
 			)
@@ -49079,87 +49219,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
-		(at 342.9 252.73 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "e300ab71-239e-40b5-92db-0d5d54a171fb")
-		(property "Reference" "R41"
-			(at 344.424 251.46 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "39k"
-			(at 344.424 254 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
-			(at 343.916 252.984 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 342.9 252.73 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor, US symbol"
-			(at 342.9 252.73 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "eedaf57f-b58d-44a7-9712-5615b206a5b1")
-		)
-		(pin "2"
-			(uuid "14ad1880-2727-42eb-882c-553f8cbfa696")
-		)
-		(instances
-			(project "telemetry"
-				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R41")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 82.55 118.11 0)
 		(unit 1)
@@ -50002,87 +50061,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
-		(at 325.12 252.73 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "eb7d0c19-e3be-493a-9e7c-b1c5a249f1ab")
-		(property "Reference" "R40"
-			(at 326.644 251.46 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "39k"
-			(at 326.644 254 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
-			(at 326.136 252.984 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 325.12 252.73 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor, US symbol"
-			(at 325.12 252.73 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "072953fc-878b-4aa3-84d8-95c0513ed1a8")
-		)
-		(pin "2"
-			(uuid "b24172e1-a048-4f88-a4e4-4a6d87fcecf0")
-		)
-		(instances
-			(project "telemetry"
-				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R40")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 143.51 119.38 0)
 		(unit 1)
@@ -50359,6 +50337,7 @@
 		)
 	)
 	(symbol
+		(lib_name "LC29HEAMD_1")
 		(lib_id "telemetry:LC29HEAMD")
 		(at 318.77 204.47 0)
 		(unit 1)
@@ -50414,7 +50393,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Quectel LC29H(EA) dual-band GNSS module. Per Hardware Design v1.4 the EA does not support D_SEL, UART2, I2C or SPI: pins 2, 4, 5, 6, 15 and 16 are reserved and must be left N/C. In the Moving Base (dual-antenna heading) application, pins 18 and 19 are TXD2 and RXD2 (joined to the rover UART1 pins 20 and 21) and pin 17 is RESET_CTL, an output that drives the rover RESET_N (leave it N/C on the rover). Pin 17 is reserved otherwise."
 			(at 318.77 204.47 0)
 			(hide yes)
 			(show_name no)
@@ -51369,7 +51348,7 @@
 				)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Quectel LC29H(EA) dual-band GNSS module. Per Hardware Design v1.4 the EA does not support D_SEL, UART2, I2C or SPI: pins 2, 4, 5, 6, 15 and 16 are reserved and must be left N/C. In the Moving Base (dual-antenna heading) application, pins 18 and 19 are TXD2 and RXD2 (joined to the rover UART1 pins 20 and 21) and pin 17 is RESET_CTL, an output that drives the rover RESET_N (leave it N/C on the rover). Pin 17 is reserved otherwise."
 			(at 314.96 270.51 0)
 			(hide yes)
 			(show_name no)
@@ -51617,87 +51596,6 @@
 			(project "telemetry"
 				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
 					(reference "#PWR0116")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_US")
-		(at 339.09 318.77 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "f80d2d27-d763-4c16-a63a-060ba9a413ca")
-		(property "Reference" "R45"
-			(at 340.614 317.5 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "39k"
-			(at 340.614 320.04 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
-			(at 340.106 319.024 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 339.09 318.77 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor, US symbol"
-			(at 339.09 318.77 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "28c682cd-9105-457e-bd32-38045414a25d")
-		)
-		(pin "2"
-			(uuid "b2d6b18c-f24f-468d-9c68-00fcf326d80d")
-		)
-		(instances
-			(project "telemetry"
-				(path "/3df6834d-aaf5-42e5-8a41-0f444a5b1186"
-					(reference "R45")
 					(unit 1)
 				)
 			)
