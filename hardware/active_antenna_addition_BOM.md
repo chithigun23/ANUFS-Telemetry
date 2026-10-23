@@ -1,193 +1,102 @@
-# Active Antenna Addition — Planning Doc
+# GNSS Antennas and Heading: Design Doc
 
-Status: **implemented in schematic** (telemetry.kicad_sch), now covering two features:
-1. The original single-antenna active bias-tee on J2 (below).
-2. A second GNSS module + antenna (U15/J8) added purely for **heading**, via dual-antenna
-   moving-base RTK — see "Dual-antenna heading addition" further down.
+Status: **implemented in schematic and PCB** (netlist dated 2026-10-13). Designators below match `telemetry.net`. An older revision of this doc used different designators (J2/J8, R40/R41, U15, D2); those are obsolete.
 
-Library symbols/footprints for the new parts (LQW15AN56NG00D, PESD0402-140, DMG2305UX-7)
-exist in telemetry-library, though the FET ended up unused — see below.
+Two features:
+1. Active-antenna bias-tees on two SMA connectors (J7 for U10, J8 for U13).
+2. Dual-antenna heading via moving-base RTK between two LC29H(EA) modules, wired per Quectel's *LC29H(EA) Moving Base Application Note V1.1*.
 
-Goal, as built: dedicated active-antenna bias-tee on the existing SMA connector (J2), always
-on (no switch — see "Design history" for why the switch was dropped, and why passive-antenna
-compatibility is no longer a design goal: precise RTK positioning needs the active antenna's
-phase-center stability and multipath rejection, so this connector is active-only going forward).
+## Roles
 
-## Design history (superseded — kept for context)
+| Module | Role | Connection to MCU |
+|---|---|---|
+| U10 LC29HEAMD | **Base**. Outputs position NMEA and, per Quectel's note, the heading computed by the rover | UART1 (pins 20/21) through U12 (TXS0104EPW) to STM32 UART4 on PA1/PA0. 1PPS (pin 3) to PA9 through U12 |
+| U13 LC29HEAMD | **Rover**. Computes baseline and heading | No data link to the MCU. 1PPS (pin 3) to PA3 through U12 |
 
-Originally planned as two separate SMA connectors (existing J2 for passive, a new J601 for
-active) selected by an RF switch (pSemi PE4259), so both antennas could be mounted
-simultaneously with instant electronic selection. **Dropped this approach**: it only makes
-sense if both antennas need to be physically connected at once.
+Both modules run from +3.3V. U10's `VDD_EXT_1` is the logic reference for U12's A side. U13's `VDD_EXT_2` (pin 7) is not connected to anything else.
 
-Next iteration was a single connector supporting *either* antenna type, with bias switchable
-via a FET (Q601/Q602/R602) so bias could be disabled for passive-antenna safety or power
-saving. **Also dropped, for two reasons:**
-1. Checked whether the module itself gates VDD_RF based on `ANT_ON` — it doesn't. VDD_RF just
-   mirrors VCC always. And on this board, VCC is never power-cycled and `WAKEUP` is
-   unconnected (no path to exit Backup mode), so the module never leaves Continuous mode in
-   the first place — there's no power-saving event for a switch to respond to.
-2. The actual goal is RTK positioning as close to 1cm as achievable. That needs the active
-   antenna's phase-center stability and multipath rejection — a passive antenna is a strictly
-   worse choice for this application, not a fallback worth keeping wired in. So "safely
-   support either antenna type" stopped being a real requirement, and with it, the reason to
-   worry about a passive antenna's DC-short fault mode on this connector went away too.
+### Module-to-module link (per Quectel moving-base note)
 
-Net result: **no switch, active-only, bias always on.** `R601` (10Ω, in series with the bias
-feed) still exists and still matters — it protects the module if the antenna connector is ever
-shorted (e.g. a wiring fault, connector mishap), which is a real scenario worth guarding
-against regardless of antenna type.
-
-## Active antenna
-
-**u-blox ANN-MB1-00**
-- Dual-band: L1 (1559–1606 MHz) + L5/E5a/B2a/NavIC (1164–1188 MHz) — matches LC29H(EA)'s
-  dual-band capability
-- Bias: 3.0–5.0 V, typ. 15 mA @ 5V (VDD_RF on this board mirrors VCC = 3.3V, within spec)
-- LNA gain: typ. 29 dB (L1) / 33 dB (L5), pre-filtered with an internal SAW
-- 5 m RG174 cable, SMA connector, magnetic mount
-- IP67, –40°C to +85°C, CE approved
-- Source: [DigiKey](https://www.digikey.com/en/products/detail/u-blox/ANN-MB1-00/14835875)
-- Datasheet: [ANN-MB1 Product Summary](https://content.u-blox.com/sites/default/files/ANN-MB1_ProductSummary_UBX-21000238.pdf)
-
-## Topology (as built)
-
-Follows Quectel's own active-antenna reference circuit (Hardware Design doc, Sheet 6), minus
-the optional power switch. `VDD_RF → R40 → [C36, C38 decoupling] → L2 → antenna node [D2 TVS,
-J2, C40 DC-block] → RF_IN`. Bias is always on.
-
-| Schematic ref | Part | Value/Footprint | Connects |
-|---|---|---|---|
-| R40 | 10Ω | [Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder](.) | VDD_RF (pin 9) → bias choke; limits fault current if the connector is ever shorted |
-| C36 | Yageo CC0402KRX7R7BB104, 100nF, X7R | [LCSC C60474](https://www.lcsc.com/product-detail/C60474.html), 16V, ±10%, $0.005 (100+ qty) | Decouple, on bias line near L2 — shunt-to-ground, dielectric loss doesn't matter here |
-| C38 | Yageo CC0402JRNPO9BN101, 100pF, C0G/NP0 | [LCSC C106200](https://www.lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_YAGEO-CC0402JRNPO9BN101_C106200.html), 50V, ±5%, $0.0044 (100+ qty) | Decouple, on bias line near L2 |
-| L2 | Murata LQW15AN56NG00D, 56nH | telemetry:LQW15AN56NG00D, [DigiKey 490-6830-1-ND](https://www.digikey.com/en/products/detail/murata-electronics/LQW15AN56NG00D/3846027) | Feeds DC bias onto the RF_IN line without loading the RF signal. SRF 2.8GHz (56% margin above L1's 1575.42MHz — chosen over Quectel's literal 68nH spec, which only has ~3% SRF margin on any commonly available part), 200mA rating, $0.12 |
-| D2 | Littelfuse PESD0402-140 | telemetry:PESD0402-140, [DigiKey PESD0402-140CT-ND](https://www.digikey.com/en/products/detail/littelfuse-inc/PESD0402-140/1968525) | ESD protection at the antenna node. 0.05pF (well under Quectel's <0.6pF recommendation), 14V standoff (clear of the 3.3V bias), $0.80 |
-| C40 | Yageo CC0402JRNPO9BN101, 100pF, C0G/NP0 | [LCSC C106200](https://www.lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_YAGEO-CC0402JRNPO9BN101_C106200.html), 50V, ±5%, $0.0044 (100+ qty) | DC block between the antenna node and RF_IN (pin 11) — C0G/NP0 specifically chosen since this cap sits directly in the RF signal path (X7R's higher dielectric loss would add real insertion loss here, unlike C36 which is just a shunt bypass) |
-| J2 | (existing) | — | Antenna connector, SMA |
-
-**Dielectric note:** C38 and C40 use the *same* C0G/NP0 part (LCSC C106200) even though C38 is just a decoupling cap that didn't strictly need C0G — no cost or sourcing penalty at this value, and it simplifies the BOM to one fewer distinct part. C36 stays X7R since 100nF isn't practically available in C0G at 0402 size, and it doesn't matter for a shunt-to-ground bypass cap anyway.
-
-**Note:** `R40`'s footprint was originally set to `Resistor_THT:R_Array_SIP4` (wrong package,
-clearly a leftover default) and `C36`/`C38`/`C40` had no footprint at all — all four fixed
-directly in the schematic (2026-09-18).
-
-**Sourcing note:** AEC-Q200 was not treated as a requirement when picking L2/D2 —
-for a Formula Student car (rebuilt/inspected each season, not a 10+ year OEM warranty part),
-the real drivers are electrical fit and physical robustness (temp range, small rigid SMD
-construction), not automotive PPAP qualification. Both parts are confirmed direct
-DigiKey stock, not DigiKey Marketplace listings.
-
-**Not used: Diodes Inc DMG2305UX-7 P-FET.** A symbol/footprint (`telemetry:DMG2305UX-7`)
-exists in the library from when a bias switch was still planned, but the switch was dropped
-(see Design history) before it got used anywhere in the schematic. The board does have an
-unrelated `Q1` (DMP3099LQ-7) and `Q2` (MMBT3904) — those belong to a separate 12V input
-protection circuit, not this antenna feature; don't confuse the two when reading the BOM.
-
-## Dual-antenna heading addition (U15/J8) — implemented in schematic
-
-**Why:** the AUSCORS/CORSnet-NSW network corrections (free, via Geoscience Australia's
-Positioning Australia program) improve absolute *position* accuracy, but say nothing about
-which way the car is pointing. A single antenna's only heading signal is course-over-ground
-(the direction of the velocity vector), which is meaningless at low speed or standstill. True,
-speed-independent heading needs a second antenna at a fixed, known separation, computed via
-moving-base RTK between two receivers — a completely separate feature from the network RTK
-corrections, not a replacement for them. Both can be used at once if wanted.
-
-**Roles:**
-- **U13 (existing module) = Rover.** Unchanged — still talks to the MCU exactly as before
-  (UART1 → level shifter U14 → STM32 **UART4**, AF8, on PA0/PA1). It's the one that outputs
-  the final position/heading solution.
-- **U15 (new module) = Base.** Only generates the raw observation stream for U13 to compute
-  the baseline/heading against. Does **not** talk to the MCU at all — U15's own UART1
-  (TXD1/RXD1) and 1PPS (pin 3) are intentionally NC-flagged, unused.
-
-**Module-to-module link (UART2 on both modules, full crossover, no level shifting needed —
-both run off their own internally-generated VDD_EXT at the same logic level):**
 | From | To | Net |
 |---|---|---|
-| U15 (Base) TXD2, pin 15 | U13 (Rover) RXD2, pin 16 | `TXD2_GNSS_2V8_2` |
-| U13 (Rover) TXD2, pin 15 | U15 (Base) RXD2, pin 16 | `RXD2_GNSS_2V8_2` |
+| U10 TXD2, pin 18 | U13 RXD1, pin 21 | `CORRECTION` |
+| U13 TXD1, pin 20 | U10 RXD2, pin 19 | `HEADING` |
+| U10 RESET_CTL, pin 17 | U13 RESET_N, pin 8 | `GNSS_RESET_SLAVE` |
 
-**Second bias-tee (U15), identical topology to J2's, same parts reused:**
-`VDD_RF (U15 pin 9) → R41 → [C41, C43 decoupling] → L3 → antenna node [D5 TVS, J8, C42
-DC-block] → RF_IN (U15 pin 11)`
+Pins 5, 6, 15, 16 on both modules are RESERVED and left unconnected. WAKEUP (pin 1) is unconnected, so the modules never leave continuous mode.
 
-| Schematic ref | Part | Value/Footprint | Connects |
+**Reset:** MCU `PC6` (`GNSS_RESET_ASSERT`) drives Q2 (MMBT3904) through R37/R38, which pulls U10 RESET_N low. U10 then resets U13 through RESET_CTL. This was a shared reset net in an earlier revision.
+
+## Antennas
+
+**Currently planned: u-blox ANN-MB5** (three being bought).
+- Bands: L1 (1559 to 1608 MHz) and L5/E5a/B2a/NavIC (1164 to 1186 MHz), matching LC29H(EA).
+- Supply 3 to 5 V, 17 mA. The board's 3.3 V `VDD_RF` is inside that range.
+- LNA gain typ. 15 dB (L1) and 16 dB (L5), 3 m cable with SMA.
+- Source: [ANN-MB5 datasheet](https://cdn.sparkfun.com/assets/0/b/a/5/2/ANN-MB5_Datasheet.pdf)
+
+**Why not the ANN-MB1-00 used in the earlier revision of this doc:** Quectel's *LC29H Series Hardware Design V1.4* (Table 9, recommended antenna specifications) gives "Active Antenna Total Gain: < 17 dB", where total gain is the internal LNA gain minus the total insertion loss of cables and components inside the antenna. The ANN-MB1's 29 dB (L1) and 33 dB (L5) LNA gain is well above that unless cable and component losses are about 12 to 16 dB. The ANN-MB5's 15 to 16 dB LNA gain is inside the limit before any cable loss. The same table asks for noise figure < 1.5 dB, out-of-band rejection > 30 dB, and for RTK, phase center offset and variation < 20 mm each.
+
+**Heading baseline:** minimum antenna separation for reliable RTK-Fixed heading is realistically 30 cm or more. Quectel's documented minimum is 0.2 m, but field reports suggest 27 cm baselines only reach RTK-Float. Mounting on the car must allow this.
+
+## Bias-tee topology (as built, one per module)
+
+Follows Quectel's active-antenna reference circuit (Hardware Design, active antenna reference design), without the optional power switch. Bias is always on.
+
+`VDD_RF -> R (10 ohm) -> [100pF, 100nF decoupling] -> L (56nH) -> antenna node [TVS, SMA, DC-block 100pF] -> pi pads -> RF_IN`
+
+| Function | U10 (J7) | U13 (J8) | Part |
 |---|---|---|---|
-| R41 | 10Ω | Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder | VDD_RF → bias choke, same fault-current role as R40 |
-| C41 | Yageo, 100pF, C0G/NP0 | [LCSC C106200](https://www.lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_YAGEO-CC0402JRNPO9BN101_C106200.html) | Decouple, bias line near L3 |
-| C43 | Yageo CC0402KRX7R7BB104, 100nF, X7R | [LCSC C60474](https://www.lcsc.com/product-detail/C60474.html) | Decouple, bias line near L3 |
-| L3 | Murata LQW15AN56NG00D, 56nH | telemetry:LQW15AN56NG00D, [DigiKey 490-6830-1-ND](https://www.digikey.com/en/products/detail/murata-electronics/LQW15AN56NG00D/3846027) | Same SRF-margin choke as L2 |
-| D5 | Littelfuse PESD0402-140 | telemetry:PESD0402-140, [DigiKey PESD0402-140CT-ND](https://www.digikey.com/en/products/detail/littelfuse-inc/PESD0402-140/1968525) | ESD protection at antenna node |
-| C42 | Yageo CC0402JRNPO9BN101, 100pF, C0G/NP0 | [LCSC C106200](https://www.lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_YAGEO-CC0402JRNPO9BN101_C106200.html) | DC block, antenna node → RF_IN |
-| J8 | GCT RFPC-SMA27-F | telemetry:RFPC-SMA27-F, [DigiKey 22162144](https://www.digikey.com/en/products/detail/gct/RFPC-SMA27-F/22162144), right-angle THT SMA jack, 6GHz, ~$2.26 — same part as J2. **Currently backorder/out of stock at DigiKey**, worth checking before final BOM lock | Second antenna connector |
+| Bias fault-current limiter | R39, 10 ohm | R43, 10 ohm | 0402 resistor. Protects the module if the connector is shorted |
+| Bias decoupling | C30 (100pF C0G), C31 (100nF X7R) | C51 (100pF C0G), C52 (100nF X7R) | See sourcing below |
+| Bias choke | L2 | L3 | Murata LQW15AN56NG00D, 56nH, [DigiKey 490-6830-1-ND](https://www.digikey.com/en/products/detail/murata-electronics/LQW15AN56NG00D/3846027), SRF 2.8 GHz |
+| Antenna-node ESD | D4 | D5 | Littelfuse PESD0402-140, [DigiKey PESD0402-140CT-ND](https://www.digikey.com/en/products/detail/littelfuse-inc/PESD0402-140/1968525), 0.05 pF, 14 V standoff |
+| DC block | C27 (100pF C0G) | C48 (100pF C0G) | Yageo CC0402JRNPO9BN101, [LCSC C106200](https://www.lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_YAGEO-CC0402JRNPO9BN101_C106200.html), 50 V |
+| Pi-filter pads | C28 (shunt, empty), R35 (series, 0 ohm), C29 (shunt, empty) | C49 (shunt, empty), R42 (series, 0 ohm), C50 (shunt, empty) | Empty shunt pads were left unpopulated on purpose |
+| Antenna connector | J7 | J8 | GCT RFPC-SMA27-F, right-angle THT SMA jack, [DigiKey 22162144](https://www.digikey.com/en/products/detail/gct/RFPC-SMA27-F/22162144). Had backorder/out-of-stock status at DigiKey when last checked, so check before ordering |
 
-All of R41/C41/C43/L3/D5/C42 are the exact same MPNs as R40/C36/C38/L2/D2/C40 (module 1) —
-just a second set, no new sourcing decisions needed for those. J8 is the only genuinely new
-line item.
+- 100nF X7R is used for the shunt bypass (100nF is not practically available in C0G at 0402). The part chosen in the earlier revision was Yageo CC0402KRX7R7BB104, [LCSC C60474](https://www.lcsc.com/product-detail/C60474.html). Confirm the BOM still uses it.
+- C0G/NP0 is used for the DC block because it sits directly in the RF path. X7R's dielectric loss would add insertion loss there.
+- L2/L3 are 56nH instead of Quectel's literal 68nH: the 68nH parts commonly available have only about 3% SRF margin over L1 (1575.42 MHz), while this part has about 56%.
+- `ANT_ON` (pin 14) on both modules is not connected. `VDD_RF` mirrors VCC and the module does not gate it.
+- AEC-Q200 was not required for L2/D4/D5. For a Formula Student car the drivers are electrical fit and physical robustness.
 
-**D_SEL pull-ups (U15):** R42 (39kΩ, DSEL2 → `VDD_EXT_2`) and R43 (39kΩ, DSEL1 → `VDD_EXT_2`)
-— same 39kΩ-to-VDD_EXT strapping as U13's R38/R39, giving D_SEL=(1,0)=SPI... actually giving
-whatever mode U13 uses; set to match U13's strap so both modules are configured identically.
+### RF test through-path (J9, J10)
 
-**Level shifter U16 — added, then removed.** Originally duplicated U14 alongside U15 to give
-it its own MCU-facing level-shifted UART1, but that's unnecessary: U15 never talks to the MCU
-in this design, so there's nothing for a second level shifter to shift. Removed, along with
-its supporting R46/C44 (which existed to support U16 specifically, same as R35/C23 support
-U14 — not independent parts, correctly deleted together).
+J9 and J10 (also RFPC-SMA27-F) are joined only to each other on net `ANT3`. They are not connected to a module. See `RF Analysis/` for the simulation work that motivated the 0.36 mm trace width.
 
-**Shared reset:** U13 and U15 are tied to the same `GNSS_RESET_N` net — both modules reset
-together off one MCU line. Intentional/simplest choice; revisit only if independent resets
-are ever needed (e.g. power-cycling just the Base without disturbing the Rover).
+## Design history (superseded)
 
-**Second antenna:** same u-blox ANN-MB1-00 as the first (see "Active antenna" section above)
-— need **two** of this part now, not one. Minimum antenna separation for reliable RTK-Fixed
-heading is realistically ~30cm+ (Quectel's documented minimum is 0.2m, but field reports
-suggest 27cm baselines only reach RTK-Float, not Fixed) — mounting separation on the car needs
-to account for this.
+- An RF switch (pSemi PE4259) to choose between a passive and an active antenna was dropped: it only makes sense if both antennas are connected at once.
+- A switchable bias (Diodes DMG2305UX-7 P-FET) was dropped because the module does not gate `VDD_RF` on `ANT_ON`, and because RTK to about 1 cm needs the active antenna's phase-center stability and multipath rejection, so a passive antenna is not a fallback worth wiring in. The `telemetry:DMG2305UX-7` library symbol is unused.
+- A second MCU-facing level shifter and shared UART2 link between the modules (earlier revisions) were removed. The current wiring follows Quectel's moving-base note.
+- Note: `Q1` (DMP3099LQ-7) is the 12 V reverse-polarity P-FET. `Q2` (MMBT3904) is the GNSS reset transistor. They are unrelated to the antenna bias.
 
-**Firmware TODO (not yet done, flagging so it isn't forgotten):**
-- Configure U15 (Base) to output raw observation data on UART2 (moving-base mode).
-- Configure U13 (Rover) to accept corrections on UART2 and enable `PQTMTAR` output
-  (baseline distance + heading) at a sane rate — 10Hz has been reported to give worse
-  RTK-Fixed stability than 1–5Hz in the field, worth testing both.
-- STM32 side is unchanged — still just UART4 (AF8) on PA0/PA1 reading U13's NMEA/PQTM output,
-  exactly as the single-antenna design already required.
+## Firmware TODO
 
-## Bandpass filtering — decided against, not implementing
+- U10 and U13 identify themselves as base and rover automatically when wired as above (per the moving-base note). No special configuration is required for the pairing.
+- Enable `$PQTMTAR` with `$PQTMCFGMSGRATE,W,PQTMTAR,1,1` as in the note. The note says the message is produced by the rover and output by the base. **Confirm on the bench** which module receives the enable command and that `$PQTMTAR` appears on U10's UART1.
+- Position fix interval is `$PAIR050` (100 to 1000 ms, default 100 ms for LC29H(EA)). Above 1 Hz only RMC and GGA output at the fast rate. At 10 Hz use UART baud 460800 or higher (`$PAIR864`); the protocol spec warns of lost messages below that.
+- 10 Hz has been reported in the field to give worse RTK-Fixed stability than 1 to 5 Hz. Make the rate configurable and test both.
+- STM32 side: UART4 (AF8) on PA0/PA1 reads U10's NMEA and `$PQTMTAR`. See [../software/README.md](../software/README.md).
 
-Considered adding a board-level bandpass filter for automotive EMI robustness (Quectel's
-reference design marks this optional). **Decision: not using an external bandpass filter.**
-The single-connector switchable-bias feature above stands on its own without it.
+## Bandpass filtering: decided against, not implementing
 
-Research is kept below for reference in case this gets revisited later — e.g. if EMI proves
-to be a real problem once the car is running and generating RF noise on track.
+Considered a board-level bandpass filter for automotive EMI robustness (Quectel's reference design marks it optional). **Decision: no external bandpass filter.** Research is kept for reference in case EMI proves to be a problem once the car is running.
 
 <details>
 <summary>Bandpass filter research (not currently planned)</summary>
 
-LC29H(EA) has a single dual-band `RF_IN` pin (no separate L1/L2 inputs), so what would be
-needed is a filter that passes *both* L1 and L5 on one line while rejecting everything else.
+LC29H(EA) has a single dual-band `RF_IN` pin (no separate L1/L5 inputs), so a filter must pass both L1 and L5 on one line while rejecting everything else.
 
-**Rejected option — Taoglas DXP.02.A SAW diplexer used as a combiner.** Considered splitting
-the antenna signal 2 ways, feeding one leg into the diplexer's L1 port and the other into its
-L2/L5 port, and taking the recombined signal off Common. **Do not use this** — a diplexer's
-ports are only 50Ω-matched *within that port's own passband*; band separation works by
-reflecting out-of-band energy, not absorbing it. Feeding a dual-band signal into a single-band
-port means the other band's energy hits an uncharacterized, reflective mismatch at that port.
-Combined with ~3dB splitter loss and ~4dB diplexer loss, this is not a clean 50Ω system.
+**Rejected: Taoglas DXP.02.A SAW diplexer used as a combiner.** A diplexer's ports are only 50 ohm matched within that port's own passband. Feeding a dual-band signal into a single-band port leaves the other band's energy hitting an uncharacterized, reflective mismatch. Together with about 3 dB splitter loss and about 4 dB diplexer loss, this is not a clean 50 ohm system.
 
-**If revisited, use instead — Abracon AFII-LC-0081 full-band GNSS ceramic bandpass filter:**
-- Genuine 2-port device (Input/Output), not a diplexer
-- 50Ω source and load impedance, both ports — datasheet states "a matching network is
-  unnecessary." VSWR 1.2 typ / 1.5 max across the entire 1125–1675 MHz passband, so both L1
-  and L5 sit cleanly inside one continuous, well-matched band
-- Insertion loss: 0.85dB typ / 1.9dB max
-- Rejection: 40dB below 900MHz, 25dB at 900-1002MHz, 35dB at 2-2.5GHz, 27dB at 2.5-5.95GHz
-- Has internal DC-blocking caps on both input/output — would need to sit upstream of the
-  bias-injection point on the active leg
-- 3.2×2.5×1.75mm SMD, -45°C to +85°C, MSL1, automotive-validated COTS per Abracon's datasheet
-- ~$0.76. [DigiKey (AFII-LC-0081-T)](https://www.digikey.com/en/products/detail/abracon-llc/AFII-LC-0081-T/) · [Datasheet](https://abracon.com/datasheets/AFII-LC-0081.pdf)
+**If revisited, use: Abracon AFII-LC-0081 full-band GNSS ceramic bandpass filter.**
+- Genuine 2-port device, 50 ohm source and load, no matching network needed. VSWR 1.2 typ / 1.5 max over 1125 to 1675 MHz, so L1 and L5 sit inside one continuous matched band.
+- Insertion loss 0.85 dB typ / 1.9 dB max.
+- Rejection: 40 dB below 900 MHz, 25 dB at 900 to 1002 MHz, 35 dB at 2 to 2.5 GHz, 27 dB at 2.5 to 5.95 GHz.
+- Internal DC-blocking capacitors on both ports, so it would sit upstream of the bias-injection point.
+- 3.2 x 2.5 x 1.75 mm SMD, -45 to +85 C, MSL1.
+- About $0.76. [DigiKey (AFII-LC-0081-T)](https://www.digikey.com/en/products/detail/abracon-llc/AFII-LC-0081-T/) and [datasheet](https://abracon.com/datasheets/AFII-LC-0081.pdf)
 
 </details>
