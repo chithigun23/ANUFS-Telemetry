@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" width="1200" height="850" role="img" aria-labelledby="t d"><title id="t">Telemetry software layers</title><desc id="d">Layered crate diagram: the RTIC firmware binary on top, safe no_std logic crates in the middle, embedded-hal traits and support crates below, then the embassy-stm32 HAL, the PAC and the STM32H523.</desc><rect width="1200" height="850" fill="#ffffff"/><text x="600" y="34" font-size="20" font-weight="700" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Telemetry software: layers and crates</text>
+<text x="600" y="56" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Dependencies point down. Logic crates never depend on the HAL, so they build and test on the PC.</text>
+<text x="40" y="92" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">FIRMWARE BINARY  (firmware/)  SD adapters exist, the RTIC app is written at bring-up</text>
+<rect x="40" y="102" width="760" height="96" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="420.0" y="133.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">RTIC application (to be written on the board)</text>
+<text x="420.0" y="149.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">hardware tasks: PPS capture, FDCAN RX, UART4 DMA, IMU data-ready</text>
+<text x="420.0" y="164.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">software tasks: clock, decoders, record builder, log writer, supervisor</text>
+<text x="420.0" y="179.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">owns the static queues and the priority table</text>
+<text x="40" y="232" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">LOGIC CRATES  (crates/)  no_std, forbid(unsafe_code), 305 tests on the PC</text>
+<rect x="40" y="242" width="140" height="64" rx="6" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="110.0" y="266.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-core</text>
+<text x="110.0" y="280.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">clock, fusion,</text>
+<text x="110.0" y="293.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">supervisor</text>
+<rect x="195" y="242" width="140" height="64" rx="6" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="265.0" y="266.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-nmea</text>
+<text x="265.0" y="280.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">NMEA, PQTM,</text>
+<text x="265.0" y="293.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">GNSS config</text>
+<rect x="350" y="242" width="140" height="64" rx="6" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="420.0" y="266.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-can</text>
+<text x="420.0" y="280.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">signal extraction</text>
+<text x="420.0" y="293.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">engine</text>
+<rect x="505" y="242" width="140" height="64" rx="6" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="575.0" y="266.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-can-sbg</text>
+<text x="575.0" y="280.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Ellipse tables</text>
+<text x="575.0" y="293.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">(from DBC)</text>
+<rect x="660" y="242" width="140" height="64" rx="6" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="730.0" y="266.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-can-motec</text>
+<text x="730.0" y="280.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">MoTeC tables</text>
+<text x="730.0" y="293.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">(from CSV)</text>
+<rect x="40" y="316" width="140" height="64" rx="6" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="110.0" y="340.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-asm330</text>
+<text x="110.0" y="354.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">IMU driver</text>
+<text x="110.0" y="367.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">(SPI)</text>
+<rect x="195" y="316" width="140" height="64" rx="6" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="265.0" y="340.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-tlc59108</text>
+<text x="265.0" y="354.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">LED driver</text>
+<text x="265.0" y="367.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">(I2C)</text>
+<rect x="350" y="316" width="140" height="64" rx="6" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="420.0" y="340.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-logfmt</text>
+<text x="420.0" y="354.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">blocks, records,</text>
+<text x="420.0" y="367.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">recovery</text>
+<rect x="505" y="316" width="140" height="64" rx="6" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="575.0" y="340.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-store</text>
+<text x="575.0" y="354.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">async write loop</text>
+<text x="575.0" y="367.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">over BlockDevice</text>
+<path d="M 740 198 L 740 242" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="740,242 744.5,233.0 735.5,233.0" fill="#7b8794"/>
+<text x="40" y="410" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">SUPPORT</text>
+<rect x="40" y="420" width="240" height="70" rx="8" fill="#f4f1e8" stroke="#8a7a3d" stroke-width="1.5"/>
+<text x="160.0" y="447.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embedded-hal 1.0</text>
+<text x="160.0" y="461.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SpiDevice and I2c traits:</text>
+<text x="160.0" y="474.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">drivers are generic over them</text>
+<rect x="300" y="420" width="240" height="70" rx="8" fill="#f4f1e8" stroke="#8a7a3d" stroke-width="1.5"/>
+<text x="420.0" y="447.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embedded-sdmmc</text>
+<text x="420.0" y="461.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SPI-mode SD driver,</text>
+<text x="420.0" y="474.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">used for SD2 only</text>
+<rect x="560" y="420" width="240" height="70" rx="8" fill="#f4f1e8" stroke="#8a7a3d" stroke-width="1.5"/>
+<text x="680.0" y="447.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">can-dbc (host only)</text>
+<text x="680.0" y="461.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">read by dbc2table to</text>
+<text x="680.0" y="474.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">turn DBC files into tables</text>
+<path d="M 420.0 380 L 420.0 420" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="420.0,420 424.5,411.0 415.5,411.0" fill="#7b8794"/>
+<text x="40" y="526" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">HAL</text>
+<rect x="40" y="536" width="760" height="70" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+<text x="420.0" y="569.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embassy-stm32 0.6  (feature stm32h523rc)</text>
+<text x="420.0" y="585.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">FDCAN1/2, SDMMC1, SPI1/2, I2C3, UART4, USB FS, TIM1/TIM2 input capture, GPDMA, IWDG</text>
+<path d="M 420.0 490 L 420.0 536" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="420.0,536 424.5,527.0 415.5,527.0" fill="#7b8794"/>
+<text x="40" y="640" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">PAC AND CORE</text>
+<rect x="40" y="650" width="760" height="60" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+<text x="420.0" y="678.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">stm32-metapac, cortex-m, cortex-m-rt, rtic</text>
+<text x="420.0" y="694.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">register access, vector table, critical sections</text>
+<path d="M 420.0 606 L 420.0 650" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="420.0,650 424.5,641.0 415.5,641.0" fill="#7b8794"/>
+<rect x="40" y="738" width="760" height="56" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="420.0" y="764.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">STM32H523RCT7</text>
+<text x="420.0" y="780.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Cortex-M33 with FPU, 256 kB flash</text>
+<path d="M 420.0 710 L 420.0 738" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="420.0,738 424.5,729.0 415.5,729.0" fill="#7b8794"/>
+<path d="M 22 534 L 14 534 L 14 712 L 22 712" fill="none" stroke="#c0392b" stroke-width="2"/>
+<text x="8" y="624" font-size="11" font-weight="normal" fill="#c0392b" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" transform="rotate(-90 8 624)">contains unsafe</text>
+<text x="840" y="92" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">HOST SIDE  (your PC)</text>
+<rect x="840" y="102" width="320" height="96" rx="8" fill="#efe9f7" stroke="#6b4aa0" stroke-width="1.5"/>
+<text x="1000.0" y="141.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tools/tel-decode</text>
+<text x="1000.0" y="157.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">scans a card or image, reports sessions,</text>
+<text x="1000.0" y="172.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">exports samples, events, CAN as CSV</text>
+<rect x="840" y="232" width="320" height="94" rx="8" fill="#efe9f7" stroke="#6b4aa0" stroke-width="1.5"/>
+<text x="1000.0" y="270.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">cargo test</text>
+<text x="1000.0" y="286.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">runs every logic crate on the PC,</text>
+<text x="1000.0" y="301.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">plus a whole-system drive simulation</text>
+<rect x="840" y="372" width="320" height="118" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="1000.0" y="415.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Reuses the same crates</text>
+<text x="1000.0" y="430.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-logfmt, tel-can-*, tel-nmea, tel-core</text>
+<text x="1000.0" y="444.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">so the decoder cannot drift from the firmware.</text>
+<text x="1000.0" y="458.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tools/dbc2table generates the CAN tables.</text>
+<path d="M 800 284 L 840 284" fill="none" stroke="#7b8794" stroke-width="1.6" stroke-dasharray="5 4"/>
+<polygon points="840,284 831.0,279.5 831.0,288.5" fill="#7b8794"/>
+<path d="M 800 150 L 840 150" fill="none" stroke="#7b8794" stroke-width="1.6" stroke-dasharray="5 4"/>
+<polygon points="840,150 831.0,145.5 831.0,154.5" fill="#7b8794"/>
+<rect x="840" y="536" width="320" height="176" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="1000.0" y="585.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Why it is split this way</text>
+<text x="1000.0" y="601.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">1. All parsing and decoding is safe Rust</text>
+<text x="1000.0" y="616.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">    that can be tested without hardware.</text>
+<text x="1000.0" y="631.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">2. Unsafe is confined to the HAL, PAC</text>
+<text x="1000.0" y="646.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">    and RTIC macros, which are widely used.</text>
+<text x="1000.0" y="661.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">3. Swapping the HAL or scheduler later</text>
+<text x="1000.0" y="676.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">    does not touch the logic crates.</text></svg>

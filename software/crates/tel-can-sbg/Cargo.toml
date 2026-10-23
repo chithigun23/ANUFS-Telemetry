@@ -1,0 +1,16 @@
+[package]
+name = "tel-can-sbg"
+description = "SBG Systems Ellipse CAN message table (generated from sbgCan.dbc) and key signal ids"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+tel-can = { path = "../tel-can" }
+
+[dev-dependencies]
+dbc2table = { path = "../../tools/dbc2table" }
+
+[lints]
+workspace = true

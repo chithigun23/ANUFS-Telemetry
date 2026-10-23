@@ -1,0 +1,7 @@
+[build]
+target = "thumbv8m.main-none-eabihf"
+
+[target.thumbv8m.main-none-eabihf]
+rustflags = ["-C", "link-arg=-Tlink.x"]
+# Flash and run with a debug probe (chip name to be confirmed with `probe-rs chip list`):
+# runner = "probe-rs run --chip STM32H523RCTx"

@@ -1,0 +1,35 @@
+[workspace]
+resolver = "2"
+members = ["crates/*", "tools/dbc2table", "tools/tel-decode"]
+exclude = ["firmware"]
+# firmware/ targets the MCU and is built separately (see firmware/README.md)
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+publish = false
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+unreachable_pub = "warn"
+
+[workspace.lints.clippy]
+# Reliability policy for logic crates: no hidden panics, no unchecked arithmetic.
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+indexing_slicing = "deny"
+arithmetic_side_effects = "deny"
+todo = "deny"
+unimplemented = "deny"
+cast_possible_truncation = "warn"
+cast_sign_loss = "warn"
+cast_possible_wrap = "warn"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+overflow-checks = true

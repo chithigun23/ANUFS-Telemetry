@@ -1,0 +1,16 @@
+[package]
+name = "tel-can-motec"
+description = "MoTeC M150 / PDM15 / C125 CAN message table, generated from config/motec.csv"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+tel-can = { path = "../tel-can" }
+
+[dev-dependencies]
+dbc2table = { path = "../../tools/dbc2table" }
+
+[lints]
+workspace = true

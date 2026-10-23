@@ -1,0 +1,24 @@
+[package]
+name = "tel-decode"
+description = "Host tool: scan a telemetry SD card or image, report sessions, export CSV, prepare a card region"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+tel-logfmt = { path = "../../crates/tel-logfmt" }
+tel-can = { path = "../../crates/tel-can" }
+tel-can-sbg = { path = "../../crates/tel-can-sbg" }
+tel-can-motec = { path = "../../crates/tel-can-motec" }
+
+[dev-dependencies]
+tel-nmea = { path = "../../crates/tel-nmea" }
+tel-core = { path = "../../crates/tel-core" }
+tel-asm330 = { path = "../../crates/tel-asm330" }
+tel-store = { path = "../../crates/tel-store" }
+futures-executor = "0.3"
+proptest = "1"
+
+[lints]
+workspace = true

@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1544" width="1100" height="1544" role="img" aria-labelledby="t d"><title id="t">Telemetry firmware boot and run flow</title><desc id="d">Flowchart from reset through hardware init, SD mount, GNSS configuration, wait for fix, and the 10 Hz logging loop with SD failover.</desc><rect width="1100" height="1544" fill="#ffffff"/><text x="550" y="34" font-size="20" font-weight="700" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Telemetry firmware: boot and run flow</text>
+<text x="550" y="56" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Centre column is the normal path. Boxes on the right handle failures and loop back.</text>
+<rect x="245.0" y="83.0" width="170" height="34" rx="17.0" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="330" y="104" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Reset</text>
+<path d="M 330 117 L 330 140" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,140 334.5,131.0 325.5,131.0" fill="#7b8794"/>
+<rect x="165.0" y="140" width="330" height="58" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="330.0" y="167.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Clocks and safe GPIO</text>
+<text x="330.0" y="182.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">24 MHz HSE to PLL, outputs idle, watchdog started</text>
+<path d="M 330 198 L 330 220" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,220 334.5,211.0 325.5,211.0" fill="#7b8794"/>
+<rect x="165.0" y="220" width="330" height="58" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="330.0" y="247.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Status LEDs on</text>
+<text x="330.0" y="262.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">TLC59108 x2 over I2C3, all LEDs red = booting</text>
+<path d="M 330 278 L 330 300" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,300 334.5,291.0 325.5,291.0" fill="#7b8794"/>
+<rect x="165.0" y="300" width="330" height="58" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="330.0" y="320.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Mount SD1 and SD2</text>
+<text x="330.0" y="335.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-store recovery: header, hints, scan for the end</text>
+<text x="330.0" y="349.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SD1 via SDMMC1, SD2 via SPI2</text>
+<path d="M 330 358 L 330 380" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,380 334.5,371.0 325.5,371.0" fill="#7b8794"/>
+<polygon points="330,380.0 455.0,420 330,460.0 205.0,420" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="330" y="417.5" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">At least one</text>
+<text x="330" y="432.5" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">card usable?</text>
+<path d="M 455 420 L 700 420" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="700,420 691.0,415.5 691.0,424.5" fill="#7b8794"/>
+<text x="468" y="412" font-size="11" font-weight="normal" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">no</text>
+<rect x="700" y="382" width="330" height="76" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+<text x="865.0" y="411.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Fault state</text>
+<text x="865.0" y="426.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">LEDs flash, retry mount every 1 s,</text>
+<text x="865.0" y="440.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">GNSS and USB console stay alive</text>
+<path d="M 865.0 382 L 865.0 329 L 495.0 329" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="495.0,329 504.0,333.5 504.0,324.5" fill="#7b8794"/>
+<text x="873.0" y="368" font-size="11" font-weight="normal" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">card inserted, retry mount</text>
+<path d="M 330 460 L 330 482" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,482 334.5,473.0 325.5,473.0" fill="#7b8794"/>
+<text x="338" y="475" font-size="11" font-weight="normal" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">yes</text>
+<rect x="165.0" y="482" width="330" height="58" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="330.0" y="502.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Verify GNSS configuration</text>
+<text x="330.0" y="517.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">try 115200 then 460800, query fix rate and baud,</text>
+<text x="330.0" y="531.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">check PQTMTAR output is enabled</text>
+<path d="M 330 540 L 330 562" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,562 334.5,553.0 325.5,553.0" fill="#7b8794"/>
+<polygon points="330,562.0 455.0,602 330,642.0 205.0,602" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="330" y="599.5" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Matches 10 Hz,</text>
+<text x="330" y="614.5" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">460800, PQTMTAR?</text>
+<path d="M 455 602 L 700 602" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="700,602 691.0,597.5 691.0,606.5" fill="#7b8794"/>
+<text x="468" y="594" font-size="11" font-weight="normal" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">no</text>
+<rect x="700" y="547" width="330" height="110" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="865.0" y="586.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Reconfigure once</text>
+<text x="865.0" y="601.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">PAIR382,1 + PAIR003, PAIR050 100 ms,</text>
+<text x="865.0" y="615.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">PAIR864 460800, PQTMCFGMSGRATE,</text>
+<text x="865.0" y="629.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">save with PQTMSAVEPAR, reset U10 via PC6</text>
+<path d="M 865.0 547 L 865.0 511 L 495.0 511" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="495.0,511 504.0,515.5 504.0,506.5" fill="#7b8794"/>
+<text x="873.0" y="537" font-size="11" font-weight="normal" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">retry verify</text>
+<path d="M 330 642 L 330 664" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,664 334.5,655.0 325.5,655.0" fill="#7b8794"/>
+<text x="338" y="657" font-size="11" font-weight="normal" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">yes</text>
+<rect x="165.0" y="664" width="330" height="58" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="330.0" y="684.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Start buses and IMU</text>
+<text x="330.0" y="699.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">FDCAN1 + FDCAN2 bus monitoring, ASM330 ODR set,</text>
+<text x="330.0" y="713.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">PPS capture armed</text>
+<path d="M 330 722 L 330 744" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,744 334.5,735.0 325.5,735.0" fill="#7b8794"/>
+<polygon points="330,744.0 455.0,784 330,824.0 205.0,784" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="330" y="781.5" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">First PPS and</text>
+<text x="330" y="796.5" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">fix within 120 s?</text>
+<path d="M 455 784 L 700 784" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="700,784 691.0,779.5 691.0,788.5" fill="#7b8794"/>
+<text x="468" y="776" font-size="11" font-weight="normal" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">no</text>
+<rect x="700" y="746" width="330" height="76" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="865.0" y="775.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Start anyway</text>
+<text x="865.0" y="790.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">records flagged NO_FIX,</text>
+<text x="865.0" y="804.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">time base from the free-running timer</text>
+<path d="M 865.0 822 L 865.0 835 L 331 835" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="331,835 340.0,839.5 340.0,830.5" fill="#7b8794"/>
+<path d="M 330 824 L 330 846" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,846 334.5,837.0 325.5,837.0" fill="#7b8794"/>
+<text x="322" y="839" font-size="11" font-weight="normal" fill="#52606d" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif">yes</text>
+<rect x="165.0" y="846" width="330" height="58" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="330.0" y="866.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Open session</text>
+<text x="330.0" y="881.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">recovery gives the next session number;</text>
+<text x="330.0" y="895.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">write SessionInfo: firmware, config, bus rates</text>
+<path d="M 330 904 L 330 926" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,926 334.5,917.0 325.5,917.0" fill="#7b8794"/>
+<rect x="165.0" y="926" width="330" height="44" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="330.0" y="953.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">LEDs green = logging</text>
+<path d="M 330 970 L 330 1062" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,1062 334.5,1053.0 325.5,1053.0" fill="#7b8794"/>
+<rect x="20" y="1010" width="1060" height="514" rx="12" fill="none" stroke="#7b8794" stroke-width="1.2" stroke-dasharray="6 5"/><text x="360" y="1032" font-size="12" font-weight="700" fill="#52606d" font-family="Segoe UI, Helvetica, Arial, sans-serif">RUN LOOP, once per GNSS fix (10 Hz, every 100 ms)</text>
+<rect x="165.0" y="1050" width="330" height="50" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+<text x="330.0" y="1073.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Fix interrupt</text>
+<text x="330.0" y="1088.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">newest GNSS fix wakes the record builder</text>
+<path d="M 330 1100 L 330 1120" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,1120 334.5,1111.0 325.5,1111.0" fill="#7b8794"/>
+<rect x="165.0" y="1120" width="330" height="58" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="330.0" y="1140.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Build record</text>
+<text x="330.0" y="1155.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">newest IMU, CAN signals, GNSS fix, heading, flags,</text>
+<text x="330.0" y="1169.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">queue overrun counters, CRC</text>
+<path d="M 330 1178 L 330 1198" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,1198 334.5,1189.0 325.5,1189.0" fill="#7b8794"/>
+<rect x="165.0" y="1198" width="330" height="50" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="330.0" y="1221.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Append to block buffer</text>
+<text x="330.0" y="1236.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">512 byte aligned, double buffered</text>
+<path d="M 330 1248 L 330 1272" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,1272 334.5,1263.0 325.5,1263.0" fill="#7b8794"/>
+<polygon points="330,1272.0 450.0,1308 330,1344.0 210.0,1308" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="330" y="1313.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Block full?</text>
+<path d="M 210 1308 L 60 1308" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<text x="95" y="1300" font-size="11" font-weight="normal" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">no</text>
+<path d="M 330 1344 L 330 1394" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,1394 334.5,1385.0 325.5,1385.0" fill="#7b8794"/>
+<text x="322" y="1364" font-size="11" font-weight="normal" fill="#52606d" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif">yes</text>
+<rect x="165.0" y="1394" width="330" height="50" rx="8" fill="#efe9f7" stroke="#6b4aa0" stroke-width="1.5"/>
+<text x="330.0" y="1417.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Flush block to SD</text>
+<text x="330.0" y="1432.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">write to every healthy card (mirror)</text>
+<path d="M 495.0 1419 L 700 1419" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="700,1419 691.0,1414.5 691.0,1423.5" fill="#7b8794"/>
+<text x="505.0" y="1411" font-size="11" font-weight="normal" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">write error or card removed</text>
+<rect x="700" y="1374" width="330" height="90" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+<text x="865.0" y="1410.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Failover</text>
+<text x="865.0" y="1425.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">stop writing to that card, log CARD_FAULT,</text>
+<text x="865.0" y="1439.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">LED red, retry mount later; the other card carries on</text>
+<path d="M 865.0 1374 L 865.0 1364 L 331 1364" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="331,1364 340.0,1368.5 340.0,1359.5" fill="#7b8794"/>
+<text x="873.0" y="1358" font-size="11" font-weight="normal" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">carry on with the other card</text>
+<path d="M 330 1444 L 330 1474 L 60 1474" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 60 1474 L 60 1075 L 165.0 1075" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="165.0,1075 156.0,1070.5 156.0,1079.5" fill="#7b8794"/>
+<text x="330" y="1496" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">The supervisor kicks the watchdog every pass. A stalled loop resets the MCU.</text></svg>

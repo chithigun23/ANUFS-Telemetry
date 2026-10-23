@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1480 1010" width="1480" height="1010" role="img" aria-labelledby="t d"><title id="t">Telemetry firmware data flow</title><desc id="d">Hardware sources feed priority-ordered interrupt and DMA handlers, which push timestamped data through static queues to decoder tasks, a 10 Hz record builder and a log writer that targets two microSD slots.</desc><rect width="1480" height="1010" fill="#ffffff"/><text x="740" y="34" font-size="20" font-weight="700" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Telemetry firmware: data flow and task priorities</text>
+<text x="740" y="56" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Rust, no_std, bare-metal. RTIC schedules everything by interrupt priority. No heap, no RTOS. P4 is the highest priority.</text>
+<text x="30" y="92" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">HARDWARE SOURCES</text>
+<text x="330" y="92" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">HARDWARE TASKS (ISR + DMA)</text>
+<text x="670" y="92" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">STATIC QUEUES</text>
+<text x="880" y="92" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">SOFTWARE TASKS</text>
+<text x="1220" y="92" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">STORAGE AND OUTPUTS</text>
+<rect x="30" y="112" width="250" height="70" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="155.0" y="145.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">GNSS PPS</text>
+<text x="155.0" y="160.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">U10 PA9, U13 PA3</text>
+<rect x="330" y="112" width="290" height="70" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+<text x="475.0" y="138.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">P4  PPS input capture</text>
+<text x="475.0" y="153.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">TIM1_CH2 + TIM2_CH4 hardware</text>
+<text x="475.0" y="167.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">timestamp, no software latency</text>
+<rect x="670" y="124" width="160" height="46" rx="8" fill="#f4f1e8" stroke="#8a7a3d" stroke-width="1.5"/>
+<text x="750.0" y="146.0" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">PpsStamp</text>
+<text x="750.0" y="161.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SPSC, fixed size</text>
+<path d="M 280 147 L 330 147" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,147 321.0,142.5 321.0,151.5" fill="#7b8794"/>
+<path d="M 620 147 L 670 147" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="670,147 661.0,142.5 661.0,151.5" fill="#7b8794"/>
+<rect x="30" y="212" width="250" height="70" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="155.0" y="238.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">CAN1 bus</text>
+<text x="155.0" y="253.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">MoTeC M150, PDM15, C125</text>
+<text x="155.0" y="267.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">listen only</text>
+<rect x="330" y="212" width="290" height="70" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+<text x="475.0" y="238.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">P3  FDCAN1 RX ISR</text>
+<text x="475.0" y="253.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">bus monitoring mode, never transmits</text>
+<text x="475.0" y="267.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">hardware RX timestamp</text>
+<rect x="670" y="224" width="160" height="46" rx="8" fill="#f4f1e8" stroke="#8a7a3d" stroke-width="1.5"/>
+<text x="750.0" y="246.0" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">CanFrame (MoTeC)</text>
+<text x="750.0" y="261.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SPSC, fixed size</text>
+<path d="M 280 247 L 330 247" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,247 321.0,242.5 321.0,251.5" fill="#7b8794"/>
+<path d="M 620 247 L 670 247" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="670,247 661.0,242.5 661.0,251.5" fill="#7b8794"/>
+<rect x="30" y="312" width="250" height="70" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="155.0" y="338.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">CAN2 bus</text>
+<text x="155.0" y="353.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SBG Ellipse-D</text>
+<text x="155.0" y="367.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">listen only</text>
+<rect x="330" y="312" width="290" height="70" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+<text x="475.0" y="345.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">P3  FDCAN2 RX ISR</text>
+<text x="475.0" y="360.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">same, second bus</text>
+<rect x="670" y="324" width="160" height="46" rx="8" fill="#f4f1e8" stroke="#8a7a3d" stroke-width="1.5"/>
+<text x="750.0" y="346.0" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">CanFrame (SBG)</text>
+<text x="750.0" y="361.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SPSC, fixed size</text>
+<path d="M 280 347 L 330 347" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,347 321.0,342.5 321.0,351.5" fill="#7b8794"/>
+<path d="M 620 347 L 670 347" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="670,347 661.0,342.5 661.0,351.5" fill="#7b8794"/>
+<rect x="30" y="412" width="250" height="70" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="155.0" y="438.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">GNSS base U10</text>
+<text x="155.0" y="453.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">UART4 PA0/PA1, 460800+ baud</text>
+<text x="155.0" y="467.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">NMEA 10 Hz + PQTMTAR</text>
+<rect x="330" y="412" width="290" height="70" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+<text x="475.0" y="445.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">P2  UART4 RX DMA</text>
+<text x="475.0" y="460.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">idle-line interrupt, byte ring buffer</text>
+<rect x="670" y="424" width="160" height="46" rx="8" fill="#f4f1e8" stroke="#8a7a3d" stroke-width="1.5"/>
+<text x="750.0" y="446.0" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">GnssBytes</text>
+<text x="750.0" y="461.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SPSC, fixed size</text>
+<path d="M 280 447 L 330 447" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,447 321.0,442.5 321.0,451.5" fill="#7b8794"/>
+<path d="M 620 447 L 670 447" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="670,447 661.0,442.5 661.0,451.5" fill="#7b8794"/>
+<rect x="30" y="512" width="250" height="70" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="155.0" y="545.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">IMU ASM330LHHX</text>
+<text x="155.0" y="560.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SPI1, INT1 PC4, INT2 PC5</text>
+<rect x="330" y="512" width="290" height="70" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+<text x="475.0" y="545.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">P1  IMU data-ready</text>
+<text x="475.0" y="560.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">EXTI then SPI DMA FIFO read</text>
+<rect x="670" y="524" width="160" height="46" rx="8" fill="#f4f1e8" stroke="#8a7a3d" stroke-width="1.5"/>
+<text x="750.0" y="546.0" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">ImuSample</text>
+<text x="750.0" y="561.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SPSC, fixed size</text>
+<path d="M 280 547 L 330 547" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,547 321.0,542.5 321.0,551.5" fill="#7b8794"/>
+<path d="M 620 547 L 670 547" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="670,547 661.0,542.5 661.0,551.5" fill="#7b8794"/>
+<rect x="30" y="612" width="250" height="70" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="155.0" y="645.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Card detect + switches</text>
+<text x="155.0" y="660.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">PC7, PB1, PC0..PC3</text>
+<rect x="330" y="612" width="290" height="70" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+<text x="475.0" y="645.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">P1  Input debounce</text>
+<text x="475.0" y="660.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">EXTI / timer tick</text>
+<rect x="670" y="624" width="160" height="46" rx="8" fill="#f4f1e8" stroke="#8a7a3d" stroke-width="1.5"/>
+<text x="750.0" y="646.0" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">UiEvent</text>
+<text x="750.0" y="661.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SPSC, fixed size</text>
+<path d="M 280 647 L 330 647" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="330,647 321.0,642.5 321.0,651.5" fill="#7b8794"/>
+<path d="M 620 647 L 670 647" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="670,647 661.0,642.5 661.0,651.5" fill="#7b8794"/>
+<rect x="880" y="112" width="290" height="70" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="1025.0" y="138.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Clock task (P2)</text>
+<text x="1025.0" y="153.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">map PPS capture to GPS time</text>
+<text x="1025.0" y="167.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">one common time base</text>
+<rect x="880" y="212" width="290" height="170" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="1025.0" y="274.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Bus decoders (P1)</text>
+<text x="1025.0" y="289.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-can-motec: ECU, PDM, dash signals</text>
+<text x="1025.0" y="303.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-can-sbg: Ellipse-D from sbgCan.dbc</text>
+<text x="1025.0" y="317.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">shared engine: tel-can</text>
+<text x="1025.0" y="331.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">pure safe Rust, host-testable</text>
+<rect x="880" y="412" width="290" height="70" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="1025.0" y="438.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">GNSS parser (P1)</text>
+<text x="1025.0" y="453.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-nmea: RMC, GGA, PQTMTAR</text>
+<text x="1025.0" y="467.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">checksum check, bounded buffers</text>
+<rect x="880" y="512" width="290" height="70" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="1025.0" y="545.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">IMU filter (P1)</text>
+<text x="1025.0" y="560.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-asm330: scale, bias, timestamp</text>
+<path d="M 830 147 L 880 147" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="880,147 871.0,142.5 871.0,151.5" fill="#7b8794"/>
+<path d="M 830 247 L 880 247" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="880,247 871.0,242.5 871.0,251.5" fill="#7b8794"/>
+<path d="M 830 347 L 880 347" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="880,347 871.0,342.5 871.0,351.5" fill="#7b8794"/>
+<path d="M 830 447 L 880 447" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="880,447 871.0,442.5 871.0,451.5" fill="#7b8794"/>
+<path d="M 830 547 L 880 547" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="880,547 871.0,542.5 871.0,551.5" fill="#7b8794"/>
+<rect x="1186" y="147" width="10" height="400" rx="3" fill="#f4f1e8" stroke="#8a7a3d" stroke-width="1.5"/>
+<text x="1212" y="330" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" transform="rotate(-90 1212 330)">latest value per source</text>
+<path d="M 1170 147 L 1186 147" fill="none" stroke="#7b8794" stroke-width="1.6" stroke-dasharray="5 4"/>
+<polygon points="1186,147 1177.0,142.5 1177.0,151.5" fill="#7b8794"/>
+<path d="M 1170 297 L 1186 297" fill="none" stroke="#7b8794" stroke-width="1.6" stroke-dasharray="5 4"/>
+<polygon points="1186,297 1177.0,292.5 1177.0,301.5" fill="#7b8794"/>
+<path d="M 1170 447 L 1186 447" fill="none" stroke="#7b8794" stroke-width="1.6" stroke-dasharray="5 4"/>
+<polygon points="1186,447 1177.0,442.5 1177.0,451.5" fill="#7b8794"/>
+<path d="M 1170 547 L 1186 547" fill="none" stroke="#7b8794" stroke-width="1.6" stroke-dasharray="5 4"/>
+<polygon points="1186,547 1177.0,542.5 1177.0,551.5" fill="#7b8794"/>
+<rect x="880" y="612" width="290" height="90" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="1025.0" y="641.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Record builder (P2, 10 Hz)</text>
+<text x="1025.0" y="656.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">fires on each GNSS fix</text>
+<text x="1025.0" y="670.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-core fusion: newest value per source</text>
+<text x="1025.0" y="684.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">framed and CRC-checked by tel-logfmt</text>
+<path d="M 1191 547 L 1191 657 L 1170 657" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="1170,657 1179.0,661.5 1179.0,652.5" fill="#7b8794"/>
+<rect x="880" y="722" width="290" height="90" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="1025.0" y="758.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Log writer (P0 lowest)</text>
+<text x="1025.0" y="773.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-store write loop, 512 byte blocks</text>
+<text x="1025.0" y="787.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">written to both cards (mirror)</text>
+<path d="M 1025 702 L 1025 722" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="1025,722 1029.5,713.0 1020.5,713.0" fill="#7b8794"/>
+<rect x="880" y="832" width="290" height="70" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="1025.0" y="865.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Supervisor (P0)</text>
+<text x="1025.0" y="880.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">LEDs, watchdog, card state, USB console</text>
+<path d="M 830 647 L 852 647 L 852 867 L 880 867" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="880,867 871.0,862.5 871.0,871.5" fill="#7b8794"/>
+<rect x="1220" y="700" width="230" height="70" rx="8" fill="#efe9f7" stroke="#6b4aa0" stroke-width="1.5"/>
+<text x="1335.0" y="726.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SD1  (J3)</text>
+<text x="1335.0" y="741.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SDMMC1, 4-bit DMA</text>
+<text x="1335.0" y="755.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">primary log, full speed</text>
+<rect x="1220" y="790" width="230" height="70" rx="8" fill="#efe9f7" stroke="#6b4aa0" stroke-width="1.5"/>
+<text x="1335.0" y="816.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SD2  (J11)</text>
+<text x="1335.0" y="831.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SPI2: PB2, PB14, PB15, CS PB0</text>
+<text x="1335.0" y="845.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">slower, secondary or mirror</text>
+<rect x="1220" y="880" width="230" height="90" rx="8" fill="#efe9f7" stroke="#6b4aa0" stroke-width="1.5"/>
+<text x="1335.0" y="909.5" font-size="13" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">LEDs, USB, debug</text>
+<text x="1335.0" y="924.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">5 bi-colour LEDs on I2C3</text>
+<text x="1335.0" y="938.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">USB FS CDC console (J6)</text>
+<text x="1335.0" y="952.5" font-size="11" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SWO PB3 and RTT via J2 / J12</text>
+<path d="M 1170 735 L 1220 735" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="1220,735 1211.0,730.5 1211.0,739.5" fill="#7b8794"/>
+<path d="M 1170 800 L 1220 800" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="1220,800 1211.0,795.5 1211.0,804.5" fill="#7b8794"/>
+<path d="M 1170 890 L 1220 890" fill="none" stroke="#7b8794" stroke-width="1.6" stroke-dasharray="5 4"/>
+<polygon points="1220,890 1211.0,885.5 1211.0,894.5" fill="#7b8794"/>
+<rect x="30" y="720" width="780" height="170" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="420.0" y="766.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Rules that keep it deterministic and memory safe</text>
+<text x="420.0" y="782.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">1. Every buffer and queue is statically sized at compile time, so there is no allocation at run time.</text>
+<text x="420.0" y="797.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">2. Interrupt handlers only timestamp and enqueue. All parsing happens in lower priority tasks.</text>
+<text x="420.0" y="812.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">3. Logic lives in no_std crates with forbid(unsafe_code), unit-tested on the PC.</text>
+<text x="420.0" y="827.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">    Only the HAL drivers and the RTIC macros contain unsafe.</text>
+<text x="420.0" y="842.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">4. Both CAN controllers use bus monitoring mode, so the logger cannot disturb the car's networks.</text>
+<text x="420.0" y="857.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">5. A queue overrun increments a counter that is written into the next record.</text></svg>
