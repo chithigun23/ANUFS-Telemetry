@@ -80,6 +80,18 @@ where
     pub fn size_blocks(&self) -> Result<u64, SdCardError> {
         Ok(self.card.num_bytes()? / 512)
     }
+
+    /// Forget the card state so the next access initialises it again (after a
+    /// fault or a card swap).
+    pub fn mark_uninit(&self) {
+        self.card.mark_card_uninit();
+    }
+
+    /// Borrow the SPI device, for example to raise the clock after the card
+    /// has been initialised at the slow identification rate.
+    pub fn with_spi<T>(&self, f: impl FnOnce(&mut SPI) -> T) -> T {
+        self.card.spi(f)
+    }
 }
 
 impl<SPI, D> BlockDevice for Sd2<SPI, D>

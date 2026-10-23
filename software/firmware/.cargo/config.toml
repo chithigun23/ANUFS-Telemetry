@@ -2,6 +2,10 @@
 target = "thumbv8m.main-none-eabihf"
 
 [target.thumbv8m.main-none-eabihf]
-rustflags = ["-C", "link-arg=-Tlink.x"]
-# Flash and run with a debug probe (chip name to be confirmed with `probe-rs chip list`):
-# runner = "probe-rs run --chip STM32H523RCTx"
+rustflags = ["-C", "link-arg=-Tlink.x", "-C", "link-arg=-Tdefmt.x"]
+# `cargo run --release --bin <name>` flashes through the debug probe on J12 and
+# prints the defmt log. The chip name is the one `probe-rs chip list` shows.
+runner = "probe-rs run --chip STM32H523RC"
+
+[env]
+DEFMT_LOG = "info"

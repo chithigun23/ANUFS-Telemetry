@@ -1,0 +1,18 @@
+[package]
+name = "tel-selftest"
+description = "Pass/fail decision logic and report for the board bring-up self-test, testable on the PC"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+tel-core = { path = "../tel-core" }
+tel-asm330 = { path = "../tel-asm330" }
+tel-nmea = { path = "../tel-nmea" }
+
+[dev-dependencies]
+proptest = "1"
+
+[lints]
+workspace = true
