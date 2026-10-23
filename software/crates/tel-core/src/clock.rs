@@ -51,9 +51,15 @@ pub struct Config {
     pub max_gap_s: u64,
 }
 
+impl Config {
+    /// The default limits, usable in `const` and `static` initialisers.
+    pub const DEFAULT: Self =
+        Self { tolerance_us: 2_000, lock_timeout_us: 3_000_000, label_window_us: 900_000, max_gap_s: 10 };
+}
+
 impl Default for Config {
     fn default() -> Self {
-        Self { tolerance_us: 2_000, lock_timeout_us: 3_000_000, label_window_us: 900_000, max_gap_s: 10 }
+        Self::DEFAULT
     }
 }
 

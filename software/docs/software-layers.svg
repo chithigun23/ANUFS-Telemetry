@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" width="1200" height="850" role="img" aria-labelledby="t d"><title id="t">Telemetry software layers</title><desc id="d">Layered crate diagram: the RTIC firmware binary on top, safe no_std logic crates in the middle, embedded-hal traits and support crates below, then the embassy-stm32 HAL, the PAC and the STM32H523.</desc><rect width="1200" height="850" fill="#ffffff"/><text x="600" y="34" font-size="20" font-weight="700" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Telemetry software: layers and crates</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" width="1200" height="850" role="img" aria-labelledby="t d"><title id="t">Telemetry software layers</title><desc id="d">Layered crate diagram: the firmware binaries on top, safe no_std logic crates in the middle, embedded-hal traits and support crates below, then the embassy-stm32 HAL, the PAC and the STM32H523.</desc><rect width="1200" height="850" fill="#ffffff"/><text x="600" y="34" font-size="20" font-weight="700" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Telemetry software: layers and crates</text>
 <text x="600" y="56" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Dependencies point down. Logic crates never depend on the HAL, so they build and test on the PC.</text>
-<text x="40" y="92" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">FIRMWARE BINARY  (firmware/)  SD adapters exist, the RTIC app is written at bring-up</text>
+<text x="40" y="92" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">FIRMWARE BINARIES  (firmware/)  bring-up test and logger are written, never run on the board</text>
 <rect x="40" y="102" width="760" height="96" rx="8" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
-<text x="420.0" y="133.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">RTIC application (to be written on the board)</text>
-<text x="420.0" y="149.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">hardware tasks: PPS capture, FDCAN RX, UART4 DMA, IMU data-ready</text>
-<text x="420.0" y="164.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">software tasks: clock, decoders, record builder, log writer, supervisor</text>
+<text x="420.0" y="133.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Logger application (main.rs) and bring-up test (bin/bringup.rs)</text>
+<text x="420.0" y="149.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">high priority executor: PPS capture, FDCAN RX, UART4 DMA, IMU, SD1</text>
+<text x="420.0" y="164.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">high priority also runs supervisor, LEDs, watchdog; thread mode: SD2 only</text>
 <text x="420.0" y="179.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">owns the static queues and the priority table</text>
-<text x="40" y="232" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">LOGIC CRATES  (crates/)  no_std, forbid(unsafe_code), 305 tests on the PC</text>
+<text x="40" y="232" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">LOGIC CRATES  (crates/)  no_std, forbid(unsafe_code), 332 tests on the PC</text>
 <rect x="40" y="242" width="140" height="64" rx="6" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
 <text x="110.0" y="266.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-core</text>
 <text x="110.0" y="280.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">clock, fusion,</text>
@@ -43,6 +43,10 @@
 <text x="575.0" y="340.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-store</text>
 <text x="575.0" y="354.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">async write loop</text>
 <text x="575.0" y="367.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">over BlockDevice</text>
+<rect x="655" y="316" width="140" height="64" rx="6" fill="#e9f6ec" stroke="#2f8f4e" stroke-width="1.5"/>
+<text x="725.0" y="340.0" font-size="12" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-selftest</text>
+<text x="725.0" y="354.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">bring-up pass/fail</text>
+<text x="725.0" y="367.0" font-size="10" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">rules and report</text>
 <path d="M 740 198 L 740 242" fill="none" stroke="#7b8794" stroke-width="1.6"/>
 <polygon points="740,242 744.5,233.0 735.5,233.0" fill="#7b8794"/>
 <text x="40" y="410" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">SUPPORT</text>
@@ -63,12 +67,12 @@
 <text x="40" y="526" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">HAL</text>
 <rect x="40" y="536" width="760" height="70" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
 <text x="420.0" y="569.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embassy-stm32 0.6  (feature stm32h523rc)</text>
-<text x="420.0" y="585.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">FDCAN1/2, SDMMC1, SPI1/2, I2C3, UART4, USB FS, TIM1/TIM2 input capture, GPDMA, IWDG</text>
+<text x="420.0" y="585.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">FDCAN1/2, SDMMC1, SPI1/2, I2C3, UART4, USB FS, TIM1 input capture, GPDMA, IWDG</text>
 <path d="M 420.0 490 L 420.0 536" fill="none" stroke="#7b8794" stroke-width="1.6"/>
 <polygon points="420.0,536 424.5,527.0 415.5,527.0" fill="#7b8794"/>
 <text x="40" y="640" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">PAC AND CORE</text>
 <rect x="40" y="650" width="760" height="60" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
-<text x="420.0" y="678.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">stm32-metapac, cortex-m, cortex-m-rt, rtic</text>
+<text x="420.0" y="678.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">stm32-metapac, cortex-m, cortex-m-rt, embassy-executor</text>
 <text x="420.0" y="694.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">register access, vector table, critical sections</text>
 <path d="M 420.0 606 L 420.0 650" fill="none" stroke="#7b8794" stroke-width="1.6"/>
 <polygon points="420.0,650 424.5,641.0 415.5,641.0" fill="#7b8794"/>
@@ -102,6 +106,6 @@
 <text x="1000.0" y="601.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">1. All parsing and decoding is safe Rust</text>
 <text x="1000.0" y="616.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">    that can be tested without hardware.</text>
 <text x="1000.0" y="631.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">2. Unsafe is confined to the HAL, PAC</text>
-<text x="1000.0" y="646.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">    and RTIC macros, which are widely used.</text>
+<text x="1000.0" y="646.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">    and one executor hook, which are widely used.</text>
 <text x="1000.0" y="661.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">3. Swapping the HAL or scheduler later</text>
 <text x="1000.0" y="676.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">    does not touch the logic crates.</text></svg>

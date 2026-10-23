@@ -627,6 +627,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "tel-selftest"
+version = "0.1.0"
+dependencies = [
+ "proptest",
+ "tel-asm330",
+ "tel-core",
+ "tel-nmea",
+]
+
+[[package]]
 name = "tel-store"
 version = "0.1.0"
 dependencies = [

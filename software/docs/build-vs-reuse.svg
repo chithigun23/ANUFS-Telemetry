@@ -9,11 +9,11 @@
 <text x="540.0" y="118.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
 <text x="540.0" y="121.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">rustc target thumbv8m.main-none-eabihf</text>
 <text x="540.0" y="136.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embassy-stm32 memory-x feature generates memory.x</text>
-<text x="540.0" y="151.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">probe-rs (planned, not yet used)</text>
+<text x="540.0" y="151.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">probe-rs (configured as the cargo runner, not yet used)</text>
 <rect x="800" y="104" width="490" height="75" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
 <text x="1045.0" y="126.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
 <text x="1045.0" y="129.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">firmware/Cargo.toml and .cargo/config.toml</text>
-<text x="1045.0" y="144.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">(done: builds and links, 600 kB with debug info)</text>
+<text x="1045.0" y="144.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">(done: both programs build and link, about 140 kB of code)</text>
 <rect x="800" y="104" width="6" height="75" rx="3" fill="#d9730d"/>
 <path d="M 280 141.5 L 330 141.5" fill="none" stroke="#7b8794" stroke-width="1.6"/>
 <path d="M 750 141.5 L 800 141.5" fill="none" stroke="#7b8794" stroke-width="1.6"/>
@@ -21,11 +21,11 @@
 <text x="155.0" y="239.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Scheduler and memory</text>
 <rect x="330" y="201" width="420" height="64" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
 <text x="540.0" y="225.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
-<text x="540.0" y="228.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">rtic 2.4 (planned, not yet wired)</text>
+<text x="540.0" y="228.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embassy-executor: interrupt and thread executors (written, untested)</text>
 <rect x="800" y="201" width="490" height="64" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
 <text x="1045.0" y="217.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
 <text x="1045.0" y="220.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Fixed-size buffers inside every crate (done, no heap)</text>
-<text x="1045.0" y="235.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Priority table and task wiring (at bring-up)</text>
+<text x="1045.0" y="235.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Priority table and task wiring (written, untested)</text>
 <rect x="800" y="201" width="6" height="64" rx="3" fill="#d9730d"/>
 <path d="M 280 233.0 L 330 233.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
 <path d="M 750 233.0 L 800 233.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
@@ -40,7 +40,7 @@
 <rect x="800" y="287" width="490" height="64" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
 <text x="1045.0" y="303.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
 <text x="1045.0" y="306.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Pin map checked against the datasheet (done)</text>
-<text x="1045.0" y="321.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Peripheral set-up in the RTIC app (at bring-up)</text>
+<text x="1045.0" y="321.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Peripheral set-up in main.rs and bringup.rs (untested)</text>
 <rect x="800" y="287" width="6" height="64" rx="3" fill="#d9730d"/>
 <path d="M 280 319.0 L 330 319.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
 <path d="M 750 319.0 L 800 319.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
@@ -123,7 +123,7 @@
 <text x="155.0" y="863.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Supervision</text>
 <rect x="330" y="825" width="420" height="64" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
 <text x="540.0" y="849.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
-<text x="540.0" y="852.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embassy-stm32 independent watchdog (at bring-up)</text>
+<text x="540.0" y="852.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embassy-stm32 independent watchdog (used by both programs, untested)</text>
 <rect x="800" y="825" width="490" height="64" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
 <text x="1045.0" y="849.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
 <text x="1045.0" y="852.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Supervisor in tel-core: cards, fix, LEDs, watchdog (done)</text>

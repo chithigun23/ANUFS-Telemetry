@@ -5,14 +5,37 @@ edition = "2021"
 publish = false
 
 [dependencies]
-embassy-stm32 = { version = "0.6.0", features = ["stm32h523rc", "rt", "time-driver-any", "unstable-pac", "memory-x"] }
+embassy-stm32 = { version = "0.6.0", features = ["stm32h523rc", "rt", "time-driver-tim12", "unstable-pac", "memory-x", "defmt", "exti"] }
+embassy-executor = { version = "0.10", features = ["platform-cortex-m", "executor-thread", "executor-interrupt", "defmt"] }
+embassy-time = { version = "0.5.1", features = ["defmt", "tick-hz-1_000_000"] }
+embassy-futures = "0.1.2"
+embassy-sync = "0.8"
+static_cell = "2"
+embedded-hal-bus = "0.3"
+embedded-can = "0.4"
+defmt = "1"
+defmt-rtt = "1"
+panic-probe = { version = "1", features = ["print-defmt"] }
+tel-selftest = { path = "../crates/tel-selftest" }
+tel-can = { path = "../crates/tel-can" }
+tel-can-sbg = { path = "../crates/tel-can-sbg" }
+tel-can-motec = { path = "../crates/tel-can-motec" }
+tel-asm330 = { path = "../crates/tel-asm330" }
+tel-tlc59108 = { path = "../crates/tel-tlc59108" }
+tel-nmea = { path = "../crates/tel-nmea" }
+tel-core = { path = "../crates/tel-core" }
 cortex-m = { version = "0.7", features = ["critical-section-single-core"] }
 cortex-m-rt = "0.7"
-panic-halt = "1"
 embedded-hal = "1.0"
 embedded-sdmmc = "0.10"
 tel-logfmt = { path = "../crates/tel-logfmt" }
 tel-store = { path = "../crates/tel-store" }
+
+[features]
+# Format a card that has no log region when it is inserted. OFF by default:
+# it overwrites the first three blocks of any card it does not recognise, which
+# destroys the partition table of a card used for anything else.
+auto-prepare = []
 
 [profile.release]
 opt-level = 3
