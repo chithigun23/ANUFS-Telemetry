@@ -1,0 +1,7 @@
+# Messages left out of the generated table.
+#
+# SBG's sbgCan.dbc declares these two messages as 4 bytes long but places the
+# STATUS signal at bits 32 to 63, which cannot fit. The logger does not use
+# them. dbc2table refuses inconsistent messages, so they are listed here.
+SBG_ECAN_MSG_GPS1_POS_SECURITY_STATUS
+SBG_ECAN_MSG_GPS2_POS_SECURITY_STATUS

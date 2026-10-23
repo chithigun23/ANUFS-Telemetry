@@ -1,0 +1,15 @@
+[package]
+name = "tel-can"
+description = "Table-driven, bounds-checked CAN signal extraction shared by the MoTeC and SBG decoders"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+
+[dev-dependencies]
+proptest = "1"
+
+[lints]
+workspace = true

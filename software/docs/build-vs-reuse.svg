@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 1137" width="1320" height="1137" role="img" aria-labelledby="t d"><title id="t">Software build versus reuse</title><desc id="d">Flow chart down the data path showing, for each stage, which existing crates are reused and which pieces must be written for this project.</desc><rect width="1320" height="1137" fill="#ffffff"/><text x="660" y="34" font-size="20" font-weight="700" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Telemetry software: what we reused and what we wrote</text>
+<text x="660" y="56" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Stages follow the data path from build tooling to the PC. Orange boxes are the work, with its status.</text>
+<text x="30" y="92" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">STAGE</text>
+<text x="330" y="92" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">REUSED (existing crates and tools)</text>
+<text x="800" y="92" font-size="12" font-weight="700" fill="#52606d" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif">WE WROTE (status)</text>
+<rect x="30" y="104" width="250" height="75" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="155.0" y="147.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Build, flash, debug</text>
+<rect x="330" y="104" width="420" height="75" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="540.0" y="118.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="540.0" y="121.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">rustc target thumbv8m.main-none-eabihf</text>
+<text x="540.0" y="136.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embassy-stm32 memory-x feature generates memory.x</text>
+<text x="540.0" y="151.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">probe-rs (planned, not yet used)</text>
+<rect x="800" y="104" width="490" height="75" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
+<text x="1045.0" y="126.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="1045.0" y="129.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">firmware/Cargo.toml and .cargo/config.toml</text>
+<text x="1045.0" y="144.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">(done: builds and links, 600 kB with debug info)</text>
+<rect x="800" y="104" width="6" height="75" rx="3" fill="#d9730d"/>
+<path d="M 280 141.5 L 330 141.5" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 750 141.5 L 800 141.5" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<rect x="30" y="201" width="250" height="64" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="155.0" y="239.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Scheduler and memory</text>
+<rect x="330" y="201" width="420" height="64" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="540.0" y="225.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="540.0" y="228.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">rtic 2.4 (planned, not yet wired)</text>
+<rect x="800" y="201" width="490" height="64" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
+<text x="1045.0" y="217.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="1045.0" y="220.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Fixed-size buffers inside every crate (done, no heap)</text>
+<text x="1045.0" y="235.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Priority table and task wiring (at bring-up)</text>
+<rect x="800" y="201" width="6" height="64" rx="3" fill="#d9730d"/>
+<path d="M 280 233.0 L 330 233.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 750 233.0 L 800 233.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 155.0 179 L 155.0 201" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="155.0,201 159.5,192.0 150.5,192.0" fill="#7b8794"/>
+<rect x="30" y="287" width="250" height="64" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="155.0" y="325.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Chip drivers (HAL)</text>
+<rect x="330" y="287" width="420" height="64" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="540.0" y="303.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="540.0" y="306.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embassy-stm32: FDCAN, SDMMC, SPI, I2C, UART, USB,</text>
+<text x="540.0" y="321.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">timer input capture, DMA, watchdog</text>
+<rect x="800" y="287" width="490" height="64" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
+<text x="1045.0" y="303.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="1045.0" y="306.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Pin map checked against the datasheet (done)</text>
+<text x="1045.0" y="321.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Peripheral set-up in the RTIC app (at bring-up)</text>
+<rect x="800" y="287" width="6" height="64" rx="3" fill="#d9730d"/>
+<path d="M 280 319.0 L 330 319.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 750 319.0 L 800 319.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 155.0 265 L 155.0 287" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="155.0,287 159.5,278.0 150.5,278.0" fill="#7b8794"/>
+<rect x="30" y="373" width="250" height="64" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="155.0" y="411.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">GNSS: LC29H pair</text>
+<rect x="330" y="373" width="420" height="64" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="540.0" y="397.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="540.0" y="400.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">nothing: no crate covers $PQTMTAR or PAIR commands</text>
+<rect x="800" y="373" width="490" height="64" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
+<text x="1045.0" y="389.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="1045.0" y="392.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-nmea: parser, command builder, configurator (done)</text>
+<text x="1045.0" y="407.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-core: PPS clock, fusion into samples (done)</text>
+<rect x="800" y="373" width="6" height="64" rx="3" fill="#d9730d"/>
+<path d="M 280 405.0 L 330 405.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 750 405.0 L 800 405.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 155.0 351 L 155.0 373" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="155.0,373 159.5,364.0 150.5,364.0" fill="#7b8794"/>
+<rect x="30" y="459" width="250" height="64" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="155.0" y="497.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">IMU: ASM330LHHX</text>
+<rect x="330" y="459" width="420" height="64" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="540.0" y="483.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="540.0" y="486.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embedded-hal 1.0 SPI traits</text>
+<rect x="800" y="459" width="490" height="64" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
+<text x="1045.0" y="475.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="1045.0" y="478.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-asm330 driver, read-back verified (done)</text>
+<text x="1045.0" y="493.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">The existing asm330lhhx-rs crate does not build</text>
+<rect x="800" y="459" width="6" height="64" rx="3" fill="#d9730d"/>
+<path d="M 280 491.0 L 330 491.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 750 491.0 L 800 491.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 155.0 437 L 155.0 459" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="155.0,459 159.5,450.0 150.5,450.0" fill="#7b8794"/>
+<rect x="30" y="545" width="250" height="64" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="155.0" y="583.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Status LEDs: TLC59108 x2</text>
+<rect x="330" y="545" width="420" height="64" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="540.0" y="569.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="540.0" y="572.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embedded-hal 1.0 I2C traits</text>
+<rect x="800" y="545" width="490" height="64" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
+<text x="1045.0" y="561.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="1045.0" y="564.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-tlc59108 driver and five-LED bank (done)</text>
+<text x="1045.0" y="579.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Which pin is red is unverified</text>
+<rect x="800" y="545" width="6" height="64" rx="3" fill="#d9730d"/>
+<path d="M 280 577.0 L 330 577.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 750 577.0 L 800 577.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 155.0 523 L 155.0 545" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="155.0,545 159.5,536.0 150.5,536.0" fill="#7b8794"/>
+<rect x="30" y="631" width="250" height="75" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="155.0" y="674.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">CAN decode: MoTeC + SBG</text>
+<rect x="330" y="631" width="420" height="75" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="540.0" y="653.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="540.0" y="656.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">can-dbc: reads DBC files in the host generator</text>
+<text x="540.0" y="671.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">sbgCan.dbc from SBG (MIT)</text>
+<rect x="800" y="631" width="490" height="75" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
+<text x="1045.0" y="645.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="1045.0" y="648.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-can engine, both byte orders (done)</text>
+<text x="1045.0" y="663.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">dbc2table, tel-can-sbg, tel-can-motec tables (done)</text>
+<text x="1045.0" y="678.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">MoTeC signals: waiting for your configuration</text>
+<rect x="800" y="631" width="6" height="75" rx="3" fill="#d9730d"/>
+<path d="M 280 668.5 L 330 668.5" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 750 668.5 L 800 668.5" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 155.0 609 L 155.0 631" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="155.0,631 159.5,622.0 150.5,622.0" fill="#7b8794"/>
+<rect x="30" y="728" width="250" height="75" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="155.0" y="771.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Logging to SD</text>
+<rect x="330" y="728" width="420" height="75" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="540.0" y="757.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="540.0" y="760.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embedded-sdmmc: SPI-mode SD driver for SD2 only</text>
+<rect x="800" y="728" width="490" height="75" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
+<text x="1045.0" y="742.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="1045.0" y="745.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-logfmt: CRC blocks, records, writer, recovery (done)</text>
+<text x="1045.0" y="760.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tel-store: async write loop (done)</text>
+<text x="1045.0" y="775.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">SD1 and SD2 adapters (done, compile only)</text>
+<rect x="800" y="728" width="6" height="75" rx="3" fill="#d9730d"/>
+<path d="M 280 765.5 L 330 765.5" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 750 765.5 L 800 765.5" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 155.0 706 L 155.0 728" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="155.0,728 159.5,719.0 150.5,719.0" fill="#7b8794"/>
+<rect x="30" y="825" width="250" height="64" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="155.0" y="863.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Supervision</text>
+<rect x="330" y="825" width="420" height="64" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="540.0" y="849.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="540.0" y="852.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">embassy-stm32 independent watchdog (at bring-up)</text>
+<rect x="800" y="825" width="490" height="64" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
+<text x="1045.0" y="849.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="1045.0" y="852.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Supervisor in tel-core: cards, fix, LEDs, watchdog (done)</text>
+<rect x="800" y="825" width="6" height="64" rx="3" fill="#d9730d"/>
+<path d="M 280 857.0 L 330 857.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 750 857.0 L 800 857.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 155.0 803 L 155.0 825" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="155.0,825 159.5,816.0 150.5,816.0" fill="#7b8794"/>
+<rect x="30" y="911" width="250" height="64" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="155.0" y="949.0" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">On the PC</text>
+<rect x="330" y="911" width="420" height="64" rx="8" fill="#e8f1fb" stroke="#3b82c4" stroke-width="1.5"/>
+<text x="540.0" y="935.0" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="540.0" y="938.0" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">nothing needed</text>
+<rect x="800" y="911" width="490" height="64" rx="8" fill="#fff1e0" stroke="#d9730d" stroke-width="1.5"/>
+<text x="1045.0" y="927.5" font-size="1" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"></text>
+<text x="1045.0" y="930.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">tools/tel-decode: scan and CSV export (done)</text>
+<text x="1045.0" y="945.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Whole-system drive test (done)</text>
+<rect x="800" y="911" width="6" height="64" rx="3" fill="#d9730d"/>
+<path d="M 280 943.0 L 330 943.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 750 943.0 L 800 943.0" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<path d="M 155.0 889 L 155.0 911" fill="none" stroke="#7b8794" stroke-width="1.6"/>
+<polygon points="155.0,911 159.5,902.0 150.5,902.0" fill="#7b8794"/>
+<rect x="30" y="1001" width="1260" height="120" rx="8" fill="#f7f7f7" stroke="#9aa5b1" stroke-width="1.5"/>
+<text x="660.0" y="1044.5" font-size="14" font-weight="600" fill="#1f2933" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Changed from the original plan</text>
+<text x="660.0" y="1060.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Own CRC-32 and record codec instead of postcard and crc; own signal engine and table generator instead of dbc-codegen;</text>
+<text x="660.0" y="1075.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">raw blocks instead of FAT, so embedded-sdmmc is needed only for the SPI driver of SD2; gnss-time and nmea were not used.</text>
+<text x="660.0" y="1090.5" font-size="12" font-weight="normal" fill="#52606d" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif">Everything marked done passes its tests on the PC. Nothing has run on the board yet.</text></svg>

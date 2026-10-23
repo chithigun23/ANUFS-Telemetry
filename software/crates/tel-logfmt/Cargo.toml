@@ -1,0 +1,15 @@
+[package]
+name = "tel-logfmt"
+description = "Crash-safe append-only block log: CRC-protected 512 byte blocks, records, sans-IO writer and recovery"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+
+[dev-dependencies]
+proptest = "1"
+
+[lints]
+workspace = true

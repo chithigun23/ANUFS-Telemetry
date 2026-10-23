@@ -1,0 +1,18 @@
+[package]
+name = "tel-core"
+description = "Telemetry core logic: timer extension, PPS clock, GNSS/IMU fusion into log samples, and the supervisor"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+tel-nmea = { path = "../tel-nmea" }
+tel-logfmt = { path = "../tel-logfmt" }
+tel-asm330 = { path = "../tel-asm330" }
+
+[dev-dependencies]
+proptest = "1"
+
+[lints]
+workspace = true

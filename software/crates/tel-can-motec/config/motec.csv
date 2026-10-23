@@ -1,0 +1,29 @@
+# MoTeC CAN signals the logger should decode.
+#
+# This file is intentionally empty of signals: the real message layouts depend
+# on how the M150 ECU (M1 Build), the PDM15 (PDM Manager) and the C125 dash were
+# configured, and they have not been supplied yet. Until they are, the
+# firmware still logs every CAN1 frame raw, and these signals can be decoded
+# later on the PC once this table is filled in.
+#
+# One row per signal. Columns:
+#   id         CAN identifier, decimal or 0x hex
+#   extended   0 for 11-bit, 1 for 29-bit
+#   message    message name (repeat on every row of the same message)
+#   dlc        payload bytes the message must have (1 to 8, repeat per row)
+#   signal     signal name
+#   start_bit  DBC start bit (for big endian, the bit holding the MSB)
+#   len        width in bits, 1 to 64
+#   order      le or be
+#   kind       u (unsigned), s (signed) or f32 (IEEE float, len 32)
+#   factor     physical = raw * factor + offset
+#   offset
+#   unit       optional, no commas
+#
+# Example row (NOT real, shown for the format only):
+# 0x640,0,ECU_EXAMPLE,8,Engine_Speed,7,16,be,u,1,0,rpm
+#
+# After editing, regenerate and test:
+#   cargo run -p dbc2table -- crates/tel-can-motec/config/motec.csv crates/tel-can-motec/src/tables.rs
+#   cargo test -p tel-can-motec
+id,extended,message,dlc,signal,start_bit,len,order,kind,factor,offset,unit

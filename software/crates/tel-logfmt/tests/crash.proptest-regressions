@@ -1,0 +1,7 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc b895157071effb665cf2e6c87d42e7dbac3f4eb35b6fcde80028a779a3e79c85 # shrinks to cycles = [([Push { len: 0 }], 0, 0), ([Push { len: 0 }], 0, 0)], seed = 0

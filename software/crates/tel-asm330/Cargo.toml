@@ -1,0 +1,16 @@
+[package]
+name = "tel-asm330"
+description = "ASM330LHHX 6-axis IMU SPI driver over embedded-hal 1.0 with verified register writes"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+embedded-hal = "1.0"
+
+[dev-dependencies]
+proptest = "1"
+
+[lints]
+workspace = true

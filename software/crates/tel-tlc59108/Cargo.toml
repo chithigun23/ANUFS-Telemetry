@@ -1,0 +1,16 @@
+[package]
+name = "tel-tlc59108"
+description = "TLC59108 8-channel I2C LED driver and a two-chip bi-colour status LED bank, over embedded-hal 1.0"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+embedded-hal = "1.0"
+
+[dev-dependencies]
+proptest = "1"
+
+[lints]
+workspace = true

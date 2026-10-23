@@ -1,0 +1,17 @@
+[package]
+name = "tel-store"
+description = "Async storage driver for the block log: recovery, preparation and the write-service loop over a BlockDevice trait"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+tel-logfmt = { path = "../tel-logfmt" }
+
+[dev-dependencies]
+futures-executor = "0.3"
+proptest = "1"
+
+[lints]
+workspace = true

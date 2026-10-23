@@ -1,0 +1,23 @@
+[package]
+name = "telemetry-firmware"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+embassy-stm32 = { version = "0.6.0", features = ["stm32h523rc", "rt", "time-driver-any", "unstable-pac", "memory-x"] }
+cortex-m = { version = "0.7", features = ["critical-section-single-core"] }
+cortex-m-rt = "0.7"
+panic-halt = "1"
+embedded-hal = "1.0"
+embedded-sdmmc = "0.10"
+tel-logfmt = { path = "../crates/tel-logfmt" }
+tel-store = { path = "../crates/tel-store" }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+debug = true
+panic = "abort"
+overflow-checks = true

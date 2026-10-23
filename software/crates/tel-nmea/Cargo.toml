@@ -1,0 +1,15 @@
+[package]
+name = "tel-nmea"
+description = "Bounded, panic-free NMEA 0183 and Quectel LC29H(EA) PAIR/PQTM framing, parsing and command building"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+
+[dev-dependencies]
+proptest = "1"
+
+[lints]
+workspace = true
