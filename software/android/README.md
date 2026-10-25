@@ -1,0 +1,65 @@
+# ANUFS Telemetry, Android viewer
+
+Opens a raw image of a telemetry card and shows it: track on a map, IMU, GNSS and CAN charts, with the SBG Ellipse as a second, independent source. Exports GPX and CSV. Kotlin and Jetpack Compose on top; the log is read by the same Rust code as the PC tool (`tools/tel-decode`) through `tools/tel-jni`.
+
+Status: builds, 15 Kotlin and the Rust tests pass, runs on a Galaxy S22 Ultra. It reads image files only; reading the card itself over USB is not done yet. Nothing has been checked against real logs from the board.
+
+## Build
+
+Needs the Rust target and cargo-ndk once, plus an Android NDK:
+
+```
+rustup target add aarch64-linux-android
+cargo install cargo-ndk
+export ANDROID_NDK_HOME=/path/to/android-ndk-r29     # build-rust.sh defaults to ~/Android/ndk-telemetry/android-ndk-r29
+```
+
+Then, with Android Studio's JDK and the SDK (platform 36, build-tools 36.1.0):
+
+```
+./gradlew :app:assembleDebug          # runs build-rust.sh first; APK in app/build/outputs/apk/debug/
+./gradlew :app:testDebugUnitTest      # Kotlin tests
+```
+
+`local.properties` (not committed) must hold `sdk.dir=...`. The library versions are the newest that work with AGP 8.13 and compileSdk 36; newer ones need AGP 9 and compileSdk 37.
+
+## Try it without the board
+
+```
+cd ..                                                   # software/
+TEL_DEMO_IMAGE=../sample-data/demo_laps.img cargo test -p tel-decode --test demo_card
+adb -s <phone> push ../sample-data/demo_laps.img /sdcard/Download/
+```
+
+`demo_laps.img` is a made-up three-lap drive with Ellipse signals and invented MoTeC frames. `TEL_DUMP_IMAGES=<dir> cargo test -p tel-decode --test pipeline` writes the two cards of the system test (one dies half way).
+
+## Debug builds on a phone
+
+A debug build accepts an intent that opens an image by path and logs the map's zoom under the `TrackMap` tag:
+
+```
+adb -s <phone> push demo_laps.img /data/local/tmp/
+adb -s <phone> shell run-as au.anufs.telemetry cp /data/local/tmp/demo_laps.img files/
+adb -s <phone> shell am start -n au.anufs.telemetry/.MainActivity \
+    --es open_path /data/data/au.anufs.telemetry/files/demo_laps.img --ei open_session 1
+```
+
+`app/src/androidTest/.../MapPinchTest.kt` drives the map with real two-finger gestures and checks the zoom. Build it with `:app:assembleDebugAndroidTest`, install both APKs, then
+`adb -s <phone> shell am instrument -w -e class au.anufs.telemetry.MapPinchTest au.anufs.telemetry.test/androidx.test.runner.AndroidJUnitRunner`.
+Always pass `-s`: more than one device is often attached.
+
+## Layout
+
+| Path | What |
+|---|---|
+| `app/src/main/java/au/anufs/telemetry/core` | Pure Kotlin: scan JSON, samples CSV, signals, Ellipse view, settings, GPX. Unit tested on the JVM. |
+| `app/src/main/java/au/anufs/telemetry/ui` | Compose screens, charts, map, settings. |
+| `../tools/tel-jni` | Rust side of the bridge: `scan` and `export`, JSON in and out, errors as `{"error": ...}`. |
+| `build-rust.sh` | cargo-ndk build into `app/src/main/jniLibs` (git-ignored). |
+
+## Known gaps
+
+- Reads image files, not the card over USB.
+- The Ellipse's `STATUS_03.SOLUTION` words are decoded from memory of SBG's documentation (`core/Ellipse.kt`); check against the Ellipse-D manual.
+- Charts use the 10 Hz sample-and-held Ellipse values; the full-rate raw CAN lane is not decoded yet.
+- No PPK or base-station download yet.
