@@ -77,6 +77,8 @@ class MapPinchTest {
                 .putExtra("open_session", 1),
         )
         SystemClock.sleep(7000)
+        device.findObject(By.text("Map")).click() // the session opens on the Summary tab
+        SystemClock.sleep(2500)
         val cx = device.displayWidth / 2f
         val cy = device.displayHeight * 0.48f
         val fitted = zoomNow()
@@ -106,6 +108,8 @@ class MapPinchTest {
                 .putExtra("open_session", 1),
         )
         SystemClock.sleep(7000)
+        device.findObject(By.text("Map")).click() // the session opens on the Summary tab
+        SystemClock.sleep(2500)
         val cx = device.displayWidth / 2f
         val cy = device.displayHeight * 0.48f
         pinch(cx, cy, from = 120f, to = 400f)

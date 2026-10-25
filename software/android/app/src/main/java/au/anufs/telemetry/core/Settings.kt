@@ -16,12 +16,20 @@ enum class AccelUnit(val label: String, internal val perG: Double) {
     MetresPerSecondSquared("m/s²", 9.80665),
 }
 
-/** Which source a session opens on when it has Ellipse data. */
+/** Which source a session opens on. */
 enum class DefaultSource(val label: String) {
+    Fused("Fused"),
     Onboard("Onboard"),
     Ellipse("Ellipse"),
     Both("Both"),
     LastUsed("Last used"),
+}
+
+/** Which receiver the fused track leans on when their positions disagree. */
+enum class Weighting(val label: String, val tuning: FusionTuning) {
+    Equal("Equal", FusionTuning()),
+    PreferEllipse("Prefer Ellipse", FusionTuning(onboardPosScale = 2.0, ellipsePosScale = 0.5)),
+    PreferOnboard("Prefer onboard", FusionTuning(onboardPosScale = 0.5, ellipsePosScale = 2.0)),
 }
 
 /** What the user can change. New fields get a default, so old saved settings still load. */
@@ -29,11 +37,12 @@ data class Settings(
     val theme: ThemeMode = ThemeMode.System,
     val speedUnit: SpeedUnit = SpeedUnit.KilometresPerHour,
     val accelUnit: AccelUnit = AccelUnit.G,
-    val defaultSource: DefaultSource = DefaultSource.Onboard,
+    val defaultSource: DefaultSource = DefaultSource.Fused,
     /** The source chosen last, for [DefaultSource.LastUsed]: "Onboard", "Ellipse" or "Both". */
-    val lastSource: String = "Onboard",
+    val lastSource: String = "Fused",
     /** Crossings of the start/finish line closer together than this are one crossing. */
     val minLapSeconds: Int = 10,
+    val weighting: Weighting = Weighting.Equal,
 ) {
     /** Speeds from km/h into the chosen unit. NaN stays NaN. */
     fun speed(kmh: DoubleArray): DoubleArray = scaled(kmh, speedUnit.perKmh)
@@ -56,6 +65,7 @@ data class Settings(
         "defaultSource" to defaultSource.name,
         "lastSource" to lastSource,
         "minLapSeconds" to minLapSeconds.toString(),
+        "weighting" to weighting.name,
     )
 
     companion object {
@@ -70,7 +80,8 @@ data class Settings(
                 speedUnit = parse(get("speedUnit"), d.speedUnit),
                 accelUnit = parse(get("accelUnit"), d.accelUnit),
                 defaultSource = parse(get("defaultSource"), d.defaultSource),
-                lastSource = get("lastSource")?.takeIf { it in setOf("Onboard", "Ellipse", "Both") } ?: d.lastSource,
+                lastSource = get("lastSource")?.takeIf { it in setOf("Fused", "Onboard", "Ellipse", "Both") } ?: d.lastSource,
+                weighting = parse(get("weighting"), d.weighting),
                 minLapSeconds = get("minLapSeconds")?.toIntOrNull()?.takeIf { it in MIN_LAP_CHOICES } ?: d.minLapSeconds,
             )
         }

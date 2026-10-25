@@ -17,25 +17,27 @@ import androidx.compose.ui.unit.dp
  * Ellipse on CAN are independent sources of the same quantities; the app does not rank them.
  */
 enum class Source(val label: String) {
+    /** The best estimate of the two combined. */
+    Fused("Fused"),
     Onboard("Onboard"),
     Ellipse("Ellipse"),
     Both("Both"),
 }
 
-val Source.showsOnboard: Boolean get() = this != Source.Ellipse
-val Source.showsEllipse: Boolean get() = this != Source.Onboard
+val Source.showsOnboard: Boolean get() = this == Source.Onboard || this == Source.Both
+val Source.showsEllipse: Boolean get() = this == Source.Ellipse || this == Source.Both
 
 /** Source picker; shown only when the session has Ellipse data. */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SourceBar(source: Source, onSource: (Source) -> Unit) {
+fun SourceBar(source: Source, hasEllipse: Boolean, onSource: (Source) -> Unit) {
     Row(
         Modifier.padding(horizontal = 16.dp, vertical = 2.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text("Source", style = MaterialTheme.typography.labelMedium)
-        Source.entries.forEach { s ->
+        Source.entries.filter { hasEllipse || it == Source.Fused || it == Source.Onboard }.forEach { s ->
             FilterChip(selected = source == s, onClick = { onSource(s) }, label = { Text(s.label) })
         }
     }

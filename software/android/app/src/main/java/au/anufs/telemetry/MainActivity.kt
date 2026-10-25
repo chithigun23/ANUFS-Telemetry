@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
                             onExport = { kind ->
                                 pending = kind
                                 when (kind) {
-                                    ExportKind.GPX, ExportKind.GPX_ELLIPSE -> saveGpx.launch(vm.exportName(kind))
+                                    ExportKind.GPX, ExportKind.GPX_ELLIPSE, ExportKind.GPX_FUSED -> saveGpx.launch(vm.exportName(kind))
                                     ExportKind.CSV -> saveCsv.launch(vm.exportName(kind))
                                 }
                             },

@@ -33,6 +33,7 @@ import au.anufs.telemetry.core.AccelUnit
 import au.anufs.telemetry.core.DefaultSource
 import au.anufs.telemetry.core.Settings
 import au.anufs.telemetry.core.SpeedUnit
+import au.anufs.telemetry.core.Weighting
 import au.anufs.telemetry.core.ThemeMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -69,6 +70,10 @@ fun SettingsScreen(settings: Settings, onChange: ((Settings) -> Settings) -> Uni
             Choice("Source to open on, when a session has Ellipse data", DefaultSource.entries, settings.defaultSource, { it.label }) { v ->
                 onChange { it.copy(defaultSource = v) }
             }
+
+            Group("Fused track")
+            Choice("When the two receivers disagree, lean on", Weighting.entries, settings.weighting, { it.label }) { v -> onChange { it.copy(weighting = v) } }
+            Hint("The fused track combines the board's receiver and the Ellipse with their Doppler speeds. \"Equal\" assumes both are metre-class. Choose a side if you know one of them is better, for example once the Ellipse has RTK corrections.")
 
             Group("Laps")
             Choice("Shortest lap", Settings.MIN_LAP_CHOICES, settings.minLapSeconds, { "$it s" }) { v -> onChange { it.copy(minLapSeconds = v) } }

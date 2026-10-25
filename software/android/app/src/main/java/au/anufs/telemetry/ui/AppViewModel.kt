@@ -14,6 +14,8 @@ import au.anufs.telemetry.core.EllipseView
 import au.anufs.telemetry.core.GeoLine
 import au.anufs.telemetry.core.rememberLine
 import au.anufs.telemetry.core.ellipseGpx
+import au.anufs.telemetry.core.fusedGpx
+import au.anufs.telemetry.core.fuseSession
 import au.anufs.telemetry.core.CardScan
 import au.anufs.telemetry.core.LogReadException
 import au.anufs.telemetry.core.Native
@@ -39,6 +41,7 @@ class OpenSession(val session: Session, val samples: Samples)
 enum class ExportKind(val native: String, val extension: String, val mime: String) {
     GPX("gpx", "gpx", "application/gpx+xml"),
     GPX_ELLIPSE("gpx-ellipse", "gpx", "application/gpx+xml"),
+    GPX_FUSED("gpx-fused", "gpx", "application/gpx+xml"),
     CSV("samples", "csv", "text/csv"),
 }
 
@@ -204,7 +207,11 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     fun exportName(kind: ExportKind): String {
         val s = open?.session ?: return "telemetry.${kind.extension}"
         val base = sourceName?.substringBeforeLast('.') ?: "telemetry"
-        val tag = if (kind == ExportKind.GPX_ELLIPSE) "_ellipse" else ""
+        val tag = when (kind) {
+            ExportKind.GPX_ELLIPSE -> "_ellipse"
+            ExportKind.GPX_FUSED -> "_fused"
+            else -> ""
+        }
         return "${base}_session${s.number}$tag.${kind.extension}"
     }
 
@@ -220,7 +227,14 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                     val app = getApplication<Application>()
                     val out = app.contentResolver.openOutputStream(dest, "wt")
                         ?: throw LogReadException("cannot write to the chosen file")
-                    if (kind == ExportKind.GPX_ELLIPSE) {
+                    if (kind == ExportKind.GPX_FUSED) {
+                        // the best-estimate track, fused here from the samples and, when present, the Ellipse's signals
+                        val e = can?.signals?.let { EllipseView(s0.samples, it) }?.takeIf { it.present }
+                        if (e == null && can == null) throw LogReadException("the CAN data is still loading, try again")
+                        val doc = fusedGpx(s0.samples, fuseSession(s0.samples, e, settings.weighting.tuning), s.number)
+                        out.use { it.write(doc.xml.toByteArray(Charsets.UTF_8)) }
+                        doc.points.toLong()
+                    } else if (kind == ExportKind.GPX_ELLIPSE) {
                         // Built here from the logged Ellipse signals, not by the Rust exporter.
                         val signals = can?.signals ?: throw LogReadException("the CAN data is still loading, try again")
                         val doc = ellipseGpx(s0.samples, EllipseView(s0.samples, signals), s.number)

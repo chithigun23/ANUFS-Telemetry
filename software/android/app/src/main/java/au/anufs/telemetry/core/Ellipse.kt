@@ -23,11 +23,12 @@ class EllipseView(private val samples: Samples, private val signals: SignalSet) 
     /** Yaw as a compass bearing, 0 to 360 clockwise from north (the Ellipse reports -180 to 180). */
     val yawDeg: DoubleArray = deg(held("EKF_EULER", "YAW")).let { y -> DoubleArray(y.size) { if (y[it].isNaN()) Double.NaN else ((y[it] % 360) + 360) % 360 } }
 
-    private val vn = held("EKF_VEL_NED", "VELOCITY_N")
-    private val ve = held("EKF_VEL_NED", "VELOCITY_E")
+    /** North and east velocity from `EKF_VEL_NED`, m/s. */
+    val velN: DoubleArray = held("EKF_VEL_NED", "VELOCITY_N")
+    val velE: DoubleArray = held("EKF_VEL_NED", "VELOCITY_E")
 
     /** Ground speed from the north and east velocities, km/h. */
-    val speedKmh: DoubleArray = DoubleArray(samples.size) { hypot(vn[it], ve[it]) * 3.6 }
+    val speedKmh: DoubleArray = DoubleArray(samples.size) { hypot(velN[it], velE[it]) * 3.6 }
 
     val lat: DoubleArray = held("EKF_POS", "LATITUDE")
     val lon: DoubleArray = held("EKF_POS", "LONGITUDE")

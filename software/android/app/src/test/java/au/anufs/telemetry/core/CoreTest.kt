@@ -223,7 +223,7 @@ class SettingsTest {
     fun defaultsRoundTripThroughTheSavedForm() {
         val s = Settings(
             theme = ThemeMode.Dark, speedUnit = SpeedUnit.MilesPerHour, accelUnit = AccelUnit.MetresPerSecondSquared,
-            defaultSource = DefaultSource.LastUsed, lastSource = "Both", minLapSeconds = 20,
+            defaultSource = DefaultSource.LastUsed, lastSource = "Both", minLapSeconds = 20, weighting = Weighting.PreferEllipse,
         )
         val saved = s.toMap()
         assertEquals(s, Settings.from { saved[it] })
@@ -235,7 +235,7 @@ class SettingsTest {
         val saved = mapOf("theme" to "Sepia", "speedUnit" to "KilometresPerHour", "lastSource" to "Nonsense", "minLapSeconds" to "7")
         val s = Settings.from { saved[it] }
         assertEquals(ThemeMode.System, s.theme)
-        assertEquals("Onboard", s.lastSource)
+        assertEquals("Fused", s.lastSource)
         assertEquals(AccelUnit.G, s.accelUnit)
         assertEquals(10, s.minLapSeconds)
     }
@@ -359,5 +359,42 @@ class LapsTest {
         assertEquals(l, GeoLine.parse(l.encode()))
         assertEquals(null, GeoLine.parse("1,2,3"))
         assertEquals(null, GeoLine.parse("a,b,c,d,1"))
+    }
+}
+
+class FusedExportTest {
+    @Test
+    fun fusedGpxCarriesTheFusedTrackAndSplitsWhereItHasNoPosition() {
+        val csv = "t_s,lat_deg,lon_deg,sog_mps,utc\n" +
+            "5.0,-35.0,149.0,1.0,2025-10-23T14:25:00.000Z\n" +
+            "5.1,-35.0,149.0,1.0,2025-10-23T14:25:00.100Z\n" +
+            "5.2,-35.0,149.0,1.0,2025-10-23T14:25:00.200Z\n"
+        val s = parseSamplesCsv(csv.reader().buffered())
+        val f = FusedTrack(
+            lat = doubleArrayOf(-35.0, Double.NaN, -35.0002), lon = doubleArrayOf(149.0, Double.NaN, 149.0002),
+            altM = doubleArrayOf(584.0, Double.NaN, 585.0), speedKmh = doubleArrayOf(36.0, Double.NaN, 72.0),
+            courseDeg = doubleArrayOf(90.0, Double.NaN, 180.0), sigmaM = doubleArrayOf(0.5, Double.NaN, 0.5), validCount = 2,
+        )
+        val doc = fusedGpx(s, f, 7)
+        assertEquals(2, doc.points)
+        assertEquals("a missing position ends the segment", 2, Regex("<trkseg>").findAll(doc.xml).count())
+        assertTrue(doc.xml.contains("(fused best estimate)"))
+        assertTrue(doc.xml.contains("<tel:speed>10.000</tel:speed><tel:course>90.00</tel:course>"))
+        assertTrue(doc.xml.contains("<ele>585.000</ele>"))
+    }
+
+    @Test
+    fun fuseSessionReadsTheColumnsAndFusesTheOnboardTrackAlone() {
+        val rows = (0 until 50).joinToString("\n") { i ->
+            val lat = -35.0 + i * 1e-5 // 1.11 m north per 0.1 s, so 11.1 m/s
+            "${5.0 + i * 0.1},$lat,149.0,11.1,0.0,0.8,1,584.0"
+        }
+        val csv = "t_s,lat_deg,lon_deg,sog_mps,cog_deg,hdop,fix_quality,alt_m\n$rows\n"
+        val s = parseSamplesCsv(csv.reader().buffered())
+        val f = fuseSession(s, null)
+        assertEquals(50, f.validCount)
+        assertEquals(11.1 * 3.6, f.speedKmh[25], 0.5)
+        assertEquals(0.0, (f.courseDeg[25] + 180) % 360 - 180, 1.0)
+        assertEquals(584.0, f.altM[25], 1e-9)
     }
 }

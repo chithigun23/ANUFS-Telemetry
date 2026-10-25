@@ -40,6 +40,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import au.anufs.telemetry.core.EllipseView
+import au.anufs.telemetry.core.FusedTrack
 import au.anufs.telemetry.core.Samples
 import android.util.Log
 import au.anufs.telemetry.BuildConfig
@@ -175,6 +176,7 @@ private fun speedColor(bin: Int): Int {
 fun TrackMap(
     samples: Samples,
     ellipse: EllipseView?,
+    fused: FusedTrack?,
     source: Source,
     camera: MapCamera,
     lineControls: LineControls,
@@ -259,10 +261,12 @@ fun TrackMap(
     drawOverlay.active = lineControls.drawing
     drawOverlay.fingerToo = fingerDraws
     drawOverlay.onLine = lineControls.onDrawn
-    val showOnboard = source.showsOnboard
+    val isFused = source == Source.Fused && fused != null
+    // the white marker belongs to the board's receiver, or to the fused track when that is what is shown
+    val showOnboard = source.showsOnboard || isFused
     val showEllipse = source.showsEllipse && ellipse != null
 
-    LaunchedEffect(samples, ellipse, source) {
+    LaunchedEffect(samples, ellipse, fused, source) {
         mapView.overlays.clear()
         val all = ArrayList<GeoPoint>()
 
@@ -322,6 +326,7 @@ fun TrackMap(
         val onboardLat = DoubleArray(samples.size) { if (samples.hasFix(it)) samples.lat[it] else Double.NaN }
         val onboardLon = DoubleArray(samples.size) { if (samples.hasFix(it)) samples.lon[it] else Double.NaN }
         when {
+            isFused -> addTrack(fused!!.lat, fused.lon, fused.speedKmh, 9f)
             showOnboard && showEllipse -> {
                 addTrack(onboardLat, onboardLon, samples.speedKmh, 9f)
                 addLine(ellipse!!.lat, ellipse.lon, ELLIPSE_COLOR, 4f)
@@ -363,7 +368,7 @@ fun TrackMap(
 
     // The start/finish line: a black casing with a white dashed core, over the tracks and under the markers.
     val lineOverlays = remember { ArrayList<Overlay>() }
-    LaunchedEffect(lineControls.line, samples, ellipse, source) {
+    LaunchedEffect(lineControls.line, samples, ellipse, fused, source) {
         mapView.overlays.removeAll(lineOverlays.toSet())
         lineOverlays.clear()
         lineControls.line?.let { l ->
@@ -392,10 +397,12 @@ fun TrackMap(
         mapView.invalidate()
     }
 
-    LaunchedEffect(samples, ellipse, cursor) {
+    LaunchedEffect(samples, ellipse, fused, source, cursor) {
         val i = cursor.coerceIn(0, max(0, samples.size - 1))
-        if (samples.size > 0 && samples.hasFix(i)) {
-            onboardMarker.position = GeoPoint(samples.lat[i], samples.lon[i])
+        val mLat = if (isFused) fused!!.lat else samples.lat
+        val mLon = if (isFused) fused!!.lon else samples.lon
+        if (samples.size > 0 && !mLat[i].isNaN() && !mLon[i].isNaN()) {
+            onboardMarker.position = GeoPoint(mLat[i], mLon[i])
             onboardMarker.alpha = 1f
         } else {
             onboardMarker.alpha = 0f

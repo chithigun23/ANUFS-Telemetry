@@ -33,6 +33,8 @@ class LapsOnDeviceTest {
         )
         assertNotNull("the session should open", device.wait(Until.findObject(By.text("Session 1")), 15000))
         SystemClock.sleep(3000)
+        device.findObject(By.text("Map")).click() // the session opens on the Summary tab
+        SystemClock.sleep(1500)
     }
 
     /** One finger or pen drag from (x1, y1) to (x2, y2). */
