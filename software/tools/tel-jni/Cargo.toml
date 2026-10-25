@@ -1,0 +1,19 @@
+[package]
+name = "tel-jni"
+description = "JNI bridge for the Android app: scan a card image and export samples, signals, events and GPX"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+jni = "0.22.4"
+tel-decode = { path = "../tel-decode" }
+tel-logfmt = { path = "../../crates/tel-logfmt" }
+
+# No `[lints] workspace = true` here: the JNI entry points need `#[no_mangle]`,
+# which the workspace `unsafe_code = "forbid"` rule rejects. The logic lives in
+# `lib.rs` functions that are safe code and tested on the PC.

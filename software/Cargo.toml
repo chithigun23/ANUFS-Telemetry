@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/*", "tools/dbc2table", "tools/tel-decode"]
+members = ["crates/*", "tools/dbc2table", "tools/tel-decode", "tools/tel-jni"]
 exclude = ["firmware"]
 # firmware/ targets the MCU and is built separately (see firmware/README.md)
 
