@@ -29,8 +29,13 @@ class FusionTest {
         val n = (seconds * 10).toInt() + 1
         val t = DoubleArray(n) { it / 10.0 }
         val w = speed / r
-        val trueE = DoubleArray(n) { r * cos(w * t[it]) }
-        val trueN = DoubleArray(n) { r * sin(w * t[it]) }
+        // the speed varies by +-3.75 m/s about 10 so there is longitudinal acceleration too
+        private val amp = 0.15
+        private val om = 0.5
+        val theta = DoubleArray(n) { w * t[it] + amp * sin(om * t[it]) }
+        val trueSpeed = DoubleArray(n) { r * (w + amp * om * cos(om * t[it])) }
+        val trueE = DoubleArray(n) { r * cos(theta[it]) }
+        val trueN = DoubleArray(n) { r * sin(theta[it]) }
         val rng = Rng(seed)
         // the onboard error drifts slowly (a first-order walk, about 20 s long) as well as jittering
         private var bx = 0.0
@@ -39,10 +44,10 @@ class FusionTest {
         val onLon = DoubleArray(n)
         val elLat = DoubleArray(n)
         val elLon = DoubleArray(n)
-        val sog = DoubleArray(n) { speed + rng.g(0.05) }
-        val cog = DoubleArray(n) { ((90 - Math.toDegrees(w * t[it] + PI / 2)) % 360 + 360) % 360 + rng.g(0.3) }
-        val velN = DoubleArray(n) { speed * cos(w * t[it]) + rng.g(0.05) }
-        val velE = DoubleArray(n) { -speed * sin(w * t[it]) + rng.g(0.05) }
+        val sog = DoubleArray(n) { trueSpeed[it] + rng.g(0.05) }
+        val cog = DoubleArray(n) { ((90 - Math.toDegrees(theta[it] + PI / 2)) % 360 + 360) % 360 + rng.g(0.3) }
+        val velN = DoubleArray(n) { trueSpeed[it] * cos(theta[it]) + rng.g(0.05) }
+        val velE = DoubleArray(n) { -trueSpeed[it] * sin(theta[it]) + rng.g(0.05) }
         val hdop = DoubleArray(n) { 0.8 }
         val fixQ = DoubleArray(n) { 1.0 }
         val alt = DoubleArray(n) { 584.0 }
@@ -57,10 +62,23 @@ class FusionTest {
             }
         }
 
-        fun inputs(withEllipse: Boolean = ellipse) = FusionInputs(
+        /** What an accelerometer reads on this circuit: no speed change, 2 m/s² to the car's left; the mount can be turned and flipped. */
+        fun imu(offsetDeg: Double = 0.0, yLeft: Boolean = true, noise: Double = 0.2, bias: Double = 0.0, seed2: Long = 99): ImuInput {
+            val g = Rng(seed2)
+            val a = Math.toRadians(offsetDeg)
+            // the car's (forward, left) acceleration; the IMU is turned by `a` and has its Y flipped if it points right
+            val fwd = DoubleArray(n) { -r * amp * om * om * sin(om * t[it]) }
+            val left = DoubleArray(n) { trueSpeed[it] * trueSpeed[it] / r }
+            val fx = DoubleArray(n) { Math.cos(a) * fwd[it] + Math.sin(a) * left[it] + g.g(noise) + bias }
+            val fy = DoubleArray(n) { (-Math.sin(a) * fwd[it] + Math.cos(a) * left[it]) * (if (yLeft) 1 else -1) + g.g(noise) }
+            return ImuInput("test IMU", fx, fy, cog.copyOf())
+        }
+
+        fun inputs(withEllipse: Boolean = ellipse, imu: ImuInput? = null) = FusionInputs(
             t, onLat.copyOf(), onLon.copyOf(), sog, cog, hdop, fixQ, alt,
             if (withEllipse) elLat else null, if (withEllipse) elLon else null,
             if (withEllipse) velN else null, if (withEllipse) velE else null, if (withEllipse) alt else null,
+            imus = listOfNotNull(imu),
         )
 
         /** Root-mean-square distance from the truth over the samples [from, to) that have a position. */
@@ -90,7 +108,7 @@ class FusionTest {
         assertTrue("fused $fused vs ellipse $el", fused < 0.7 * el)
         assertEquals(w.n, f.validCount)
         // speed from the fused velocity is within a few cm/s of the truth, and the course is the direction of travel
-        val sErr = (0 until w.n).map { Math.abs(f.speedKmh[it] / 3.6 - speed) }.average()
+        val sErr = (0 until w.n).map { Math.abs(f.speedKmh[it] / 3.6 - w.trueSpeed[it]) }.average()
         assertTrue("mean speed error $sErr m/s", sErr < 0.1)
         assertTrue("sigma is reported and small", f.sigmaM.all { it > 0 && it < 2.0 })
     }
@@ -158,5 +176,70 @@ class FusionTest {
         for (i in 0 until w.n) w.fixQ[i] = 4.0 // the onboard receiver reports an RTK fixed solution
         val f = fuse(w.inputs())
         assertTrue("rms ${w.rms(f.lat, f.lon)}", w.rms(f.lat, f.lon) < 0.5)
+    }
+
+    @Test
+    fun anAccelerometerThatMatchesTheMotionCarriesTheTrackThroughALostFix() {
+        val w = World(60.0, ellipse = false)
+        for (i in 200..270) { w.onLat[i] = Double.NaN; w.onLon[i] = Double.NaN } // seven seconds without a fix
+        val without = fuse(w.inputs(withEllipse = false))
+        val withImu = fuse(w.inputs(withEllipse = false, imu = w.imu()))
+        val rep = withImu.imu.single()
+        println("imu: used=${rep.used} r=${rep.correlation} scale=${rep.scale} offset=${rep.offsetDeg} yLeft=${rep.yLeft}")
+        assertTrue(rep.used)
+        assertTrue("r ${rep.correlation}", rep.correlation > 0.9)
+        assertEquals(1.0, rep.scale, 0.15)
+        assertEquals(0.0, rep.offsetDeg, 3.0)
+        assertTrue(rep.yLeft)
+        assertTrue("without the accelerometer the middle of the gap is missing", without.lat[235].isNaN())
+        assertFalse("with it the track is carried across", withImu.lat[235].isNaN())
+        val err = w.rms(withImu.lat, withImu.lon, 200, 271)
+        println("rms in the gap with the IMU: $err")
+        assertTrue("error across the gap $err", err < 3.0)
+    }
+
+    @Test
+    fun theMountingIsFoundWhateverWayTheAccelerometerIsTurned() {
+        val w = World(60.0, ellipse = false)
+        val straight = fuse(w.inputs(withEllipse = false, imu = w.imu()))
+        val turned = fuse(w.inputs(withEllipse = false, imu = w.imu(offsetDeg = 40.0, yLeft = false)))
+        val rep = turned.imu.single()
+        println("turned: used=${rep.used} r=${rep.correlation} offset=${rep.offsetDeg} yLeft=${rep.yLeft}")
+        assertTrue(rep.used)
+        assertFalse("the Y axis points right", rep.yLeft)
+        assertEquals(40.0, Math.abs(rep.offsetDeg), 5.0)
+        assertEquals("same track as an IMU mounted straight", w.rms(straight.lat, straight.lon), w.rms(turned.lat, turned.lon), 0.1)
+    }
+
+    @Test
+    fun anAccelerometerThatDoesNotMatchTheMotionIsLeftOut() {
+        val w = World(60.0, ellipse = false)
+        val rng = Rng(5)
+        val junk = ImuInput("junk", DoubleArray(w.n) { rng.g(3.0) }, DoubleArray(w.n) { rng.g(3.0) }, w.cog.copyOf())
+        val plain = fuse(w.inputs(withEllipse = false))
+        val withJunk = fuse(w.inputs(withEllipse = false, imu = junk))
+        val rep = withJunk.imu.single()
+        println("junk: used=${rep.used} r=${rep.correlation}")
+        assertFalse(rep.used)
+        assertTrue("r ${rep.correlation}", rep.correlation < 0.5)
+        for (i in 0 until w.n) assertEquals(plain.lat[i], withJunk.lat[i], 0.0)
+    }
+
+    @Test
+    fun theImuSwitchTurnsAidingOff() {
+        val w = World(60.0, ellipse = false)
+        for (i in 200..270) { w.onLat[i] = Double.NaN; w.onLon[i] = Double.NaN }
+        val off = fuse(w.inputs(withEllipse = false, imu = w.imu()), FusionTuning(useImu = false))
+        assertFalse(off.imu.single().used)
+        assertTrue(off.lat[235].isNaN())
+    }
+
+    @Test
+    fun withAGoodAccelerometerTheFullLapIsNoWorse() {
+        val w = World(120.0)
+        val a = fuse(w.inputs())
+        val b = fuse(w.inputs(imu = w.imu()))
+        println("rms without ${w.rms(a.lat, a.lon)} with ${w.rms(b.lat, b.lon)}")
+        assertTrue(w.rms(b.lat, b.lon) <= w.rms(a.lat, a.lon) * 1.05)
     }
 }

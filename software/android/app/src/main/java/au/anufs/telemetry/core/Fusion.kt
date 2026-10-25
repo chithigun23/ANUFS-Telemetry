@@ -25,6 +25,32 @@ class FusionInputs(
     val elVelN: DoubleArray?,
     val elVelE: DoubleArray?,
     val elAlt: DoubleArray?,
+    /** Accelerometers that may aid the filter; each is checked against the GNSS motion first. */
+    val imus: List<ImuInput> = emptyList(),
+)
+
+/**
+ * Horizontal body-axis accelerations of one IMU, m/s², and the compass heading (degrees clockwise
+ * from north) of something fixed to the car, such as the dual-antenna baseline or the Ellipse's yaw.
+ * The mounting need not be known: [fuse] works out the angle between the axes and the heading.
+ */
+class ImuInput(val name: String, val ax: DoubleArray, val ay: DoubleArray, val heading: DoubleArray)
+
+/** What was found when an IMU was checked against the GNSS accelerations. */
+class ImuReport(
+    val name: String,
+    /** The IMU aids the filter. */
+    val used: Boolean,
+    /** Correlation (0 to 1) between the IMU's accelerations and those of the GNSS velocity, over the samples compared. */
+    val correlation: Double,
+    /** Fitted gain: 1 means the accelerations match in size. */
+    val scale: Double,
+    /** Angle between the IMU's forward axis and the heading reference, degrees. */
+    val offsetDeg: Double,
+    /** The IMU's Y axis points to the car's left (otherwise right). */
+    val yLeft: Boolean,
+    /** Samples compared. */
+    val samples: Int,
 )
 
 /**
@@ -38,6 +64,12 @@ data class FusionTuning(
     val accelNoise: Double = 50.0,
     /** A position with no measurement within this many seconds either side is reported as missing. */
     val coastSeconds: Double = 3.0,
+    /** Let accelerometers that agree with the GNSS motion aid the filter. */
+    val useImu: Boolean = true,
+    /** Error of an accelerometer once calibrated (tilt, noise, drift), m/s². */
+    val imuSigma: Double = 0.5,
+    /** With an accelerometer carrying the car between fixes, a position can coast this long. */
+    val coastWithImuSeconds: Double = 6.0,
 )
 
 /** The best guess of where the car was, one value per sample. */
@@ -55,6 +87,8 @@ class FusedTrack(
     val sigmaM: DoubleArray,
     /** Samples the track has a position for. */
     val validCount: Int,
+    /** How each IMU fared when checked against the GNSS accelerations. */
+    val imu: List<ImuReport> = emptyList(),
 )
 
 // ---- assumed measurement errors (one sigma). They are guesses until real logs say otherwise.
@@ -90,7 +124,7 @@ fun fuse(input: FusionInputs, tuning: FusionTuning = FusionTuning()): FusedTrack
             break
         }
     }
-    if (origin < 0) return FusedTrack(nan(), nan(), nan(), nan(), nan(), nan(), 0)
+    if (origin < 0) return FusedTrack(nan(), nan(), nan(), nan(), nan(), nan(), 0, input.imus.map { ImuReport(it.name, false, Double.NaN, Double.NaN, Double.NaN, true, 0) })
     val lat0 = if (!input.onLat[origin].isNaN()) input.onLat[origin] else input.elLat!![origin]
     val lon0 = if (!input.onLon[origin].isNaN()) input.onLon[origin] else input.elLon!![origin]
     val kLat = EARTH_R * RAD
@@ -160,8 +194,35 @@ fun fuse(input: FusionInputs, tuning: FusionTuning = FusionTuning()): FusedTrack
         for (a in 0..1) vel[a] += AxisMeas(z[a], r[a])
     }
 
-    val east = smoothAxis(input.t, pos[0], vel[0], tuning.accelNoise)
-    val north = smoothAxis(input.t, pos[1], vel[1], tuning.accelNoise)
+    // ---- accelerometers: checked against the GNSS accelerations, then used to carry the car between fixes
+    val reports = ArrayList<ImuReport>()
+    var accE: DoubleArray? = null
+    var accN: DoubleArray? = null
+    if (input.imus.isNotEmpty()) {
+        val refVel = referenceVelocity(input, n)
+        val sumE = DoubleArray(n)
+        val sumN = DoubleArray(n)
+        val cnt = IntArray(n)
+        for (imu in input.imus) {
+            val (report, acc) = calibrateImu(input.t, imu, refVel)
+            val use = tuning.useImu && report.used && acc != null
+            reports += if (use || !report.used) report else ImuReport(report.name, false, report.correlation, report.scale, report.offsetDeg, report.yLeft, report.samples)
+            if (use) for (i in 0 until n) {
+                if (acc!![0][i].isNaN() || acc[1][i].isNaN()) continue
+                sumE[i] += acc[0][i]
+                sumN[i] += acc[1][i]
+                cnt[i]++
+            }
+        }
+        if (cnt.any { it > 0 }) {
+            accE = DoubleArray(n) { if (cnt[it] > 0) sumE[it] / cnt[it] else Double.NaN }
+            accN = DoubleArray(n) { if (cnt[it] > 0) sumN[it] / cnt[it] else Double.NaN }
+        }
+    }
+    val imuAids = accE != null
+    val east = smoothAxis(input.t, pos[0], vel[0], tuning.accelNoise, accE, tuning.imuSigma)
+    val north = smoothAxis(input.t, pos[1], vel[1], tuning.accelNoise, accN, tuning.imuSigma)
+    val coast = if (imuAids) tuning.coastWithImuSeconds else tuning.coastSeconds
 
     // ---- how recent the nearest position measurement is, either side
     val anyPos = BooleanArray(n) { i -> pos[0].any { !it.z[i].isNaN() } }
@@ -185,7 +246,7 @@ fun fuse(input: FusionInputs, tuning: FusionTuning = FusionTuning()): FusedTrack
     val sig = nan()
     var valid = 0
     for (i in 0 until n) {
-        if (nearest[i] > tuning.coastSeconds) continue
+        if (nearest[i] > coast) continue
         valid++
         lat[i] = lat0 + north.p[i] / kLat
         lon[i] = lon0 + east.p[i] / kLon
@@ -203,13 +264,16 @@ fun fuse(input: FusionInputs, tuning: FusionTuning = FusionTuning()): FusedTrack
             else -> b
         }
     }
-    return FusedTrack(lat, lon, alt, spd, crs, sig, valid)
+    return FusedTrack(lat, lon, alt, spd, crs, sig, valid, reports)
 }
 
 private class AxisResult(val p: DoubleArray, val v: DoubleArray, val pVar: DoubleArray)
 
 /** Kalman filter and RTS smoother for one axis: state (position, velocity), scalar measurement updates. */
-private fun smoothAxis(t: DoubleArray, pos: List<AxisMeas>, vel: List<AxisMeas>, q: Double): AxisResult {
+private fun smoothAxis(
+    t: DoubleArray, pos: List<AxisMeas>, vel: List<AxisMeas>, q: Double,
+    acc: DoubleArray?, accSigma: Double,
+): AxisResult {
     val n = t.size
     // filtered and predicted state and covariance at every sample
     val xf = Array(n) { DoubleArray(2) }
@@ -226,11 +290,17 @@ private fun smoothAxis(t: DoubleArray, pos: List<AxisMeas>, vel: List<AxisMeas>,
     for (i in 0 until n) {
         if (i > 0) {
             val dt = max(0.0, t[i] - t[i - 1])
-            // x = F x with F = [[1, dt], [0, 1]];  P = F P F' + Q
-            p += v * dt
-            val n00 = c00 + 2 * dt * c01 + dt * dt * c11 + q * dt * dt * dt / 3
-            val n01 = c01 + dt * c11 + q * dt * dt / 2
-            val n11 = c11 + q * dt
+            // x = F x + B a with F = [[1, dt], [0, 1]], B = [dt^2/2, dt] and a the accelerometer's
+            // acceleration over the step; P = F P F' + Q. Without an accelerometer reading the
+            // acceleration is unknown and Q is the white-noise-acceleration model.
+            val a = acc?.get(i) ?: Double.NaN
+            val known = !a.isNaN()
+            p += v * dt + if (known) 0.5 * a * dt * dt else 0.0
+            if (known) v += a * dt
+            val s2 = accSigma * accSigma
+            val n00 = c00 + 2 * dt * c01 + dt * dt * c11 + if (known) s2 * dt * dt * dt * dt / 4 else q * dt * dt * dt / 3
+            val n01 = c01 + dt * c11 + if (known) s2 * dt * dt * dt / 2 else q * dt * dt / 2
+            val n11 = c11 + if (known) s2 * dt * dt else q * dt
             c00 = n00
             c01 = n01
             c11 = n11
@@ -309,4 +379,128 @@ private fun smoothAxis(t: DoubleArray, pos: List<AxisMeas>, vel: List<AxisMeas>,
         ps[i][2] = a[2] + t10 * k10 + t11 * k11
     }
     return AxisResult(DoubleArray(n) { xs[it][0] }, DoubleArray(n) { xs[it][1] }, DoubleArray(n) { max(0.0, ps[it][0]) })
+}
+
+/** The east and north velocity the GNSS sources agree on, per sample: their mean where there is more than one. */
+private class RefVel(val e: DoubleArray, val n: DoubleArray)
+
+private fun referenceVelocity(input: FusionInputs, count: Int): RefVel {
+    val e = DoubleArray(count) { Double.NaN }
+    val nn = DoubleArray(count) { Double.NaN }
+    for (i in 0 until count) {
+        var se = 0.0
+        var sn = 0.0
+        var k = 0
+        val sog = input.onSog[i]
+        if (!sog.isNaN() && sog >= STILL_SPEED && !input.onCog[i].isNaN()) {
+            val c = input.onCog[i] * RAD
+            se += sog * kotlin.math.sin(c)
+            sn += sog * cos(c)
+            k++
+        }
+        val ve = input.elVelE?.get(i) ?: Double.NaN
+        val vn = input.elVelN?.get(i) ?: Double.NaN
+        if (!ve.isNaN() && !vn.isNaN()) {
+            se += ve
+            sn += vn
+            k++
+        }
+        if (k > 0) {
+            e[i] = se / k
+            nn[i] = sn / k
+        }
+    }
+    return RefVel(e, nn)
+}
+
+private const val MIN_CAL_SPEED = 3.0 // m/s: below this the course, and so the reference acceleration, is noise
+private const val MIN_CAL_SAMPLES = 30
+private const val MIN_CORRELATION = 0.7
+
+/**
+ * Check an accelerometer against the GNSS accelerations (the derivative of the reference velocity) and,
+ * if they agree, return its accelerations in north and east.
+ *
+ * In complex form with north real and west imaginary, the acceleration is
+ * `g = rho * z + c`, where `z = (ax + i s ay) e^(-i heading)` is the body acceleration turned by the
+ * heading, `s` is +1 if the IMU's Y points left and -1 if right, `rho` a fixed complex gain (its
+ * argument is the mounting offset, its size should be near 1) and `c` a constant (tilt and bias).
+ * Both signs of `s` are tried and the better fit kept.
+ */
+private fun calibrateImu(t: DoubleArray, imu: ImuInput, ref: RefVel): Pair<ImuReport, Array<DoubleArray>?> {
+    val n = t.size
+    // reference acceleration by a central difference, as north + i*west
+    val gRe = DoubleArray(n) { Double.NaN }
+    val gIm = DoubleArray(n) { Double.NaN }
+    for (i in 1 until n - 1) {
+        val dt = t[i + 1] - t[i - 1]
+        if (dt <= 0 || dt > 0.35) continue
+        val an = (ref.n[i + 1] - ref.n[i - 1]) / dt
+        val ae = (ref.e[i + 1] - ref.e[i - 1]) / dt
+        if (an.isNaN() || ae.isNaN()) continue
+        if (hypot(ref.e[i], ref.n[i]) < MIN_CAL_SPEED) continue
+        gRe[i] = an
+        gIm[i] = -ae
+    }
+    class Fit(val flip: Int, val rhoRe: Double, val rhoIm: Double, val cRe: Double, val cIm: Double, val r: Double, val used: Int)
+    fun zOf(i: Int, s: Int): Pair<Double, Double>? {
+        val ax = imu.ax[i]
+        val ay = imu.ay[i]
+        val h = imu.heading[i]
+        if (ax.isNaN() || ay.isNaN() || h.isNaN()) return null
+        val hr = h * RAD
+        val c = cos(hr)
+        val sn = kotlin.math.sin(hr)
+        return (ax * c + s * ay * sn) to (s * ay * c - ax * sn)
+    }
+    var best: Fit? = null
+    for (s in intArrayOf(1, -1)) {
+        var k = 0
+        var mzr = 0.0; var mzi = 0.0; var mgr = 0.0; var mgi = 0.0
+        for (i in 0 until n) {
+            if (gRe[i].isNaN()) continue
+            val z = zOf(i, s) ?: continue
+            mzr += z.first; mzi += z.second; mgr += gRe[i]; mgi += gIm[i]
+            k++
+        }
+        if (k < MIN_CAL_SAMPLES) continue
+        mzr /= k; mzi /= k; mgr /= k; mgi /= k
+        var sxzRe = 0.0; var sxzIm = 0.0; var szz = 0.0; var sgg = 0.0
+        for (i in 0 until n) {
+            if (gRe[i].isNaN()) continue
+            val z = zOf(i, s) ?: continue
+            val zr = z.first - mzr
+            val zi = z.second - mzi
+            val gr = gRe[i] - mgr
+            val gi = gIm[i] - mgi
+            // conj(z) * g
+            sxzRe += zr * gr + zi * gi
+            sxzIm += zr * gi - zi * gr
+            szz += zr * zr + zi * zi
+            sgg += gr * gr + gi * gi
+        }
+        if (szz < 1e-9 || sgg < 1e-9) continue
+        val rhoRe = sxzRe / szz
+        val rhoIm = sxzIm / szz
+        val r = sqrt((sxzRe * sxzRe + sxzIm * sxzIm) / (szz * sgg))
+        val cRe = mgr - (rhoRe * mzr - rhoIm * mzi)
+        val cIm = mgi - (rhoRe * mzi + rhoIm * mzr)
+        if (best == null || r > best.r) best = Fit(s, rhoRe, rhoIm, cRe, cIm, r, k)
+    }
+    val b = best ?: return ImuReport(imu.name, false, Double.NaN, Double.NaN, Double.NaN, true, 0) to null
+    val scale = hypot(b.rhoRe, b.rhoIm)
+    val offset = -atan2(b.rhoIm, b.rhoRe) / RAD
+    val ok = b.r >= MIN_CORRELATION && scale in 0.7..1.4
+    val report = ImuReport(imu.name, ok, b.r, scale, offset, b.flip > 0, b.used)
+    if (!ok) return report to null
+    val aE = DoubleArray(n) { Double.NaN }
+    val aN = DoubleArray(n) { Double.NaN }
+    for (i in 0 until n) {
+        val z = zOf(i, b.flip) ?: continue
+        val re = b.rhoRe * z.first - b.rhoIm * z.second + b.cRe
+        val im = b.rhoRe * z.second + b.rhoIm * z.first + b.cIm
+        aN[i] = re
+        aE[i] = -im
+    }
+    return report to arrayOf(aE, aN)
 }

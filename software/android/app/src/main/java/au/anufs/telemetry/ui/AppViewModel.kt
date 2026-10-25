@@ -231,7 +231,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                         // the best-estimate track, fused here from the samples and, when present, the Ellipse's signals
                         val e = can?.signals?.let { EllipseView(s0.samples, it) }?.takeIf { it.present }
                         if (e == null && can == null) throw LogReadException("the CAN data is still loading, try again")
-                        val doc = fusedGpx(s0.samples, fuseSession(s0.samples, e, settings.weighting.tuning), s.number)
+                        val doc = fusedGpx(s0.samples, fuseSession(s0.samples, e, settings.fusionTuning), s.number)
                         out.use { it.write(doc.xml.toByteArray(Charsets.UTF_8)) }
                         doc.points.toLong()
                     } else if (kind == ExportKind.GPX_ELLIPSE) {

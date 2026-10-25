@@ -2,7 +2,7 @@
 
 Opens a raw image of a telemetry card and shows it: track on a map, laps against a start/finish line, IMU, GNSS and CAN charts, with the SBG Ellipse as a second, independent source. Exports GPX and CSV. Kotlin and Jetpack Compose on top; the log is read by the same Rust code as the PC tool (`tools/tel-decode`) through `tools/tel-jni`.
 
-Status: builds, 32 Kotlin and the Rust tests pass, runs on a Galaxy S22 Ultra. It reads image files only; reading the card itself over USB is not done yet. Nothing has been checked against real logs from the board.
+Status: builds, 37 Kotlin and the Rust tests pass, runs on a Galaxy S22 Ultra. It reads image files only; reading the card itself over USB is not done yet. Nothing has been checked against real logs from the board.
 
 ## Build
 
@@ -63,7 +63,7 @@ The Source chips offer **Fused** (the default), Onboard, Ellipse and Both. Fused
 
 Laps and the "GPX track, fused" export use the fused track when Fused is chosen. The Summary tab collates the headline numbers, how each source did, how closely the two receivers agree, and the filter's own spread.
 
-Assumed errors (Settings, "Fused track", can lean on one side): 1 m for a single-band receiver (scaled by HDOP), 3 cm and 30 cm for RTK fixed and float, 0.1 m/s for Doppler. They are guesses until real logs say otherwise. The filter assumes the receivers' errors are independent; they share satellites, so its spread is a lower bound, and the Summary leads with the measured gap between the receivers instead. The two IMUs are not fused (their axes differ) and the IMU does not yet feed the filter.
+Assumed errors (Settings, "Fused track", can lean on one side): 1 m for a single-band receiver (scaled by HDOP), 3 cm and 30 cm for RTK fixed and float, 0.1 m/s for Doppler. They are guesses until real logs say otherwise. The filter assumes the receivers' errors are independent; they share satellites, so its spread is a lower bound, and the Summary leads with the measured gap between the receivers instead. **Accelerometers.** The board's IMU and the Ellipse's can carry the track between fixes (the filter's prediction step uses their acceleration, so a lost fix is bridged for up to 6 s instead of 3 s). Their mounting is not assumed: each IMU's horizontal accelerations are turned by a heading reference (the dual-antenna heading for the board, the Ellipse's yaw for the Ellipse) and fitted to the acceleration of the GNSS velocity, which finds the mounting angle, whether Y points left or right, the gain and a constant bias (tilt, offset). An IMU is used only if the fit is good (correlation of at least 0.7 and a gain between 0.7 and 1.4); otherwise it is left out and the Summary says why. It can be switched off in Settings. Tilt and roll are not modelled, so the aiding is good for seconds, not for minutes. The two IMUs are not fused with each other.
 
 ## Laps
 
@@ -82,6 +82,6 @@ Crossings are found by intersecting each step between two fixes with the line (t
 - The Ellipse's `STATUS_03.SOLUTION` words are decoded from memory of SBG's documentation (`core/Ellipse.kt`); check against the Ellipse-D manual.
 - Charts use the 10 Hz sample-and-held Ellipse values; the full-rate raw CAN lane is not decoded yet.
 - No PPK or base-station download yet.
-- The fusion's error figures are assumptions, and it has only seen simulated data.
+- The fusion's error figures are assumptions, and it has only seen simulated data. The IMU fit needs real driving with both braking and cornering to pin down the mounting.
 - Laps use the 10 Hz samples, so a crossing is interpolated between 0.1 s fixes; the line is straight and fixed in size (40 m) when set at the cursor.
 - Drawing with a real S Pen has only been tried with injected stylus events.

@@ -43,7 +43,12 @@ data class Settings(
     /** Crossings of the start/finish line closer together than this are one crossing. */
     val minLapSeconds: Int = 10,
     val weighting: Weighting = Weighting.Equal,
+    /** Let accelerometers that agree with the GNSS motion aid the fused track. */
+    val useImu: Boolean = true,
 ) {
+    /** The fusion tuning these settings ask for. */
+    val fusionTuning: FusionTuning get() = weighting.tuning.copy(useImu = useImu)
+
     /** Speeds from km/h into the chosen unit. NaN stays NaN. */
     fun speed(kmh: DoubleArray): DoubleArray = scaled(kmh, speedUnit.perKmh)
 
@@ -66,6 +71,7 @@ data class Settings(
         "lastSource" to lastSource,
         "minLapSeconds" to minLapSeconds.toString(),
         "weighting" to weighting.name,
+        "useImu" to useImu.toString(),
     )
 
     companion object {
@@ -82,6 +88,7 @@ data class Settings(
                 defaultSource = parse(get("defaultSource"), d.defaultSource),
                 lastSource = get("lastSource")?.takeIf { it in setOf("Fused", "Onboard", "Ellipse", "Both") } ?: d.lastSource,
                 weighting = parse(get("weighting"), d.weighting),
+                useImu = get("useImu")?.toBooleanStrictOrNull() ?: d.useImu,
                 minLapSeconds = get("minLapSeconds")?.toIntOrNull()?.takeIf { it in MIN_LAP_CHOICES } ?: d.minLapSeconds,
             )
         }

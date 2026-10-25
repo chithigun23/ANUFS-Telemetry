@@ -125,6 +125,13 @@ fun SummaryTab(
         Heading("Do the sources agree?")
         if (ellipse == null || between == null) {
             Note("Only the onboard receiver is in this session, so there is nothing to compare. The fused track is the onboard track smoothed with its own Doppler speed.")
+            fused.imu.forEach { r ->
+                Note(
+                    "${r.name}: " + if (r.used) f("used in the fused track (matches the GNSS accelerations, r = %.2f).", r.correlation)
+                    else if (r.correlation.isNaN()) "not used (not enough movement to check it)."
+                    else f("not used (does not match the GNSS motion, r = %.2f).", r.correlation),
+                )
+            }
         } else {
             Card(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 4.dp)) {
                 Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -143,6 +150,14 @@ fun SummaryTab(
                             rms(ellipse.angleGap(ellipse.yawDeg, samples["heading_deg"])),
                         ),
                     )
+                    fused.imu.forEach { r ->
+                        SourceRow(
+                            "${r.name} in the fused track",
+                            if (r.used) f("used · matches the GNSS accelerations (r = %.2f), axes %.0f° off the heading reference", r.correlation, r.offsetDeg)
+                            else if (r.correlation.isNaN()) "not used · not enough movement to check it against"
+                            else f("not used · does not match the GNSS motion (r = %.2f); axes, mounting or the heading reference may be off", r.correlation),
+                        )
+                    }
                     SourceRow(
                         "Fused track",
                         f(

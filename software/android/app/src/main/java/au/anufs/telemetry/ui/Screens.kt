@@ -146,7 +146,7 @@ fun SessionScreen(
     var tab by rememberSaveable { mutableIntStateOf(0) } // 0 Summary, 1 Map, 2 Laps, 3 IMU, 4 GNSS, 5 CAN
     var cursor by remember(samples) { mutableIntStateOf(0) }
     val mapCamera = remember(samples) { MapCamera() }
-    val fused = remember(samples, ellipse, settings.weighting) { fuseSession(samples, ellipse, settings.weighting.tuning) }
+    val fused = remember(samples, ellipse, settings.weighting, settings.useImu) { fuseSession(samples, ellipse, settings.fusionTuning) }
     val initialSource = when (settings.defaultSource) {
         DefaultSource.Fused -> Source.Fused
         DefaultSource.Onboard -> Source.Onboard

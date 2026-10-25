@@ -223,7 +223,7 @@ class SettingsTest {
     fun defaultsRoundTripThroughTheSavedForm() {
         val s = Settings(
             theme = ThemeMode.Dark, speedUnit = SpeedUnit.MilesPerHour, accelUnit = AccelUnit.MetresPerSecondSquared,
-            defaultSource = DefaultSource.LastUsed, lastSource = "Both", minLapSeconds = 20, weighting = Weighting.PreferEllipse,
+            defaultSource = DefaultSource.LastUsed, lastSource = "Both", minLapSeconds = 20, weighting = Weighting.PreferEllipse, useImu = false,
         )
         val saved = s.toMap()
         assertEquals(s, Settings.from { saved[it] })

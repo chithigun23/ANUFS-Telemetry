@@ -73,6 +73,8 @@ fun SettingsScreen(settings: Settings, onChange: ((Settings) -> Settings) -> Uni
 
             Group("Fused track")
             Choice("When the two receivers disagree, lean on", Weighting.entries, settings.weighting, { it.label }) { v -> onChange { it.copy(weighting = v) } }
+            Choice("Accelerometers in the fused track", listOf(true, false), settings.useImu, { if (it) "On" else "Off" }) { v -> onChange { it.copy(useImu = v) } }
+            Hint("An IMU only helps if its accelerations match the GNSS motion; each is checked and left out if not. It carries the track through short losses of the fix.")
             Hint("The fused track combines the board's receiver and the Ellipse with their Doppler speeds. \"Equal\" assumes both are metre-class. Choose a side if you know one of them is better, for example once the Ellipse has RTK corrections.")
 
             Group("Laps")

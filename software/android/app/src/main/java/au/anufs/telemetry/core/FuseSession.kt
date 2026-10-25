@@ -13,6 +13,16 @@ fun fuseSession(s: Samples, e: EllipseView?, tuning: FusionTuning = FusionTuning
         onSog = sog, onCog = cog,
         onHdop = s["hdop"], onFixQuality = s["fix_quality"], onAlt = s["alt_m"],
         elLat = e?.lat, elLon = e?.lon, elVelN = e?.velN, elVelE = e?.velE, elAlt = e?.altM,
+        imus = buildList {
+            // The board's IMU, turned by the dual-antenna heading; the Ellipse's, by its own yaw. The mounting of
+            // neither is assumed: fuse() fits it from the GNSS motion and drops an IMU that does not match.
+            val g = 9.80665
+            val ax = s["accel_mean_x_g"]
+            val ay = s["accel_mean_y_g"]
+            val h = s["heading_deg"]
+            add(ImuInput("Onboard IMU", DoubleArray(s.size) { ax[it] * g }, DoubleArray(s.size) { ay[it] * g }, h))
+            if (e != null) add(ImuInput("Ellipse IMU", DoubleArray(s.size) { e.accelXg[it] * g }, DoubleArray(s.size) { e.accelYg[it] * g }, e.yawDeg))
+        },
     )
     return fuse(inputs, tuning)
 }
