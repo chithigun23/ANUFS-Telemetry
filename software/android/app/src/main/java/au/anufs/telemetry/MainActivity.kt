@@ -34,6 +34,7 @@ class MainActivity : ComponentActivity() {
             val vm: AppViewModel = viewModel()
             if (BuildConfig.DEBUG) {
                 androidx.compose.runtime.LaunchedEffect(Unit) {
+                    if (intent?.getBooleanExtra("reset", false) == true) vm.resetState()
                     intent?.getStringExtra("open_path")?.let { vm.openPath(it, intent.getIntExtra("open_session", -1).takeIf { n -> n >= 0 }) }
                 }
             }

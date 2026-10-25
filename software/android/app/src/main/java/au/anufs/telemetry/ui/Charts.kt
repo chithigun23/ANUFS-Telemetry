@@ -29,6 +29,9 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
+/** Times (seconds since the first sample) of the start/finish crossings; every [LineChart] marks them. */
+val LocalLapMarks = androidx.compose.runtime.compositionLocalOf { DoubleArray(0) }
+
 /** One line on a [LineChart]. NaN breaks the line. */
 class Series(val name: String, val values: DoubleArray, val color: Color, val dashed: Boolean = false)
 
@@ -62,6 +65,8 @@ fun LineChart(
     val labelColor = MaterialTheme.colorScheme.onSurfaceVariant
     val gridColor = MaterialTheme.colorScheme.outlineVariant
     val cursorColor = MaterialTheme.colorScheme.onSurface
+    val lapMarks = LocalLapMarks.current
+    val markColor = MaterialTheme.colorScheme.tertiary
     val labelStyle = TextStyle(fontSize = 10.sp, color = labelColor)
 
     Column(modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 6.dp)) {
@@ -153,6 +158,11 @@ fun LineChart(
                     path, s.color,
                     style = Stroke(width = 2f, pathEffect = if (s.dashed) PathEffect.dashPathEffect(floatArrayOf(14f, 9f)) else null),
                 )
+            }
+            for (m in lapMarks) {
+                if (m < t0 || m > t.last()) continue
+                val xm = left + (((m - t0) / span).toFloat()) * w
+                drawLine(markColor, Offset(xm, 0f), Offset(xm, h), strokeWidth = 1.5f, pathEffect = PathEffect.dashPathEffect(floatArrayOf(6f, 6f)))
             }
             val c = cursor.coerceIn(0, t.size - 1)
             drawLine(cursorColor, Offset(x(c), 0f), Offset(x(c), h), strokeWidth = 1.5f)

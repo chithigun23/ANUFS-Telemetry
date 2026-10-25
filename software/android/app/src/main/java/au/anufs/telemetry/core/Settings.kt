@@ -32,6 +32,8 @@ data class Settings(
     val defaultSource: DefaultSource = DefaultSource.Onboard,
     /** The source chosen last, for [DefaultSource.LastUsed]: "Onboard", "Ellipse" or "Both". */
     val lastSource: String = "Onboard",
+    /** Crossings of the start/finish line closer together than this are one crossing. */
+    val minLapSeconds: Int = 10,
 ) {
     /** Speeds from km/h into the chosen unit. NaN stays NaN. */
     fun speed(kmh: DoubleArray): DoubleArray = scaled(kmh, speedUnit.perKmh)
@@ -53,9 +55,13 @@ data class Settings(
         "accelUnit" to accelUnit.name,
         "defaultSource" to defaultSource.name,
         "lastSource" to lastSource,
+        "minLapSeconds" to minLapSeconds.toString(),
     )
 
     companion object {
+        /** The minimum lap times the settings page offers, seconds. */
+        val MIN_LAP_CHOICES = listOf(5, 10, 20, 30)
+
         /** Rebuild from saved key/value pairs, using the default for anything missing or unrecognised. */
         fun from(get: (String) -> String?): Settings {
             val d = Settings()
@@ -65,6 +71,7 @@ data class Settings(
                 accelUnit = parse(get("accelUnit"), d.accelUnit),
                 defaultSource = parse(get("defaultSource"), d.defaultSource),
                 lastSource = get("lastSource")?.takeIf { it in setOf("Onboard", "Ellipse", "Both") } ?: d.lastSource,
+                minLapSeconds = get("minLapSeconds")?.toIntOrNull()?.takeIf { it in MIN_LAP_CHOICES } ?: d.minLapSeconds,
             )
         }
 

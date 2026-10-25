@@ -11,6 +11,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import au.anufs.telemetry.core.CanData
 import au.anufs.telemetry.core.EllipseView
+import au.anufs.telemetry.core.GeoLine
+import au.anufs.telemetry.core.rememberLine
 import au.anufs.telemetry.core.ellipseGpx
 import au.anufs.telemetry.core.CardScan
 import au.anufs.telemetry.core.LogReadException
@@ -70,8 +72,40 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         prefs.edit().apply { settings.toMap().forEach { (k, v) -> putString(k, v) } }.apply()
     }
 
+    /** Start/finish lines the user has set, newest first; a session whose track crosses one gets laps without asking. */
+    var savedLines by mutableStateOf(
+        (prefs.getString("sf_lines", "") ?: "").split(';').mapNotNull { GeoLine.parse(it) },
+    )
+        private set
+
+    private fun persistLines() {
+        prefs.edit().putString("sf_lines", savedLines.joinToString(";") { it.encode() }).apply()
+    }
+
+    fun saveLine(line: GeoLine) {
+        savedLines = rememberLine(savedLines, line)
+        persistLines()
+    }
+
+    fun forgetLine(line: GeoLine) {
+        savedLines = savedLines.filter { it != line }
+        persistLines()
+    }
+
     private var pfd: ParcelFileDescriptor? = null
     private var imagePath: String? = null
+
+    /** Debug builds only: forget saved settings and lines, so a test starts from nothing. */
+    fun resetState() {
+        prefs.edit().clear().apply()
+        savedLines = emptyList()
+        settings = Settings()
+    }
+
+    /** Show [text] in the snackbar. */
+    fun notify(text: String) {
+        message = text
+    }
 
     fun dismissMessage() {
         message = null

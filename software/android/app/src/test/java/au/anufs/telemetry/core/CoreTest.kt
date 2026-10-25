@@ -223,7 +223,7 @@ class SettingsTest {
     fun defaultsRoundTripThroughTheSavedForm() {
         val s = Settings(
             theme = ThemeMode.Dark, speedUnit = SpeedUnit.MilesPerHour, accelUnit = AccelUnit.MetresPerSecondSquared,
-            defaultSource = DefaultSource.LastUsed, lastSource = "Both",
+            defaultSource = DefaultSource.LastUsed, lastSource = "Both", minLapSeconds = 20,
         )
         val saved = s.toMap()
         assertEquals(s, Settings.from { saved[it] })
@@ -232,11 +232,12 @@ class SettingsTest {
 
     @Test
     fun unknownOrOldSavedValuesFallBackToDefaults() {
-        val saved = mapOf("theme" to "Sepia", "speedUnit" to "KilometresPerHour", "lastSource" to "Nonsense")
+        val saved = mapOf("theme" to "Sepia", "speedUnit" to "KilometresPerHour", "lastSource" to "Nonsense", "minLapSeconds" to "7")
         val s = Settings.from { saved[it] }
         assertEquals(ThemeMode.System, s.theme)
         assertEquals("Onboard", s.lastSource)
         assertEquals(AccelUnit.G, s.accelUnit)
+        assertEquals(10, s.minLapSeconds)
     }
 
     @Test
@@ -252,5 +253,111 @@ class SettingsTest {
         assertTrue(a[1].isNaN())
         val same = doubleArrayOf(1.0)
         assertTrue("km/h and g leave the array alone", Settings().speed(same) === same && Settings().accel(same) === same)
+    }
+}
+
+class LapsTest {
+    private val lat0 = -35.28
+    private val lon0 = 149.13
+    private val r = 50.0
+    private val speed = 10.0 // m/s, so a lap of the circle takes 2*pi*50/10 = 31.4 s
+    private val mLat = 111_320.0
+    private val mLon = 111_320.0 * Math.cos(Math.toRadians(lat0))
+
+    /** A car going anticlockwise round a circle, starting [startDeg] past east, for [seconds] at 10 Hz. */
+    private fun circle(seconds: Double, startDeg: Double = 10.0): Triple<DoubleArray, DoubleArray, DoubleArray> {
+        val n = (seconds * 10).toInt() + 1
+        val t = DoubleArray(n) { it / 10.0 }
+        val w = speed / r
+        val lat = DoubleArray(n) { lat0 + r * Math.sin(Math.toRadians(startDeg) + w * t[it]) / mLat }
+        val lon = DoubleArray(n) { lon0 + r * Math.cos(Math.toRadians(startDeg) + w * t[it]) / mLon }
+        return Triple(t, lat, lon)
+    }
+
+    private fun speeds(n: Int) = DoubleArray(n) { speed * 3.6 }
+
+    /** A short line across the track at the east point (angle 0), drawn by hand: direction unknown. */
+    private val eastLine = GeoLine(lat0 - 1e-5 * 0, lon0 + (r - 8) / mLon, lat0, lon0 + (r + 8) / mLon, 0)
+        .let { GeoLine(lat0, lon0 + (r - 8) / mLon, lat0, lon0 + (r + 8) / mLon, 0) }
+
+    @Test
+    fun countsLapsOfACircleAndTimesThemFromInterpolatedCrossings() {
+        val (t, lat, lon) = circle(100.0) // 3.2 laps, first crossing at ~ (360-10)/ (w in deg/s) s
+        val res = detectLaps(t, lat, lon, speeds(t.size), eastLine)
+        assertEquals(3, res.crossings.size)
+        assertEquals(2, res.laps.size)
+        val lapTime = 2 * Math.PI * r / speed
+        res.laps.forEach { assertEquals(lapTime, it.timeS, 0.02) }
+        assertEquals(1, res.laps[0].number)
+        assertEquals(2 * Math.PI * r, res.laps[0].distanceMetres, 3.0) // the steps at the two ends are not counted
+        assertEquals(36.0, res.laps[0].maxKmh, 1e-9)
+        assertEquals(36.0, res.laps[0].avgKmh, 0.2)
+        // out lap: from the start (10 degrees past the line) round to the line
+        assertEquals(lapTime * 350 / 360, res.outLapS, 0.02)
+        assertEquals(100.0 - res.crossings.last(), res.inLapS, 1e-9)
+    }
+
+    @Test
+    fun theLinesDirectionAndTheShortestLapDecideWhatCounts() {
+        val (t, lat, lon) = circle(100.0)
+        val sp = speeds(t.size)
+        fun withDir(d: Int) = GeoLine(eastLine.lat1, eastLine.lon1, eastLine.lat2, eastLine.lon2, dir = d)
+        // the line runs west to east and the car crosses it going north, which is dir +1
+        assertEquals(3, detectLaps(t, lat, lon, sp, withDir(1)).crossings.size)
+        assertEquals(0, detectLaps(t, lat, lon, sp, withDir(-1)).crossings.size)
+        // a hand-drawn line (dir 0) takes the direction most crossings go
+        assertEquals(3, detectLaps(t, lat, lon, sp, eastLine).crossings.size)
+        // crossings 31 s apart are two laps; a 70 s shortest lap keeps only the first crossing
+        assertEquals(1, detectLaps(t, lat, lon, sp, eastLine, minLapSeconds = 70.0).crossings.size)
+        assertEquals(0, detectLaps(t, lat, lon, sp, eastLine, minLapSeconds = 70.0).laps.size)
+    }
+
+    @Test
+    fun aLineMadeAtASampleCountsTheCarsOwnDirectionOnly() {
+        val (t, lat, lon) = circle(100.0)
+        val i = 200 // 20 s in
+        val line = lineAtSample(lat, lon, i, halfLengthMetres = 10.0)!!
+        assertEquals(1, line.dir)
+        assertEquals(20.0, line.lengthMetres, 0.1)
+        val res = detectLaps(t, lat, lon, speeds(t.size), line)
+        // the car was on the line at 20 s, and passes it again every lap
+        val lapTime = 2 * Math.PI * r / speed
+        assertEquals(20.0, res.crossings[0], 0.15)
+        assertEquals(20.0 + lapTime, res.crossings[1], 0.15)
+        // the same car driving the other way never crosses it in the line's direction
+        val back = detectLaps(t, lat.reversedArray(), lon.reversedArray(), speeds(t.size), line)
+        assertEquals(0, back.crossings.size)
+    }
+
+    @Test
+    fun gapsInTheFixesDoNotMakeLapsOrBreakTheCount() {
+        val (t, lat, lon) = circle(100.0)
+        // lose the fix for five seconds around the second crossing (about 63 s)
+        for (i in 600..660) { lat[i] = Double.NaN; lon[i] = Double.NaN }
+        val res = detectLaps(t, lat, lon, speeds(t.size), eastLine)
+        assertEquals("the crossing at ~63 s fell in the gap", 2, res.crossings.size)
+        assertEquals(1, res.laps.size)
+    }
+
+    @Test
+    fun savedLinesAreChosenByTheLapsTheyFindAndKeptTidy() {
+        val (t, lat, lon) = circle(100.0)
+        val farAway = GeoLine(lat0 + 0.01, lon0, lat0 + 0.01, lon0 + 0.0001, 0)
+        assertEquals(eastLine, bestSavedLine(t, lat, lon, speeds(t.size), listOf(farAway, eastLine)))
+        assertEquals(null, bestSavedLine(t, lat, lon, speeds(t.size), listOf(farAway)))
+        // a line 10 m from an old one replaces it; 100 m away is kept alongside
+        val near = GeoLine(eastLine.lat1 + 5e-5, eastLine.lon1, eastLine.lat2 + 5e-5, eastLine.lon2, 0)
+        val far = GeoLine(eastLine.lat1 + 1e-3, eastLine.lon1, eastLine.lat2 + 1e-3, eastLine.lon2, 0)
+        assertEquals(listOf(near), rememberLine(listOf(eastLine), near))
+        assertEquals(listOf(far, eastLine), rememberLine(listOf(eastLine), far))
+        assertEquals(20, (1..40).fold(emptyList<GeoLine>()) { acc, k -> rememberLine(acc, GeoLine(lat0 + k * 1e-3, lon0, lat0 + k * 1e-3, lon0 + 1e-4, 0)) }.size)
+    }
+
+    @Test
+    fun linesRoundTripThroughTheSavedForm() {
+        val l = GeoLine(-35.1234567, 149.7654321, -35.1234000, 149.7655000, 1)
+        assertEquals(l, GeoLine.parse(l.encode()))
+        assertEquals(null, GeoLine.parse("1,2,3"))
+        assertEquals(null, GeoLine.parse("a,b,c,d,1"))
     }
 }

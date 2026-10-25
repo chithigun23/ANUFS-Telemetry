@@ -4,7 +4,24 @@ import android.graphics.Color as AColor
 import android.graphics.Paint
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
+import android.graphics.Canvas
+import android.graphics.Point
+import android.view.InputDevice
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.Card
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Switch
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import au.anufs.telemetry.core.GeoLine
+import au.anufs.telemetry.core.haversine
+import org.osmdroid.views.overlay.Overlay
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -68,6 +85,82 @@ class MapCamera {
     var userChosen = false
 }
 
+/** What the map's start/finish menu does, and what it draws. */
+class LineControls(
+    val line: GeoLine?,
+    /** The user is drawing a line now. */
+    val drawing: Boolean,
+    val onDrawn: (GeoLine) -> Unit,
+    val onStartDraw: () -> Unit,
+    val onCancelDraw: () -> Unit,
+    val onSetAtCursor: () -> Unit,
+    val onClear: () -> Unit,
+)
+
+/**
+ * Takes the touches that draw a start/finish line while drawing is on. The S Pen draws; fingers
+ * keep panning and zooming unless [fingerToo] is set (for phones without a pen). A second finger
+ * down means a pinch, so it is never taken.
+ */
+private class DrawOverlay : Overlay() {
+    var active = false
+    var fingerToo = false
+    var onLine: (GeoLine) -> Unit = {}
+    private var a: GeoPoint? = null
+    private var b: GeoPoint? = null
+    private val paint = Paint().apply {
+        color = AColor.rgb(0xD5, 0x5E, 0x00)
+        strokeWidth = 10f
+        strokeCap = Paint.Cap.ROUND
+        isAntiAlias = true
+    }
+
+    override fun onTouchEvent(e: MotionEvent, map: MapView): Boolean {
+        if (!active) return false
+        val tool = e.getToolType(0)
+        val pen = tool == MotionEvent.TOOL_TYPE_STYLUS || tool == MotionEvent.TOOL_TYPE_ERASER
+        if (!pen && !fingerToo) return false
+        if (e.pointerCount > 1) return false
+        val p = map.projection.fromPixels(e.x.toInt(), e.y.toInt()) as GeoPoint
+        when (e.actionMasked) {
+            MotionEvent.ACTION_DOWN -> {
+                a = p
+                b = p
+            }
+            MotionEvent.ACTION_MOVE -> b = p
+            MotionEvent.ACTION_UP -> {
+                b = p
+                val s = a
+                val t = b
+                a = null
+                b = null
+                // a tap or a scratch is not a line: at least 5 m
+                if (s != null && t != null && haversine(s.latitude, s.longitude, t.latitude, t.longitude) >= 5.0) {
+                    onLine(GeoLine(s.latitude, s.longitude, t.latitude, t.longitude, 0))
+                }
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                a = null
+                b = null
+            }
+        }
+        map.invalidate()
+        return true
+    }
+
+    override fun draw(c: Canvas, map: MapView, shadow: Boolean) {
+        if (shadow) return
+        val s = a ?: return
+        val t = b ?: return
+        val ps = map.projection.toPixels(s, Point())
+        val pt = map.projection.toPixels(t, Point())
+        c.drawLine(ps.x.toFloat(), ps.y.toFloat(), pt.x.toFloat(), pt.y.toFloat(), paint)
+    }
+}
+
+private fun deviceHasStylus(): Boolean =
+    InputDevice.getDeviceIds().any { InputDevice.getDevice(it)?.supportsSource(InputDevice.SOURCE_STYLUS) == true }
+
 /** Blue (slow) to red (fast). */
 private fun speedColor(bin: Int): Int {
     val hue = 240f * (1f - bin.toFloat() / (SPEED_BINS - 1))
@@ -79,7 +172,15 @@ private fun speedColor(bin: Int): Int {
  * Tiles are downloaded on first view and kept in the app cache.
  */
 @Composable
-fun TrackMap(samples: Samples, ellipse: EllipseView?, source: Source, camera: MapCamera, cursor: Int, modifier: Modifier = Modifier) {
+fun TrackMap(
+    samples: Samples,
+    ellipse: EllipseView?,
+    source: Source,
+    camera: MapCamera,
+    lineControls: LineControls,
+    cursor: Int,
+    modifier: Modifier = Modifier,
+) {
     val context = LocalContext.current
     val lifecycle = LocalLifecycleOwner.current.lifecycle
 
@@ -152,6 +253,12 @@ fun TrackMap(samples: Samples, ellipse: EllipseView?, source: Source, camera: Ma
     }
     val onboardMarker = remember(samples) { dot(AColor.WHITE) }
     val ellipseMarker = remember(samples, ellipse) { dot(ELLIPSE_COLOR) }
+    val drawOverlay = remember { DrawOverlay() }
+    val fingerDefault = remember { !deviceHasStylus() }
+    var fingerDraws by remember { mutableStateOf(fingerDefault) }
+    drawOverlay.active = lineControls.drawing
+    drawOverlay.fingerToo = fingerDraws
+    drawOverlay.onLine = lineControls.onDrawn
     val showOnboard = source.showsOnboard
     val showEllipse = source.showsEllipse && ellipse != null
 
@@ -224,6 +331,7 @@ fun TrackMap(samples: Samples, ellipse: EllipseView?, source: Source, camera: Ma
         }
         if (showOnboard) mapView.overlays.add(onboardMarker)
         if (showEllipse) mapView.overlays.add(ellipseMarker)
+        mapView.overlays.add(drawOverlay)
         if (all.isNotEmpty()) {
             var box = BoundingBox.fromGeoPoints(all)
             val minSpan = 0.0015 // about 150 m, so a very short track does not zoom to the tile limit
@@ -253,6 +361,37 @@ fun TrackMap(samples: Samples, ellipse: EllipseView?, source: Source, camera: Ma
         mapView.invalidate()
     }
 
+    // The start/finish line: a black casing with a white dashed core, over the tracks and under the markers.
+    val lineOverlays = remember { ArrayList<Overlay>() }
+    LaunchedEffect(lineControls.line, samples, ellipse, source) {
+        mapView.overlays.removeAll(lineOverlays.toSet())
+        lineOverlays.clear()
+        lineControls.line?.let { l ->
+            val casing = Polyline(mapView).apply {
+                addPoint(GeoPoint(l.lat1, l.lon1))
+                addPoint(GeoPoint(l.lat2, l.lon2))
+                outlinePaint.color = AColor.BLACK
+                outlinePaint.strokeWidth = 16f
+            }
+            val core = Polyline(mapView).apply {
+                addPoint(GeoPoint(l.lat1, l.lon1))
+                addPoint(GeoPoint(l.lat2, l.lon2))
+                outlinePaint.color = AColor.WHITE
+                outlinePaint.strokeWidth = 8f
+                outlinePaint.pathEffect = android.graphics.DashPathEffect(floatArrayOf(14f, 14f), 0f)
+            }
+            lineOverlays += casing
+            lineOverlays += core
+        }
+        mapView.overlays.addAll(lineOverlays)
+        // markers and the pen layer go back on top
+        for (o in listOf<Overlay>(onboardMarker, ellipseMarker, drawOverlay)) mapView.overlays.remove(o)
+        if (showOnboard) mapView.overlays.add(onboardMarker)
+        if (showEllipse) mapView.overlays.add(ellipseMarker)
+        mapView.overlays.add(drawOverlay)
+        mapView.invalidate()
+    }
+
     LaunchedEffect(samples, ellipse, cursor) {
         val i = cursor.coerceIn(0, max(0, samples.size - 1))
         if (samples.size > 0 && samples.hasFix(i)) {
@@ -273,9 +412,31 @@ fun TrackMap(samples: Samples, ellipse: EllipseView?, source: Source, camera: Ma
     // osmdroid draws past its own bounds; clip it so it cannot cover the tabs above or the chart below.
     Box(modifier.clipToBounds()) {
         AndroidView(factory = { mapView }, modifier = Modifier.matchParentSize())
-        FilledTonalButton(
-            onClick = { fitState.touched = false; fitState.fit?.invoke() },
-            modifier = Modifier.align(Alignment.TopEnd).padding(8.dp),
-        ) { Text("Fit track") }
+        var menu by remember { mutableStateOf(false) }
+        Column(Modifier.align(Alignment.TopEnd).padding(8.dp), horizontalAlignment = Alignment.End, verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            FilledTonalButton(onClick = { fitState.touched = false; fitState.fit?.invoke() }) { Text("Fit track") }
+            Box {
+                FilledTonalButton(onClick = { menu = true }) { Text(if (lineControls.line == null) "Start/finish" else "Start/finish ✓") }
+                DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
+                    DropdownMenuItem(text = { Text("Draw with S Pen") }, onClick = { menu = false; lineControls.onStartDraw() })
+                    DropdownMenuItem(text = { Text("Set at the cursor") }, onClick = { menu = false; lineControls.onSetAtCursor() })
+                    if (lineControls.line != null) {
+                        DropdownMenuItem(text = { Text("Remove") }, onClick = { menu = false; lineControls.onClear() })
+                    }
+                }
+            }
+        }
+        if (lineControls.drawing) {
+            Card(Modifier.align(Alignment.TopStart).padding(8.dp)) {
+                Column(Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
+                    Text("Draw the start/finish line across the track")
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(if (fingerDraws) "Finger draws" else "S Pen draws, finger pans", style = androidx.compose.material3.MaterialTheme.typography.labelMedium)
+                        Switch(checked = fingerDraws, onCheckedChange = { fingerDraws = it })
+                    }
+                    TextButton(onClick = lineControls.onCancelDraw) { Text("Cancel") }
+                }
+            }
+        }
     }
 }

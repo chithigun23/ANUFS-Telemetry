@@ -38,6 +38,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import au.anufs.telemetry.core.EllipseView
 import au.anufs.telemetry.core.DefaultSource
+import au.anufs.telemetry.core.GeoLine
+import au.anufs.telemetry.core.bestSavedLine
+import au.anufs.telemetry.core.detectLaps
+import au.anufs.telemetry.core.lineAtSample
+import androidx.compose.runtime.CompositionLocalProvider
 import au.anufs.telemetry.core.Samples
 import au.anufs.telemetry.core.Settings
 import au.anufs.telemetry.core.Session
@@ -148,6 +153,48 @@ fun SessionScreen(
     var picked by rememberSaveable { mutableStateOf(initialSource) }
     // A session without Ellipse data can only show the onboard sensors.
     val source = if (ellipse == null) Source.Onboard else picked
+
+    // Laps follow the chosen source: Ellipse uses its own track, onboard and Both use the board's receiver.
+    val trackEllipse = ellipse?.takeIf { source == Source.Ellipse }
+    val trackLat = trackEllipse?.lat ?: samples.lat
+    val trackLon = trackEllipse?.lon ?: samples.lon
+    val trackKmh = trackEllipse?.speedKmh ?: samples.speedKmh
+    val minLap = settings.minLapSeconds.toDouble()
+    var chosenLine by remember(samples) { mutableStateOf<GeoLine?>(null) }
+    var lineRemoved by remember(samples) { mutableStateOf(false) }
+    var drawing by remember { mutableStateOf(false) }
+    val savedLines = vm.savedLines
+    val autoLine = remember(samples, trackEllipse, savedLines, minLap) {
+        bestSavedLine(samples.t, trackLat, trackLon, trackKmh, savedLines, minLap)
+    }
+    val line = chosenLine ?: if (lineRemoved) null else autoLine
+    val laps = remember(samples, trackEllipse, line, minLap) {
+        line?.let { detectLaps(samples.t, trackLat, trackLon, trackKmh, it, minLap) }
+    }
+    fun setLine(l: GeoLine) {
+        chosenLine = l
+        lineRemoved = false
+        drawing = false
+        vm.saveLine(l)
+        val found = detectLaps(samples.t, trackLat, trackLon, trackKmh, l, minLap).laps.size
+        vm.notify(if (found == 0) "Start/finish set, but no complete lap crosses it" else "Start/finish set: $found ${if (found == 1) "lap" else "laps"}")
+    }
+    val lineControls = LineControls(
+        line = line,
+        drawing = drawing,
+        onDrawn = { setLine(it) },
+        onStartDraw = { drawing = true; tab = 0 },
+        onCancelDraw = { drawing = false },
+        onSetAtCursor = {
+            val made = lineAtSample(trackLat, trackLon, cursor)
+            if (made != null) setLine(made) else vm.notify("The car has no direction here (no fix, or standing still)")
+        },
+        onClear = {
+            line?.let { vm.forgetLine(it) }
+            chosenLine = null
+            lineRemoved = true
+        },
+    )
     var menu by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
@@ -179,24 +226,33 @@ fun SessionScreen(
     ) { pad ->
         Column(Modifier.padding(pad).fillMaxSize()) {
             StatsRow(samples, ellipse, source, settings)
-            if (ellipse != null && tab != 3) {
+            if (ellipse != null && tab != 4) {
                 SourceBar(source) { s ->
                     picked = s
                     vm.updateSettings { it.copy(lastSource = s.name) }
                 }
             }
             PrimaryTabRow(selectedTabIndex = tab) {
-                listOf("Map", "IMU", "GNSS", "CAN").forEachIndexed { i, name ->
+                listOf("Map", "Laps", "IMU", "GNSS", "CAN").forEachIndexed { i, name ->
                     Tab(selected = tab == i, onClick = { tab = i }, text = { Text(name) })
                 }
             }
             if (samples.size == 0) {
                 Text("This session has no samples.", Modifier.padding(16.dp))
-            } else when (tab) {
-                0 -> MapTab(samples, ellipse, source, settings, mapCamera, cursor) { cursor = it }
-                1 -> ImuTab(samples, ellipse, source, settings, cursor) { cursor = it }
-                2 -> GnssTab(samples, ellipse, source, settings, cursor) { cursor = it }
-                else -> CanTab(samples, can, vm.canBusy, cursor) { cursor = it }
+            } else CompositionLocalProvider(LocalLapMarks provides (laps?.crossings ?: DoubleArray(0))) {
+                when (tab) {
+                    0 -> MapTab(samples, ellipse, source, settings, mapCamera, lineControls, cursor) { cursor = it }
+                    1 -> LapsTab(
+                        samples, laps, line, settings,
+                        onCursor = { cursor = it },
+                        onDraw = lineControls.onStartDraw,
+                        onSetAtCursor = lineControls.onSetAtCursor,
+                        onClear = lineControls.onClear,
+                    )
+                    2 -> ImuTab(samples, ellipse, source, settings, cursor) { cursor = it }
+                    3 -> GnssTab(samples, ellipse, source, settings, cursor) { cursor = it }
+                    else -> CanTab(samples, can, vm.canBusy, cursor) { cursor = it }
+                }
             }
         }
     }
@@ -243,9 +299,9 @@ private fun ellipseDistance(s: Samples, e: EllipseView): Double {
 }
 
 @Composable
-private fun MapTab(s: Samples, e: EllipseView?, source: Source, settings: Settings, camera: MapCamera, cursor: Int, onCursor: (Int) -> Unit) {
+private fun MapTab(s: Samples, e: EllipseView?, source: Source, settings: Settings, camera: MapCamera, controls: LineControls, cursor: Int, onCursor: (Int) -> Unit) {
     Column(Modifier.fillMaxSize()) {
-        TrackMap(s, e, source, camera, cursor, Modifier.weight(1f).fillMaxWidth())
+        TrackMap(s, e, source, camera, controls, cursor, Modifier.weight(1f).fillMaxWidth())
         if (source == Source.Both) Text(
             "White marker and coloured line: onboard · pink: Ellipse",
             style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant,

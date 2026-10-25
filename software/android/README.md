@@ -1,8 +1,8 @@
 # ANUFS Telemetry, Android viewer
 
-Opens a raw image of a telemetry card and shows it: track on a map, IMU, GNSS and CAN charts, with the SBG Ellipse as a second, independent source. Exports GPX and CSV. Kotlin and Jetpack Compose on top; the log is read by the same Rust code as the PC tool (`tools/tel-decode`) through `tools/tel-jni`.
+Opens a raw image of a telemetry card and shows it: track on a map, laps against a start/finish line, IMU, GNSS and CAN charts, with the SBG Ellipse as a second, independent source. Exports GPX and CSV. Kotlin and Jetpack Compose on top; the log is read by the same Rust code as the PC tool (`tools/tel-decode`) through `tools/tel-jni`.
 
-Status: builds, 15 Kotlin and the Rust tests pass, runs on a Galaxy S22 Ultra. It reads image files only; reading the card itself over USB is not done yet. Nothing has been checked against real logs from the board.
+Status: builds, 24 Kotlin and the Rust tests pass, runs on a Galaxy S22 Ultra. It reads image files only; reading the card itself over USB is not done yet. Nothing has been checked against real logs from the board.
 
 ## Build
 
@@ -57,9 +57,22 @@ Always pass `-s`: more than one device is often attached.
 | `../tools/tel-jni` | Rust side of the bridge: `scan` and `export`, JSON in and out, errors as `{"error": ...}`. |
 | `build-rust.sh` | cargo-ndk build into `app/src/main/jniLibs` (git-ignored). |
 
+## Laps
+
+The start/finish line is set on the Map tab (Start/finish menu) or the Laps tab, two ways:
+
+- **Draw it** across the track with the S Pen. Fingers keep panning and zooming; the switch in the banner lets a finger draw on a phone without a pen.
+- **Set it at the cursor**: scrub the cursor to where the car is on the line; the line is made square to the direction of travel, 40 m wide.
+
+Crossings are found by intersecting each step between two fixes with the line (the time is interpolated inside the step), in the line's direction only, and at least "Shortest lap" (Settings) apart. A hand-drawn line takes the direction most crossings go. Lines are remembered; a later session whose track crosses a saved line gets its laps without asking. Laps follow the source chosen (Ellipse uses its own track; Onboard and Both use the board's receiver). The crossings show as dashed lines on every chart.
+
+`LapsOnDeviceTest` drives this on a phone with a synthetic stylus stream, checks a finger does not draw, and sets a line at the cursor.
+
 ## Known gaps
 
 - Reads image files, not the card over USB.
 - The Ellipse's `STATUS_03.SOLUTION` words are decoded from memory of SBG's documentation (`core/Ellipse.kt`); check against the Ellipse-D manual.
 - Charts use the 10 Hz sample-and-held Ellipse values; the full-rate raw CAN lane is not decoded yet.
 - No PPK or base-station download yet.
+- Laps use the 10 Hz samples, so a crossing is interpolated between 0.1 s fixes; the line is straight and fixed in size (40 m) when set at the cursor.
+- Drawing with a real S Pen has only been tried with injected stylus events.

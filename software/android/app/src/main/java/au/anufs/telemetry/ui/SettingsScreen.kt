@@ -70,6 +70,10 @@ fun SettingsScreen(settings: Settings, onChange: ((Settings) -> Settings) -> Uni
                 onChange { it.copy(defaultSource = v) }
             }
 
+            Group("Laps")
+            Choice("Shortest lap", Settings.MIN_LAP_CHOICES, settings.minLapSeconds, { "$it s" }) { v -> onChange { it.copy(minLapSeconds = v) } }
+            Hint("Two crossings of the start/finish line closer together than this count as one, so a car that wobbles over the line is not given a lap.")
+
             Group("Map")
             Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 6.dp), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
