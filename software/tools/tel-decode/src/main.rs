@@ -4,6 +4,7 @@
 //! tel-decode info    <image-or-device> [--start-lba N] [--blocks N]
 //! tel-decode samples <image-or-device> [--session S] [-o file.csv] [region options]
 //! tel-decode events  ...      tel-decode can-raw ...      tel-decode signals ...
+//! tel-decode gpx     <image-or-device> --session S [-o file.gpx] [region options]
 //! tel-decode prepare <image-or-device> --blocks N [--start-lba N] --yes-erase
 //! ```
 //!
@@ -126,6 +127,22 @@ fn run() -> Result<(), String> {
             eprintln!("{} rows written, {} records could not be decoded", stats.rows, stats.undecodable);
             Ok(())
         }
+        "gpx" => {
+            let session = o.session.ok_or("gpx needs --session S")?;
+            let mut src = FileSource::open(&o.path).map_err(|e| format!("{}: {e}", o.path))?;
+            let geo = geometry(&o, &mut src)?;
+            let header = tel_decode::scan::read_header(&mut src, geo).map_err(|e| e.to_string())?;
+            let mut out: Box<dyn Write> = match &o.out {
+                Some(p) => Box::new(BufWriter::new(std::fs::File::create(p).map_err(|e| format!("{p}: {e}"))?)),
+                None => Box::new(BufWriter::new(std::io::stdout().lock())),
+            };
+            let (stats, _) =
+                tel_decode::gpx::export_gpx(&mut src, geo, header.card_id, session, DEFAULT_STOP_AFTER_INVALID, &mut out)
+                    .map_err(|e| e.to_string())?;
+            out.flush().map_err(|e| e.to_string())?;
+            eprintln!("{} points in {} segments, {} samples without a fix skipped", stats.points, stats.segments, stats.skipped);
+            Ok(())
+        }
         "prepare" => {
             if !o.yes_erase {
                 return Err("prepare overwrites the first 3 blocks of the region; pass --yes-erase to confirm".into());
@@ -142,7 +159,7 @@ fn run() -> Result<(), String> {
     }
 }
 
-const USAGE: &str = "usage: tel-decode <info|samples|events|can-raw|signals|prepare> <image-or-device> [options]\n\
+const USAGE: &str = "usage: tel-decode <info|samples|events|can-raw|signals|gpx|prepare> <image-or-device> [options]\n\
 options: --start-lba N  --blocks N  --session S  -o FILE  --yes-erase";
 
 /// A card id that differs from run to run, from the clock and the process id.

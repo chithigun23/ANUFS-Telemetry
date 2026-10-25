@@ -3,7 +3,9 @@
 //! The card (or an image of it) is read as a region of 512 byte blocks that
 //! starts at `start_lba` and is `blocks` long; see `tel-logfmt` for the layout.
 
+pub mod cansummary;
 pub mod export;
+pub mod gpx;
 pub mod scan;
 pub mod source;
 

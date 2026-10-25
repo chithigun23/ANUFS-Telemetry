@@ -349,6 +349,15 @@ fn rows(card: &mut SimCard, id: u32, what: What) -> (Vec<String>, Vec<Vec<String
 fn full_drive_with_card_failure_is_logged_and_readable() {
     let (mut a, mut b, injected_errors, _) = drive();
 
+    // Development aid: `TEL_DUMP_IMAGES=<dir> cargo test -p tel-decode --test pipeline` writes both
+    // simulated cards as raw images (card_a.img died half way, card_b.img is complete).
+    if let Some(dir) = std::env::var_os("TEL_DUMP_IMAGES") {
+        for (name, card) in [("card_a.img", &a), ("card_b.img", &b)] {
+            let bytes: Vec<u8> = card.mem.blocks.iter().flatten().copied().collect();
+            std::fs::write(std::path::Path::new(&dir).join(name), bytes).unwrap();
+        }
+    }
+
     // ---- card B (healthy): complete log
     let report = scan(&mut b.mem, geo(), 256).unwrap();
     assert_eq!(report.runs.len(), 1);
@@ -441,4 +450,40 @@ fn full_drive_with_card_failure_is_logged_and_readable() {
     // a card read back with a fresh recovery continues the session numbering
     let rec = block_on(recover(&mut b, geo())).unwrap();
     assert_eq!(rec.last_session, 1);
+}
+
+#[test]
+fn gpx_export_has_one_point_per_fix_and_closes_cleanly() {
+    let (_a, mut b, _, _) = drive();
+    let mut out = Vec::new();
+    let (stats, _) =
+        tel_decode::gpx::export_gpx(&mut b.mem, geo(), 0xBBBB_0002, 1, 256, &mut out).unwrap();
+    let text = String::from_utf8(out).unwrap();
+    assert_eq!(stats.points, 300);
+    assert_eq!(stats.segments, 1, "the scripted drive never loses the fix for more than 2 s");
+    assert_eq!(text.matches("<trkpt ").count(), 300);
+    assert_eq!(text.matches("</trkpt>").count(), 300);
+    assert_eq!(text.matches("<trkseg>").count(), text.matches("</trkseg>").count());
+    assert!(text.starts_with("<?xml"));
+    assert!(text.trim_end().ends_with("</gpx>"));
+    assert!(text.contains("<trkpt lat=\"-35.280900000\" lon=\"149.130000000\">"));
+    assert!(text.contains("<ele>584.123</ele>"));
+    assert!(text.contains("<fix>dgps</fix>"), "fix quality 4 (RTK fixed) maps to dgps");
+    // card A died half way; its GPX is a prefix of B's points, never more
+    let mut out_a = Vec::new();
+    let (stats_a, _) =
+        tel_decode::gpx::export_gpx(&mut _a.mem.clone(), geo(), 0xAAAA_0001, 1, 256, &mut out_a).unwrap();
+    assert!(stats_a.points > 0 && stats_a.points < 300);
+}
+
+#[test]
+fn can_summary_counts_frames_per_id_and_names_known_messages() {
+    let (_a, mut b, _, _) = drive();
+    let (ids, _) = tel_decode::cansummary::can_summary(&mut b.mem, geo(), 0xBBBB_0002, 1, 256).unwrap();
+    assert_eq!(ids.len(), 1, "the scripted drive logs one raw frame per epoch, all id 0x132 on bus 2");
+    let s = &ids[0];
+    assert_eq!((s.bus, s.id, s.extended, s.dlc), (2, 0x132, false, 6));
+    assert_eq!(s.name, Some("SBG_ECAN_MSG_EKF_EULER"));
+    assert_eq!(s.count, 300);
+    assert!(s.last_us > s.first_us);
 }

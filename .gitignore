@@ -8,3 +8,6 @@ kleplace.log
 *.inspect.ndjson
 __pycache__/
 *.pyc
+
+# local card images and exports made by the tests (regenerate, see software/android/README.md)
+sample-data/
