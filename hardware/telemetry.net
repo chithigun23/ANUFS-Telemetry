@@ -4398,7 +4398,7 @@
 		)
 		(comp
 			(ref "L1")
-			(value "8uH, 14m")
+			(value "10uH, 16.5m")
 			(footprint "Inductor_SMD:L_TaiTech_TMPC1265_13.5x12.5mm")
 			(description "Inductor")
 			(fields

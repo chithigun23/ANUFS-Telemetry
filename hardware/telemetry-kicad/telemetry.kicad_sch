@@ -31813,7 +31813,7 @@
 				)
 			)
 		)
-		(property "Value" "8uH, 14m"
+		(property "Value" "10uH, 16.5m"
 			(at 193.04 33.02 90)
 			(show_name no)
 			(do_not_autoplace no)

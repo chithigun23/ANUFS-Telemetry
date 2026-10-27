@@ -627,7 +627,7 @@
 				)
 			)
 		)
-		(property "Value" "8uH, 14m"
+		(property "Value" "10uH, 16.5m"
 			(at 0 7.4 90)
 			(layer "F.Fab")
 			(uuid "8ebbb8cd-fd28-4253-946e-33f5df3bd8f6")
